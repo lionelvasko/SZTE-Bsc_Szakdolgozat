@@ -1,0 +1,63 @@
+﻿@page "/login"
+@layout MainLayout
+
+<h1>Login</h1>
+
+<div class="login-container">
+    <h1 class="title text-center">Login</h1>
+    <form>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" @bind="Username" placeholder="Enter your username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" @bind="Password" placeholder="Enter your password" class="form-control" />
+        </div>
+        <button type="button" @onclick="HandleLogin" class="btn btn-primary btn-block">Login</button>
+    </form>
+
+    <!-- Register button -->
+    <div class="mt-3 text-center">
+        <button @onclick="NavigateToRegisterPage" class="btn btn-secondary">Don't have an account? Register</button>
+    </div>
+
+    <!-- Google Login button -->
+    <div class="mt-3 text-center">
+        <button @onclick="HandleGoogleLogin" class="btn btn-danger btn-block">
+            <i class="fa fa-google"></i> Login with Google
+        </button>
+    </div>
+</div>
+
+<div class="custom-alert" id="alertBox">
+    <p id="alertMessage"></p>
+    <button class="btn btn-primary" onclick="hideAlert()">Close</button>
+</div>
+
+@code {
+    private string Username { get; set; }
+    private string Password { get; set; }
+
+    private async Task HandleLogin()
+    {
+        // Display custom alert using JavaScript
+        await JSRuntime.InvokeVoidAsync("showCustomAlert", $"Username: {Username}, Password: {Password}");
+    }
+
+    private void NavigateToRegisterPage()
+    {
+        // Redirect to the registration page
+        NavigationManager.NavigateTo("/register");
+    }
+
+    private async Task HandleGoogleLogin()
+    {
+        // Trigger Google Login logic here
+        // This can be done using an external JavaScript library or API for Google login
+        await JSRuntime.InvokeVoidAsync("showCustomAlert", "Redirecting to Google login...");
+    }
+
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+}

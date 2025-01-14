@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "PackagePath": "staticwebassets\\Szakdoga.styles.css"
+    },
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.Szakdoga.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.Szakdoga.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.build.Szakdoga.props",
+      "PackagePath": "build\\Szakdoga.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildMultiTargeting.Szakdoga.props",
+      "PackagePath": "buildMultiTargeting\\Szakdoga.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.buildTransitive.Szakdoga.props",
+      "PackagePath": "buildTransitive\\Szakdoga.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
