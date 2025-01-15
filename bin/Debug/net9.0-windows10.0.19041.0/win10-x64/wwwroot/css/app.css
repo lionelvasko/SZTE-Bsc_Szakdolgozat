@@ -109,6 +109,13 @@ body {
     background-color: #2c2c3e;
     backdrop-filter: blur(10px);
     animation: slide-in 0.8s ease-out;
+    align-items
+}
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 /* Title animation */
@@ -128,7 +135,8 @@ label {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type='email']{
     width: 100%;
     padding: 12px;
     font-size: 14px;
@@ -141,7 +149,8 @@ input[type="password"] {
 }
 
     input[type="text"]:focus,
-    input[type="password"]:focus {
+    input[type="password"]:focus,
+    input[type='email']:focus {
         border-color: #8a2be2;
         transform: scale(1.03);
     }

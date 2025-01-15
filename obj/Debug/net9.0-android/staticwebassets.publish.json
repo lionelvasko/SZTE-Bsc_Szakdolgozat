@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KKk/KP1rrNyi01rOeOMC5A+b2IfBYFF75I6l8Eqeq4o=",
+  "Hash": "q0C66FmDJ8YumwPg7qK2HSUg8a5R1GO2x0Smb/VCjlY=",
   "Source": "Szakdoga",
   "BasePath": "/",
   "Mode": "Root",
@@ -227,12 +227,12 @@
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-uujefw9gzv.br",
+      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-nxe0s61ju5.br",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
-      "RelativePath": "css/app#[.{fingerprint=uujefw9gzv}]?.css.br",
+      "RelativePath": "css/app#[.{fingerprint=nxe0s61ju5}]?.css.br",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -241,8 +241,8 @@
       "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
-      "Fingerprint": "xurs1wk936",
-      "Integrity": "CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY=",
+      "Fingerprint": "v3aoc1ffkn",
+      "Integrity": "Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css"
@@ -269,12 +269,12 @@
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-uujefw9gzv.gz",
+      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-nxe0s61ju5.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "css/app#[.{fingerprint=uujefw9gzv}]?.css.gz",
+      "RelativePath": "css/app#[.{fingerprint=nxe0s61ju5}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -283,8 +283,8 @@
       "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "p8ql0g8yn4",
-      "Integrity": "GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc=",
+      "Fingerprint": "cqc3p7xcvh",
+      "Integrity": "zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css"
@@ -367,8 +367,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "uujefw9gzv",
-      "Integrity": "Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=",
+      "Fingerprint": "nxe0s61ju5",
+      "Integrity": "ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.css"
@@ -461,12 +461,12 @@
   "Endpoints": [
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-uujefw9gzv.br",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-nxe0s61ju5.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.000469263257"
+          "Quality": "0.000462534690"
         }
       ],
       "ResponseHeaders": [
@@ -476,15 +476,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2130"
+          "Value": "2161"
         },
         {
           "Name": "ETag",
-          "Value": "\"CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY=\""
+          "Value": "\"Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -504,24 +504,24 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "W/\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-uujefw9gzv.gz",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-nxe0s61ju5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000408163265"
+          "Quality": "0.000398565165"
         }
       ],
       "ResponseHeaders": [
@@ -531,15 +531,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2449"
+          "Value": "2508"
         },
         {
           "Name": "ETag",
-          "Value": "\"GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc=\""
+          "Value": "\"zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -559,13 +559,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "W/\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
@@ -580,7 +580,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5874"
+          "Value": "6062"
         },
         {
           "Name": "Content-Type",
@@ -588,11 +588,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -602,13 +602,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
     {
       "Route": "css/app.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-uujefw9gzv.br",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-nxe0s61ju5.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -617,7 +617,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2130"
+          "Value": "2161"
         },
         {
           "Name": "Content-Type",
@@ -625,11 +625,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY=\""
+          "Value": "\"Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -647,13 +647,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY="
+          "Value": "sha256-Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c="
         }
       ]
     },
     {
       "Route": "css/app.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-uujefw9gzv.gz",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-nxe0s61ju5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -662,7 +662,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2449"
+          "Value": "2508"
         },
         {
           "Name": "Content-Type",
@@ -670,11 +670,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc=\""
+          "Value": "\"zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -692,18 +692,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc="
+          "Value": "sha256-zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek="
         }
       ]
     },
     {
-      "Route": "css/app.uujefw9gzv.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-uujefw9gzv.br",
+      "Route": "css/app.nxe0s61ju5.css",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-nxe0s61ju5.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "br",
-          "Quality": "0.000469263257"
+          "Quality": "0.000462534690"
         }
       ],
       "ResponseHeaders": [
@@ -713,15 +713,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2130"
+          "Value": "2161"
         },
         {
           "Name": "ETag",
-          "Value": "\"CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY=\""
+          "Value": "\"Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -741,13 +741,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "W/\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uujefw9gzv"
+          "Value": "nxe0s61ju5"
         },
         {
           "Name": "label",
@@ -755,18 +755,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
     {
-      "Route": "css/app.uujefw9gzv.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-uujefw9gzv.gz",
+      "Route": "css/app.nxe0s61ju5.css",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-nxe0s61ju5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000408163265"
+          "Quality": "0.000398565165"
         }
       ],
       "ResponseHeaders": [
@@ -776,15 +776,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2449"
+          "Value": "2508"
         },
         {
           "Name": "ETag",
-          "Value": "\"GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc=\""
+          "Value": "\"zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -804,13 +804,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "W/\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uujefw9gzv"
+          "Value": "nxe0s61ju5"
         },
         {
           "Name": "label",
@@ -818,12 +818,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
     {
-      "Route": "css/app.uujefw9gzv.css",
+      "Route": "css/app.nxe0s61ju5.css",
       "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -833,7 +833,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5874"
+          "Value": "6062"
         },
         {
           "Name": "Content-Type",
@@ -841,11 +841,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8=\""
+          "Value": "\"ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -855,7 +855,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uujefw9gzv"
+          "Value": "nxe0s61ju5"
         },
         {
           "Name": "label",
@@ -863,13 +863,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Btu5EUvUQ6cGueaqKYFSO1TSprZ7rpUmor9B1sbWFJ8="
+          "Value": "sha256-ZXAiwbijWEy29Q6GUNhiCpPYnAvkdAAPErL5Oz0cuFI="
         }
       ]
     },
     {
-      "Route": "css/app.uujefw9gzv.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-uujefw9gzv.br",
+      "Route": "css/app.nxe0s61ju5.css.br",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-nxe0s61ju5.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -878,7 +878,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2130"
+          "Value": "2161"
         },
         {
           "Name": "Content-Type",
@@ -886,11 +886,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY=\""
+          "Value": "\"Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -908,7 +908,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uujefw9gzv"
+          "Value": "nxe0s61ju5"
         },
         {
           "Name": "label",
@@ -916,13 +916,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-CR1LCyb5xwRA4GjhJt2AneEAlU5WdCCnjFaMPprGsfY="
+          "Value": "sha256-Kyk3v7XdfjQ2d321XRp+PNe7KnsIiG71sww5o+W+C/c="
         }
       ]
     },
     {
-      "Route": "css/app.uujefw9gzv.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-uujefw9gzv.gz",
+      "Route": "css/app.nxe0s61ju5.css.gz",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-nxe0s61ju5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -931,7 +931,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2449"
+          "Value": "2508"
         },
         {
           "Name": "Content-Type",
@@ -939,11 +939,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc=\""
+          "Value": "\"zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:40:45 GMT"
+          "Value": "Wed, 15 Jan 2025 13:15:24 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -961,7 +961,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uujefw9gzv"
+          "Value": "nxe0s61ju5"
         },
         {
           "Name": "label",
@@ -969,7 +969,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-GbjNL3oXxxwXB/XL2jYhLdtuOFyao9/BQ/17So9sBQc="
+          "Value": "sha256-zFcDP0DDAI2lw/KRqSnCr3sUNGNF3Lu2amBCoUPmAek="
         }
       ]
     },

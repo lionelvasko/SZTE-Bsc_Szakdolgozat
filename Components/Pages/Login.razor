@@ -1,9 +1,8 @@
 ﻿@page "/login"
 @layout MainLayout
 
-<h1>Login</h1>
-
-<div class="login-container">
+<div class="center-wrapper">
+    <div class="login-container">
     <h1 class="title text-center">Login</h1>
     <form>
         <div class="form-group">
@@ -34,6 +33,9 @@
     <p id="alertMessage"></p>
     <button class="btn btn-primary" onclick="hideAlert()">Close</button>
 </div>
+</div>
+
+
 
 @code {
     private string Username { get; set; }
