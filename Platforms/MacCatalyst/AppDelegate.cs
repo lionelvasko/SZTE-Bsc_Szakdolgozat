@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Szakdoga
+namespace Szakdoga.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

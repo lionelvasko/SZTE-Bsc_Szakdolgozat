@@ -1,6 +1,95 @@
 ﻿@page "/settings"
-<h1>Settings</h1>
+
+<div class="d-flex flex-column min-vh-100 bg-dark text-light">
+    <!-- Navbar for selecting User or Application Settings -->
+    <div class="container my-4">
+
+        <ul class="nav nav-pills justify-content-center ">
+            <li class="nav-item flex-grow-1 text-center">
+                <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                    User Settings
+                </a>
+            </li>
+            <li class="nav-item flex-grow-1 text-center">
+                <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                    Application Settings
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tab content -->
+    <div class="flex-grow-1 d-flex align-items-center top-0">
+        <div class="container shadow-lg p-5 rounded">
+            @if (activeTab == 1)
+            {
+                <div>
+                    <h3 class="text-center text-info mb-4">User Settings</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="username" class="form-label fw-bold">Username</label>
+                            <input type="text" class="form-control shadow-sm bg-dark text-light border-secondary" id="username" @bind="username" placeholder="Enter your username" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="form-label fw-bold">Email Address</label>
+                            <input type="email" class="form-control shadow-sm bg-dark text-light border-secondary" id="email" @bind="email" placeholder="Enter your email" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label fw-bold">Password</label>
+                            <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="Enter your password" />
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">Save Changes</button>
+                    </form>
+                </div>
+            }
+            else if (activeTab == 2)
+            {
+                <div>
+                    <h3 class="text-center text-info mb-4">Application Settings</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label for="theme" class="form-label fw-bold">Theme</label>
+                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="theme" @bind="theme">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="language" class="form-label fw-bold">Language</label>
+                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="language" @bind="language">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                            </select>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input type="checkbox" class="form-check-input shadow-sm bg-dark border-secondary" id="notifications" @bind="notificationsEnabled" />
+                            <label class="form-check-label fw-bold" for="notifications">Enable Notifications</label>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">Save Changes</button>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 @code {
+    private int activeTab = 1; // Default to User Settings tab
+    private string username = string.Empty;
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private string theme = "light";
+    private string language = "en";
+    private bool notificationsEnabled = true;
 
+    private void SetActiveTab(int tabNumber)
+    {
+        activeTab = tabNumber; // Set the active tab
+    }
+
+    private string GetTabClass(int tabNumber)
+    {
+        return activeTab == tabNumber ? "active" : "";
+    }
 }

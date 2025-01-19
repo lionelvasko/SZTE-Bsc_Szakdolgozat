@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Szakdoga
+namespace Szakdoga.Platforms.iOS
 {
     public class Program
     {

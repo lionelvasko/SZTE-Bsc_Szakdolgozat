@@ -9,7 +9,12 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage()) { Title = "Szakdoga" };
+            return new Window(new MainPage()) 
+            {
+                MinimumWidth = 500,
+                MinimumHeight = 400,
+                Title = "Szakdoga" 
+            };
         }
     }
 }

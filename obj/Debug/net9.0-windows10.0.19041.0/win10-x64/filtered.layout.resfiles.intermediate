@@ -1,11 +1,9 @@
 Components\Layout\MainLayout.razor.css
 Components\Layout\NavMenu.razor.css
-wwwroot\js\app.js.gz
 wwwroot\index.html.gz
 wwwroot\css\bootstrap\bootstrap.min.css.gz
 wwwroot\css\bootstrap\bootstrap.min.css.map.gz
 wwwroot\Szakdoga.styles.css.gz
-wwwroot\js\app.js.br
 wwwroot\index.html.br
 wwwroot\css\bootstrap\bootstrap.min.css.br
 wwwroot\css\bootstrap\bootstrap.min.css.map.br
@@ -78,5 +76,4 @@ wwwroot\css\app.css
 wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\index.html
-wwwroot\js\app.js
 runtimes\win-x64\native\WebView2Loader.dll

@@ -1,5 +1,331 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
-<h1>Hello, world!</h1>
+<div class="d-flex flex-column min-vh-100 bg-dark text-light">
 
-Welcome to your new app.
+    <!-- Top Navigation Bar -->
+    <div class="container my-4">
+
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item flex-grow-1 text-center">
+                <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                    Entities
+                </a>
+            </li>
+            <li class="nav-item flex-grow-1 text-center">
+                <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                    Devices
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content" id="dashboardTabContent">
+        <!-- Entities Tab Content -->
+        <div class="tab-pane fade @GetTabClass(1)" id="entities" role="tabpanel" aria-labelledby="entitiesTab">
+            <h4 class="mt-4">Entities</h4>
+            <div class="row g-3">
+                @foreach (var entity in entities)
+                {
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowEntityDetails(entity)">
+                            <div class="card-body">
+                                <h5 class="card-title">@entity.Name</h5>
+                                <p class="card-text">Entity status: @entity.Status</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Devices Tab Content -->
+        <div class="tab-pane fade @GetTabClass(2)" id="devices" role="tabpanel" aria-labelledby="devicesTab">
+            <h4 class="mt-4">Devices</h4>
+            <div class="row g-3">
+                @foreach (var device in devices)
+                {
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
+                            <div class="card-body">
+                                <h5 class="card-title">@device.Name</h5>
+                                <p class="card-text">Device status: @device.Status</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="btn btn-lg btn-warning add-device-btn" style="position:fixed; right:24px; bottom:24px;" @onclick="ShowAddDeviceModal">+</button>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal for adding a device -->
+@if (showAddDeviceModal)
+{
+    <div class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header with Tab Bar for Tahoma and Tuya APIs -->
+                <div class="modal-header">
+                    <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link " @onclick="() => SetModalActiveTab(1)" id="tahomaTab" data-bs-toggle="tab" href="#tahoma" role="tab" aria-controls="tahoma" aria-selected="true">Tahoma API</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link " @onclick="() => SetModalActiveTab(2)" id="tuyaTab" data-bs-toggle="tab" href="#tuya" role="tab" aria-controls="tuya" aria-selected="false">Tuya API</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div class="tab-content" id="apiTabContent">
+                        <!-- Tahoma Tab Content -->
+                        <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
+                            <h5>Tahoma API Device Form</h5>
+                            <label for="tahomaName">Device Name:</label>
+                            <input type="text" class="form-control" id="tahomaName" @bind="tahomaName" placeholder="Enter device name" />
+                            <label for="tahomaStatus" class="mt-2">Device Status:</label>
+                            <select class="form-control" id="tahomaStatus" @bind="tahomaStatus">
+                                <option>Active</option>
+                                <option>Offline</option>
+                                <option>Maintenance</option>
+                            </select>
+                        </div>
+
+                        <!-- Tuya Tab Content -->
+                        <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
+                            <h5>Tuya API Device Form</h5>
+                            <label for="tuyaName">Device Name:</label>
+                            <input type="text" class="form-control" id="tuyaName" @bind="tuyaName" placeholder="Enter device name" />
+                            <label for="tuyaStatus" class="mt-2">Device Status:</label>
+                            <select class="form-control" id="tuyaStatus" @bind="tuyaStatus">
+                                <option>Active</option>
+                                <option>Offline</option>
+                                <option>Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Footer with Save Button -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="SaveDevice">Save Device</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal for displaying entity details -->
+@if (showEntityDetailsModal && selectedEntity != null)
+{
+    <div class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="entityDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@selectedEntity.Name</h5>
+                    <button type="button" class="btn-close" @onclick="CloseEntityDetailsModal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Entity Name:</strong> @selectedEntity.Name</p>
+                    <p><strong>Status:</strong> @selectedEntity.Status</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal for displaying device details -->
+@if (showDeviceDetailsModal && selectedDevice != null)
+{
+    <div class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="deviceDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@selectedDevice.Name</h5>
+                    <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Device Name:</strong> @selectedDevice.Name</p>
+                    <p><strong>Status:</strong> @selectedDevice.Status</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+    // Default active tabs
+    private int activeTab = 1;  
+    private int modalActiveTab = 1;
+
+    private string tahomaDeviceName;
+    private string tuyaDeviceName;
+
+    // Separate modal states for Entity and Device details
+    private bool showEntityDetailsModal = false;
+    private bool showDeviceDetailsModal = false;
+    private bool showAddDeviceModal = false;
+
+    // Entity and Device State Variables
+    private Entity selectedEntity;
+    private Device selectedDevice;
+
+    // Form Variables for Tahoma and Tuya Entities
+    private string tahomaName;
+    private string tuyaName;
+    private string tahomaStatus = "Active";
+    private string tuyaStatus = "Active";
+
+    // Classes implements the Entity and Device interfaces
+    public class Entity() : IEntity
+    {
+        public string Name { get; set;}
+        public string Status { get ; set;}
+    }
+
+    public class Device : IDevice
+    {
+        public string Name { get; set; }
+        public string Status { get; set; }
+        public IEntity[] Entities { get ; set; }
+    }
+
+    private List<Entity> entities = new List<Entity>
+{
+    new Entity { Name = "Entity 1", Status = "Active" },
+    new Entity { Name = "Entity 2", Status = "Offline" },
+    new Entity { Name = "Entity 3", Status = "Active" },
+    new Entity { Name = "Entity 4", Status = "Maintenance" },
+    new Entity { Name = "Entity 5", Status = "Active" },
+    new Entity { Name = "Entity 6", Status = "Offline" },
+    new Entity { Name = "Entity 7", Status = "Active" },
+    new Entity { Name = "Entity 8", Status = "Active" },
+    new Entity { Name = "Entity 9", Status = "Active" },
+    new Entity { Name = "Entity 10", Status = "Maintenance" },
+    new Entity { Name = "Entity 11", Status = "Offline" },
+    new Entity { Name = "Entity 12", Status = "Active" },
+    new Entity { Name = "Entity 13", Status = "Active" },
+    new Entity { Name = "Entity 14", Status = "Offline" },
+    new Entity { Name = "Entity 15", Status = "Maintenance" },
+    new Entity { Name = "Entity 16", Status = "Active" },
+    new Entity { Name = "Entity 17", Status = "Active" },
+    new Entity { Name = "Entity 18", Status = "Offline" },
+    new Entity { Name = "Entity 19", Status = "Maintenance" },
+    new Entity { Name = "Entity 20", Status = "Active" }
+};
+
+    private List<Device> devices = new List<Device>
+{
+    new Device { Name = "Device 1", Status = "Active" },
+    new Device { Name = "Device 2", Status = "Offline" },
+    new Device { Name = "Device 3", Status = "Active" },
+    new Device { Name = "Device 4", Status = "Maintenance" },
+    new Device { Name = "Device 5", Status = "Active" },
+    new Device { Name = "Device 6", Status = "Offline" },
+    new Device { Name = "Device 7", Status = "Active" },
+    new Device { Name = "Device 8", Status = "Active" },
+    new Device { Name = "Device 9", Status = "Active" },
+    new Device { Name = "Device 10", Status = "Maintenance" },
+    new Device { Name = "Device 11", Status = "Offline" },
+    new Device { Name = "Device 12", Status = "Active" },
+    new Device { Name = "Device 13", Status = "Active" },
+    new Device { Name = "Device 14", Status = "Offline" },
+    new Device { Name = "Device 15", Status = "Maintenance" },
+    new Device { Name = "Device 16", Status = "Active" },
+    new Device { Name = "Device 17", Status = "Active" },
+    new Device { Name = "Device 18", Status = "Offline" },
+    new Device { Name = "Device 19", Status = "Maintenance" },
+    new Device { Name = "Device 20", Status = "Active" }
+};
+
+    // Show Modal Functions
+    private void ShowEntityDetailsModal(Entity entity)
+    {
+        selectedEntity = entity;
+        showEntityDetailsModal = true;
+    }
+
+    private void ShowDeviceDetailsModal(Device device)
+    {
+        selectedDevice = device;
+        showDeviceDetailsModal = true;
+    }
+
+    private void CloseEntityDetailsModal()
+    {
+        showEntityDetailsModal = false;
+        selectedEntity = null;
+    }
+
+    private void CloseDeviceDetailsModal()
+    {
+        showDeviceDetailsModal = false;
+        selectedDevice = null;
+    }
+    private void CloseAddDeviceModal()
+    {
+        showAddDeviceModal = false;
+        selectedDevice = null;
+    }
+
+
+    private void SaveDevice()
+    {
+        // Logic for saving the device (add the device to the list)
+        var newDevice = new Device
+            {
+                Name = activeTab == 1 ? tahomaName : tuyaName,
+                Status = activeTab == 1 ? tahomaStatus : tuyaStatus
+            };
+        devices.Add(newDevice);
+        CloseAddDeviceModal(); // Close the modal after saving
+    }
+
+    private void SetActiveTab(int tabNumber)
+    {
+        activeTab = tabNumber;  // Set the active tab number
+    }
+
+    private string GetTabClass(int tabNumber)
+    {
+        return activeTab == tabNumber ? "show active" : "";
+    }
+    private void SetModalActiveTab(int tabNumber)
+    {
+        modalActiveTab = tabNumber;  // Set the active tab number
+    }
+
+    private string GetModalTabClass(int tabNumber)
+    {
+        return modalActiveTab == tabNumber ? "show active" : "";
+    }
+
+    private void ShowEntityDetails(Entity entity)
+    {
+        selectedEntity = entity;
+        showEntityDetailsModal = true;
+    }
+
+    private void ShowDeviceDetails(Device device)
+    {
+        selectedDevice = device;
+        showDeviceDetailsModal = true;
+    }
+    private void ShowAddDeviceModal()
+    {
+        showAddDeviceModal = true;
+    }
+
+}

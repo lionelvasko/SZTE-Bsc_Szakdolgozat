@@ -1,4 +1,3 @@
-C:\Git Projects\Szakdoga\wwwroot\js\app.js
 C:\Git Projects\Szakdoga\wwwroot\index.html
 C:\Git Projects\Szakdoga\wwwroot\css\bootstrap\bootstrap.min.css
 C:\Git Projects\Szakdoga\wwwroot\css\bootstrap\bootstrap.min.css.map
@@ -7,4 +6,3 @@ wwwroot\css\app.css
 wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\index.html
-wwwroot\js\app.js

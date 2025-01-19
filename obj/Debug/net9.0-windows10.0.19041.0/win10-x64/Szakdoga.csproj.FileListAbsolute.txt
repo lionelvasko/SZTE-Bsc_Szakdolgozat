@@ -506,6 +506,7 @@ C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\mauiimag
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.AssemblyInfoInputs.cache
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.AssemblyInfo.cs
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.csproj.CoreCompileInputs.cache
+C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.sourcelink.json
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\XamlC.stamp
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.csproj.Up2Date
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.dll
@@ -528,11 +529,5 @@ C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\pri.resf
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\qualifiers.txt.intermediate
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\5lox1xmnm2-ylbqc29q2z.gz
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\publish\5lox1xmnm2-ylbqc29q2z.br
-C:\Git Projects\Szakdoga\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\wwwroot\js\app.js.gz
-C:\Git Projects\Szakdoga\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\wwwroot\js\app.js.br
-C:\Git Projects\Szakdoga\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\wwwroot\js\app.js
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\Szakdoga.sourcelink.json
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\srcapka0sw-nxe0s61ju5.gz
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\publish\srcapka0sw-nxe0s61ju5.br
+C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\srcapka0sw-cunhm4v95s.gz
+C:\Git Projects\Szakdoga\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\compressed\publish\srcapka0sw-cunhm4v95s.br

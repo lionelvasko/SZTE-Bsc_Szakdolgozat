@@ -21,10 +21,6 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\js\\app.js",
-      "PackagePath": "staticwebassets\\js\\app.js"
-    },
-    {
       "Id": "obj\\Debug\\net9.0-android\\staticwebassets\\msbuild.Szakdoga.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
