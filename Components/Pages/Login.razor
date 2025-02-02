@@ -3,35 +3,33 @@
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg rounded bg-dark text-white" style="max-width: 400px; width: 100%;">
-        <h2 class="text-center mb-4 text-primary">Login</h2>
-        <form>
-            <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" id="username" @bind="Username" placeholder="Enter your username" class="form-control bg-transparent text-white" />
+            <h2 class="text-center mb-4 text-primary">Login</h2>
+            <EditForm Model="loginModel" OnValidSubmit="Submit">
+                <DataAnnotationsValidator />
+                <div class="mb-3">
+                    <label for="eamil" class="form-label">Email</label>
+                    <input type="email" id="email" @bind="loginModel.Email" placeholder="Enter your email" class="form-control bg-transparent text-white" />
+                    <ValidationMessage For="@(() => loginModel.Email)" />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" @bind="loginModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
+                    <ValidationMessage For="@(() => loginModel.Password)" />    
+                </div>
+                <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Login</button>
+             </EditForm>
+            <div class="text-center mt-4">
+                <p class="mb-2">Don't have an account?</p>
+                <button @onclick="NavigateToRegisterPage" class="btn btn-outline-secondary w-100 shadow-sm">Register Here</button>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" @bind="Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
+            <div class="text-center mt-4">
+                <button @onclick="HandleGoogleLogin" class="btn btn-danger w-100 shadow-sm">
+                    <i class="fa fa-google me-2"></i> Login with Google
+                </button>
             </div>
-            <button type="button" @onclick="HandleLogin" class="btn btn-primary w-100 shadow-sm mt-3">Login</button>
-        </form>
-
-        <!-- Register button -->
-        <div class="text-center mt-4">
-            <p class="mb-2">Don't have an account?</p>
-            <button @onclick="NavigateToRegisterPage" class="btn btn-outline-secondary w-100 shadow-sm">Register Here</button>
-        </div>
-
-        <!-- Google Login button -->
-        <div class="text-center mt-4">
-            <button @onclick="HandleGoogleLogin" class="btn btn-danger w-100 shadow-sm">
-                <i class="fa fa-google me-2"></i> Login with Google
-            </button>
-        </div>
     </div>
 </div>
 
-<!-- Modal -->
 @if (ShowModal)
 {
     <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
@@ -53,24 +51,15 @@
 }
 
 @code {
-    private string Username { get; set; }
-    private string Password { get; set; }
+    private LoginModel loginModel = new LoginModel();
+
+    public async Task Submit()
+    {
+    }
+
+
     private bool ShowModal { get; set; }
     private string ModalMessage { get; set; }
-
-    private async void HandleLogin()
-    {
-        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
-        {
-            ModalMessage = $"Username: {Username}\nPassword: {Password}";
-        }
-        else
-        {
-            ModalMessage = "Please enter both username and password.";
-        }
-
-        ShowModal = true;
-    }
 
     private async void HandleGoogleLogin()
     {

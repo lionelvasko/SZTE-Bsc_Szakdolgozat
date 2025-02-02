@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6G2JbGE0xGltcgQMO5fPhl+H3O9XAgA5xlWAxGAx4DE=",
+  "Hash": "NwGdaJKEx3JdfxnXD813m2d7ZvBKuyN4cEs1hvulYxU=",
   "Source": "Szakdoga",
   "BasePath": "/",
   "Mode": "Root",
@@ -101,12 +101,12 @@
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\scopedcss\\bundle\\Szakdoga.styles.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-z8ul8gc5o8.gz",
+      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "css/app#[.{fingerprint=z8ul8gc5o8}]?.css.gz",
+      "RelativePath": "css/app#[.{fingerprint=3xeme7nlh4}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -115,8 +115,8 @@
       "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "xp2wvt0r3r",
-      "Integrity": "O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g=",
+      "Fingerprint": "1s8qdxu55s",
+      "Integrity": "D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css"
@@ -199,8 +199,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "z8ul8gc5o8",
-      "Integrity": "Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ=",
+      "Fingerprint": "3xeme7nlh4",
+      "Integrity": "+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\app.css"
@@ -271,13 +271,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-z8ul8gc5o8.gz",
+      "Route": "css/app.3xeme7nlh4.css",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000300120048"
+          "Quality": "0.000324991875"
         }
       ],
       "ResponseHeaders": [
@@ -287,19 +287,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3331"
+          "Value": "3076"
         },
         {
           "Name": "ETag",
-          "Value": "\"O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g=\""
+          "Value": "\"D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -315,18 +315,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ=\""
+          "Value": "W/\"+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "3xeme7nlh4"
+        },
+        {
+          "Name": "label",
+          "Value": "css/app.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ="
+          "Value": "sha256-+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8="
         }
       ]
     },
     {
-      "Route": "css/app.css",
+      "Route": "css/app.3xeme7nlh4.css",
       "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -336,7 +344,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9865"
+          "Value": "8645"
         },
         {
           "Name": "Content-Type",
@@ -344,121 +352,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ=\""
+          "Value": "\"+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-z8ul8gc5o8.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3331"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.z8ul8gc5o8.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-z8ul8gc5o8.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000300120048"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3331"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z8ul8gc5o8"
+          "Value": "3xeme7nlh4"
         },
         {
           "Name": "label",
@@ -466,13 +374,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ="
+          "Value": "sha256-+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8="
         }
       ]
     },
     {
-      "Route": "css/app.z8ul8gc5o8.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "Route": "css/app.3xeme7nlh4.css.gz",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -481,7 +389,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "9865"
+          "Value": "3076"
         },
         {
           "Name": "Content-Type",
@@ -489,56 +397,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ=\""
+          "Value": "\"D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "z8ul8gc5o8"
-        },
-        {
-          "Name": "label",
-          "Value": "css/app.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Y9SaMVcB/lkR9LaOkdiDbvaqyxiZNaNxQNFrlEMuEJQ="
-        }
-      ]
-    },
-    {
-      "Route": "css/app.z8ul8gc5o8.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-z8ul8gc5o8.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "3331"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:52:04 GMT"
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -556,7 +419,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "z8ul8gc5o8"
+          "Value": "3xeme7nlh4"
         },
         {
           "Name": "label",
@@ -564,7 +427,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-O1fKTmyEOV6xIlBMhVQbpyAQ4ggp0Tektgm1mg+4k3g="
+          "Value": "sha256-D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000324991875"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3076"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8645"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+RBIabJOHkOFmoTs/UsaErKe8u6lGHYbrBDTHwDASJ8="
+        }
+      ]
+    },
+    {
+      "Route": "css/app.css.gz",
+      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-maccatalyst\\maccatalyst-x64\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3076"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8="
         }
       ]
     },

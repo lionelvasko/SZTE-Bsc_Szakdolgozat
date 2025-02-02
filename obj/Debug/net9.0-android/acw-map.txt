@@ -1,9 +1,9 @@
-Szakdoga.MainActivity, Szakdoga;crc645fc5d2ccf26b95d7.MainActivity
-Szakdoga.MainActivity;crc645fc5d2ccf26b95d7.MainActivity
-szakdoga.MainActivity;crc645fc5d2ccf26b95d7.MainActivity
-Szakdoga.MainApplication, Szakdoga;crc645fc5d2ccf26b95d7.MainApplication
-Szakdoga.MainApplication;crc645fc5d2ccf26b95d7.MainApplication
-szakdoga.MainApplication;crc645fc5d2ccf26b95d7.MainApplication
+Szakdoga.Platforms.Android.MainActivity, Szakdoga;crc641b505e60fdb3cf02.MainActivity
+Szakdoga.Platforms.Android.MainActivity;crc641b505e60fdb3cf02.MainActivity
+szakdoga.platforms.android.MainActivity;crc641b505e60fdb3cf02.MainActivity
+Szakdoga.Platforms.Android.MainApplication, Szakdoga;crc641b505e60fdb3cf02.MainApplication
+Szakdoga.Platforms.Android.MainApplication;crc641b505e60fdb3cf02.MainApplication
+szakdoga.platforms.android.MainApplication;crc641b505e60fdb3cf02.MainApplication
 GoogleGson.IExclusionStrategy, GoogleGson;com.google.gson.ExclusionStrategy
 GoogleGson.IExclusionStrategy;com.google.gson.ExclusionStrategy
 com.google.gson.ExclusionStrategy;com.google.gson.ExclusionStrategy

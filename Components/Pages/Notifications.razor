@@ -1,0 +1,59 @@
+﻿@page "/notifications"
+
+<h3 class="text-light">Notifications</h3>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            @if (NotificationList.Count > 0)
+            {
+                @foreach (var notification in NotificationList)
+                {
+                            <div class="card bg-dark text-white mb-3">
+                                <div class="card-header">@notification.Title</div>
+                                <div class="card-body">
+                                    <p class="card-text">@notification.Message</p>
+                                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteNotification(notification.Id)">Delete</button>
+                                </div>
+                            </div>
+                }
+            }
+            else
+            {
+                    <p class="text-muted">No notifications available.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    public class Notification
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Message { get; set; }
+    }
+    private List<Notification> NotificationList { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        for (int i = 1; i <= 10; i++)
+        {
+            NotificationList.Add(new Notification
+                {
+                    Id = i,
+                    Title = $"Notification {i}",
+                    Message = $"This is the message for notification {i}."
+                });
+        }
+    }
+
+    private void DeleteNotification(int id)
+    {
+        var notificationToRemove = NotificationList.FirstOrDefault(n => n.Id == id);
+        if (notificationToRemove != null)
+        {
+            NotificationList.Remove(notificationToRemove);
+        }
+    }
+}

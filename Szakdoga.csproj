@@ -61,13 +61,21 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+      <None Remove="Resources\overkiz-root-ca-2048.crt" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services\" />
+        <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.1" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.30" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="9.0.30" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Resources\overkiz-root-ca-2048.crt" />
     </ItemGroup>
 
 </Project>

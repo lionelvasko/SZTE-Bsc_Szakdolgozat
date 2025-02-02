@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Hosting;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Szakdoga.Services;
 
 namespace Szakdoga
 {
@@ -14,8 +16,10 @@ namespace Szakdoga
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
+                builder.Services.AddSingleton<SomfyApiService>();
+                builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddMauiBlazorWebView();
+
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
