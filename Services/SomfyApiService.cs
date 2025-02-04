@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Net.NetworkInformation;
 using System.Net.Security;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
@@ -140,44 +138,58 @@ namespace Szakdoga.Services
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<List<Entity>> GetEntitiesAsync()
+        public async Task<string> GetSetupJsonAsync(bool useCloud = true)
         {
-            var entities = new List<Entity>();
+            string setupUrl = useCloud
+                ? $"{_baseUrl}/enduser-mobile-web/enduserAPI/setup"
+                : $"https://gateway-{_gatewayPin}:8443/enduser-mobile-web/1/enduserAPI/setup";
 
-            var setupUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI/setup";
-            //var setupUrl = $"https://gateway-{_gatewayPin}:{8443}/enduser-mobile-web/1/enduserAPl"; //Nem működik egy update miatt a local hívás 😓
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
             var response = await _httpClient.GetAsync(setupUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                var responseBody = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine(responseBody);
-                var setupData = JsonSerializer.Deserialize<SetupResponse>(responseBody, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                if (setupData?.Devices != null)
-                {
-                    foreach (var device in setupData.Devices)
-                    {
-                        entities.Add(new Entity
-                        {
-                            DeviceURL = device.DeviceURL,
-                            Label = device.Label,
-                            Type = device.Type,
-                            Available = device.Available
-                        });
-                    }
-                }
-            }
-            else
+            if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Failed to fetch setup data: {response.StatusCode}");
             }
 
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        public List<Entity> GetEntitiesFromJson(string json)
+        {
+            var setupData = JsonSerializer.Deserialize<SetupResponse>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            var entities = new List<Entity>();
+
+            if (setupData?.Entities != null)
+            {
+                foreach (var listEntity in setupData.Entities)
+                {
+                    entities.Add(new Entity
+                    {
+                        DeviceURL = listEntity.DeviceURL,
+                        Label = listEntity.Label,
+                        Type = listEntity.Type,
+                        Available = listEntity.Available
+                    });
+                }
+            }
+
             return entities;
         }
+
+        public Models.Device? GetDeviceFromJson(string json)
+        {
+            var setupData = JsonSerializer.Deserialize<SetupResponse>(json, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            return setupData?.Devices?.FirstOrDefault();
+        }
+
     }
 }

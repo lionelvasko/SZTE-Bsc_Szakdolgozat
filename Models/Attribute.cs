@@ -9,7 +9,6 @@ namespace Szakdoga.Models
     public class Attribute
     {
         public string Name { get; set; }
-        public int? Type { get; set; }
         public object Value { get; set; }
     }
 }

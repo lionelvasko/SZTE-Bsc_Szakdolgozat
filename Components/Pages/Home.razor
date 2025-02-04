@@ -35,7 +35,6 @@
                 }
             </div>
         </div>
-
         <div class="tab-pane fade @GetTabClass(2)" id="devices" role="tabpanel" aria-labelledby="devicesTab">
             <h4 class="mt-4">Devices</h4>
             <div class="row g-3">
@@ -44,8 +43,8 @@
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
                             <div class="card-body">
-                                <h5 class="card-title">@device.Name</h5>
-                                <p class="card-text">Device status: @device.Status</p>
+                                <h5 class="card-title">@device.GatewayId</h5>
+                                <p class="card-text">Device status: @device.Mode</p>
                             </div>
                         </div>
                     </div>
@@ -54,8 +53,6 @@
             <button class="btn btn-lg btn-warning add-device-btn" style="position:fixed; right:24px; bottom:24px;" @onclick="ShowAddDeviceModal">+</button>
         </div>
     </div>
-
-
 </div>
 
 @if (showAddDeviceModal)
@@ -65,6 +62,9 @@
             <div class="modal-content">
 
                 <div class="modal-header">
+                    <h5 class="modal-title">Add Device</h5>
+                </div>
+                <div class="modal-body">
                     <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link " @onclick="() => SetModalActiveTab(1)" id="tahomaTab" data-bs-toggle="tab" href="#tahoma" role="tab" aria-controls="tahoma" aria-selected="true">Tahoma API</a>
@@ -73,54 +73,57 @@
                             <a class="nav-link " @onclick="() => SetModalActiveTab(2)" id="tuyaTab" data-bs-toggle="tab" href="#tuya" role="tab" aria-controls="tuya" aria-selected="false">Tuya API</a>
                         </li>
                     </ul>
-                </div>
-
-                <div class="modal-body">
                     <div class="tab-content" id="apiTabContent">
-
                         <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
                             <h5>Tahoma API Device Form</h5>
-                            <label for="homeURL" class="mt-2">Home URL:</label>
-                            <select class="form-control" id="homeURL" @bind="homeURL">
-                                <option value="" disabled selected>Select a region</option>
-                                <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
-                                <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
-                                <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (North America)</option>
+                            <label for="apiType">API Type:</label>
+                            <select class="form-control" id="apiType" @bind="selectedApiType">
+                                <option value="online">Online API</option>
+                                <option value="local">Local API</option>
                             </select>
-                            <label for="gatewayPin">Device PIN:</label>
-                            <input type="text" class="form-control" id="gatewayPin" @bind="gatewayPin" placeholder="1234-5678-9012" />
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
-                            <label for="password">Password:</label>
-                            <input type="text" class="form-control" id="password" @bind="password" placeholder="Password" />
-
+                            @if (selectedApiType == "online")
+                            {
+                                <label for="homeURL" class="mt-2">Home URL:</label>
+                                <select class="form-control" id="homeURL" @bind="homeURL">
+                                    <option value="" disabled selected>Select a region</option>
+                                    <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
+                                    <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
+                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (North America)</option>
+                                </select>
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
+                                <label for="password">Password:</label>
+                                <input type="text" class="form-control" id="password" @bind="password" placeholder="Password" />
+                            }
+                            else if (selectedApiType == "local")
+                            {
+                                <label for="homeURL" class="mt-2">Home URL:</label>
+                                <select class="form-control" id="homeURL" @bind="homeURL">
+                                    <option value="" disabled selected>Select a region</option>
+                                    <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
+                                    <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
+                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (North America)</option>
+                                </select>
+                                <label for="gatewayPin">Device PIN:</label>
+                                <input type="text" class="form-control" id="gatewayPin" @bind="gatewayPin" placeholder="1234-5678-9012" />
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
+                                <label for="password">Password:</label>
+                                <input type="text" class="form-control" id="password" @bind="password" placeholder="Password" />
+                                <div class="alert alert-warning mt-3">Jelenleg a local API hívások kidolgozás alatt vannak.</div>
+                            }
                             <button type="button" class="btn btn-primary" @onclick="LoadEntities">Save Device</button>
-
-                        </div>
-
-
-                        <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
-                            <h5>Tuya API Device Form</h5>
-                            <label for="tuyaName">Device Name:</label>
-                            <input type="text" class="form-control" id="tuyaName" @bind="tuyaName" placeholder="Enter device name" />
-                            <label for="tuyaStatus" class="mt-2">Device Status:</label>
-                            <select class="form-control" id="tuyaStatus" @bind="tuyaStatus">
-                                <option>Active</option>
-                                <option>Offline</option>
-                                <option>Maintenance</option>
-                            </select>
                         </div>
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Device</button>
                 </div>
             </div>
         </div>
     </div>
 }
+
 
 @if (showEntityDetailsModal && selectedEntity != null)
 {
@@ -149,12 +152,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">@selectedDevice.Name</h5>
+                    <h5 class="modal-title">@selectedDevice.GatewayId</h5>
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Device Name:</strong> @selectedDevice.Name</p>
-                    <p><strong>Status:</strong> @selectedDevice.Status</p>
+                    <p><strong>Device Name:</strong> @selectedDevice.GatewayId</p>
+                    <p><strong>Status:</strong> @selectedDevice.Mode</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
@@ -176,17 +179,13 @@
     private bool showDeviceDetailsModal = false;
     private bool showAddDeviceModal = false;
 
+    private string selectedApiType = "online";
+
     private Entity selectedEntity;
     private Device selectedDevice;
 
     private string tuyaName;
     private string tuyaStatus = "Active";
-
-    public class Device
-    {
-        public string Name { get; set; }
-        public string Status { get; set; }
-    }
 
     private List<Entity> entities = new();
 
@@ -195,29 +194,7 @@
         //var loginSucces = await SomfyApiService.LoginAsync();
     }
 
-    private List<Device> devices = new List<Device>
-{
-    new Device { Name = "Device 1", Status = "Active" },
-    new Device { Name = "Device 2", Status = "Offline" },
-    new Device { Name = "Device 3", Status = "Active" },
-    new Device { Name = "Device 4", Status = "Maintenance" },
-    new Device { Name = "Device 5", Status = "Active" },
-    new Device { Name = "Device 6", Status = "Offline" },
-    new Device { Name = "Device 7", Status = "Active" },
-    new Device { Name = "Device 8", Status = "Active" },
-    new Device { Name = "Device 9", Status = "Active" },
-    new Device { Name = "Device 10", Status = "Maintenance" },
-    new Device { Name = "Device 11", Status = "Offline" },
-    new Device { Name = "Device 12", Status = "Active" },
-    new Device { Name = "Device 13", Status = "Active" },
-    new Device { Name = "Device 14", Status = "Offline" },
-    new Device { Name = "Device 15", Status = "Maintenance" },
-    new Device { Name = "Device 16", Status = "Active" },
-    new Device { Name = "Device 17", Status = "Active" },
-    new Device { Name = "Device 18", Status = "Offline" },
-    new Device { Name = "Device 19", Status = "Maintenance" },
-    new Device { Name = "Device 20", Status = "Active" }
-};
+    private List<Device> devices = new();
 
     private void ShowEntityDetailsModal(Entity entity)
     {
@@ -248,18 +225,6 @@
         selectedDevice = null;
     }
 
-        /*
-        private void SaveDevice()
-            {
-            var newDevice = new Device
-            {
-            Name = activeTab == 1 ? tahomaName : tuyaName,
-            Status = activeTab == 1 ? tahomaStatus : tuyaStatus
-    };
-    devices.Add(newDevice);
-    CloseAddDeviceModal();
-    }
-    */
     private void SetActiveTab(int tabNumber)
     {
         activeTab = tabNumber;
@@ -320,25 +285,38 @@
                 await jsRuntime.InvokeVoidAsync("console.log", "Login failed.");
                 return;
             }
-
-            await jsRuntime.InvokeVoidAsync("console.log", "Generating token...");
-            var token = await SingletonSomfyApiService.GenerateTokenAsync(gatewayPin);
-            await jsRuntime.InvokeVoidAsync("console.log", $"Token generated: {token}");
-
-            await jsRuntime.InvokeVoidAsync("console.log", "Activating token...");
-            bool successfulActivation = await SingletonSomfyApiService.ActivateTokenAsync(token);
-            await jsRuntime.InvokeVoidAsync("console.log", $"Token activation successful: {successfulActivation}");
-
-            if (!successfulActivation)
+            if(selectedApiType == "local")
             {
-                await jsRuntime.InvokeVoidAsync("console.log", "Token activation failed.");
-                return;
+                await jsRuntime.InvokeVoidAsync("console.log", "Generating token...");
+                var token = await SingletonSomfyApiService.GenerateTokenAsync(gatewayPin);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Token generated: {token}");
+                await jsRuntime.InvokeVoidAsync("console.log", "Activating token...");
+                bool successfulActivation = await SingletonSomfyApiService.ActivateTokenAsync(token);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Token activation successful: {successfulActivation}");
+
+                if (!successfulActivation)
+                {
+                    await jsRuntime.InvokeVoidAsync("console.log", "Token activation failed.");
+                    return;
+                }
             }
 
+
             await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
-            var newEntities = await SingletonSomfyApiService.GetEntitiesAsync();
+            var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync(selectedApiType == "online");
+            var mainDevice = SingletonSomfyApiService.GetDeviceFromJson(generatedJson);
+            await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
+            var newEntities = SingletonSomfyApiService.GetEntitiesFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
 
+            if (mainDevice != null)
+            {
+                devices.Add(new Device { GatewayId = mainDevice.GatewayId, Mode = mainDevice.Mode });
+            }
+            else
+            {
+                await jsRuntime.InvokeVoidAsync("console.log", "mainDevice is null.");
+            }
             foreach (var entity in newEntities)
             {
                 entities.Add(entity);
