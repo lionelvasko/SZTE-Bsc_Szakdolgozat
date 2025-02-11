@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Szakdoga.Services;
+using Szakdoga.Services.Somfy;
 
 namespace Szakdoga
 {

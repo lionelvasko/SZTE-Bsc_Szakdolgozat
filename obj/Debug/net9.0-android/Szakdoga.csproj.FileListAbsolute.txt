@@ -980,7 +980,6 @@ C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\stamp\_GeneratePackageManagerJ
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\stamp\_ResolveLibraryProjectImports.stamp
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\compressed\srcapka0sw-3xeme7nlh4.gz
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\compressed\publish\srcapka0sw-3xeme7nlh4.br
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\x86_64\Microsoft.AspNetCore.Components.Authorization.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\src\crc641b505e60fdb3cf02\MainActivity.java
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\src\crc641b505e60fdb3cf02\MainApplication.java
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-android\appsettings.json
@@ -1024,7 +1023,6 @@ C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Micro
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Authentication.Core.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Authorization.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Authorization.Policy.dll
-C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Components.Authorization.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Components.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Components.Forms.dll
 C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\android\assets\arm64-v8a\Microsoft.AspNetCore.Components.Web.dll

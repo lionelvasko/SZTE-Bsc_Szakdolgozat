@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Szakdoga")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+871afe94e23c08f7ded92506e26ed8b1025b8ac6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+88be1246872cc74740354dcf81e02dfb261334c1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Szakdoga")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Szakdoga")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

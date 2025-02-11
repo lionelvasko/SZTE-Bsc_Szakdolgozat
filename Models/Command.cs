@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Szakdoga.Models
+﻿namespace Szakdoga.Models
 {
     public class Command
     {
-        public string CommandName { get; set; }
-        public int Nparams { get; set; }
+        public required string CommandName { get; set; }
+        public required int Nparams { get; set; }
     }
 }

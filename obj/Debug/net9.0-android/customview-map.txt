@@ -30,6 +30,7 @@ external-cache-path;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\167\jl\
 external-path;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\167\jl\res\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
 foreground;obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon.xml
 foreground;obj\Debug\net9.0-android\resizetizer\r\mipmap-anydpi-v26\appicon_round.xml
+item;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\165\jl\res\values\values.xml
 item;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\166\jl\res\drawable\maui_splash.xml
 item;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\166\jl\res\values\styles.xml
 item;C:\Git Projects\Szakdoga\obj\Debug\net9.0-android\lp\166\jl\res\values-v35\styles.xml

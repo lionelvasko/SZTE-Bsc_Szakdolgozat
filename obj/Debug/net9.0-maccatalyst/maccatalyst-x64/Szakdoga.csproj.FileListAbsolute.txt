@@ -343,7 +343,6 @@ C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Authentication.Core.dll
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Authorization.Policy.dll
-C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Components.Authorization.dll
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Git Projects\Szakdoga\bin\Debug\net9.0-maccatalyst\maccatalyst-x64\Microsoft.AspNetCore.Hosting.Abstractions.dll

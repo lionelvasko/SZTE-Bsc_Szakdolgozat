@@ -29,6 +29,14 @@
                             <div class="card-body">
                                 <h5 class="card-title">@entity.DeviceURL</h5>
                                 <h5 class="card-title">@entity.Label</h5>
+                                <div class="d-flex flex-column gap-2 mt-3">
+                                    <div class="d-flex flex-column gap-2 mt-3">
+                                        <button class="btn btn-success" @onclick="() => OpenShutter(entity.DeviceURL)">Open</button>
+                                        <button class="btn btn-warning" @onclick="() => StopShutter(entity.DeviceURL)">Stop</button>
+                                        <button class="btn btn-danger" @onclick="() => CloseShutter(entity.DeviceURL)">Close</button>
+                                        <button class="btn btn-info" @onclick="() => MyPositionShutter(entity.DeviceURL)">My Position</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -112,11 +120,11 @@
                                 <input type="text" class="form-control" id="password" @bind="password" placeholder="Password" />
                                 <div class="alert alert-warning mt-3">Jelenleg a local API hívások kidolgozás alatt vannak.</div>
                             }
-                            <button type="button" class="btn btn-primary" @onclick="LoadEntities">Save Device</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="LoadEntities">Save Device</button>
                     <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">Close</button>
                 </div>
             </div>
@@ -274,7 +282,7 @@
         try
         {
             await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
-            var SingletonSomfyApiService = SomfyApiService.GetInstance();
+            var SingletonSomfyApiService = Services.Somfy.SomfyApiService.GetInstance();
 
             await jsRuntime.InvokeVoidAsync("console.log", "Attempting to log in...");
             bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeURL);
@@ -303,8 +311,9 @@
 
 
             await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
-            var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync(selectedApiType == "online");
-            var mainDevice = SingletonSomfyApiService.GetDeviceFromJson(generatedJson);
+            SingletonSomfyApiService.SetUrl(selectedApiType == "online");
+            var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
+            var mainDevice = Services.Somfy.SomfyApiService.GetDeviceFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
             var newEntities = SingletonSomfyApiService.GetEntitiesFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
@@ -334,4 +343,25 @@
     {
         await jsRuntime.InvokeVoidAsync("console.log", "Initialized.");
     }
+
+    private async Task OpenShutter(string deviceUrl)
+    {
+        await Services.Somfy.ShutterControl.OpenShutter(deviceUrl);
+    }
+
+    private async Task StopShutter(string deviceUrl)
+    {
+        await Services.Somfy.ShutterControl.StopShutter(deviceUrl);
+    }
+
+    private async Task CloseShutter(string deviceUrl)
+    {
+        await Services.Somfy.ShutterControl.CloseShutter(deviceUrl);
+    }
+
+    private async Task MyPositionShutter(string deviceUrl)
+    {
+        await Services.Somfy.ShutterControl.MyPositionShutter(deviceUrl);
+    }
+
 }
