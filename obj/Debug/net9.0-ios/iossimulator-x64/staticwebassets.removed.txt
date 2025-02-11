@@ -1,0 +1,4 @@
+C:\Git Projects\Szakdoga\wwwroot\index.html
+C:\Git Projects\Szakdoga\wwwroot\css\bootstrap\bootstrap.min.css
+C:\Git Projects\Szakdoga\wwwroot\css\bootstrap\bootstrap.min.css.map
+C:\Git Projects\Szakdoga\wwwroot\css\app.css

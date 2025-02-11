@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Szakdoga.Services.Somfy;
+﻿using Microsoft.Extensions.Logging;
+using SomfyAPI.Services;
 
 namespace Szakdoga
 {

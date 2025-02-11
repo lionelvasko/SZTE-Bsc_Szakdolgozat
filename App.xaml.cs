@@ -13,7 +13,7 @@
             {
                 MinimumWidth = 500,
                 MinimumHeight = 400,
-                Title = "Szakdoga" 
+                Title = "Szakdolgozat" 
             };
         }
     }

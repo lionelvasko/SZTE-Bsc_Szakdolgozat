@@ -197,11 +197,6 @@
 
     private List<Entity> entities = new();
 
-    private async Task Login()
-    {
-        //var loginSucces = await SomfyApiService.LoginAsync();
-    }
-
     private List<Device> devices = new();
 
     private void ShowEntityDetailsModal(Entity entity)
@@ -282,7 +277,7 @@
         try
         {
             await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
-            var SingletonSomfyApiService = Services.Somfy.SomfyApiService.GetInstance();
+            var SingletonSomfyApiService = SomfyApiService.GetInstance();
 
             await jsRuntime.InvokeVoidAsync("console.log", "Attempting to log in...");
             bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeURL);
@@ -313,7 +308,7 @@
             await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
             SingletonSomfyApiService.SetUrl(selectedApiType == "online");
             var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
-            var mainDevice = Services.Somfy.SomfyApiService.GetDeviceFromJson(generatedJson);
+            var mainDevice = SomfyApiService.GetDeviceFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
             var newEntities = SingletonSomfyApiService.GetEntitiesFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
@@ -346,22 +341,22 @@
 
     private async Task OpenShutter(string deviceUrl)
     {
-        await Services.Somfy.ShutterControl.OpenShutter(deviceUrl);
+        await ShutterControl.OpenShutter(deviceUrl);
     }
 
     private async Task StopShutter(string deviceUrl)
     {
-        await Services.Somfy.ShutterControl.StopShutter(deviceUrl);
+        await ShutterControl.StopShutter(deviceUrl);
     }
 
     private async Task CloseShutter(string deviceUrl)
     {
-        await Services.Somfy.ShutterControl.CloseShutter(deviceUrl);
+        await ShutterControl.CloseShutter(deviceUrl);
     }
 
     private async Task MyPositionShutter(string deviceUrl)
     {
-        await Services.Somfy.ShutterControl.MyPositionShutter(deviceUrl);
+        await ShutterControl.MyPositionShutter(deviceUrl);
     }
 
 }

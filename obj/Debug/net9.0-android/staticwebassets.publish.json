@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oBkIWMBNZMA1TYNNS63qdpiHFvAIuuPwasEAwetlebY=",
+  "Hash": "9XevuBGAuiIdsTtyw+B30dOj1+lHTsNYXVamfF0NW/U=",
   "Source": "Szakdoga",
   "BasePath": "/",
   "Mode": "Root",
@@ -10,17 +10,17 @@
     {
       "Name": "Szakdoga\\wwwroot",
       "Source": "Szakdoga",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\wwwroot\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "index#[.{fingerprint=3k1h9ur0hd}]?.html.gz",
       "AssetKind": "All",
@@ -28,20 +28,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "7o813i7ztd",
       "Integrity": "2YKVTR9x5vrMUGmUdr2Hbr86ZiZ8Stc/JHLC1c4/Nrg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min#[.{fingerprint=6gzpyzhau4}]?.css.gz",
       "AssetKind": "All",
@@ -49,20 +49,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "joqzyw7ssu",
       "Integrity": "LTxu1aeZz5yJTTAB+DiLnn5XOMdK1oiypNP/4JaeK9c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css#[.{fingerprint=8inm30yfxf}]?.map.gz",
       "AssetKind": "All",
@@ -70,20 +70,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "fbl5ivwo6k",
       "Integrity": "Kym5HpgDYV8Caci50HDUPG6WCQ6nTP+8hy429w+zHVU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint=1gwkgr3fwy}]?.styles.css.gz",
       "AssetKind": "All",
@@ -91,20 +91,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "4cx6fasp98",
       "Integrity": "RMVCt1vvKbEop2irtLWs0R/2oue9iJtorIvHd5gVdEI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "index#[.{fingerprint=3k1h9ur0hd}]?.html.br",
       "AssetKind": "All",
@@ -112,20 +112,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "q1xhtbxslb",
       "Integrity": "jhoqpfusw1FujITuYhBM5sCbbGBlOZ8sef6CAiO3yNs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min#[.{fingerprint=6gzpyzhau4}]?.css.br",
       "AssetKind": "All",
@@ -133,20 +133,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "2o883p7o84",
       "Integrity": "4jR0OWxmfzUr920AK8Yzn3GjSgWqtt7AtQDXrJ9OWmA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css#[.{fingerprint=8inm30yfxf}]?.map.br",
       "AssetKind": "All",
@@ -154,20 +154,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "b4a1wrn6r6",
       "Integrity": "e0W3cltN7F1+gW+ilWd1J4N1PyvYvfyn8Js6/fJEqb0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint=1gwkgr3fwy}]?.styles.css.br",
       "AssetKind": "All",
@@ -175,20 +175,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "4nvknmtyxo",
       "Integrity": "MLywoL8CoXNzgfhFZusWeTACElfiOSjLUh7qZIAqzeE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "css/app#[.{fingerprint=3xeme7nlh4}]?.css.br",
       "AssetKind": "All",
@@ -196,20 +196,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "ix8tqdzfli",
       "Integrity": "io+kt9aQY3mXMll58T3Nn1mGV6YPxRgaHh9kOJ+Q5Gc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint=1gwkgr3fwy}]!.bundle.scp.css.br",
       "AssetKind": "All",
@@ -217,20 +217,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "br",
       "Fingerprint": "4nvknmtyxo",
       "Integrity": "MLywoL8CoXNzgfhFZusWeTACElfiOSjLUh7qZIAqzeE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "css/app#[.{fingerprint=3xeme7nlh4}]?.css.gz",
       "AssetKind": "All",
@@ -238,20 +238,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "1s8qdxu55s",
       "Integrity": "D+CAMPALD/XTUYdv2z7l3ZmByFTYyBUNnfusJUMTCZ8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint=1gwkgr3fwy}]!.bundle.scp.css.gz",
       "AssetKind": "All",
@@ -259,20 +259,20 @@
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
+      "RelatedAsset": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "4cx6fasp98",
       "Integrity": "RMVCt1vvKbEop2irtLWs0R/2oue9iJtorIvHd5gVdEI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -287,13 +287,13 @@
       "Integrity": "v9Kcm9oTN3rLAcbqlRTnxXf+5mNd80/08YlkVWydCQg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
       "SourceId": "Szakdoga",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\",
       "BasePath": "/",
       "RelativePath": "Szakdoga#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -308,13 +308,13 @@
       "Integrity": "v9Kcm9oTN3rLAcbqlRTnxXf+5mNd80/08YlkVWydCQg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\wwwroot\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -332,10 +332,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\wwwroot\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -353,10 +353,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\wwwroot\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "Identity": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "SourceId": "Szakdoga",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Git Projects\\Szakdoga\\wwwroot\\",
+      "ContentRoot": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index#[.{fingerprint}]?.html",
       "AssetKind": "All",
@@ -398,7 +398,7 @@
   "Endpoints": [
     {
       "Route": "css/app.3xeme7nlh4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -421,7 +421,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -461,7 +461,7 @@
     },
     {
       "Route": "css/app.3xeme7nlh4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -484,7 +484,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -524,7 +524,7 @@
     },
     {
       "Route": "css/app.3xeme7nlh4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -545,7 +545,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -569,7 +569,7 @@
     },
     {
       "Route": "css/app.3xeme7nlh4.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -590,7 +590,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -622,7 +622,7 @@
     },
     {
       "Route": "css/app.3xeme7nlh4.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -643,7 +643,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -675,7 +675,7 @@
     },
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -698,7 +698,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -730,7 +730,7 @@
     },
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -753,7 +753,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -785,7 +785,7 @@
     },
     {
       "Route": "css/app.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -806,7 +806,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -822,7 +822,7 @@
     },
     {
       "Route": "css/app.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\srcapka0sw-3xeme7nlh4.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -843,7 +843,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -867,7 +867,7 @@
     },
     {
       "Route": "css/app.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\srcapka0sw-3xeme7nlh4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -888,7 +888,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 19:23:09 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -912,7 +912,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -935,7 +935,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -975,7 +975,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -998,7 +998,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1038,7 +1038,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1059,7 +1059,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1083,7 +1083,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1104,7 +1104,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1136,7 +1136,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.6gzpyzhau4.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1157,7 +1157,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1189,7 +1189,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1212,7 +1212,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1244,7 +1244,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1267,7 +1267,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1299,7 +1299,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1320,7 +1320,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1336,7 +1336,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1359,7 +1359,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1399,7 +1399,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1422,7 +1422,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1462,7 +1462,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1483,7 +1483,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1507,7 +1507,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1528,7 +1528,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1560,7 +1560,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.8inm30yfxf.map.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1581,7 +1581,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1613,7 +1613,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\b7im08knlc-6gzpyzhau4.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1634,7 +1634,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1658,7 +1658,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\b7im08knlc-6gzpyzhau4.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1679,7 +1679,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1703,7 +1703,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1726,7 +1726,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1758,7 +1758,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1781,7 +1781,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1813,7 +1813,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1834,7 +1834,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1850,7 +1850,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\mmg41zqcba-8inm30yfxf.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1871,7 +1871,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1895,7 +1895,7 @@
     },
     {
       "Route": "css/bootstrap/bootstrap.min.css.map.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\mmg41zqcba-8inm30yfxf.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1916,7 +1916,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 14 Jan 2025 13:35:55 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1940,7 +1940,7 @@
     },
     {
       "Route": "index.3k1h9ur0hd.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1963,7 +1963,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2003,7 +2003,7 @@
     },
     {
       "Route": "index.3k1h9ur0hd.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2026,7 +2026,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2066,7 +2066,7 @@
     },
     {
       "Route": "index.3k1h9ur0hd.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2087,7 +2087,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2111,7 +2111,7 @@
     },
     {
       "Route": "index.3k1h9ur0hd.html.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2132,7 +2132,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2164,7 +2164,7 @@
     },
     {
       "Route": "index.3k1h9ur0hd.html.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2185,7 +2185,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2217,7 +2217,7 @@
     },
     {
       "Route": "index.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2240,7 +2240,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2272,7 +2272,7 @@
     },
     {
       "Route": "index.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2295,7 +2295,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2327,7 +2327,7 @@
     },
     {
       "Route": "index.html",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2348,7 +2348,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2364,7 +2364,7 @@
     },
     {
       "Route": "index.html.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\8gv4yrbfrw-3k1h9ur0hd.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2385,7 +2385,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2409,7 +2409,7 @@
     },
     {
       "Route": "index.html.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\8gv4yrbfrw-3k1h9ur0hd.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2430,7 +2430,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 18 Jan 2025 17:01:42 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:54 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2454,7 +2454,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2477,7 +2477,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2517,7 +2517,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2540,7 +2540,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2580,7 +2580,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2601,7 +2601,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2625,7 +2625,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.bundle.scp.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2646,7 +2646,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2678,7 +2678,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.bundle.scp.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2699,7 +2699,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2731,7 +2731,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2754,7 +2754,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2794,7 +2794,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -2817,7 +2817,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2857,7 +2857,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2878,7 +2878,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2902,7 +2902,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.styles.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2923,7 +2923,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2955,7 +2955,7 @@
     },
     {
       "Route": "Szakdoga.1gwkgr3fwy.styles.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2976,7 +2976,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3008,7 +3008,7 @@
     },
     {
       "Route": "Szakdoga.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3031,7 +3031,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3063,7 +3063,7 @@
     },
     {
       "Route": "Szakdoga.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3086,7 +3086,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3118,7 +3118,7 @@
     },
     {
       "Route": "Szakdoga.bundle.scp.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\projectbundle\\Szakdoga.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3139,7 +3139,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3155,7 +3155,7 @@
     },
     {
       "Route": "Szakdoga.bundle.scp.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\t18z5oab1q-1gwkgr3fwy.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3176,7 +3176,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3200,7 +3200,7 @@
     },
     {
       "Route": "Szakdoga.bundle.scp.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\t18z5oab1q-1gwkgr3fwy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3221,7 +3221,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3245,7 +3245,7 @@
     },
     {
       "Route": "Szakdoga.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3268,7 +3268,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3300,7 +3300,7 @@
     },
     {
       "Route": "Szakdoga.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -3323,7 +3323,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3355,7 +3355,7 @@
     },
     {
       "Route": "Szakdoga.styles.css",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3376,7 +3376,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3392,7 +3392,7 @@
     },
     {
       "Route": "Szakdoga.styles.css.br",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\publish\\nr14em5uxq-1gwkgr3fwy.br",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3413,7 +3413,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3437,7 +3437,7 @@
     },
     {
       "Route": "Szakdoga.styles.css.gz",
-      "AssetFile": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
+      "AssetFile": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\compressed\\nr14em5uxq-1gwkgr3fwy.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3458,7 +3458,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 19 Jan 2025 08:53:10 GMT"
+          "Value": "Tue, 11 Feb 2025 14:17:53 GMT"
         },
         {
           "Name": "Cache-Control",

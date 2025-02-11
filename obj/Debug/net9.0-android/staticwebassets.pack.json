@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
+      "Id": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\obj\\Debug\\net9.0-android\\scopedcss\\bundle\\Szakdoga.styles.css",
       "PackagePath": "staticwebassets\\Szakdoga.styles.css"
     },
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\app.css",
+      "Id": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Git Projects\\Szakdoga\\wwwroot\\index.html",
+      "Id": "C:\\Git Projects\\SZTE-Bsc_Szakdolgozat\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
