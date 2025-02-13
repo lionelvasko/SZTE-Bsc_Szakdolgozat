@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using SomfyAPI.Services;
-
 namespace Szakdoga
 {
     public static class MauiProgram

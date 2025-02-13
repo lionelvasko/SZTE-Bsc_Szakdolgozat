@@ -197,6 +197,11 @@
 
     private List<Entity> entities = new();
 
+    private async Task Login()
+    {
+        //var loginSucces = await SomfyApiService.LoginAsync();
+    }
+
     private List<Device> devices = new();
 
     private void ShowEntityDetailsModal(Entity entity)
@@ -341,22 +346,22 @@
 
     private async Task OpenShutter(string deviceUrl)
     {
-        await ShutterControl.OpenShutter(deviceUrl);
+        await SomfyAPI.Services.ShutterControl.OpenShutter(deviceUrl);
     }
 
     private async Task StopShutter(string deviceUrl)
     {
-        await ShutterControl.StopShutter(deviceUrl);
+        await SomfyAPI.Services.ShutterControl.StopShutter(deviceUrl);
     }
 
     private async Task CloseShutter(string deviceUrl)
     {
-        await ShutterControl.CloseShutter(deviceUrl);
+        await SomfyAPI.Services.ShutterControl.CloseShutter(deviceUrl);
     }
 
     private async Task MyPositionShutter(string deviceUrl)
     {
-        await ShutterControl.MyPositionShutter(deviceUrl);
+        await SomfyAPI.Services.ShutterControl.MyPositionShutter(deviceUrl);
     }
 
 }
