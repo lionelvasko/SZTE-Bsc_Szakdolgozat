@@ -1,0 +1,6 @@
+# Build és IDE fájlok
+bin/
+obj/
+.vs/
+.github/
+Szakdoga.csproj.user

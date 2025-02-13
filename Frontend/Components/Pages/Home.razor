@@ -25,10 +25,12 @@
                 @foreach (var entity in entities)
                 {
                     <div class="col-12 col-md-4 col-lg-3">
-                        <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowEntityDetails(entity)">
+                        <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;">
                             <div class="card-body">
-                                <h5 class="card-title">@entity.DeviceURL</h5>
-                                <h5 class="card-title">@entity.Label</h5>
+                                <div @onclick="() => ShowEntityDetails(entity)">
+                                    <h5 class="card-title">@entity.DeviceURL</h5>
+                                    <h5 class="card-title">@entity.Label</h5>
+                                </div>
                                 <div class="d-flex flex-column gap-2 mt-3">
                                     <div class="d-flex flex-column gap-2 mt-3">
                                         <button class="btn btn-success" @onclick="() => OpenShutter(entity.DeviceURL)">Open</button>
@@ -313,9 +315,9 @@
             await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
             SingletonSomfyApiService.SetUrl(selectedApiType == "online");
             var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
-            var mainDevice = SomfyApiService.GetDeviceFromJson(generatedJson);
+            var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
-            var newEntities = SingletonSomfyApiService.GetEntitiesFromJson(generatedJson);
+            var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
             await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
 
             if (mainDevice != null)
