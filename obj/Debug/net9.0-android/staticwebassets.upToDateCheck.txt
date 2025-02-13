@@ -1,8 +1,0 @@
-C:\Git Projects\SZTE-Bsc_Szakdolgozat\wwwroot\index.html
-C:\Git Projects\SZTE-Bsc_Szakdolgozat\wwwroot\css\bootstrap\bootstrap.min.css
-C:\Git Projects\SZTE-Bsc_Szakdolgozat\wwwroot\css\bootstrap\bootstrap.min.css.map
-C:\Git Projects\SZTE-Bsc_Szakdolgozat\wwwroot\css\app.css
-wwwroot\css\app.css
-wwwroot\css\bootstrap\bootstrap.min.css
-wwwroot\css\bootstrap\bootstrap.min.css.map
-wwwroot\index.html
