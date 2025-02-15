@@ -6,3 +6,6 @@
 /.vs/ProjectEvaluation
 /SomfyAPI/bin/Debug
 /SomfyAPI/obj
+/AuthAPI/AuthAPI/bin/Debug/net9.0
+/AuthAPI/AuthAPI/obj
+*.json
