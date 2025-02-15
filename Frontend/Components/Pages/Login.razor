@@ -1,32 +1,29 @@
 ﻿@page "/login"
 @layout MainLayout
+@using System.Text.Json;
+@using System.Text;
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg rounded bg-dark text-white" style="max-width: 400px; width: 100%;">
-            <h2 class="text-center mb-4 text-primary">Login</h2>
-            <EditForm Model="loginModel" OnValidSubmit="Submit">
-                <DataAnnotationsValidator />
-                <div class="mb-3">
-                    <label for="eamil" class="form-label">Email</label>
-                    <input type="email" id="email" @bind="loginModel.Email" placeholder="Enter your email" class="form-control bg-transparent text-white" />
-                    <ValidationMessage For="@(() => loginModel.Email)" />
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" @bind="loginModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
-                    <ValidationMessage For="@(() => loginModel.Password)" />    
-                </div>
-                <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Login</button>
-             </EditForm>
-            <div class="text-center mt-4">
-                <p class="mb-2">Don't have an account?</p>
-                <button @onclick="NavigateToRegisterPage" class="btn btn-outline-secondary w-100 shadow-sm">Register Here</button>
+        <h2 class="text-center mb-4 text-primary">Login</h2>
+        <EditForm Model="loginModel" OnValidSubmit="Submit">
+            <DataAnnotationsValidator />
+            <div class="mb-3">
+                <label for="eamil" class="form-label">Email</label>
+                <input type="email" id="email" @bind="loginModel.Email" placeholder="Enter your email" class="form-control bg-transparent text-white" />
+                <ValidationMessage For="@(() => loginModel.Email)" />
             </div>
-            <div class="text-center mt-4">
-                <button @onclick="HandleGoogleLogin" class="btn btn-danger w-100 shadow-sm">
-                    <i class="fa fa-google me-2"></i> Login with Google
-                </button>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" @bind="loginModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
+                <ValidationMessage For="@(() => loginModel.Password)" />    
             </div>
+            <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Login</button>
+        </EditForm>
+        <div class="text-center mt-4">
+            <p class="mb-2">Don't have an account?</p>
+            <button @onclick="NavigateToRegisterPage" class="btn btn-outline-secondary w-100 shadow-sm">Register Here</button>
+        </div>
     </div>
 </div>
 
@@ -52,19 +49,41 @@
 
 @code {
     private LoginModel loginModel = new LoginModel();
-
-    public async Task Submit()
-    {
-    }
-
-
     private bool ShowModal { get; set; }
     private string ModalMessage { get; set; }
 
-    private async void HandleGoogleLogin()
+    public async Task Submit()
     {
-        ModalMessage = "Google authentication is under implementation.";
-        ShowModal = true;
+        try
+        {
+            var loginData = new
+            {
+                Username = loginModel.Email,
+                PasswordHash = loginModel.Password
+            };
+
+            var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
+            var response = await HttpClient.PostAsync("http://localhost:5223/authapi/login", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var token = await response.Content.ReadAsStringAsync();
+                // Save token for future use (e.g., local storage, secure storage)
+                await SecureStorage.SetAsync("authtoken", token);
+                ModalMessage = "Login successful!";
+            }
+            else
+            {
+                ModalMessage = "Invalid credentials. Please try again.";
+            }
+
+            ShowModal = true;
+        }
+        catch (Exception ex)
+        {
+            ModalMessage = $"Error: {ex.Message}";
+            ShowModal = true;
+        }
     }
 
     private void CloseModal()
@@ -77,5 +96,6 @@
         NavigationManager.NavigateTo("/register");
     }
 
+    [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
 }
