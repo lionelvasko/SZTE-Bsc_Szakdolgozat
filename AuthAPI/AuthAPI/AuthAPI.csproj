@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\SomfyAPI\Models\Attribute.cs" Link="Models\Attribute.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\Command.cs" Link="Models\Command.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\Connectivity.cs" Link="Models\Connectivity.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\Definiton.cs" Link="Models\Definiton.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\Device.cs" Link="Models\Device.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\Entity.cs" Link="Models\Entity.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\SetupResponse.cs" Link="Models\SetupResponse.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\State.cs" Link="Models\State.cs" />
+    <Compile Include="..\..\SomfyAPI\Models\TahomaExecutionId.cs" Link="Models\TahomaExecutionId.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
@@ -14,6 +26,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
   </ItemGroup>
 
 </Project>

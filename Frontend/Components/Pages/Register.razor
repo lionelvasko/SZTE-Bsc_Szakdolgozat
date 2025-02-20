@@ -4,7 +4,8 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg rounded bg-dark text-white" style="max-width: 500px; width: 100%;">
         <h2 class="text-center mb-4">Create an Account</h2>
-        <EditForm Model="registerModel" OnInvalidSubmit="Submit">
+        <EditForm Model="registerModel" OnValidSubmit="Submit">
+            <DataAnnotationsValidator />
             <div class="mb-3">
                 <label for="firstname" class="form-label">First Name</label>
                 <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="Enter your first name" class="form-control bg-transparent text-white" />
@@ -16,49 +17,105 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email Address</label>
                 <input type="email" id="email" @bind="registerModel.Email" placeholder="Enter your email" class="form-control bg-transparent text-white" />
+                <ValidationMessage For="@(() => registerModel.Email)" />
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" id="password" @bind="registerModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
+                <ValidationMessage For="@(() => registerModel.Password)" />
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                 <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="Confirm your password" class="form-control bg-transparent text-white" />
             </div>
-            <button type="button" @onclick="HandleRegister" class="btn btn-primary w-100 shadow-sm">Register</button>
+            <button type="submit" class="btn btn-primary w-100 shadow-sm">Register</button>
         </EditForm>
 
         <div class="text-center mt-4">
             <p class="mb-2">Already have an account?</p>
-            <button @onclick="NavigateToLoginPage" class="btn btn-outline-secondary w-100">Login Here</button>
+            <button @onclick="ToLogin" class="btn btn-outline-secondary w-100">Login Here</button>
         </div>
     </div>
 </div>
 
+@if (ShowModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register Info</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@ModalMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="CloseModal">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="ToLogin">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
     private RegisterModel registerModel = new RegisterModel();
-    private void Submit()
-    {
-        
-    }
+    private bool ShowModal { get; set; }
+    private string ModalMessage { get; set; }
     private string ConfirmPassword { get; set; }
-
-    private async Task HandleRegister()
+    private async Task Submit()
     {
         if (registerModel.Password != ConfirmPassword)
         {
-            await JSRuntime.InvokeVoidAsync("showCustomAlert", "Passwords do not match.");
+            ModalMessage = "Passwords do not match.";
+            ShowModal = true;
             return;
         }
 
-        await JSRuntime.InvokeVoidAsync("showCustomAlert", $"Registered successfully!");
+        try
+        {
+            var registerData = new
+            {
+                Email = registerModel.Email,
+                Password = registerModel.Password,
+                FirstName = registerModel.FirstName,
+                LastName = registerModel.LastName
+            };
+
+            var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
+            var response = await HttpClient.PostAsync("http://localhost:5223/authapi/register", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var token = await response.Content.ReadAsStringAsync();
+                ModalMessage = "Register successful!";
+            }
+            else
+            {
+                var errorResponse = await response.Content.ReadAsStringAsync();
+                ModalMessage = $"Register failed: {errorResponse}";
+            }
+
+            ShowModal = true;
+        }
+        catch (Exception ex)
+        {
+            ModalMessage = $"Error: {ex.Message}";
+            ShowModal = true;
+        }
     }
 
-    private void NavigateToLoginPage()
+    private void CloseModal()
+    {
+        ShowModal = false;
+        ModalMessage = "";
+    }
+    private void ToLogin()
     {
         NavigationManager.NavigateTo("/login");
     }
-
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private HttpClient HttpClient { get; set; }
 }

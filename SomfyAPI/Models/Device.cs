@@ -8,6 +8,7 @@ namespace SomfyAPI.Models
 {
     public class Device
     {
+        public int Id { get; set; }
         public string GatewayId { get; set; }
         public int Type { get; set; }
         public int SubType { get; set; }

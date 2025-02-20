@@ -1,14 +1,8 @@
-﻿using Microsoft.Maui.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SomfyAPI.Models
+﻿namespace SomfyAPI.Models
 {
     public class Entity
     {
+        public int Id { get; set; }
         public string DeviceURL { get; set; }
         public bool Available { get; set; }
         public int Type { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SomfyAPI.Models
+namespace Szakdoga.Models
 {
     public class RegisterModel
     {
