@@ -1,6 +1,7 @@
 ﻿using AuthAPI.Data;
 using AuthAPI.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,106 +17,82 @@ namespace AuthAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(AppDbContext context)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // Register User
+        // Register User
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            var existingUser = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == user.Email);
-
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null)
             {
-                return BadRequest("Username already exists.");
+                return BadRequest("Email is already registered.");
             }
 
-            // Encrypt the user's password with salt
-            (string passwordHash, string salt) = CreatePasswordHash(user.Password);
+            var user = new User
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
 
-            user.Password = passwordHash;
-            user.Salt = salt; // Store salt alongside the hash
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
 
             return Ok("User registered successfully.");
         }
 
         // Login User
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestModel loginUser)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Email == loginUser.Email);
-
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return Unauthorized("No registered account for this email.");
-            }
-            if(!VerifyPassword(loginUser.Password, user.Password, user.Salt))
-            {
-                return Unauthorized("Invalid password.");
+                return Unauthorized("No account found.");
             }
 
-            // Generate JWT Token
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
+            if (!result.Succeeded)
+            {
+                return Unauthorized("Invalid email or password.");
+            }
+
+            var token = GenerateJwtToken(user);
+            return Ok(new { Token = token });
+        }
+
+        private string GenerateJwtToken(User user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("yourSuperSecretKeyThatIsLongEnoughToBe256Bits");
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Email, user.Email) }),
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwtToken = tokenHandler.WriteToken(token);
-
-            return Ok(new { Token = jwtToken });
-        }
-
-        // Password Hashing with Salt
-        private (string passwordHash, string salt) CreatePasswordHash(string password)
-        {
-            // Generate a 128-bit salt using a sequence of
-            // cryptographically strong random bytes.
-            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
-
-            // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password!,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 100000,
-                numBytesRequested: 256 / 8));
-
-            return (hashed, Convert.ToBase64String(salt));
-        }
-
-        // Verify Password
-        private bool VerifyPassword(string enteredPassword, string storedHash, string storedSalt)
-        {
-            byte[] salt = Convert.FromBase64String(storedSalt);
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: enteredPassword,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 100000,
-                numBytesRequested: 256 / 8));
-            return storedHash == hashed;
-        }
-
-        public class LoginRequestModel
-        {
-            [Required]
-            public string Email { get; set; }
-
-            [Required]
-            public string Password { get; set; }
+            return tokenHandler.WriteToken(token);
         }
     }
 }
