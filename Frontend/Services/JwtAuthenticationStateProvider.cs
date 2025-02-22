@@ -22,14 +22,13 @@ namespace Szakdoga.Services
             var jwtinfos = GetInfoFromJwt(jwt);
             var identity = new ClaimsIdentity(
             [
-                new Claim(ClaimTypes.Name, jwtinfos["Name"]),
-                new Claim(ClaimTypes.Email, jwtinfos["Email"]),
-                new Claim(ClaimTypes.Role, jwtinfos["First Name"]),
-                new Claim(ClaimTypes.Role, jwtinfos["Last Name"])
+                new Claim(ClaimTypes.Name, jwtinfos["unique_name"]),
+                new Claim(ClaimTypes.Email, jwtinfos["email"]),
+
              ]);
 
             var user = new ClaimsPrincipal(identity);
-
+            SecureStorage.SetAsync("jwt", jwt);
             NotifyAuthenticationStateChanged(
                 Task.FromResult(new AuthenticationState(user)));
         }
@@ -45,7 +44,7 @@ namespace Szakdoga.Services
         private Dictionary<string, string> GetInfoFromJwt(string jwt)
         {
             var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadToken(jwt) as JwtSecurityToken;
+            var token = handler.ReadJwtToken(jwt) as JwtSecurityToken;
             return token?.Claims.ToDictionary(c => c.Type, c => c.Value);
         }
     }

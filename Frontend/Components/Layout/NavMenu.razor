@@ -52,7 +52,7 @@
 @code {
     private async Task Logout()
     {
-        //await AuthStateProvider.SignOut();
+        AuthStateProvider.LogoutUser();
         Nav.NavigateTo("/login");
     }
     [Inject] JwtAuthenticationStateProvider AuthStateProvider { get; set; }

@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@inject IJSRuntime jsRuntime
 @layout MainLayout
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
@@ -24,6 +25,14 @@
         </div>
     </div>
 </div>
+<AuthorizeView>
+    <Authorized>
+        <p>Hello, @context.User.Identity?.Name!</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You're not authorized.</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 @if (ShowModal)
 {
@@ -64,9 +73,13 @@
 
             if (response.IsSuccessStatusCode)
             {
-                var token = await response.Content.ReadAsStringAsync();
-                //await JwtAuthenticationStateProvider.SignIn(token);
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var jwtResponse = JsonSerializer.Deserialize<JwtResponse>(jsonResponse);
+                string token = jwtResponse.Token;
+                await jsRuntime.InvokeVoidAsync("console.log", "Got the token succesfully");
+                JwtAuthenticationStateProvider.AuthenticateUser(token);
                 ModalMessage = "Login successful!";
+                NavigationManager.NavigateTo("/");
             }
             else
             {

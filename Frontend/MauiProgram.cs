@@ -22,7 +22,6 @@ namespace Szakdoga
 
             builder.Services.AddScoped<JwtAuthenticationStateProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredService<JwtAuthenticationStateProvider>());
-            builder.Services.AddScoped<SecureStorageService>();
             builder.Services.AddAuthorizationCore();
 
 
