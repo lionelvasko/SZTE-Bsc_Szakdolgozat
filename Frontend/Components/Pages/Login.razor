@@ -65,8 +65,7 @@
             if (response.IsSuccessStatusCode)
             {
                 var token = await response.Content.ReadAsStringAsync();
-                // Save token for future use (e.g., local storage, secure storage)
-                await SecureStorage.SetAsync("authtoken", token);
+                //await JwtAuthenticationStateProvider.SignIn(token);
                 ModalMessage = "Login successful!";
             }
             else
@@ -95,4 +94,5 @@
 
     [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private JwtAuthenticationStateProvider JwtAuthenticationStateProvider { get; set; }
 }

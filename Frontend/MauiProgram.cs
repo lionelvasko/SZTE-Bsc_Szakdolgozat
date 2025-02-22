@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Logging;
 using SomfyAPI.Services;
+using Szakdoga.Services;
 namespace Szakdoga
 {
     public static class MauiProgram
@@ -16,6 +18,12 @@ namespace Szakdoga
                 builder.Services.AddSingleton<SomfyApiService>();
                 builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddMauiBlazorWebView();
+
+
+            builder.Services.AddScoped<JwtAuthenticationStateProvider>();
+            builder.Services.AddScoped<AuthenticationStateProvider>(sp => sp.GetRequiredService<JwtAuthenticationStateProvider>());
+            builder.Services.AddScoped<SecureStorageService>();
+            builder.Services.AddAuthorizationCore();
 
 
 #if DEBUG
