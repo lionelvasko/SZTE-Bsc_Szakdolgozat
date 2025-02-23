@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Szakdoga.Models
 {
-    internal class JwtResponse
+    internal class LoginResponse
     {
         [JsonPropertyName("token")]
         public string Token { get; set; }

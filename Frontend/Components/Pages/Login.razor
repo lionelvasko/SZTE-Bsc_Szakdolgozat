@@ -25,14 +25,6 @@
         </div>
     </div>
 </div>
-<AuthorizeView>
-    <Authorized>
-        <p>Hello, @context.User.Identity?.Name!</p>
-    </Authorized>
-    <NotAuthorized>
-        <p>You're not authorized.</p>
-    </NotAuthorized>
-</AuthorizeView>
 
 @if (ShowModal)
 {
@@ -74,10 +66,9 @@
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                var jwtResponse = JsonSerializer.Deserialize<JwtResponse>(jsonResponse);
+                var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
                 string token = jwtResponse.Token;
                 await jsRuntime.InvokeVoidAsync("console.log", "Got the token succesfully");
-                JwtAuthenticationStateProvider.AuthenticateUser(token);
                 ModalMessage = "Login successful!";
                 NavigationManager.NavigateTo("/");
             }
@@ -107,5 +98,4 @@
 
     [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private JwtAuthenticationStateProvider JwtAuthenticationStateProvider { get; set; }
 }
