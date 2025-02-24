@@ -21,9 +21,9 @@
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="logout">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true" @onlclick="Logout"></span> Logout
-                    </NavLink>
+                    <button class="btn btn-danger w-100 text-start" @onclick="Logout" style="margin:auto">
+                        <span class="bi bi-door-closed" aria-hidden="true"></span> Logout
+                    </button>
                 </div>
 
                 <div class="flex-grow-1"></div>
@@ -50,11 +50,10 @@
 </div>
 
 @code {
-    private async Task Logout()
+    private void Logout()
     {
-        AuthStateProvider.LogoutUser();
-        Nav.NavigateTo("/login");
+        AuthenticationService.Logout();
     }
-    [Inject] JwtAuthenticationStateProvider AuthStateProvider { get; set; }
-    [Inject] NavigationManager Nav { get; set; }
+
+    [Inject] private AuthenticationService AuthenticationService { get; set; }
 }

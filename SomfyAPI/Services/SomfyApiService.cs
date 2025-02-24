@@ -50,9 +50,10 @@ namespace SomfyAPI.Services
                 using (var memoryStream = new MemoryStream())
                 {
                     certStream.CopyTo(memoryStream);
-                    var certificate = new X509Certificate2(memoryStream.ToArray());
+                    var certificate = X509CertificateLoader.LoadCertificate(memoryStream.ToArray());
                     handler.ClientCertificates.Add(certificate);
                 }
+
             }
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) =>
             {

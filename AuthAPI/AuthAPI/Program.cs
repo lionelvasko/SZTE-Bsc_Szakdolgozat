@@ -27,24 +27,12 @@ namespace AuthAPI
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add CORS policy to allow localhost requests
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowLocalhost", policy =>
-                {
-                    policy.WithOrigins("http://localhost:5000")  // The origin of your MAUI Blazor app
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
-                });
-            });
 
             // Add services to the container.
 
             builder.Services.AddControllers();
 
             var app = builder.Build();
-
-            app.UseCors("AllowLocalhost");  // Apply CORS policy
 
             app.UseAuthentication();
 

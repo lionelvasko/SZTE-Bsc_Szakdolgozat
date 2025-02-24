@@ -1,6 +1,9 @@
 ﻿@page "/login"
 @inject IJSRuntime jsRuntime
 @layout MainLayout
+@using Szakdoga.Services
+@using Microsoft.AspNetCore.Authorization
+@attribute [AllowAnonymous]
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 shadow-lg rounded bg-dark text-white" style="max-width: 400px; width: 100%;">
@@ -17,6 +20,11 @@
                 <input type="password" id="password" @bind="loginModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
                 <ValidationMessage For="@(() => loginModel.Password)" />    
             </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" id="rememberMe" @bind="loginModel.RememberMe" class="form-check-input" />
+                <label for="rememberMe" class="form-check-label">Remember Me</label>
+            </div>
+
             <button type="submit" class="btn btn-primary w-100 shadow-sm mt-3">Login</button>
         </EditForm>
         <div class="text-center mt-4">
@@ -25,14 +33,6 @@
         </div>
     </div>
 </div>
-<AuthorizeView>
-    <Authorized>
-        <p>Hello, @context.User.Identity?.Name!</p>
-    </Authorized>
-    <NotAuthorized>
-        <p>You're not authorized.</p>
-    </NotAuthorized>
-</AuthorizeView>
 
 @if (ShowModal)
 {
@@ -62,24 +62,10 @@
     {
         try
         {
-            var loginData = new
-            {
-                Email = loginModel.Email,
-                Password = loginModel.Password
-            };
-
-            var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
-            var response = await HttpClient.PostAsync("http://localhost:5223/authapi/login", content);
-
+            var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe);
             if (response.IsSuccessStatusCode)
             {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var jwtResponse = JsonSerializer.Deserialize<JwtResponse>(jsonResponse);
-                string token = jwtResponse.Token;
-                await jsRuntime.InvokeVoidAsync("console.log", "Got the token succesfully");
-                JwtAuthenticationStateProvider.AuthenticateUser(token);
                 ModalMessage = "Login successful!";
-                NavigationManager.NavigateTo("/");
             }
             else
             {
@@ -107,5 +93,6 @@
 
     [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private JwtAuthenticationStateProvider JwtAuthenticationStateProvider { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    [Inject] private AuthenticationService AuthenticationService { get; set; }
 }
