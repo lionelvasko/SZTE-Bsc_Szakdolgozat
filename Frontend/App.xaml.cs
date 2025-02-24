@@ -1,4 +1,6 @@
-﻿namespace Szakdoga
+﻿using System.Xml.Serialization;
+
+namespace Szakdoga
 {
     public partial class App : Application
     {

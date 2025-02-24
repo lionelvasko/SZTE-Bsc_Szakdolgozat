@@ -27,7 +27,6 @@ namespace AuthAPI.Controllers
         }
 
         // Register User
-        // Register User
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
