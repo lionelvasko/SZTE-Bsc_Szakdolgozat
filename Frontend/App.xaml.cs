@@ -26,6 +26,8 @@ namespace Szakdoga
                 {
                     SecureStorage.Default.Remove(AuthenticationService.JWT_AUTH_TOKEN);
                     SecureStorage.Default.Remove(AuthenticationService.REMEMBER_ME_KEY);
+                    SecureStorage.Default.Remove(UserInfoService.NAME_KEY);
+                    SecureStorage.Default.Remove(UserInfoService.EMAIL_KEY);
                 }
             };
 

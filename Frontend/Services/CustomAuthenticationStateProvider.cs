@@ -22,9 +22,6 @@ namespace Szakdoga.Services
             {
                 return new AuthenticationState(_anonymous);
             }
-
-            //Store the user's data in securestorage
-
             try
             {
                 var user = DecodeJwtToken(token);

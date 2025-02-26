@@ -1,8 +1,6 @@
 ﻿@page "/login"
 @inject IJSRuntime jsRuntime
 @layout MainLayout
-@using Szakdoga.Services
-@using Microsoft.AspNetCore.Authorization
 @attribute [AllowAnonymous]
 
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
@@ -65,7 +63,13 @@
             var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe);
             if (response.IsSuccessStatusCode)
             {
-                ModalMessage = "Login successful!";
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
+                string token = jwtResponse.Token;
+
+                ModalMessage = "Login successful";
+                await jsRuntime.InvokeVoidAsync("console.log", $"Token: {token}");
+
             }
             else
             {

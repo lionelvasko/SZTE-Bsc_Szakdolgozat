@@ -1,14 +1,9 @@
-﻿using AuthAPI.Data;
-using AuthAPI.Models;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+﻿using AuthAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace AuthAPI.Controllers
@@ -19,6 +14,8 @@ namespace AuthAPI.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+
+        private static readonly string SECRET_KEY = "yourSuperSecretKeyThatIsLongEnoughToBe256Bits";
 
         public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
@@ -77,14 +74,19 @@ namespace AuthAPI.Controllers
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("yourSuperSecretKeyThatIsLongEnoughToBe256Bits");
+            var key = Encoding.ASCII.GetBytes(SECRET_KEY);
+
+            if(user.Email is null || user.FirstName is null || user.LastName is null)
+            {
+                return null;
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                    new Claim(ClaimTypes.Name, $"{user.LastName} {user.FirstName} "),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

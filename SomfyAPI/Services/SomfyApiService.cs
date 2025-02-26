@@ -135,7 +135,7 @@ namespace SomfyAPI.Services
             {
                 var responseBody = await response.Content.ReadAsStringAsync();
                 var tokenData = JsonSerializer.Deserialize<JsonElement>(responseBody);
-                _token = tokenData.GetProperty("token").GetString(); // Store token globally
+                _token = tokenData.GetProperty("token").GetString();
                 return _token;
             }
             return null;

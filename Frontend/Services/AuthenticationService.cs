@@ -5,9 +5,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Szakdoga.Models;
 
 namespace Szakdoga.Services
@@ -16,18 +18,19 @@ namespace Szakdoga.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly UserInfoService _userInfoService;
         public readonly static string JWT_AUTH_TOKEN = "jwt_auth_token";
         public readonly static string REMEMBER_ME_KEY = "remember_me";
 
-        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
+        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, UserInfoService userInfoService)
         {
             _httpClient = httpClient;
             _authenticationStateProvider = authenticationStateProvider;
+            _userInfoService = userInfoService;
         }
 
         public async Task<HttpResponseMessage> LoginAsync(string email, string password, bool rememberMe)
         {
-            await SecureStorage.SetAsync(REMEMBER_ME_KEY, rememberMe.ToString());
             var loginData = new
             {
                 Email = email,
@@ -45,6 +48,12 @@ namespace Szakdoga.Services
             string token = jwtResponse.Token;
 
             await SecureStorage.Default.SetAsync(JWT_AUTH_TOKEN, token);
+            await SecureStorage.SetAsync(REMEMBER_ME_KEY, rememberMe.ToString());
+
+            var user = DecodeJwtToken(token);
+            _userInfoService.StroreName(user.FirstOrDefault(c => c.Type == "unique_name")?.Value);
+            _userInfoService.StroreEmail(user.FirstOrDefault(c => c.Type == "email")?.Value);
+
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
 
             return response;
@@ -54,7 +63,18 @@ namespace Szakdoga.Services
         {
             SecureStorage.Default.Remove(JWT_AUTH_TOKEN);
             SecureStorage.Default.Remove(REMEMBER_ME_KEY);
+            SecureStorage.Default.Remove(UserInfoService.NAME_KEY);
+            SecureStorage.Default.Remove(UserInfoService.EMAIL_KEY);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
+
+        private IEnumerable<Claim> DecodeJwtToken(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token) as JwtSecurityToken;
+
+            return jwtToken?.Claims;
+        }
+
     }
 }

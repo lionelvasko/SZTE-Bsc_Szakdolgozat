@@ -44,7 +44,6 @@ namespace SomfyAPI.Services
 
             return entities;
         }
-
         public static Models.Device? GetDeviceFromJson(string json)
         {
             var setupData = JsonSerializer.Deserialize<Models.SetupResponse>(json, new JsonSerializerOptions
