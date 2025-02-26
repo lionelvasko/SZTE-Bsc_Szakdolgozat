@@ -16,7 +16,7 @@ namespace Szakdoga.Services
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var token = await SecureStorage.Default.GetAsync("jwt_auth_token");
+            var token = await SecureStorage.Default.GetAsync(AuthenticationService.JWT_AUTH_TOKEN);
 
             if (token is null)
             {

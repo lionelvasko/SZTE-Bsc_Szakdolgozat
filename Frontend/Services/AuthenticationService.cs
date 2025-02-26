@@ -14,10 +14,10 @@ namespace Szakdoga.Services
 {
     public class AuthenticationService
     {
-        private bool _rememberMe;
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly string JWT_AUTH_TOKEN = "jwt_auth_token";
+        public readonly static string JWT_AUTH_TOKEN = "jwt_auth_token";
+        public readonly static string REMEMBER_ME_KEY = "remember_me";
 
         public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
         {
@@ -27,7 +27,7 @@ namespace Szakdoga.Services
 
         public async Task<HttpResponseMessage> LoginAsync(string email, string password, bool rememberMe)
         {
-            _rememberMe = rememberMe;
+            await SecureStorage.SetAsync(REMEMBER_ME_KEY, rememberMe.ToString());
             var loginData = new
             {
                 Email = email,
@@ -53,6 +53,7 @@ namespace Szakdoga.Services
         public void Logout()
         {
             SecureStorage.Default.Remove(JWT_AUTH_TOKEN);
+            SecureStorage.Default.Remove(REMEMBER_ME_KEY);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
     }

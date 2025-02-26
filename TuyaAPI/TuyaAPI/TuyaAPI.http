@@ -1,0 +1,6 @@
+@TuyaAPI_HostAddress = http://localhost:5139
+
+GET {{TuyaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

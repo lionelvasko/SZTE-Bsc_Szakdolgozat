@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomfyAPI", "SomfyAPI\SomfyA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI", "AuthAPI\AuthAPI\AuthAPI.csproj", "{1EA2EC63-3227-47E1-91EF-7DD6DC235A62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuyaAPI", "TuyaAPI\TuyaAPI\TuyaAPI.csproj", "{CD502981-8B4D-4CA3-978F-31198DBD0FAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{1EA2EC63-3227-47E1-91EF-7DD6DC235A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA2EC63-3227-47E1-91EF-7DD6DC235A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA2EC63-3227-47E1-91EF-7DD6DC235A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD502981-8B4D-4CA3-978F-31198DBD0FAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD502981-8B4D-4CA3-978F-31198DBD0FAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD502981-8B4D-4CA3-978F-31198DBD0FAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD502981-8B4D-4CA3-978F-31198DBD0FAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using System.Xml.Serialization;
+﻿using Szakdoga.Services;
 
 namespace Szakdoga
 {
@@ -11,12 +11,25 @@ namespace Szakdoga
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage()) 
+            Window window = new Window(new MainPage())
             {
                 MinimumWidth = 500,
                 MinimumHeight = 400,
-                Title = "Szakdolgozat" 
+                Title = "Szakdolgozat"
             };
+
+            window.Destroying += async (s, e) =>
+            {
+                string? shouldRememberString = await SecureStorage.GetAsync(AuthenticationService.REMEMBER_ME_KEY);
+                bool shouldRemember = bool.TryParse(shouldRememberString, out bool result) && result;
+                if (!shouldRemember)
+                {
+                    SecureStorage.Default.Remove(AuthenticationService.JWT_AUTH_TOKEN);
+                    SecureStorage.Default.Remove(AuthenticationService.REMEMBER_ME_KEY);
+                }
+            };
+
+            return window;
         }
     }
 }
