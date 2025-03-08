@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Szakdoga.Models;
 
 namespace Szakdoga.Services
 {
@@ -15,7 +19,7 @@ namespace Szakdoga.Services
 
         public async Task<string?> GetName()
         {
-           return await SecureStorage.Default.GetAsync(NAME_KEY);
+            return await SecureStorage.Default.GetAsync(NAME_KEY);
         }
 
         public void StroreName(string name = "nulla")

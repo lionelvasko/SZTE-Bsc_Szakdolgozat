@@ -47,8 +47,10 @@ namespace Szakdoga.Services
             var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
             string token = jwtResponse.Token;
 
-            await SecureStorage.Default.SetAsync(JWT_AUTH_TOKEN, token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             await SecureStorage.SetAsync(REMEMBER_ME_KEY, rememberMe.ToString());
+            await SecureStorage.SetAsync(JWT_AUTH_TOKEN, token);
 
             var user = DecodeJwtToken(token);
             _userInfoService.StroreName(user.FirstOrDefault(c => c.Type == "unique_name")?.Value);
@@ -61,6 +63,7 @@ namespace Szakdoga.Services
 
         public void Logout()
         {
+            _httpClient.DefaultRequestHeaders.Authorization = null;
             SecureStorage.Default.Remove(JWT_AUTH_TOKEN);
             SecureStorage.Default.Remove(REMEMBER_ME_KEY);
             SecureStorage.Default.Remove(UserInfoService.NAME_KEY);

@@ -15,17 +15,16 @@ namespace Szakdoga
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
+            builder.Services.AddMauiBlazorWebView();
 
             builder.Services.AddSingleton<SomfyApiService>();
             builder.Services.AddSingleton<HttpClient>();
-            builder.Services.AddMauiBlazorWebView();
-
             builder.Services.AddScoped<AuthenticationService>();
-            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-            builder.Services.AddAuthorizationCore();
             builder.Services.AddScoped<UserInfoService>();
 
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
+            builder.Services.AddAuthorizationCore();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
