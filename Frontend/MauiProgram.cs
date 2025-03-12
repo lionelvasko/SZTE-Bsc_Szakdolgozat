@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using SomfyAPI.Services;
+using TuyaAPI.Services;
 using Szakdoga.Services;
 namespace Szakdoga
 {
@@ -18,6 +19,8 @@ namespace Szakdoga
             builder.Services.AddMauiBlazorWebView();
 
             builder.Services.AddSingleton<SomfyApiService>();
+            builder.Services.AddSingleton<TuyaApiService>();
+
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddScoped<AuthenticationService>();
             builder.Services.AddScoped<UserInfoService>();

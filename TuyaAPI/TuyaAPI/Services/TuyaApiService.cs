@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Diagnostics;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using TuyaAPI.Models;
@@ -9,12 +11,11 @@ namespace TuyaAPI.Services
     {
         private static TuyaApiService? _instance;
         private HttpClient _httpClient;
-        private string _baseUrl;
-        private string _clientId;
+        private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
+        private readonly string PLATFORM = "tuya";
 
         private string _accessToken;
         private string _refreshToken;
-        private string _secret;
 
         private TuyaApiService()
         {
@@ -36,80 +37,138 @@ namespace TuyaAPI.Services
             return _instance;
         }
 
-        public void SetURL(string url)
-        {
-            _baseUrl = url;
-        }
-
-        public string GetURL()
-        {
-            return _baseUrl;
-        }
-
-        public void SetClientId(string clientId)
-        {
-            this._clientId = clientId;
-        }
-
-        public void SetSecret(string secret)
-        {
-            this._secret = secret;
-        }
-
         public HttpClient GetHttpClient()
         {
             return _httpClient;
         }
 
-        private string GenerateTimestamp()
+        public void SetUrl(string countryCode)
         {
-            return DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
-        }
-
-        private string GenerateNonce()
-        {
-            return Guid.NewGuid().ToString();
-        }
-
-        private string GenerateSign(string timestamp, string nonce)
-        {
-            var sign = $"{_clientId}{timestamp}{nonce}{_secret}";
-            using (var sha256 = SHA256.Create())
+            if(countryCode == "1")
             {
-                var bytes = Encoding.UTF8.GetBytes(sign);
-                var hash = sha256.ComputeHash(bytes);
-                return BitConverter.ToString(hash).Replace("-", "").ToLower();
+                _baseUrl.Replace("eu", "us");
             }
-        }
-
-        public async Task GetAccesTokenWithSimpleMode()
-        {
-            _httpClient.DefaultRequestHeaders.Add("client_id", _clientId);
-            _httpClient.DefaultRequestHeaders.Add("sign_method", "HMAC-SHA256");
-            _httpClient.DefaultRequestHeaders.Add("t", GenerateTimestamp());
-            _httpClient.DefaultRequestHeaders.Add("nonce", GenerateNonce());
-            _httpClient.DefaultRequestHeaders.Add("sign", GenerateSign(_httpClient.DefaultRequestHeaders.GetValues("t").First(), _httpClient.DefaultRequestHeaders.GetValues("nonce").First()));
-
-            var response = await _httpClient.GetAsync(_baseUrl + "/v1.0/token?grant_type=1");
-            if (response.IsSuccessStatusCode)
+            else if(countryCode == "44")
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
-                try
-                {
-                    var token = JsonSerializer.Deserialize<SimpleModeToken>(responseContent);
-                    this._accessToken = token.Result.Access_token;
-                    this._refreshToken = token.Result.Refresh_token;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Failed to get access token", e);
-                }
+                _baseUrl.Replace("eu", "eu");
             }
             else
             {
-                throw new Exception("Not Succesfull ");
+                _baseUrl.Replace("eu", "cn");
+            }
+        }
+
+        public string GetUrl()
+        {
+            return _baseUrl;
+        }
+
+        public async Task<HttpStatusCode> Login(string username, string password, string countryCode)
+        {
+            var loginBody = new Dictionary<string, string>
+            {
+                { "userName", username },
+                { "password", password },
+                { "countryCode", countryCode},
+                {"bizType", PLATFORM },
+                {"from", PLATFORM }
+            };
+
+            using var content = new FormUrlEncodedContent(loginBody);
+            Debug.WriteLine("Login URL: " + $"{_baseUrl}/homeassistant/auth.do");
+            var response = await _httpClient.PostAsync($"{_baseUrl}auth.do", content);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                Debug.WriteLine("Login response: " + responseContent);
+                var loginResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
+                _accessToken = loginResponse.GetProperty("access_token").GetString();
+                _refreshToken = loginResponse.GetProperty("refresh_token").GetString();
+            }
+            else
+            {
+                Debug.WriteLine("Login failed: " + response.StatusCode);
+            }
+            return response.StatusCode;
+        }
+
+        public async Task<HttpStatusCode> RefreshToken()
+        {
+            var refreshBody = new Dictionary<string, string>
+            {
+                { "grant_type", "refresh_token" },
+                { "refresh_token", _refreshToken },
+                { "rand", RandomNumberGenerator.GetInt32(0, 2).ToString() }
+            };
+            using var content = new FormUrlEncodedContent(refreshBody);
+            var response = await _httpClient.PostAsync($"{_baseUrl}access.do", content);
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var refreshResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
+                _accessToken = refreshResponse.GetProperty("access_token").GetString();
+                _refreshToken = refreshResponse.GetProperty("refresh_token").GetString();
+            }
+            return response.StatusCode;
+        }
+
+        public async Task<string> GetDevices(bool refreshAccessToken = false)
+        {
+            if (refreshAccessToken)
+            {
+                await RefreshToken();
             }
 
+            var url = $"{_baseUrl}skill";
+            var requestBody = new
+            {
+                header = new
+                {
+                    name = "Discovery",
+                    @namespace = "discovery",
+                    payloadVersion = 1
+                },
+                payload = new
+                {
+                    accessToken = _accessToken
+                }
+            };
+
+            using var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(url, content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to fetch setup data: {response.StatusCode}");
+            }
+            return await response.Content.ReadAsStringAsync();
         }
+
+        public async Task<HttpStatusCode> ControlDevice(string deviceId, string command, string value)
+        {
+            var url = $"{_baseUrl}skill";
+            var requestBody = new
+            {
+                header = new
+                {
+                    name = "TurnOn",
+                    @namespace = "control",
+                    payloadVersion = 1
+                },
+                payload = new
+                {
+                    accessToken = _accessToken,
+                    devId = deviceId,
+                    value = value
+                }
+            };
+            using var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(url, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to control device: {response.StatusCode}");
+            }
+            return response.StatusCode;
+        }   
     }
 }

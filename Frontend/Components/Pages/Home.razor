@@ -30,15 +30,14 @@
                         <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;">
                             <div class="card-body">
                                 <div @onclick="() => ShowEntityDetails(entity)">
-                                    <h5 class="card-title">@entity.DeviceURL</h5>
-                                    <h5 class="card-title">@entity.Label</h5>
+                                    <h5 class="card-title">@entity.Name</h5>
                                 </div>
                                 <div class="d-flex flex-column gap-2 mt-3">
                                     <div class="d-flex flex-column gap-2 mt-3">
-                                        <button class="btn btn-success" @onclick="() => OpenShutter(entity.DeviceURL)">Open</button>
-                                        <button class="btn btn-warning" @onclick="() => StopShutter(entity.DeviceURL)">Stop</button>
-                                        <button class="btn btn-danger" @onclick="() => CloseShutter(entity.DeviceURL)">Close</button>
-                                        <button class="btn btn-info" @onclick="() => MyPositionShutter(entity.DeviceURL)">My Position</button>
+                                        <button class="btn btn-success" @onclick="() => OpenShutter(entity.Id)">Open</button>
+                                        <button class="btn btn-warning" @onclick="() => StopShutter(entity.Id)">Stop</button>
+                                        <button class="btn btn-danger" @onclick="() => CloseShutter(entity.Id)">Close</button>
+                                        <button class="btn btn-info" @onclick="() => MyPositionShutter(entity.Id)">My Position</button>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +55,6 @@
                         <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
                             <div class="card-body">
                                 <h5 class="card-title">@device.GatewayId</h5>
-                                <p class="card-text">Device status: @device.Mode</p>
                             </div>
                         </div>
                     </div>
@@ -125,11 +123,28 @@
                                 <div class="alert alert-warning mt-3">Jelenleg a local API hívások kidolgozás alatt vannak.</div>
                             }
                         </div>
+                        <div class="tab-content" id="apiTabContent">
+                            <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
+                                <h5>Tuya API Device Form</h5>
+                                <label for="region" class="mt-2">Home URL:</label>
+                                <select class="form-control" id=" " @bind="region">
+                                    <option value="" disabled selected>Select a region</option>
+                                    <option value="44">EU</option>
+                                    <option value="1">US</option>
+                                    <option value="86">CN</option>
+                                </select>
+                                <label for="username">Username / Email</label>
+                                <input type="text" class="form-control" id="username" @bind="username" placeholder="Username" />
+                                <label for="tuyaPassword">Password:</label>
+                                <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="Password" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" @onclick="LoadEntities">Save Device</button>
                     <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">Close</button>
+                    <div class="alert alert-warning mt-3">Csak az online API elérhető.</div>
                 </div>
             </div>
         </div>
@@ -143,12 +158,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">@selectedEntity.DeviceURL</h5>
+                    <h5 class="modal-title">@selectedEntity.Id</h5>
                     <button type="button" class="btn-close" @onclick="CloseEntityDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Entity Name:</strong> @selectedEntity.DeviceURL</p>
-                    <p><strong>Status:</strong> @selectedEntity.DeviceURL</p>
+                    <p><strong>Entity Name:</strong> @selectedEntity.Name</p>
+                    <p><strong>ID:</strong> @selectedEntity.Id</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">Close</button>
@@ -168,8 +183,8 @@
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Device Name:</strong> @selectedDevice.GatewayId</p>
-                    <p><strong>Status:</strong> @selectedDevice.Mode</p>
+                    <p><strong>Device Id:</strong> @selectedDevice.Id</p>
+                    <p><strong>Platform:</strong> @selectedDevice.Platform</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
@@ -193,23 +208,23 @@
 
     private string selectedApiType = "online";
 
-    private Entity selectedEntity;
-    private Device selectedDevice;
+    private Models.Entity selectedEntity;
+    private Models.Device selectedDevice;
 
     private string tuyaName;
     private string tuyaStatus = "Active";
 
-    private List<Entity> entities = new();
+    private List<Models.Entity> entities = new();
 
-    private List<Device> devices = new();
+    private List<Models.Device> devices = new();
 
-    private void ShowEntityDetailsModal(Entity entity)
+    private void ShowEntityDetailsModal(Models.Entity entity)
     {
         selectedEntity = entity;
         showEntityDetailsModal = true;
     }
 
-    private void ShowDeviceDetailsModal(Device device)
+    private void ShowDeviceDetailsModal(Models.Device device)
     {
         selectedDevice = device;
         showDeviceDetailsModal = true;
@@ -251,13 +266,13 @@
         return modalActiveTab == tabNumber ? "show active" : "";
     }
 
-    private void ShowEntityDetails(Entity entity)
+    private void ShowEntityDetails(Models.Entity entity)
     {
         selectedEntity = entity;
         showEntityDetailsModal = true;
     }
 
-    private void ShowDeviceDetails(Device device)
+    private void ShowDeviceDetails(Models.Device device)
     {
         selectedDevice = device;
         showDeviceDetailsModal = true;
@@ -272,75 +287,101 @@
     private string email;
     private string password;
 
+    private string username;
+    private string region;
+    private string tuyaPassword;
+
+
     private async Task LoadEntities()
     {
-        await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
-        await jsRuntime.InvokeVoidAsync("console.log", $"Gateway PIN: {gatewayPin}");
-        await jsRuntime.InvokeVoidAsync("console.log", $"Email: {email}");
-        await jsRuntime.InvokeVoidAsync("console.log", $"Password: {password}");
-        try
+        if(modalActiveTab == 1)
         {
-            await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
-            var SingletonSomfyApiService = SomfyApiService.GetInstance();
-
-            await jsRuntime.InvokeVoidAsync("console.log", "Attempting to log in...");
-            bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeURL);
-            await jsRuntime.InvokeVoidAsync("console.log", $"Login successful: {validLogin}");
-
-            if (!validLogin)
+            try
             {
-                await jsRuntime.InvokeVoidAsync("console.log", "Login failed.");
-                return;
-            }
-            if(selectedApiType == "local")
-            {
-                await jsRuntime.InvokeVoidAsync("console.log", "Generating token...");
-                var token = await SingletonSomfyApiService.GenerateTokenAsync(gatewayPin);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Token generated: {token}");
-                await jsRuntime.InvokeVoidAsync("console.log", "Activating token...");
-                bool successfulActivation = await SingletonSomfyApiService.ActivateTokenAsync(token);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Token activation successful: {successfulActivation}");
+                await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
+                var SingletonSomfyApiService = SomfyApiService.GetInstance();
 
-                if (!successfulActivation)
+                await jsRuntime.InvokeVoidAsync("console.log", "Attempting to log in...");
+                bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeURL);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Login successful: {validLogin}");
+
+                if (!validLogin)
                 {
-                    await jsRuntime.InvokeVoidAsync("console.log", "Token activation failed.");
+                    await jsRuntime.InvokeVoidAsync("console.log", "Login failed.");
                     return;
                 }
+                if(selectedApiType == "local")
+                {
+                    await jsRuntime.InvokeVoidAsync("console.log", "Generating token...");
+                    var token = await SingletonSomfyApiService.GenerateTokenAsync(gatewayPin);
+                    await jsRuntime.InvokeVoidAsync("console.log", $"Token generated: {token}");
+                    await jsRuntime.InvokeVoidAsync("console.log", "Activating token...");
+                    bool successfulActivation = await SingletonSomfyApiService.ActivateTokenAsync(token);
+                    await jsRuntime.InvokeVoidAsync("console.log", $"Token activation successful: {successfulActivation}");
+
+                    if (!successfulActivation)
+                    {
+                        await jsRuntime.InvokeVoidAsync("console.log", "Token activation failed.");
+                        return;
+                    }
+                }
+
+
+                await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
+                SingletonSomfyApiService.SetUrl(selectedApiType == "online");
+                var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
+                var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
+                await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
+                var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
+                var convertedDevice = EDConverter.ConvertToDevice(mainDevice);
+                convertedDevice.Email = email;
+                foreach (var entity in newEntities)
+                {
+                    var convertedEntity =EDConverter.ConvertToEntity(entity);
+                    entities.Add(convertedEntity);
+                    convertedDevice.Entities.Add(convertedEntity);
+                }
+                devices.Add(convertedDevice);
+
+                await jsRuntime.InvokeVoidAsync("console.log", "Entities loaded successfully.");
             }
-
-
-            await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
-            SingletonSomfyApiService.SetUrl(selectedApiType == "online");
-            var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
-            var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
-            await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
-            var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
-            await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
-
-            if (mainDevice != null)
+            catch (Exception ex)
             {
-                devices.Add(new Device { GatewayId = mainDevice.GatewayId, Mode = mainDevice.Mode });
+                await jsRuntime.InvokeVoidAsync("console.error", $"An error occurred: {ex.Message}");
             }
-            else
-            {
-                await jsRuntime.InvokeVoidAsync("console.log", "mainDevice is null.");
-            }
-            foreach (var entity in newEntities)
-            {
-                entities.Add(entity);
-            }
-
-            await jsRuntime.InvokeVoidAsync("console.log", "Entities loaded successfully.");
         }
-        catch (Exception ex)
+        else if(modalActiveTab == 2)
         {
-            await jsRuntime.InvokeVoidAsync("console.error", $"An error occurred: {ex.Message}");
-        }
-    }
+            try
+            {
 
-    protected override async Task OnInitializedAsync()
-    {
-        await jsRuntime.InvokeVoidAsync("console.log", "Initialized.");
+                var SingletonTuyaApiService = TuyaApiService.GetInstance();
+                SingletonTuyaApiService.SetUrl(region);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Region: {region}");
+                await jsRuntime.InvokeVoidAsync("console.log", "Attempting to get tokens...");
+                await jsRuntime.InvokeVoidAsync("console.log", $"Url: {SingletonTuyaApiService.GetUrl()}");
+                var response = await SingletonTuyaApiService.Login(username, tuyaPassword, region);
+                await jsRuntime.InvokeVoidAsync("console.log", $"Login response: {response}");
+                var resultDevices = await SingletonTuyaApiService.GetDevices();
+                var toAddEntites = TuyaAPI.Services.JsonHelper.GetEntitiesFromJson(resultDevices);
+                var convertedDevice = EDConverter.ConvertToDevice(toAddEntites.First());
+                convertedDevice.Email = username;
+                foreach (var entity in toAddEntites)
+                {
+                    var convertedEntity =EDConverter.ConvertToEntity(entity);
+                    convertedDevice.Entities.Add(convertedEntity);
+                }
+                devices.Add(convertedDevice);
+
+            }
+            catch (Exception ex)
+            {
+                await jsRuntime.InvokeVoidAsync("console.error", $"Hiba: Hiányzó kulcs a JSON-adatokban. {ex.Message}");
+            }
+
+        }
+            
     }
 
     private async Task OpenShutter(string deviceUrl)

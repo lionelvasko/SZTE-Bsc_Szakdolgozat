@@ -74,6 +74,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SomfyAPI\SomfyAPI.csproj" />
+      <ProjectReference Include="..\TuyaAPI\TuyaAPI\TuyaAPI.csproj" />
     </ItemGroup>
 
 </Project>
