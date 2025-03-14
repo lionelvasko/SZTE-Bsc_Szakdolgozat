@@ -37,6 +37,11 @@ namespace TuyaAPI.Services
             return _instance;
         }
 
+        public string GetAccessToken()
+        {
+            return _accessToken;
+        }
+
         public HttpClient GetHttpClient()
         {
             return _httpClient;
@@ -143,32 +148,5 @@ namespace TuyaAPI.Services
             }
             return await response.Content.ReadAsStringAsync();
         }
-
-        public async Task<HttpStatusCode> ControlDevice(string deviceId, string command, string value)
-        {
-            var url = $"{_baseUrl}skill";
-            var requestBody = new
-            {
-                header = new
-                {
-                    name = "TurnOn",
-                    @namespace = "control",
-                    payloadVersion = 1
-                },
-                payload = new
-                {
-                    accessToken = _accessToken,
-                    devId = deviceId,
-                    value = value
-                }
-            };
-            using var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Failed to control device: {response.StatusCode}");
-            }
-            return response.StatusCode;
-        }   
     }
 }

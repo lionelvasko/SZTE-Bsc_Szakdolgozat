@@ -10,6 +10,7 @@ namespace Szakdoga.Models
     {
         internal string Id { get; set; }
         internal string Name { get; set; }
-        internal string Picture { get; set; }
+        internal string Platform { get; set; }
+        internal string Icon { get; set; }
     }
 }

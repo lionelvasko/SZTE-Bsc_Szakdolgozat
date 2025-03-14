@@ -26,23 +26,45 @@
             <div class="row g-3">
                 @foreach (var entity in entities)
                 {
-                    <div class="col-12 col-md-4 col-lg-3">
-                        <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;">
-                            <div class="card-body">
-                                <div @onclick="() => ShowEntityDetails(entity)">
-                                    <h5 class="card-title">@entity.Name</h5>
-                                </div>
-                                <div class="d-flex flex-column gap-2 mt-3">
+                    if(entity.Platform == "Somfy")
+                    {
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;">
+                                <div class="card-body">
+                                    <div @onclick="() => ShowEntityDetails(entity)">
+                                        <h5 class="card-title">@entity.Name</h5>
+                                    </div>
                                     <div class="d-flex flex-column gap-2 mt-3">
-                                        <button class="btn btn-success" @onclick="() => OpenShutter(entity.Id)">Open</button>
-                                        <button class="btn btn-warning" @onclick="() => StopShutter(entity.Id)">Stop</button>
-                                        <button class="btn btn-danger" @onclick="() => CloseShutter(entity.Id)">Close</button>
-                                        <button class="btn btn-info" @onclick="() => MyPositionShutter(entity.Id)">My Position</button>
+                                        <div class="d-flex flex-column gap-2 mt-3">
+                                            <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(entity.Id)">Open</button>
+                                            <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(entity.Id)">Stop</button>
+                                            <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(entity.Id)">Close</button>
+                                            <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(entity.Id)">My Position</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;">
+                                <div class="card-body">
+                                    <div @onclick="() => ShowEntityDetails(entity)">
+                                        <h5 class="card-title">@entity.Name</h5>
+                                        <img href="@entity.Icon" alt="@entity.Name" style="width: 100px; height: 100px;" />
+                                    </div>
+                                    <div class="d-flex flex-column gap-2 mt-3">
+                                        <div class="d-flex flex-column gap-2 mt-3">
+                                            <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(entity.Id, true)">On/Off</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
                 }
             </div>
         </div>
@@ -54,7 +76,9 @@
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="card bg-dark text-white border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
                             <div class="card-body">
-                                <h5 class="card-title">@device.GatewayId</h5>
+                                <h5 class="card-title">@device.Platform</h5>
+                                <h5 class="card-title">@device.Creation_Time</h5>
+                                <h5 class="card-title">@device.Email</h5>
                             </div>
                         </div>
                     </div>
@@ -179,12 +203,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">@selectedDevice.GatewayId</h5>
+                    <h5 class="modal-title">@selectedDevice.Platform</h5>
+                    <h5 class="modal-title">@selectedDevice.Email</h5>
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Device Id:</strong> @selectedDevice.Id</p>
-                    <p><strong>Platform:</strong> @selectedDevice.Platform</p>
+                    @if(selectedDevice.Platform == "Somfy")
+                    {
+                        var somfyDevice = selectedDevice as SomfyDevice;
+                        <p><strong>Device Id:</strong> @somfyDevice.Id</p>
+                        <p><strong>Device Gateway Id:</strong> @somfyDevice.GatewayId</p>
+                    }
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
@@ -338,7 +367,7 @@
                 convertedDevice.Email = email;
                 foreach (var entity in newEntities)
                 {
-                    var convertedEntity =EDConverter.ConvertToEntity(entity);
+                    var convertedEntity = (Szakdoga.Models.Entity)EDConverter.ConvertToEntity(entity);
                     entities.Add(convertedEntity);
                     convertedDevice.Entities.Add(convertedEntity);
                 }
@@ -369,8 +398,9 @@
                 convertedDevice.Email = username;
                 foreach (var entity in toAddEntites)
                 {
-                    var convertedEntity =EDConverter.ConvertToEntity(entity);
+                    var convertedEntity =(Szakdoga.Models.Entity)EDConverter.ConvertToEntity(entity);
                     convertedDevice.Entities.Add(convertedEntity);
+                    entities.Add(convertedEntity);
                 }
                 devices.Add(convertedDevice);
 
@@ -381,27 +411,6 @@
             }
 
         }
-            
-    }
 
-    private async Task OpenShutter(string deviceUrl)
-    {
-        await SomfyAPI.Services.ShutterControl.OpenShutter(deviceUrl);
     }
-
-    private async Task StopShutter(string deviceUrl)
-    {
-        await SomfyAPI.Services.ShutterControl.StopShutter(deviceUrl);
-    }
-
-    private async Task CloseShutter(string deviceUrl)
-    {
-        await SomfyAPI.Services.ShutterControl.CloseShutter(deviceUrl);
-    }
-
-    private async Task MyPositionShutter(string deviceUrl)
-    {
-        await SomfyAPI.Services.ShutterControl.MyPositionShutter(deviceUrl);
-    }
-
 }
