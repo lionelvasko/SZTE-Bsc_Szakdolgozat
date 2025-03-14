@@ -10,7 +10,7 @@ namespace Szakdoga.Services
             var frontendEntities = new List<Entity>();
             if (obj.GetType() == typeof(SomfyAPI.Models.Entity))
             {
-                var returnEntity = new Entity();
+                var returnEntity = new SomfyEntity();
                 var ent = obj as SomfyAPI.Models.Entity;
                 returnEntity.Id = ent.DeviceURL;
                 returnEntity.Name = ent.Label;
@@ -48,7 +48,7 @@ namespace Szakdoga.Services
             }
             else if (obj.GetType() == typeof(TuyaAPI.Models.Device))
             {
-                var returnDevice = new Models.Device();
+                var returnDevice = new Models.TuyaDevice();
                 var ent = obj as TuyaAPI.Models.Device;
                 returnDevice.Platform = "Tuya";
                 returnDevice.Entities = new List<Models.Entity>();
