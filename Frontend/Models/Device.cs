@@ -8,6 +8,7 @@ namespace Szakdoga.Models
 {
     internal class Device
     {
+        internal int Id { get; set; }
         internal string Creation_Time { get; set; }
         internal string Platform { get; set; }
         internal string Email { get; set; }

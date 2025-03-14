@@ -131,19 +131,6 @@
                             }
                             else if (selectedApiType == "local")
                             {
-                                <label for="homeURL" class="mt-2">Home URL:</label>
-                                <select class="form-control" id="homeURL" @bind="homeURL">
-                                    <option value="" disabled selected>Select a region</option>
-                                    <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
-                                    <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
-                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (North America)</option>
-                                </select>
-                                <label for="gatewayPin">Device PIN:</label>
-                                <input type="text" class="form-control" id="gatewayPin" @bind="gatewayPin" placeholder="1234-5678-9012" />
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
-                                <label for="password">Password:</label>
-                                <input type="text" class="form-control" id="password" @bind="password" placeholder="Password" />
                                 <div class="alert alert-warning mt-3">Jelenleg a local API hívások kidolgozás alatt vannak.</div>
                             }
                         </div>
@@ -244,8 +231,16 @@
     private string tuyaStatus = "Active";
 
     private List<Models.Entity> entities = new();
-
     private List<Models.Device> devices = new();
+
+    private string homeURL;
+    private string gatewayPin;
+    private string email;
+    private string password;
+
+    private string username;
+    private string region;
+    private string tuyaPassword;
 
     private void ShowEntityDetailsModal(Models.Entity entity)
     {
@@ -311,106 +306,37 @@
         showAddDeviceModal = true;
     }
 
-    private string homeURL;
-    private string gatewayPin;
-    private string email;
-    private string password;
-
-    private string username;
-    private string region;
-    private string tuyaPassword;
-
+    protected override async Task OnInitializedAsync()
+    {
+    }
 
     private async Task LoadEntities()
     {
-        if(modalActiveTab == 1)
+        if (modalActiveTab == 1)
         {
             try
             {
-                await jsRuntime.InvokeVoidAsync("console.log", $"Home URL: {homeURL}");
-                var SingletonSomfyApiService = SomfyApiService.GetInstance();
-
-                await jsRuntime.InvokeVoidAsync("console.log", "Attempting to log in...");
-                bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeURL);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Login successful: {validLogin}");
-
-                if (!validLogin)
-                {
-                    await jsRuntime.InvokeVoidAsync("console.log", "Login failed.");
-                    return;
-                }
-                if(selectedApiType == "local")
-                {
-                    await jsRuntime.InvokeVoidAsync("console.log", "Generating token...");
-                    var token = await SingletonSomfyApiService.GenerateTokenAsync(gatewayPin);
-                    await jsRuntime.InvokeVoidAsync("console.log", $"Token generated: {token}");
-                    await jsRuntime.InvokeVoidAsync("console.log", "Activating token...");
-                    bool successfulActivation = await SingletonSomfyApiService.ActivateTokenAsync(token);
-                    await jsRuntime.InvokeVoidAsync("console.log", $"Token activation successful: {successfulActivation}");
-
-                    if (!successfulActivation)
-                    {
-                        await jsRuntime.InvokeVoidAsync("console.log", "Token activation failed.");
-                        return;
-                    }
-                }
-
-
-                await jsRuntime.InvokeVoidAsync("console.log", "Fetching entities...");
-                SingletonSomfyApiService.SetUrl(selectedApiType == "online");
-                var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
-                var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
-                await jsRuntime.InvokeVoidAsync("console.log", mainDevice);
-                var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Entities fetched: {newEntities.Count()}");
-                var convertedDevice = EDConverter.ConvertToDevice(mainDevice);
-                convertedDevice.Email = email;
-                foreach (var entity in newEntities)
-                {
-                    var convertedEntity = (Szakdoga.Models.Entity)EDConverter.ConvertToEntity(entity);
-                    entities.Add(convertedEntity);
-                    convertedDevice.Entities.Add(convertedEntity);
-                }
-                devices.Add(convertedDevice);
-
-                await jsRuntime.InvokeVoidAsync("console.log", "Entities loaded successfully.");
+                var device = await AddDeviceService.AddSomfyDeviceAsync(email, password, homeURL);
+                devices.Add(device);
             }
             catch (Exception ex)
             {
-                await jsRuntime.InvokeVoidAsync("console.error", $"An error occurred: {ex.Message}");
+                Console.WriteLine(ex.Message);
             }
-        }
-        else if(modalActiveTab == 2)
-        {
-            try
-            {
-
-                var SingletonTuyaApiService = TuyaApiService.GetInstance();
-                SingletonTuyaApiService.SetUrl(region);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Region: {region}");
-                await jsRuntime.InvokeVoidAsync("console.log", "Attempting to get tokens...");
-                await jsRuntime.InvokeVoidAsync("console.log", $"Url: {SingletonTuyaApiService.GetUrl()}");
-                var response = await SingletonTuyaApiService.Login(username, tuyaPassword, region);
-                await jsRuntime.InvokeVoidAsync("console.log", $"Login response: {response}");
-                var resultDevices = await SingletonTuyaApiService.GetDevices();
-                var toAddEntites = TuyaAPI.Services.JsonHelper.GetEntitiesFromJson(resultDevices);
-                var convertedDevice = EDConverter.ConvertToDevice(toAddEntites.First());
-                convertedDevice.Email = username;
-                foreach (var entity in toAddEntites)
-                {
-                    var convertedEntity =(Szakdoga.Models.Entity)EDConverter.ConvertToEntity(entity);
-                    convertedDevice.Entities.Add(convertedEntity);
-                    entities.Add(convertedEntity);
-                }
-                devices.Add(convertedDevice);
-
-            }
-            catch (Exception ex)
-            {
-                await jsRuntime.InvokeVoidAsync("console.error", $"Hiba: Hiányzó kulcs a JSON-adatokban. {ex.Message}");
-            }
-
-        }
-
     }
+        else if (modalActiveTab == 2)
+        {
+            try
+            {
+                var device = await AddDeviceService.AddTuyaDeviceAsync(username, tuyaPassword, region);
+                devices.Add(device);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+    [Inject] private HttpClient HttpClient { get; set; }
 }
