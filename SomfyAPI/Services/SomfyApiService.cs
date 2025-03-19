@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Net.Security;
 using System.Reflection;
@@ -17,6 +18,8 @@ namespace SomfyAPI.Services
         private string _token;
         private string _apiUrl;
 
+        private string regiesteredUsername;
+
         private SomfyApiService()
         {
             if (_httpClient == null)
@@ -26,6 +29,16 @@ namespace SomfyAPI.Services
                 _httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
                 _httpClient.Timeout = TimeSpan.FromSeconds(5);
             }
+        }
+
+        public string GetAccessToken()
+        {
+            return _token;
+        }
+
+        public string GetRegisteredUsername()
+        {
+            return regiesteredUsername;
         }
 
         public static SomfyApiService GetInstance()
@@ -67,9 +80,7 @@ namespace SomfyAPI.Services
 
         public void SetUrl(bool useCloud = true)
         {
-            _apiUrl = useCloud
-                ? $"{_baseUrl}/enduser-mobile-web/enduserAPI"
-                : $"https://gateway-{_gatewayPin}:8443/enduser-mobile-web/1/enduserAPI";
+            _apiUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI";
         }
 
         public string GetURL()
@@ -80,6 +91,11 @@ namespace SomfyAPI.Services
         public HttpClient GetHttpClient()
         {
             return _httpClient;
+        }
+
+        public void SetToken(string token)
+        {
+            _token = token;
         }
 
         public async Task<bool> LoginAsync(string email, string password, string baseUrl)
@@ -112,7 +128,7 @@ namespace SomfyAPI.Services
                         _httpClient.DefaultRequestHeaders.Add("Cookie", $"JSESSIONID={_sessionId}");
                     }
                 }
-
+                regiesteredUsername = email;
                 return true;
             }
 
@@ -136,6 +152,8 @@ namespace SomfyAPI.Services
                 var responseBody = await response.Content.ReadAsStringAsync();
                 var tokenData = JsonSerializer.Deserialize<JsonElement>(responseBody);
                 _token = tokenData.GetProperty("token").GetString();
+                Debug.WriteLine(responseBody.ToString());
+                Debug.WriteLine(tokenData);
                 return _token;
             }
             return null;

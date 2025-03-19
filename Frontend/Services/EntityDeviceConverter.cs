@@ -3,7 +3,7 @@ using Device = Szakdoga.Models.Device;
 
 namespace Szakdoga.Services
 {
-    internal static class EDConverter
+    internal static class EntityDeviceConverter
     {
         internal static Entity ConvertToEntity(object obj)
         {
@@ -25,6 +25,12 @@ namespace Szakdoga.Services
                 returnEntity.Name = ent.Name;
                 returnEntity.Icon = ent.Icon;
                 returnEntity.Platform = "Tuya";
+                returnEntity.State = ent.Data.State;
+                returnEntity.Brightness = ent.Data.Brightness;
+                returnEntity.ColorMode = ent.Data.ColorMode;
+                returnEntity.ColorTemp = ent.Data.ColorTemp;
+                returnEntity.Online = ent.Data.Online;
+
                 return returnEntity;
             }
             else

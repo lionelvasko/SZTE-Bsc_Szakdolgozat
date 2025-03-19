@@ -6,12 +6,11 @@ namespace AuthAPI.Models
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
+        public string SomfyToken { get; set; } = string.Empty;
+        public string SomfyUrl { get; set; } = string.Empty;
+        public string TuyaToken { get; set; } = string.Empty;
+        public string TuyaRefreshToken { get; set; } = string.Empty;
+        public string TuyaRegion { get; set; } = string.Empty;
 
-        public List<SomfyDevice> SomfyDevices { get; set; } = new List<SomfyDevice>();
-        public List<TuyaDevice> TuyaDevices { get; set; } = new List<TuyaDevice>();
-
-        public List<SomfyEntity> SomfyEntities { get; set; } = new List<SomfyEntity>();
-
-        public List<TuyaEntity> TuyaEntities { get; set; } = new List<TuyaEntity>();
     }
 }

@@ -53,7 +53,7 @@
                                 <div class="card-body">
                                     <div @onclick="() => ShowEntityDetails(entity)">
                                         <h5 class="card-title">@entity.Name</h5>
-                                        <img href="@entity.Icon" alt="@entity.Name" style="width: 100px; height: 100px;" />
+                                        <img src="@entity.Icon" alt="@entity.Name" style="width: 100px; height: 100px;" />
                                     </div>
                                     <div class="d-flex flex-column gap-2 mt-3">
                                         <div class="d-flex flex-column gap-2 mt-3">
@@ -306,36 +306,85 @@
         showAddDeviceModal = true;
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-    }
-
     private async Task LoadEntities()
     {
         if (modalActiveTab == 1)
         {
             try
             {
-                var device = await AddDeviceService.AddSomfyDeviceAsync(email, password, homeURL);
+                await GetDeviceService.GenerateSomfyTokens(email, password, homeURL);
+                var device = await GetDeviceService.AddSomfyDeviceAsync();
                 devices.Add(device);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-    }
-        else if (modalActiveTab == 2)
-        {
-            try
-            {
-                var device = await AddDeviceService.AddTuyaDeviceAsync(username, tuyaPassword, region);
-                devices.Add(device);
+                foreach (var entity in device.Entities)
+                {
+                    entities.Add(entity);
+                }
+                await GetDeviceService.SetTokensSS(true, false);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+        else if (modalActiveTab == 2)
+        {
+            try
+            {
+                await GetDeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
+                var device = await GetDeviceService.AddTuyaDeviceAsync();
+                devices.Add(device);
+                foreach (var entity in device.Entities)
+                {
+                    entities.Add(entity);
+                }
+                await GetDeviceService.SetTokensSS(false, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+
+    private async Task LoadFromPreferences()
+    {
+        var tuyaToken = await SecureStorage.GetAsync("tuya_token");
+        var tuyaRefreshToken = await SecureStorage.GetAsync("tuya_refresh_token");
+        var tuyaRegion = await SecureStorage.GetAsync("tuya_region");
+        var somfyToken = await SecureStorage.GetAsync("somfy_token");
+        var somfyUrl = await SecureStorage.GetAsync("somfy_url");
+
+        if (!string.IsNullOrEmpty(tuyaToken) && !string.IsNullOrEmpty(tuyaRefreshToken))
+        {
+            GetDeviceService.UpdateApiServiceTokensTuya(tuyaToken, tuyaRefreshToken, tuyaRegion);
+            var device = await GetDeviceService.AddTuyaDeviceAsync();
+            devices.Add(device);
+            foreach (var entity in device.Entities)
+            {
+                entities.Add(entity);
+            }
+
+        }
+        if (!string.IsNullOrEmpty(somfyToken))
+        {
+            GetDeviceService.UpdateApiServiceTokensSomfy(somfyToken, somfyUrl);
+            var device = await GetDeviceService.AddSomfyDeviceAsync();
+            devices.Add(device);
+            foreach (var entity in device.Entities)
+            {
+                entities.Add(entity);
+            }
+        }
+    }
+
+    protected override async void OnInitialized()
+    {
+        LoadFromPreferences();
+        Debug.WriteLine(await SecureStorage.GetAsync("tuya_token"));
+        Debug.WriteLine(await SecureStorage.GetAsync("tuya_refresh_token"));
+        Debug.WriteLine(await SecureStorage.GetAsync("tuya_region"));
+        Debug.WriteLine(await SecureStorage.GetAsync("somfy_token"));
+        Debug.WriteLine(await SecureStorage.GetAsync("somfy_url"));  
     }
 
     [Inject] private HttpClient HttpClient { get; set; }

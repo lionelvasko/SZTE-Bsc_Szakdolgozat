@@ -3,7 +3,6 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using TuyaAPI.Models;
 
 namespace TuyaAPI.Services
 {
@@ -13,9 +12,12 @@ namespace TuyaAPI.Services
         private HttpClient _httpClient;
         private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
         private readonly string PLATFORM = "tuya";
+        private string region;
 
         private string _accessToken;
         private string _refreshToken;
+
+        private string registeredUsername;
 
         private TuyaApiService()
         {
@@ -42,13 +44,24 @@ namespace TuyaAPI.Services
             return _accessToken;
         }
 
+        public string GetRefreshToken()
+        {
+            return _refreshToken;
+        }
+
         public HttpClient GetHttpClient()
         {
             return _httpClient;
         }
 
+        public string GetRegion()
+        {
+            return region;
+        }
+
         public void SetUrl(string countryCode)
         {
+            region = countryCode;
             if(countryCode == "1")
             {
                 _baseUrl.Replace("eu", "us");
@@ -66,6 +79,17 @@ namespace TuyaAPI.Services
         public string GetUrl()
         {
             return _baseUrl;
+        }
+
+        public string GetRegisteredUsername()
+        {
+            return registeredUsername;
+        }
+
+        public void SetTokens(string accessToken, string refreshToken)
+        {
+            _accessToken = accessToken;
+            _refreshToken = refreshToken;
         }
 
         public async Task<HttpStatusCode> Login(string username, string password, string countryCode)
@@ -89,6 +113,8 @@ namespace TuyaAPI.Services
                 var loginResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
                 _accessToken = loginResponse.GetProperty("access_token").GetString();
                 _refreshToken = loginResponse.GetProperty("refresh_token").GetString();
+
+                registeredUsername = username;
             }
             else
             {
@@ -117,7 +143,7 @@ namespace TuyaAPI.Services
             return response.StatusCode;
         }
 
-        public async Task<string> GetDevices(bool refreshAccessToken = false)
+        public async Task<string> GetEntities(bool refreshAccessToken = false)
         {
             if (refreshAccessToken)
             {

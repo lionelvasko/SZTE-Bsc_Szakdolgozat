@@ -11,114 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250314115422_AddDevicesMigration")]
-    partial class AddDevicesMigration
+    [Migration("20250319125224_AddedTokensAndurl")]
+    partial class AddedTokensAndurl
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
-
-            modelBuilder.Entity("AuthAPI.Models.Entity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SomfyDeviceId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("TuyaDeviceId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SomfyDeviceId");
-
-                    b.HasIndex("TuyaDeviceId");
-
-                    b.ToTable("Entity");
-
-                    b.HasDiscriminator().HasValue("Entity");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.SomfyDevice", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Creation_Time")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GatewayId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SomfyDevices");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaDevice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Creation_Time")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TuyaDevices");
-                });
 
             modelBuilder.Entity("AuthAPI.Models.User", b =>
                 {
@@ -171,6 +71,26 @@ namespace AuthAPI.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SomfyToken")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SomfyUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TuyaRefreshToken")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TuyaRegion")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TuyaToken")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -320,79 +240,6 @@ namespace AuthAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AuthAPI.Models.SomfyEntity", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Entity");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("SomfyEntity");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaEntity", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Entity");
-
-                    b.Property<string>("Brightness")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ColorMode")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ColorTemp")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Online")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Entity", t =>
-                        {
-                            t.Property("UserId")
-                                .HasColumnName("TuyaEntity_UserId");
-                        });
-
-                    b.HasDiscriminator().HasValue("TuyaEntity");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.Entity", b =>
-                {
-                    b.HasOne("AuthAPI.Models.SomfyDevice", null)
-                        .WithMany("Entities")
-                        .HasForeignKey("SomfyDeviceId");
-
-                    b.HasOne("AuthAPI.Models.TuyaDevice", null)
-                        .WithMany("Entities")
-                        .HasForeignKey("TuyaDeviceId");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.SomfyDevice", b =>
-                {
-                    b.HasOne("AuthAPI.Models.User", null)
-                        .WithMany("SomfyDevices")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaDevice", b =>
-                {
-                    b.HasOne("AuthAPI.Models.User", null)
-                        .WithMany("TuyaDevices")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -442,41 +289,6 @@ namespace AuthAPI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.SomfyEntity", b =>
-                {
-                    b.HasOne("AuthAPI.Models.User", null)
-                        .WithMany("SomfyEntities")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaEntity", b =>
-                {
-                    b.HasOne("AuthAPI.Models.User", null)
-                        .WithMany("TuyaEntities")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.SomfyDevice", b =>
-                {
-                    b.Navigation("Entities");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaDevice", b =>
-                {
-                    b.Navigation("Entities");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.User", b =>
-                {
-                    b.Navigation("SomfyDevices");
-
-                    b.Navigation("SomfyEntities");
-
-                    b.Navigation("TuyaDevices");
-
-                    b.Navigation("TuyaEntities");
                 });
 #pragma warning restore 612, 618
         }
