@@ -24,6 +24,8 @@ namespace Szakdoga
             builder.Services.AddScoped<AuthenticationService>();
             builder.Services.AddScoped<UserInfoService>();
 
+            builder.Services.AddLocalization();
+
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddAuthorizationCore();
 

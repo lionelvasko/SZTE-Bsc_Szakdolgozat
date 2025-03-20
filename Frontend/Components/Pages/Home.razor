@@ -1,5 +1,4 @@
 ﻿@page "/"
-@inject IJSRuntime jsRuntime
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
@@ -10,19 +9,19 @@
         <ul class="nav nav-pills justify-content-center">
             <li class="nav-item flex-grow-1 text-center">
                 <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    Entities
+                    @Localizer["Entities"]
                 </a>
             </li>
             <li class="nav-item flex-grow-1 text-center">
                 <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    Devices
+                    @Localizer["Devices"]
                 </a>
             </li>
         </ul>
     </div>
     <div class="tab-content" id="dashboardTabContent">
         <div class="tab-pane fade @GetTabClass(1)" id="entities" role="tabpanel" aria-labelledby="entitiesTab">
-            <h4 class="mt-4">Entities</h4>
+            <h4 class="mt-4">@Localizer["Entities"]</h4>
             <div class="row g-3">
                 @foreach (var entity in entities)
                 {
@@ -36,10 +35,10 @@
                                     </div>
                                     <div class="d-flex flex-column gap-2 mt-3">
                                         <div class="d-flex flex-column gap-2 mt-3">
-                                            <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(entity.Id)">Open</button>
-                                            <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(entity.Id)">Stop</button>
-                                            <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(entity.Id)">Close</button>
-                                            <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(entity.Id)">My Position</button>
+                                                    <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(entity.Id)">@Localizer["Open"]</button>
+                                                    <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(entity.Id)">@Localizer["Stop"]</button>
+                                                    <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(entity.Id)">@Localizer["Close"]</button>
+                                                    <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(entity.Id)">@Localizer["My position"]</button>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +56,7 @@
                                     </div>
                                     <div class="d-flex flex-column gap-2 mt-3">
                                         <div class="d-flex flex-column gap-2 mt-3">
-                                            <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(entity.Id, true)">On/Off</button>
+                                                    <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(entity.Id, true)">@Localizer["On/Off"]</button>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +68,7 @@
             </div>
         </div>
         <div class="tab-pane fade @GetTabClass(2)" id="devices" role="tabpanel" aria-labelledby="devicesTab">
-            <h4 class="mt-4">Devices</h4>
+            <h4 class="mt-4">@Localizer["Devices"]</h4>
             <div class="row g-3">
                 @foreach (var device in devices)
                 {
@@ -96,7 +95,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Device</h5>
+                        <h5 class="modal-title">@Localizer["Add device"]</h5>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">
@@ -109,53 +108,53 @@
                     </ul>
                     <div class="tab-content" id="apiTabContent">
                         <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
-                            <h5>Tahoma API Device Form</h5>
+                                    <h5>Tahoma @Localizer["Device form"]</h5>
                             <label for="apiType">API Type:</label>
                             <select class="form-control" id="apiType" @bind="selectedApiType">
-                                <option value="online">Online API</option>
-                                <option value="local">Local API</option>
+                                    <option value="online">@Localizer["Online"]</option>
+                                    <option value="local">@Localizer["Local"]</option>
                             </select>
                             @if (selectedApiType == "online")
                             {
-                                <label for="homeURL" class="mt-2">Home URL:</label>
+                                        <label for="homeURL" class="mt-2">@Localizer["Region"]:</label>
                                 <select class="form-control" id="homeURL" @bind="homeURL">
-                                    <option value="" disabled selected>Select a region</option>
+                                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
                                     <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
-                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (North America)</option>
+                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (America)</option>
                                 </select>
-                                <label for="email">Email:</label>
+                                <label for="email">@Localizer["Email address"]:</label>
                                 <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
-                                <label for="password">Password:</label>
+                                <label for="password">@Localizer["Password"]:</label>
                                 <input type="password" class="form-control" id="password" @bind="password" placeholder="Password" />
                             }
                             else if (selectedApiType == "local")
                             {
-                                <div class="alert alert-warning mt-3">Jelenleg a local API hívások kidolgozás alatt vannak.</div>
+                                <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
                             }
                         </div>
                         <div class="tab-content" id="apiTabContent">
                             <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
-                                <h5>Tuya API Device Form</h5>
-                                <label for="region" class="mt-2">Home URL:</label>
+                                <h5>Tuya @Localizer["Device form"]</h5>
+                                    <label for="region" class="mt-2">@Localizer["Region"]:</label>
                                 <select class="form-control" id=" " @bind="region">
-                                    <option value="" disabled selected>Select a region</option>
+                                        <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="44">EU</option>
                                     <option value="1">US</option>
                                     <option value="86">CN</option>
                                 </select>
-                                <label for="username">Username / Email</label>
-                                <input type="text" class="form-control" id="username" @bind="username" placeholder="Username" />
-                                <label for="tuyaPassword">Password:</label>
-                                <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="Password" />
+                                        <label for="username">@Localizer["Username"]</label>
+                                    <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" />
+                                    <label for="tuyaPassword">@Localizer["Password"]:</label>
+                                    <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Password"]" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @onclick="LoadEntities">Save Device</button>
-                    <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">Close</button>
-                    <div class="alert alert-warning mt-3">Csak az online API elérhető.</div>
+                        <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
+                        <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>
+                            <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
                 </div>
             </div>
         </div>
@@ -177,7 +176,7 @@
                     <p><strong>ID:</strong> @selectedEntity.Id</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">Close</button>
+                        <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">@Localizer["Close"]</button>
                 </div>
             </div>
         </div>
@@ -384,6 +383,6 @@
         Debug.WriteLine(await SecureStorage.GetAsync("somfy_token"));
         Debug.WriteLine(await SecureStorage.GetAsync("somfy_url"));  
     }
-
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
 }

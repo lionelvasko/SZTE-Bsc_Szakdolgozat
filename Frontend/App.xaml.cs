@@ -1,4 +1,6 @@
-﻿using Szakdoga.Services;
+﻿using Microsoft.Extensions.Localization;
+using Szakdoga.Resources.Localization;
+using Szakdoga.Services;
 
 namespace Szakdoga
 {

@@ -12,17 +12,17 @@
             <Authorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Devices
+                        <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> @Localizer["Devices"]
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="settings">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Settings
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Settings"]
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <button class="btn btn-danger w-100 text-start" @onclick="Logout" style="margin:auto">
-                        <span class="bi bi-door-closed" aria-hidden="true"></span> Logout
+                        <span class="bi bi-door-closed" aria-hidden="true"></span> @Localizer["Logout"]
                     </button>
                 </div>
 
@@ -36,12 +36,12 @@
             <NotAuthorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Login
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Loging"]
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="register">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Register
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Register"]
                     </NavLink>
                 </div>
             </NotAuthorized>
@@ -55,4 +55,5 @@
         AuthenticationService.Logout();
     }
     [Inject] private AuthenticationService AuthenticationService { get; set; }
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
 }

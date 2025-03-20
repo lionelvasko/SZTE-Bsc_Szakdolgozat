@@ -8,12 +8,12 @@
         <ul class="nav nav-pills justify-content-center ">
             <li class="nav-item flex-grow-1 text-center">
                 <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    User Settings
+                    @Localizer["user settings"]
                 </a>
             </li>
             <li class="nav-item flex-grow-1 text-center">
                 <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    Application Settings
+                    @Localizer["Application settings"]
                 </a>
             </li>
         </ul>
@@ -28,46 +28,46 @@
                     <h3 class="text-center text-info mb-4">User Settings</h3>
                     <form>
                         <div class="mb-4">
-                            <label for="Email" class="form-label fw-bold">Username</label>
-                            <input type="email" class="form-control shadow-sm bg-dark text-light border-secondary" id="email" @bind="userModel.Name" />
+                            <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
+                            <input type="email" class="form-control shadow-sm bg-dark text-light border-secondary" id="email" @bind="userModel.Email" />
                         </div>
                         <div class="mb-4">
-                            <label for="Name" class="form-label fw-bold">Email Address</label>
-                            <input type="text" class="form-control shadow-sm bg-dark text-light border-secondary" id="name" @bind="userModel.Email" />
+                                <label for="name" class="form-label fw-bold">@Localizer["Name"]</label>
+                            <input type="text" class="form-control shadow-sm bg-dark text-light border-secondary" id="name" @bind="userModel.Name" />
                         </div>
                         <div class="mb-4">
-                            <label for="password" class="form-label fw-bold">Password</label>
-                            <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="Enter your password" />
+                                <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
+                                    <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
                         </div>
-                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">Save Changes</button>
+                                <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save changes"]</button>
                     </form>
                 </div>
             }
             else if (activeTab == 2)
             {
                 <div>
-                    <h3 class="text-center text-info mb-4">Application Settings</h3>
+                            <h3 class="text-center text-info mb-4">@Localizer["Application Settings"]</h3>
                     <form>
                         <div class="mb-4">
-                            <label for="theme" class="form-label fw-bold">Theme</label>
+                                <label for="theme" class="form-label fw-bold">@Localizer["Theme"]</label>
                             <select class="form-select shadow-sm bg-dark text-light border-secondary" id="theme" @bind="theme">
-                                <option value="light">Light</option>
-                                <option value="dark">Dark</option>
+                                        <option value="light">@Localizer["Light"]</option>
+                                    <option value="dark">@Localizer["Dark"]</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="language" class="form-label fw-bold">Language</label>
+                                <label for="language" class="form-label fw-bold">@Localizer["Language"]</label>
                             <select class="form-select shadow-sm bg-dark text-light border-secondary" id="language" @bind="language">
-                                <option value="en">English</option>
-                                <option value="es">Spanish</option>
-                                <option value="fr">French</option>
+                                    <option value="en">@Localizer["English"]</option>
+                                    <option value="hu">@Localizer["Hungarian"]</option>
+                                    <option value="de">@Localizer["German"]</option>
                             </select>
                         </div>
                         <div class="form-check mb-4">
                             <input type="checkbox" class="form-check-input shadow-sm bg-dark border-secondary" id="notifications" @bind="notificationsEnabled" />
                             <label class="form-check-label fw-bold" for="notifications">Enable Notifications</label>
                         </div>
-                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">Save Changes</button>
+                                <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save Changes"]</button>
                     </form>
                 </div>
             }
@@ -102,4 +102,5 @@
     }
 
     [Inject] private UserInfoService getUserInfos { get; set; }
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
 }

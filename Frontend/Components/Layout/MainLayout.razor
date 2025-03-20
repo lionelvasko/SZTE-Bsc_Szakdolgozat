@@ -1,13 +1,18 @@
 ﻿@inherits LayoutComponentBase
+@inject IStringLocalizer<AppResources> Localizer
 
 <div class="page bg-dark text-light">
     <div class="sidebar">
         <NavMenu />
     </div>
-
+    <div class="top-row px-4 bg-dark text-light">
+        <Button Text="Switch to English" Clicked="OnSwitchLanguageClicked" />
+    </div>
     <main>
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
+@code{
+}

@@ -9,33 +9,33 @@
         <EditForm Model="registerModel" OnValidSubmit="Submit">
             <DataAnnotationsValidator />
             <div class="mb-3">
-                <label for="firstname" class="form-label">First Name</label>
-                <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="Enter your first name" class="form-control bg-transparent text-white" />
+                <label for="firstname" class="form-label">@Localizer["First name"]</label>
+                <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="@Localizer["Enter your first name"]" class="form-control bg-transparent text-white" />
             </div>
             <div class="mb-3">
-                <label for="lastname" class="form-label">Last Name</label>
-                <input type="text" id="lastname" @bind="registerModel.LastName" placeholder="Enter your last name" class="form-control bg-transparent text-white" />
+                <label for="lastname" class="form-label">@Localizer["First name"]</label>
+                <input type="text" id="lastname" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-white" />
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="email" id="email" @bind="registerModel.Email" placeholder="Enter your email" class="form-control bg-transparent text-white" />
+                <label for="email" class="form-label">@Localizer["Email address"]</label>
+                <input type="email" id="email" @bind="registerModel.Email" placeholder="@Localizer["Enter your email address"]" class="form-control bg-transparent text-white" />
                 <ValidationMessage For="@(() => registerModel.Email)" />
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" @bind="registerModel.Password" placeholder="Enter your password" class="form-control bg-transparent text-white" />
+                <label for="password" class="form-label">@Localizer["Password"]</label>
+                <input type="password" id="password" @bind="registerModel.Password" placeholder="@Localizer["Enter your password"]" class="form-control bg-transparent text-white" />
                 <ValidationMessage For="@(() => registerModel.Password)" />
             </div>
             <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm Password</label>
-                <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="Confirm your password" class="form-control bg-transparent text-white" />
+                <label for="confirmPassword" class="form-label">@Localizer["Confirm password"]</label>
+                <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="@Localizer["Enter your password again"]" class="form-control bg-transparent text-white" />
             </div>
-            <button type="submit" class="btn btn-primary w-100 shadow-sm">Register</button>
+            <button type="submit" class="btn btn-primary w-100 shadow-sm">@Localizer["Register"]</button>
         </EditForm>
 
         <div class="text-center mt-4">
-            <p class="mb-2">Already have an account?</p>
-            <button @onclick="ToLogin" class="btn btn-outline-secondary w-100">Login Here</button>
+            <p class="mb-2">@Localizer["Already have an account?"]</p>
+            <button @onclick="ToLogin" class="btn btn-outline-secondary w-100">@Localizer["Login here"]</button>
         </div>
     </div>
 </div>
@@ -47,14 +47,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Register Info</h5>
-                    <button type="button" class="btn-close" @onclick="CloseModal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" @onclick="CloseModal" aria-label="@Localizer["Close"]"></button>
                 </div>
                 <div class="modal-body">
                     <p>@ModalMessage</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @onclick="CloseModal">Close</button>
-                    <button type="button" class="btn btn-primary" @onclick="ToLogin">Login</button>
+                        <button type="button" class="btn btn-primary" @onclick="CloseModal">@Localizer["Close"]</button>
+                        <button type="button" class="btn btn-primary" @onclick="ToLogin">@Localizer["login"]</button>
                 </div>
             </div>
         </div>
@@ -93,4 +93,5 @@
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private AuthenticationService AuthenticationService { get; set; }
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
 }
