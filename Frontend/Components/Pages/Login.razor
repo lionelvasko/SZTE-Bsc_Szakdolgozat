@@ -66,16 +66,8 @@
                 var jsonResponse = await response.Content.ReadAsStringAsync();
                 var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
                 string token = jwtResponse.Token;
-
-                ModalMessage = "Login successful";
-                await jsRuntime.InvokeVoidAsync("console.log", $"Token: {token}");
-
             }
-            else
-            {
-                ModalMessage = response.Content.ReadAsStringAsync().Result;
-            }
-
+            ModalMessage = response.Content.ReadAsStringAsync().Result;
             ShowModal = true;
         }
         catch (Exception ex)

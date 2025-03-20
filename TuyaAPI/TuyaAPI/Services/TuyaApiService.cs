@@ -12,8 +12,8 @@ namespace TuyaAPI.Services
         private HttpClient _httpClient;
         private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
         private readonly string PLATFORM = "tuya";
-        private string region;
 
+        private string region;
         private string _accessToken;
         private string _refreshToken;
 

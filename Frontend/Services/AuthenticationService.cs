@@ -61,6 +61,28 @@ namespace Szakdoga.Services
             return response;
         }
 
+        public async Task<HttpResponseMessage> RegisterAsync(RegisterModel registerModel)
+        {
+            try
+            {
+                var registerData = new
+                {
+                    Email = registerModel.Email,
+                    Password = registerModel.Password,
+                    FirstName = registerModel.FirstName,
+                    LastName = registerModel.LastName
+                };
+
+                var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("http://localhost:5223/authapi/register", content);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.Unauthorized, Content = new StringContent(ex.Message) };
+            }
+        }
+
         public void Logout()
         {
             _httpClient.DefaultRequestHeaders.Authorization = null;
@@ -68,6 +90,11 @@ namespace Szakdoga.Services
             SecureStorage.Default.Remove(REMEMBER_ME_KEY);
             SecureStorage.Default.Remove(UserInfoService.NAME_KEY);
             SecureStorage.Default.Remove(UserInfoService.EMAIL_KEY);
+            SecureStorage.Default.Remove("tuya_token");
+            SecureStorage.Default.Remove("tuya_refresh_token");
+            SecureStorage.Default.Remove("tuya_region");
+            SecureStorage.Default.Remove("somfy_token");
+            SecureStorage.Default.Remove("somfy_url");
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
 

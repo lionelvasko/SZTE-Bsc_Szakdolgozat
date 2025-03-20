@@ -16,7 +16,6 @@ namespace SomfyAPI.Services
         private string _gatewayPin;
         private string _sessionId;
         private string _token;
-        private string _apiUrl;
 
         private string regiesteredUsername;
 
@@ -78,14 +77,14 @@ namespace SomfyAPI.Services
             return new HttpClient(handler);
         }
 
-        public void SetUrl(bool useCloud = true)
+        public void SetUrl(string url)
         {
-            _apiUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI";
+            _baseUrl = $"{url}/enduser-mobile-web/enduserAPI";
         }
 
         public string GetURL()
         {
-            return _apiUrl;
+            return _baseUrl;
         }
 
         public HttpClient GetHttpClient()
@@ -104,9 +103,8 @@ namespace SomfyAPI.Services
             {
                 throw new InvalidOperationException("Base URL is not set.");
             }
-            _baseUrl = baseUrl;
-
-            var loginUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI/login";
+            SetUrl(baseUrl);
+            var loginUrl = $"{_baseUrl}/login";
             var loginBody = new Dictionary<string, string>
             {
                 { "userId", email },
@@ -143,7 +141,7 @@ namespace SomfyAPI.Services
                 throw new InvalidOperationException("Gateway Pin is not set.");
             }
             this._gatewayPin = _gatewayPin;
-            var tokenUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI/config/{_gatewayPin}/local/tokens/generate";
+            var tokenUrl = $"{_baseUrl}/config/{_gatewayPin}/local/tokens/generate";
 
 
             var response = await _httpClient.GetAsync(tokenUrl);
@@ -161,7 +159,7 @@ namespace SomfyAPI.Services
 
         public async Task<bool> ActivateTokenAsync(string token)
         {
-            var activateTokenUrl = $"{_baseUrl}/enduser-mobile-web/enduserAPI/config/{_gatewayPin}/local/tokens";
+            var activateTokenUrl = $"{_baseUrl}/config/{_gatewayPin}/local/tokens";
             var activateBody = new
             {
                 label = "My MAUI Blazor Token",

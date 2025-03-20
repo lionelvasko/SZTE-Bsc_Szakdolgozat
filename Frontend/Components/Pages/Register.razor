@@ -75,37 +75,9 @@
             return;
         }
 
-        try
-        {
-            var registerData = new
-            {
-                Email = registerModel.Email,
-                Password = registerModel.Password,
-                FirstName = registerModel.FirstName,
-                LastName = registerModel.LastName
-            };
-
-            var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
-            var response = await HttpClient.PostAsync("http://localhost:5223/authapi/register", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var token = await response.Content.ReadAsStringAsync();
-                ModalMessage = "Register successful!";
-            }
-            else
-            {
-                var errorResponse = await response.Content.ReadAsStringAsync();
-                ModalMessage = $"Register failed: {errorResponse}";
-            }
-
-            ShowModal = true;
-        }
-        catch (Exception ex)
-        {
-            ModalMessage = $"Error: {ex.Message}";
-            ShowModal = true;
-        }
+        var response = await AuthenticationService.RegisterAsync(registerModel);
+        ModalMessage = await response.Content.ReadAsStringAsync();
+        ShowModal = true;
     }
 
     private void CloseModal()
@@ -120,4 +92,5 @@
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
+    [Inject] private AuthenticationService AuthenticationService { get; set; }
 }

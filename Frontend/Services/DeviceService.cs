@@ -8,7 +8,7 @@ using TuyaAPI.Services;
 
 namespace Szakdoga.Services
 {
-    internal static class GetDeviceService
+    internal static class DeviceService
     {
         internal static async Task<Models.Device> AddSomfyDeviceAsync()
         {
@@ -16,7 +16,6 @@ namespace Szakdoga.Services
             {
                 var SingletonSomfyApiService = SomfyApiService.GetInstance();
 
-                SingletonSomfyApiService.SetUrl(true);
                 var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
                 var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
                 var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
@@ -45,7 +44,7 @@ namespace Szakdoga.Services
             {
                 return new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, Content = new StringContent("Login failed") };
             }
-            //await SetTokensSS(true, false);
+            //await SetTokensSS(true);
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = new StringContent("Login successful") };
         }
 
@@ -89,19 +88,19 @@ namespace Szakdoga.Services
             {
                 return new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, Content = new StringContent("Login failed") };
             }
-            await SetTokensSS(false, true);
+            await SetTokensSS(false);
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = new StringContent("Login successful") };
         }
 
-        internal static async Task SetTokensSS(bool somfy, bool tuya)
+        internal static async Task SetTokensSS(bool somfyOrTuya)
         {
-            if(somfy)
+            if(somfyOrTuya)
             {
                 var SingletonSomfyApiService = SomfyApiService.GetInstance();
                 await SecureStorage.Default.SetAsync("somfy_token", SingletonSomfyApiService.GetAccessToken());
                 await SecureStorage.Default.SetAsync("somfy_url", SingletonSomfyApiService.GetURL());
             }
-            if(tuya)
+            else
             {
                 var SingletonTuyaApiService = TuyaApiService.GetInstance();
                 await SecureStorage.Default.SetAsync("tuya_token", SingletonTuyaApiService.GetAccessToken());
@@ -120,12 +119,11 @@ namespace Szakdoga.Services
         {
             var SingletonSomfyApiService = SomfyApiService.GetInstance();
             SingletonSomfyApiService.SetToken(token);
-            SingletonSomfyApiService.SetUrl();
         }
 
         internal static async Task SaveTokensToUser()
         {
-             
+            var AuthenticationService = new AuthenticationService(new HttpClient(), new CustomAuthenticationStateProvider(), new UserInfoService());
         }
 
     }

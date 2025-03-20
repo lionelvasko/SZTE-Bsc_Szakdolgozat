@@ -312,14 +312,13 @@
         {
             try
             {
-                await GetDeviceService.GenerateSomfyTokens(email, password, homeURL);
-                var device = await GetDeviceService.AddSomfyDeviceAsync();
+                await DeviceService.GenerateSomfyTokens(email, password, homeURL);
+                var device = await DeviceService.AddSomfyDeviceAsync();
                 devices.Add(device);
                 foreach (var entity in device.Entities)
                 {
                     entities.Add(entity);
                 }
-                await GetDeviceService.SetTokensSS(true, false);
             }
             catch (Exception ex)
             {
@@ -330,14 +329,13 @@
         {
             try
             {
-                await GetDeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
-                var device = await GetDeviceService.AddTuyaDeviceAsync();
+                await DeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
+                var device = await DeviceService.AddTuyaDeviceAsync();
                 devices.Add(device);
                 foreach (var entity in device.Entities)
                 {
                     entities.Add(entity);
                 }
-                await GetDeviceService.SetTokensSS(false, true);
             }
             catch (Exception ex)
             {
@@ -356,8 +354,8 @@
 
         if (!string.IsNullOrEmpty(tuyaToken) && !string.IsNullOrEmpty(tuyaRefreshToken))
         {
-            GetDeviceService.UpdateApiServiceTokensTuya(tuyaToken, tuyaRefreshToken, tuyaRegion);
-            var device = await GetDeviceService.AddTuyaDeviceAsync();
+            DeviceService.UpdateApiServiceTokensTuya(tuyaToken, tuyaRefreshToken, tuyaRegion);
+            var device = await DeviceService.AddTuyaDeviceAsync();
             devices.Add(device);
             foreach (var entity in device.Entities)
             {
@@ -367,8 +365,8 @@
         }
         if (!string.IsNullOrEmpty(somfyToken))
         {
-            GetDeviceService.UpdateApiServiceTokensSomfy(somfyToken, somfyUrl);
-            var device = await GetDeviceService.AddSomfyDeviceAsync();
+            DeviceService.UpdateApiServiceTokensSomfy(somfyToken, somfyUrl);
+            var device = await DeviceService.AddSomfyDeviceAsync();
             devices.Add(device);
             foreach (var entity in device.Entities)
             {

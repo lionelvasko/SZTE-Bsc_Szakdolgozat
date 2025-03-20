@@ -30,7 +30,9 @@ namespace Szakdoga
                     SecureStorage.Default.Remove(UserInfoService.EMAIL_KEY);
                     SecureStorage.Default.Remove("tuya_token");
                     SecureStorage.Default.Remove("tuya_refresh_token");
+                    SecureStorage.Default.Remove("tuya_region");
                     SecureStorage.Default.Remove("somfy_token");
+                    SecureStorage.Default.Remove("somfy_url");
                 }
             };
 
