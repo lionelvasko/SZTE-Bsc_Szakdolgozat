@@ -270,10 +270,16 @@
   <data name="English" xml:space="preserve">
     <value>Angol</value>
   </data>
-  <data name="Hiungarian" xml:space="preserve">
-    <value>Magyar</value>
-  </data>
   <data name="German" xml:space="preserve">
     <value>Német</value>
+  </data>
+  <data name="Hungarian" xml:space="preserve">
+    <value>Magyar</value>
+  </data>
+  <data name="Enable notifications" xml:space="preserve">
+    <value>Értesítések engedélyezése</value>
+  </data>
+  <data name="Select language" xml:space="preserve">
+    <value>Válasszon nyelvet</value>
   </data>
 </root>

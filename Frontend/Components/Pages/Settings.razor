@@ -1,21 +1,30 @@
 ﻿@page "/settings"
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
 
 <div class="d-flex flex-column min-vh-100 bg-dark text-light">
     <div class="container my-4">
-
         <ul class="nav nav-pills justify-content-center ">
-            <li class="nav-item flex-grow-1 text-center">
-                <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    @Localizer["user settings"]
-                </a>
-            </li>
-            <li class="nav-item flex-grow-1 text-center">
-                <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
-                    @Localizer["Application settings"]
-                </a>
-            </li>
+            <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+                <Authorized>
+                    <li class="nav-item flex-grow-1 text-center">
+                        <a class="nav-link @GetTabClass(1) py-3" @onclick="() => SetActiveTab(1)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                            @Localizer["User settings"]
+                        </a>
+                    </li>
+                    <li class="nav-item flex-grow-1 text-center">
+                        <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                            @Localizer["Application settings"]
+                        </a>
+                    </li>
+                </Authorized>
+                <NotAuthorized>
+                    <li class="nav-item flex-grow-1 text-center">
+                        <a class="nav-link @GetTabClass(2) py-3" @onclick="() => SetActiveTab(2)" style="font-size: 1.25rem; cursor: pointer; transition: all 0.3s; border-radius: 1.5rem;">
+                            @Localizer["Application settings"]
+                        </a>
+                    </li>
+                </NotAuthorized>
+            </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
         </ul>
     </div>
 
@@ -32,42 +41,44 @@
                             <input type="email" class="form-control shadow-sm bg-dark text-light border-secondary" id="email" @bind="userModel.Email" />
                         </div>
                         <div class="mb-4">
-                                <label for="name" class="form-label fw-bold">@Localizer["Name"]</label>
+                            <label for="name" class="form-label fw-bold">@Localizer["Name"]</label>
                             <input type="text" class="form-control shadow-sm bg-dark text-light border-secondary" id="name" @bind="userModel.Name" />
                         </div>
                         <div class="mb-4">
-                                <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
-                                    <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
+                            <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
+                            <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
                         </div>
-                                <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save changes"]</button>
+                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save changes"]</button>
                     </form>
                 </div>
             }
             else if (activeTab == 2)
             {
                 <div>
-                            <h3 class="text-center text-info mb-4">@Localizer["Application Settings"]</h3>
+                    <h3 class="text-center text-info mb-4">@Localizer["Application Settings"]</h3>
                     <form>
                         <div class="mb-4">
-                                <label for="theme" class="form-label fw-bold">@Localizer["Theme"]</label>
+                            <label for="theme" class="form-label fw-bold">@Localizer["Theme"]</label>
                             <select class="form-select shadow-sm bg-dark text-light border-secondary" id="theme" @bind="theme">
-                                        <option value="light">@Localizer["Light"]</option>
-                                    <option value="dark">@Localizer["Dark"]</option>
+                                <option value="light">@Localizer["Light"]</option>
+                                <option value="dark">@Localizer["Dark"]</option>
                             </select>
                         </div>
                         <div class="mb-4">
-                                <label for="language" class="form-label fw-bold">@Localizer["Language"]</label>
-                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="language" @bind="language">
-                                    <option value="en">@Localizer["English"]</option>
-                                    <option value="hu">@Localizer["Hungarian"]</option>
-                                    <option value="de">@Localizer["German"]</option>
+                            <label for="language" class="form-label fw-bold">@Localizer["Language"]</label>
+                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="language" @onchange="LanguageChanged">
+                                <option value="" disabled selected>@Localizer["Select language"]</option>
+                                <option value="en">
+                                    @Localizer["English"]
+                                </option>
+                                <option value="hu">
+                                    @Localizer["Hungarian"]
+                                </option>
+                                <option value="de">
+                                    @Localizer["German"]
+                                </option>
                             </select>
                         </div>
-                        <div class="form-check mb-4">
-                            <input type="checkbox" class="form-check-input shadow-sm bg-dark border-secondary" id="notifications" @bind="notificationsEnabled" />
-                            <label class="form-check-label fw-bold" for="notifications">Enable Notifications</label>
-                        </div>
-                                <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save Changes"]</button>
                     </form>
                 </div>
             }
@@ -76,10 +87,9 @@
 </div>
 
 @code {
-    private int activeTab = 1;
+    private int activeTab = 2;
     private string theme = "light";
-    private string language = "en";
-    private bool notificationsEnabled = true;
+    private string language;
 
     private string password = null;
 
@@ -89,6 +99,8 @@
     {
         userModel.Email = await getUserInfos.GetEmail();
         userModel.Name = await getUserInfos.GetName();
+
+        language = await SecureStorage.GetAsync("selectedCulture");
     }
 
     private void SetActiveTab(int tabNumber)
@@ -101,6 +113,23 @@
         return activeTab == tabNumber ? "active" : "";
     }
 
+
+    private async Task LanguageChanged(ChangeEventArgs e)
+    {
+        string cultureCode = e.Value?.ToString() ?? "en";
+        await ChangeLanguage(cultureCode);
+    }
+
+    private async Task ChangeLanguage(string cultureCode)
+    {
+        LocalizationService.SetCulture(cultureCode);
+        await SecureStorage.SetAsync("selectedCulture", cultureCode);
+        NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+    }
+
     [Inject] private UserInfoService getUserInfos { get; set; }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private LocalizationService LocalizationService { get; set; }
 }

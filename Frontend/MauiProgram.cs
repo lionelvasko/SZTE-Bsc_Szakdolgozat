@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using SomfyAPI.Services;
 using TuyaAPI.Services;
 using Szakdoga.Services;
+using System.Globalization;
 namespace Szakdoga
 {
     public static class MauiProgram
@@ -25,6 +26,9 @@ namespace Szakdoga
             builder.Services.AddScoped<UserInfoService>();
 
             builder.Services.AddLocalization();
+            builder.Services.AddSingleton<LocalizationService>();
+
+
 
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddAuthorizationCore();
@@ -34,7 +38,16 @@ namespace Szakdoga
             builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            return app;
+        }
+
+        public static void SetCulture(string cultureCode)
+        {
+            var culture = new CultureInfo(cultureCode);
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
     }
 }

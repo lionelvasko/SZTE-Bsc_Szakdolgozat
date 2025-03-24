@@ -118,7 +118,7 @@
                             {
                                         <label for="homeURL" class="mt-2">@Localizer["Region"]:</label>
                                 <select class="form-control" id="homeURL" @bind="homeURL">
-                                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
+                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
                                     <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
                                     <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (America)</option>
@@ -126,7 +126,7 @@
                                 <label for="email">@Localizer["Email address"]:</label>
                                 <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
                                 <label for="password">@Localizer["Password"]:</label>
-                                <input type="password" class="form-control" id="password" @bind="password" placeholder="Password" />
+                                <input type="password" class="form-control" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
                             }
                             else if (selectedApiType == "local")
                             {
@@ -146,7 +146,7 @@
                                         <label for="username">@Localizer["Username"]</label>
                                     <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" />
                                     <label for="tuyaPassword">@Localizer["Password"]:</label>
-                                    <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Password"]" />
+                                <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Enter your password"]" />
                             </div>
                         </div>
                     </div>

@@ -333,3 +333,47 @@ html {
 .nav-tabs .nav-link {
     cursor: url('https://cur.cursors-4u.net/cursors/cur-1/cur2.cur'), pointer;
 }
+
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    width: 50px;
+    height: 35px;
+    border: none;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10%;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background: #333;
+    border-radius: 5px;
+    padding: 5px;
+    min-width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+    .dropdown-item:hover {
+        background: #444;
+    }
+
+    .dropdown-item img {
+        width: 24px;
+        height: auto;
+        margin-right: 10px;
+    }

@@ -1,12 +1,8 @@
 ﻿@inherits LayoutComponentBase
-@inject IStringLocalizer<AppResources> Localizer
 
 <div class="page bg-dark text-light">
     <div class="sidebar">
         <NavMenu />
-    </div>
-    <div class="top-row px-4 bg-dark text-light">
-        <Button Text="Switch to English" Clicked="OnSwitchLanguageClicked" />
     </div>
     <main>
         <article class="content px-4">
@@ -15,4 +11,17 @@
     </main>
 </div>
 @code{
+    protected override async Task OnInitializedAsync()
+    {
+        string language = await SecureStorage.GetAsync("selectedCulture");
+
+        if (!string.IsNullOrEmpty(language))
+        {
+            LocalizationService.SetCulture(language);
+            await Task.Delay(100);
+        }
+    }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private LocalizationService LocalizationService { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
 }

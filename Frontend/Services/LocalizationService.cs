@@ -18,7 +18,7 @@ namespace Szakdoga.Services
             return _resourceManager.GetString(key, CultureInfo.CurrentUICulture) ?? key;
         }
 
-        public void SetLanguage(string languageCode)
+        public void SetCulture(string languageCode)
         {
             CultureInfo culture = new CultureInfo(languageCode);
             CultureInfo.DefaultThreadCurrentCulture = culture;

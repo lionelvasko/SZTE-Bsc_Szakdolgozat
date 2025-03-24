@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Szakdolgozat</a>
+        <a class="navbar-brand" href="">@Localizer["Thesis"]</a>
     </div>
 </div>
 
@@ -36,12 +36,17 @@
             <NotAuthorized>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login">
-                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Loging"]
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Login"]
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="register">
                         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Register"]
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="settings">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> @Localizer["Settings"]
                     </NavLink>
                 </div>
             </NotAuthorized>
@@ -54,6 +59,7 @@
     {
         AuthenticationService.Logout();
     }
+
     [Inject] private AuthenticationService AuthenticationService { get; set; }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
 }

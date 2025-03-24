@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Localization;
+using Microsoft.JSInterop;
 using Szakdoga.Resources.Localization;
 using Szakdoga.Services;
 
@@ -35,6 +36,7 @@ namespace Szakdoga
                     SecureStorage.Default.Remove("tuya_region");
                     SecureStorage.Default.Remove("somfy_token");
                     SecureStorage.Default.Remove("somfy_url");
+                    SecureStorage.Default.Remove("selectedCulture");
                 }
             };
 
