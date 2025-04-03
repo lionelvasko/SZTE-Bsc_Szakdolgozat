@@ -1,7 +1,7 @@
 ﻿@page "/settings"
 @using Microsoft.AspNetCore.Authorization
 
-<div class="d-flex flex-column min-vh-100 bg-dark text-light">
+<div class="d-flex flex-column min-vh-100">
     <div class="container my-4">
         <ul class="nav nav-pills justify-content-center ">
             <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
@@ -38,15 +38,15 @@
                     <form>
                         <div class="mb-4">
                             <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
-                            <input type="email" class="form-control shadow-sm bg-dark text-light border-secondary" id="email" @bind="userModel.Email" />
+                            <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
                         </div>
                         <div class="mb-4">
                             <label for="name" class="form-label fw-bold">@Localizer["Name"]</label>
-                            <input type="text" class="form-control shadow-sm bg-dark text-light border-secondary" id="name" @bind="userModel.Name" />
+                            <input type="text" class="form-control shadow-sm border-secondary" id="name" @bind="userModel.Name" />
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
-                            <input type="password" class="form-control shadow-sm bg-dark text-light border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
+                            <input type="password" class="form-control shadow-sm border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
                         </div>
                         <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save changes"]</button>
                     </form>
@@ -59,15 +59,15 @@
                     <form>
                         <div class="mb-4">
                             <label for="theme" class="form-label fw-bold">@Localizer["Theme"]</label>
-                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="theme" @bind="theme">
-                                <option value="light">@Localizer["Light"]</option>
-                                <option value="dark">@Localizer["Dark"]</option>
+                            <select class="form-select bg-transparent text-info" @onchange="ChangeTheme" id="theme">
+                                <option value="Light" selected="@(ThemeChangingService.CurrentTheme == AppTheme.Light)">@Localizer["Light"]</option>
+                                <option value="Dark" selected="@(ThemeChangingService.CurrentTheme == AppTheme.Dark)">@Localizer["Dark"]</option>
                             </select>
                         </div>
                         <div class="mb-4">
                             <label for="language" class="form-label fw-bold">@Localizer["Language"]</label>
-                            <select class="form-select shadow-sm bg-dark text-light border-secondary" id="language" @onchange="LanguageChanged">
-                                <option value="" disabled selected>@Localizer["Select language"]</option>
+                            <select class="form-select shadow-sm border-secondary bg-transparent text-info" id="language" @onchange="LanguageChanged">
+                                <option value="" disabled selected class="bg-transparent text-info">@Localizer["Select language"]</option>
                                 <option value="en">
                                     @Localizer["English"]
                                 </option>
@@ -101,6 +101,9 @@
         userModel.Name = await getUserInfos.GetName();
 
         language = await SecureStorage.GetAsync("selectedCulture");
+
+        theme = await SecureStorage.GetAsync("selectedTheme") ?? "light";
+        ChangeTheme(new ChangeEventArgs { Value = theme });
     }
 
     private void SetActiveTab(int tabNumber)
@@ -127,9 +130,23 @@
         NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
     }
 
+    private void ChangeTheme(ChangeEventArgs e)
+    {
+        var selectedTheme = e.Value?.ToString();
+        if (selectedTheme == "Light")
+        {
+            ThemeChangingService.SetTheme(AppTheme.Light);
+        }
+        else if (selectedTheme == "Dark")
+        {
+            ThemeChangingService.SetTheme(AppTheme.Dark);
+        }
+    }
+
     [Inject] private UserInfoService getUserInfos { get; set; }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private LocalizationService LocalizationService { get; set; }
+    [Inject] private ThemeChangingService ThemeChangingService { get; set; }
 }

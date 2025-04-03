@@ -11,18 +11,18 @@
             {
                 @foreach (var notification in NotificationList)
                 {
-                            <div class="card bg-dark text-white mb-3">
-                                <div class="card-header">@notification.Title</div>
-                                <div class="card-body">
-                                    <p class="card-text">@notification.Message</p>
-                                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteNotification(notification.Id)">Delete</button>
-                                </div>
-                            </div>
+                    <div class="card mb-3">
+                        <div class="card-header">@notification.Title</div>
+                        <div class="card-body">
+                            <p class="card-text">@notification.Message</p>
+                            <button class="btn btn-danger btn-sm" @onclick="() => DeleteNotification(notification.Id)">Delete</button>
+                        </div>
+                    </div>
                 }
             }
             else
             {
-                    <p class="text-muted">No notifications available.</p>
+                <p class="text-muted">No notifications available.</p>
             }
         </div>
     </div>

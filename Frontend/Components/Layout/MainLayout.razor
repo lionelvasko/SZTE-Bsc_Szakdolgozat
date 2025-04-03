@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page bg-dark text-light">
+<div class="page @GetThemeClass()">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -20,7 +20,29 @@
             LocalizationService.SetCulture(language);
             await Task.Delay(100);
         }
+        if (ThemeChangingService != null)
+        {
+            ThemeChangingService.OnThemeChanged += OnThemeChanged;
+        }
     }
+    private async void OnThemeChanged()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private string GetThemeClass()
+    {
+        return ThemeChangingService?.CurrentTheme == AppTheme.Dark ? "bg-dark text-light" : "bg-light text-dark";
+    }
+
+    public void Dispose()
+    {
+        if (ThemeChangingService != null)
+        {
+            ThemeChangingService.OnThemeChanged -= OnThemeChanged;
+        }
+    }
+    [Inject] private ThemeChangingService ThemeChangingService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private LocalizationService LocalizationService { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }

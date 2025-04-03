@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.JSInterop;
-using SomfyAPI.Services;
-using System.Diagnostics;
+﻿using SomfyAPI.Services;
 using System.Net;
-using Szakdoga.Models;
 using TuyaAPI.Services;
 
 namespace Szakdoga.Services

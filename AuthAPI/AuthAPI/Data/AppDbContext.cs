@@ -7,5 +7,25 @@ namespace AuthAPI.Data
     public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public DbSet<TuyaDevice> TuyaDevices { get; set; }
+        public DbSet<SomfyDevice> SomfyDevices { get; set; }
+        public DbSet<Entity> Entities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Device>()
+                .HasDiscriminator<string>("DeviceType")
+                .HasValue<TuyaDevice>("Tuya")
+                .HasValue<SomfyDevice>("Somfy");
+
+            // Kapcsolatok beállítása
+            modelBuilder.Entity<Device>()
+                .HasOne(d => d.User)
+                .WithMany(u => u.Devices)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

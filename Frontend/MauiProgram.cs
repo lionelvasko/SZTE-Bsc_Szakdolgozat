@@ -28,7 +28,7 @@ namespace Szakdoga
             builder.Services.AddLocalization();
             builder.Services.AddSingleton<LocalizationService>();
 
-
+            builder.Services.AddSingleton<ThemeChangingService>();
 
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddAuthorizationCore();

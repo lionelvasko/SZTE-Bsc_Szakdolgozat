@@ -74,17 +74,6 @@ namespace AuthAPI.Controllers
             return Ok(new { Token = token });
         }
 
-        [Authorize]
-        [HttpGet("profile")]
-        public IActionResult GetProfile()
-        {
-            var email = User.FindFirst(ClaimTypes.Email)?.Value;
-            var name = User.FindFirst(ClaimTypes.Name)?.Value;
-            
-
-            return Ok(new { Email = email, Name = name });
-        }
-
 
         private string GenerateJwtToken(User user)
         {
