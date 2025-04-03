@@ -28,7 +28,7 @@
                     if(entity.Platform == "Somfy")
                     {
                         <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card border-primary shadow-lg rounded" style="cursor: pointer;">
+                            <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
                                 <div class="card-body">
                                     <div @onclick="() => ShowEntityDetails(entity)">
                                         <h5 class="card-title">@entity.Name</h5>
@@ -48,7 +48,7 @@
                     else
                     {
                         <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card border-primary shadow-lg rounded" style="cursor: pointer;">
+                            <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
                                 <div class="card-body">
                                     <div @onclick="() => ShowEntityDetails(entity)">
                                         <h5 class="card-title">@entity.Name</h5>
@@ -73,7 +73,7 @@
                 @foreach (var device in devices)
                 {
                     <div class="col-12 col-md-4 col-lg-3">
-                        <div class="card border-primary shadow-lg rounded" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
+                        <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
                             <div class="card-body">
                                 <h5 class="card-title">@device.Platform</h5>
                                 <h5 class="card-title">@device.Creation_Time</h5>
@@ -90,7 +90,7 @@
 
 @if (showAddDeviceModal)
 {
-    <div class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+    <div class="modal fade show bg-transparent" tabindex="-1" style="display: block;" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -164,7 +164,7 @@
 
 @if (showEntityDetailsModal && selectedEntity != null)
 {
-    <div class="modal fade show" tabindex="-1" style="display: block;" aria-labelledby="entityDetailsModalLabel" aria-hidden="true">
+    <div class="modal fade show bg-transparent" tabindex="-1" style="display: block;" aria-labelledby="entityDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
