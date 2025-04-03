@@ -19,13 +19,6 @@ namespace AuthAPI.Data
                 .HasDiscriminator<string>("DeviceType")
                 .HasValue<TuyaDevice>("Tuya")
                 .HasValue<SomfyDevice>("Somfy");
-
-            // Kapcsolatok beállítása
-            modelBuilder.Entity<Device>()
-                .HasOne(d => d.User)
-                .WithMany(u => u.Devices)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
