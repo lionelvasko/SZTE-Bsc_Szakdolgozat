@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AuthAPI.Controllers
 {
-    [Route("authapi/")]
+    [Route("api/")]
     [ApiController]
     public class AuthController : ControllerBase
     {
