@@ -28,9 +28,9 @@ namespace Szakdoga.Services
                 return;
 
             CurrentTheme = theme;
-            Preferences.Set(ThemeKey, theme.ToString()); // Tárolás helyileg
+            Preferences.Set(ThemeKey, theme.ToString());
             ApplyTheme(theme);
-            OnThemeChanged?.Invoke(); // Értesítjük a feliratkozott komponenseket
+            OnThemeChanged?.Invoke();
         }
 
         private void ApplyTheme(AppTheme theme)

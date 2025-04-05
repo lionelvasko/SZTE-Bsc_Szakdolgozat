@@ -1,4 +1,4 @@
-﻿using AuthAPI.Data;
+﻿  using AuthAPI.Data;
 using AuthAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -36,7 +36,8 @@ namespace AuthAPI.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             return await _context.Devices
-                .Include(d => d.Entities)
+                .Include(d => d.TuyaEntities)
+                .Include(d => d.SomfyEntities)
                 .Where(d => d.UserId == userId)
                 .ToListAsync();
         }
@@ -54,16 +55,10 @@ namespace AuthAPI.Controllers
             {
                 Name = model.Name,
                 Platform = model.Platform,
-                CreationTime = DateTime.UtcNow.ToString("o"),
+                CreationTime = DateTime.UtcNow.ToString(),
                 UserId = user.Id,
-                Entities = model.Entities?.Select(e => new Entity
-                {
-                    URL = e.URL,
-                    Name = e.Name,
-                    Platform = e.Platform,
-                    Icon = e.Icon,
-                    UserId = user.Id
-                }).ToList()
+                SomfyEntities = [],
+                TuyaEntities = []
             };
 
             _context.Devices.Add(device);

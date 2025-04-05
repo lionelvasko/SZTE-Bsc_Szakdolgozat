@@ -41,9 +41,7 @@ namespace Szakdoga.Services
             if (!response.IsSuccessStatusCode)
                 return response;
 
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-            var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
-            string token = jwtResponse.Token;
+            string token = await response.Content.ReadAsStringAsync();
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -90,6 +88,7 @@ namespace Szakdoga.Services
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
 
+        /*
         public async Task SetTokens()
         {
             var tuyaAccesToken = await SecureStorage.GetAsync("tuya_token");
@@ -112,13 +111,6 @@ namespace Szakdoga.Services
                 await _httpClient.PostAsync("http://localhost:5223/authapi/tokens/somfy", content);
             }
         }
-        private IEnumerable<Claim> DecodeJwtToken(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(token) as JwtSecurityToken;
-
-            return jwtToken?.Claims;
-        }
-
+        */
     }
 }

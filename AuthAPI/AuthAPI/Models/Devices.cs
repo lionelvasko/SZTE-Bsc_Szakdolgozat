@@ -11,7 +11,8 @@ namespace AuthAPI.Models
         public string CreationTime { get; set; } = string.Empty;
         public string Platform { get; set; } = string.Empty;
         public string UserId { get; set; }
-        public ICollection<Entity> Entities { get; set; } = new List<Entity>();
+        public ICollection<TuyaEntity> TuyaEntities { get; set; } = new List<TuyaEntity>();
+        public ICollection<SomfyEntity> SomfyEntities { get; set; } = new List<SomfyEntity>();
     }
 
 }

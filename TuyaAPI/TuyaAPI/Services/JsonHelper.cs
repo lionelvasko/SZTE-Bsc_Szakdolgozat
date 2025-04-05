@@ -1,37 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using TuyaAPI.DTOs;
 using System.Text.Json;
-using System.Threading.Tasks;
 using TuyaAPI.Models;
 
 namespace TuyaAPI.Services
 {
     public static class JsonHelper
     {
-        public static List<Device> GetEntitiesFromJson(string json)
+        public static List<EntityDTO> GetEntitiesFromJson(string json)
         {
             var setupData = JsonSerializer.Deserialize<TuyaResponse>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
 
-            var entities = new List<Device>();
+            var entities = new List<EntityDTO>();
 
             if (setupData?.Payload != null)
             {
                 foreach (var listEntity in setupData.Payload.Devices)
                 {
-                    entities.Add(new Device
+                    entities.Add(new EntityDTO
                     {
-                        Data = listEntity.Data,
+                        Platform = "tuya",
                         Name = listEntity.Name,
                         Icon = listEntity.Icon,
-                        Id = listEntity.Id,
-                        DevType = listEntity.DevType,
-                        HaType = listEntity.HaType
-
+                        URL = listEntity.Id,
                     });
                 }
             }
