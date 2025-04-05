@@ -11,10 +11,13 @@ namespace AuthAPI.Models
     public class Entity
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string UserId { get; set; }
         public int DeviceId { get; set; }
-        public string Name { get; set; }
-        public string Platform { get; set; }
-        public string Icon { get; set; }
+        public string URL { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Platform { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
     }
+
 }

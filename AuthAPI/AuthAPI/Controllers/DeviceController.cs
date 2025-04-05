@@ -5,81 +5,83 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Diagnostics;
+using AuthAPI.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthAPI.Controllers
 {
     [ApiController]
-    [Route("deviceapi/")]
-    public class DeviceController : ControllerBase
+    [Route("api/[controller]")]
+    [Produces("application/json")]
+    [Authorize]
+    public class DevicesController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
 
-        public DeviceController(AppDbContext context, UserManager<User> userManager)
+        public DevicesController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-
-        [HttpPost("addDevice")]
-        [Authorize]
-        [SwaggerOperation(Summary = "Add a new device", Description = "Adds a new device for the authenticated user.")]
-        [SwaggerResponse(200, "Device added successfully", typeof(Device))]
-        [SwaggerResponse(400, "Invalid request")]
+        [HttpGet]
+        [SwaggerOperation(Summary = "Get all devices for the authenticated user.")]
+        [SwaggerResponse(200, "List of devices", typeof(IEnumerable<Device>))]
         [SwaggerResponse(401, "Unauthorized")]
-        public async Task<IActionResult> AddDevice([FromBody] Device device)
+        [SwaggerResponse(404, "No devices found")]
+        [SwaggerResponse(500, "Internal server error")]
+        [ProducesResponseType(typeof(IEnumerable<Device>), 200)]
+        public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
-            if (device == null)
-            {
-                return BadRequest("Device data is required.");
-            }
-
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-            {
-                return Unauthorized("User not found.");
-            }
+            return await _context.Devices
+                .Include(d => d.Entities)
+                .Where(d => d.UserId == userId)
+                .ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Device>> AddDevice(AddDevice model)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
 
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return Unauthorized("User not found.");
-            }
+            if (user == null) return Unauthorized();
 
-            device.UserId = userId;
-
-            if (device.Platform == "tuya")
+            var device = new Device
             {
-                var tuyaDevice = new TuyaDevice
+                Name = model.Name,
+                Platform = model.Platform,
+                CreationTime = DateTime.UtcNow.ToString("o"),
+                UserId = user.Id,
+                Entities = model.Entities?.Select(e => new Entity
                 {
-                    Id = device.Id,
-                    CreationTime = device.CreationTime,
-                    Platform = device.Platform,
-                    UserId = device.UserId,
-                    Entities = device.Entities
-                };
+                    URL = e.URL,
+                    Name = e.Name,
+                    Platform = e.Platform,
+                    Icon = e.Icon,
+                    UserId = user.Id
+                }).ToList()
+            };
 
-                _context.TuyaDevices.Add(tuyaDevice);
-            }
-            else if (device.Platform == "somfy")
-            {
-                var somfyDevice = device as SomfyDevice;
-                if (somfyDevice == null)
-                {
-                    return BadRequest("Invalid Somfy device data.");
-                }
-                _context.SomfyDevices.Add(somfyDevice);
-            }
-            else
-            {
-                return BadRequest("Unknown device type.");
-            }
-
-            user.Devices.Add(device);
+            _context.Devices.Add(device);
             await _context.SaveChangesAsync();
-            return Ok(device.Id);
+
+            return CreatedAtAction(nameof(GetDevices), new { id = device.Id }, device);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDevice(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var device = await _context.Devices.FirstOrDefaultAsync(d => d.Id == id && d.UserId == userId);
+            if (device == null) return NotFound();
+
+            _context.Devices.Remove(device);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

@@ -27,9 +27,8 @@ namespace AuthAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DeviceType")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
@@ -44,17 +43,14 @@ namespace AuthAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Device");
-
-                    b.HasDiscriminator<string>("DeviceType").HasValue("Device");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("AuthAPI.Models.Entity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("DeviceId")
                         .HasColumnType("INTEGER");
@@ -68,6 +64,14 @@ namespace AuthAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -276,24 +280,6 @@ namespace AuthAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.SomfyDevice", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Device");
-
-                    b.Property<string>("GatewayId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("Somfy");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaDevice", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Device");
-
-                    b.HasDiscriminator().HasValue("Tuya");
                 });
 
             modelBuilder.Entity("AuthAPI.Models.Device", b =>

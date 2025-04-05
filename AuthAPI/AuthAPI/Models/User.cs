@@ -6,6 +6,6 @@ namespace AuthAPI.Models
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public List<Device> Devices { get; set; } = new();
+        public ICollection<Device> Devices { get; set; } = new List<Device>();
     }
 }

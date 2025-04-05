@@ -7,17 +7,11 @@ namespace AuthAPI.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public string CreationTime { get; set; }
-        public string Platform { get; set; }
-
+        public string Name { get; set; } = string.Empty;
+        public string CreationTime { get; set; } = string.Empty;
+        public string Platform { get; set; } = string.Empty;
         public string UserId { get; set; }
-
-        public List<Entity> Entities { get; set; } = new();
-
-        public override string ToString()
-        {
-            return $"{Id} - {CreationTime} - {Platform} - {UserId}";
-        }
+        public ICollection<Entity> Entities { get; set; } = new List<Entity>();
     }
+
 }

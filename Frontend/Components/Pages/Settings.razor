@@ -97,9 +97,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        userModel.Email = await getUserInfos.GetEmail();
-        userModel.Name = await getUserInfos.GetName();
-
         language = await SecureStorage.GetAsync("selectedCulture");
 
         theme = await SecureStorage.GetAsync("selectedTheme") ?? "light";
@@ -143,7 +140,6 @@
         }
     }
 
-    [Inject] private UserInfoService getUserInfos { get; set; }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }

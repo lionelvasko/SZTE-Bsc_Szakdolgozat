@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250330181116_DevicesAndEntities")]
-    partial class DevicesAndEntities
+    [Migration("20250405134905_DeviceAndEntityFix-2")]
+    partial class DeviceAndEntityFix2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,9 +30,8 @@ namespace AuthAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("DeviceType")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(8)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
@@ -47,19 +46,16 @@ namespace AuthAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Device");
-
-                    b.HasDiscriminator<string>("DeviceType").HasValue("Device");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("AuthAPI.Models.Entity", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DeviceId")
+                    b.Property<int>("DeviceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Icon")
@@ -71,6 +67,14 @@ namespace AuthAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("URL")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -281,40 +285,22 @@ namespace AuthAPI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AuthAPI.Models.SomfyDevice", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Device");
-
-                    b.Property<string>("GatewayId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasDiscriminator().HasValue("Somfy");
-                });
-
-            modelBuilder.Entity("AuthAPI.Models.TuyaDevice", b =>
-                {
-                    b.HasBaseType("AuthAPI.Models.Device");
-
-                    b.HasDiscriminator().HasValue("Tuya");
-                });
-
             modelBuilder.Entity("AuthAPI.Models.Device", b =>
                 {
-                    b.HasOne("AuthAPI.Models.User", "User")
+                    b.HasOne("AuthAPI.Models.User", null)
                         .WithMany("Devices")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AuthAPI.Models.Entity", b =>
                 {
                     b.HasOne("AuthAPI.Models.Device", null)
                         .WithMany("Entities")
-                        .HasForeignKey("DeviceId");
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

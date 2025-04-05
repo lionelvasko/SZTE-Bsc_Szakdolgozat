@@ -5,28 +5,27 @@
 namespace AuthAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class DevicesAndEntities : Migration
+    public partial class AddedDevicesAndEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Device",
+                name: "Devices",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     CreationTime = table.Column<string>(type: "TEXT", nullable: false),
                     Platform = table.Column<string>(type: "TEXT", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    DeviceType = table.Column<string>(type: "TEXT", maxLength: 8, nullable: false),
-                    GatewayId = table.Column<string>(type: "TEXT", nullable: true)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Device", x => x.Id);
+                    table.PrimaryKey("PK_Devices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Device_AspNetUsers_UserId",
+                        name: "FK_Devices_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -38,30 +37,44 @@ namespace AuthAPI.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    URL = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Platform = table.Column<string>(type: "TEXT", nullable: false),
-                    Icon = table.Column<string>(type: "TEXT", nullable: false),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Icon = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Entities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Entities_Device_DeviceId",
+                        name: "FK_Entities_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Entities_Devices_DeviceId",
                         column: x => x.DeviceId,
-                        principalTable: "Device",
-                        principalColumn: "Id");
+                        principalTable: "Devices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Device_UserId",
-                table: "Device",
+                name: "IX_Devices_UserId",
+                table: "Devices",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entities_DeviceId",
                 table: "Entities",
                 column: "DeviceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entities_UserId",
+                table: "Entities",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -71,7 +84,7 @@ namespace AuthAPI.Migrations
                 name: "Entities");
 
             migrationBuilder.DropTable(
-                name: "Device");
+                name: "Devices");
         }
     }
 }

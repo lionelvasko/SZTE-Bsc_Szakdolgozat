@@ -311,8 +311,8 @@
         {
             try
             {
-                await DeviceService.GenerateSomfyTokens(email, password, homeURL);
-                var device = await DeviceService.AddSomfyDeviceAsync();
+                await AddDeviceService.GenerateSomfyTokens(email, password, homeURL);
+                var device = await AddDeviceService.AddSomfyDeviceAsync();
                 devices.Add(device);
                 foreach (var entity in device.Entities)
                 {
@@ -328,8 +328,8 @@
         {
             try
             {
-                await DeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
-                var device = await DeviceService.AddTuyaDeviceAsync();
+                await AddDeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
+                var device = await AddDeviceService.AddTuyaDeviceAsync();
                 devices.Add(device);
                 foreach (var entity in device.Entities)
                 {
@@ -343,46 +343,6 @@
         }
     }
 
-    private async Task LoadFromPreferences()
-    {
-        var tuyaToken = await SecureStorage.GetAsync("tuya_token");
-        var tuyaRefreshToken = await SecureStorage.GetAsync("tuya_refresh_token");
-        var tuyaRegion = await SecureStorage.GetAsync("tuya_region");
-        var somfyToken = await SecureStorage.GetAsync("somfy_token");
-        var somfyUrl = await SecureStorage.GetAsync("somfy_url");
-
-        if (!string.IsNullOrEmpty(tuyaToken) && !string.IsNullOrEmpty(tuyaRefreshToken))
-        {
-            DeviceService.UpdateApiServiceTokensTuya(tuyaToken, tuyaRefreshToken, tuyaRegion);
-            var device = await DeviceService.AddTuyaDeviceAsync();
-            devices.Add(device);
-            foreach (var entity in device.Entities)
-            {
-                entities.Add(entity);
-            }
-
-        }
-        if (!string.IsNullOrEmpty(somfyToken))
-        {
-            DeviceService.UpdateApiServiceTokensSomfy(somfyToken, somfyUrl);
-            var device = await DeviceService.AddSomfyDeviceAsync();
-            devices.Add(device);
-            foreach (var entity in device.Entities)
-            {
-                entities.Add(entity);
-            }
-        }
-    }
-
-    protected override async void OnInitialized()
-    {
-        LoadFromPreferences();
-        Debug.WriteLine(await SecureStorage.GetAsync("tuya_token"));
-        Debug.WriteLine(await SecureStorage.GetAsync("tuya_refresh_token"));
-        Debug.WriteLine(await SecureStorage.GetAsync("tuya_region"));
-        Debug.WriteLine(await SecureStorage.GetAsync("somfy_token"));
-        Debug.WriteLine(await SecureStorage.GetAsync("somfy_url"));  
-    }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
 }

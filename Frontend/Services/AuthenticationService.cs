@@ -18,15 +18,13 @@ namespace Szakdoga.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly UserInfoService _userInfoService;
         public readonly static string JWT_AUTH_TOKEN = "jwt_auth_token";
         public readonly static string REMEMBER_ME_KEY = "remember_me";
 
-        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, UserInfoService userInfoService)
+        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
         {
             _httpClient = httpClient;
             _authenticationStateProvider = authenticationStateProvider;
-            _userInfoService = userInfoService;
         }
 
         public async Task<HttpResponseMessage> LoginAsync(string email, string password, bool rememberMe)
@@ -51,10 +49,6 @@ namespace Szakdoga.Services
 
             await SecureStorage.SetAsync(REMEMBER_ME_KEY, rememberMe.ToString());
             await SecureStorage.SetAsync(JWT_AUTH_TOKEN, token);
-
-            var user = DecodeJwtToken(token);
-            _userInfoService.StroreName(user.FirstOrDefault(c => c.Type == "unique_name")?.Value);
-            _userInfoService.StroreEmail(user.FirstOrDefault(c => c.Type == "email")?.Value);
 
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
 
@@ -88,8 +82,6 @@ namespace Szakdoga.Services
             _httpClient.DefaultRequestHeaders.Authorization = null;
             SecureStorage.Default.Remove(JWT_AUTH_TOKEN);
             SecureStorage.Default.Remove(REMEMBER_ME_KEY);
-            SecureStorage.Default.Remove(UserInfoService.NAME_KEY);
-            SecureStorage.Default.Remove(UserInfoService.EMAIL_KEY);
             SecureStorage.Default.Remove("tuya_token");
             SecureStorage.Default.Remove("tuya_refresh_token");
             SecureStorage.Default.Remove("tuya_region");

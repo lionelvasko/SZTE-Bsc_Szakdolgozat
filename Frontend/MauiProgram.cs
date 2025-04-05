@@ -23,7 +23,6 @@ namespace Szakdoga
             builder.Services.AddSingleton<TuyaApiService>();
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddScoped<AuthenticationService>();
-            builder.Services.AddScoped<UserInfoService>();
 
             builder.Services.AddLocalization();
             builder.Services.AddSingleton<LocalizationService>();

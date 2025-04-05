@@ -1,4 +1,5 @@
-﻿using AuthAPI.Models;
+﻿using AuthAPI.DTOs;
+using AuthAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -71,7 +72,7 @@ namespace AuthAPI.Controllers
             }
 
             var token = GenerateJwtToken(user);
-            return Ok(new { Token = token });
+            return Ok(token);
         }
 
 

@@ -10,25 +10,25 @@
             <DataAnnotationsValidator />
             <div class="mb-3">
                 <label for="firstname" class="form-label">@Localizer["First name"]</label>
-                <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="@Localizer["Enter your first name"]" class="form-control bg-transparent text-white" />
+                <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="@Localizer["Enter your first name"]" class="form-control bg-transparent text-info" />
             </div>
             <div class="mb-3">
                 <label for="lastname" class="form-label">@Localizer["First name"]</label>
-                <input type="text" id="lastname" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-white" />
+                <input type="text" id="lastname" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-info" />
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">@Localizer["Email address"]</label>
-                <input type="email" id="email" @bind="registerModel.Email" placeholder="@Localizer["Enter your email address"]" class="form-control bg-transparent text-white" />
+                <input type="email" id="email" @bind="registerModel.Email" placeholder="@Localizer["Enter your email address"]" class="form-control bg-transparent text-info" />
                 <ValidationMessage For="@(() => registerModel.Email)" />
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">@Localizer["Password"]</label>
-                <input type="password" id="password" @bind="registerModel.Password" placeholder="@Localizer["Enter your password"]" class="form-control bg-transparent text-white" />
+                <input type="password" id="password" @bind="registerModel.Password" placeholder="@Localizer["Enter your password"]" class="form-control bg-transparent text-info" />
                 <ValidationMessage For="@(() => registerModel.Password)" />
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">@Localizer["Confirm password"]</label>
-                <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="@Localizer["Enter your password again"]" class="form-control bg-transparent text-white" />
+                <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="@Localizer["Enter your password again"]" class="form-control bg-transparent text-info" />
             </div>
             <button type="submit" class="btn btn-primary w-100 shadow-sm">@Localizer["Register"]</button>
         </EditForm>
