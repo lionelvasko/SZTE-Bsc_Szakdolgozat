@@ -1,0 +1,12 @@
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\bin\Debug\net9.0\TuyaAPI.deps.json
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\bin\Debug\net9.0\TuyaAPI.dll
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\bin\Debug\net9.0\TuyaAPI.pdb
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.AssemblyInfoInputs.cache
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.AssemblyInfo.cs
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.csproj.CoreCompileInputs.cache
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.sourcelink.json
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.dll
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\refint\TuyaAPI.dll
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\TuyaAPI.pdb
+D:\SZTE-Bsc_Szakdolgozat\TuyaAPI\TuyaAPI\obj\Debug\net9.0\ref\TuyaAPI.dll

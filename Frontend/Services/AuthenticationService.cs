@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -36,12 +38,13 @@ namespace Szakdoga.Services
             };
 
             var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/authapi/login", content);
-
+            var response = await _httpClient.PostAsync("http://localhost:5223/api/login", content);
             if (!response.IsSuccessStatusCode)
                 return response;
 
             string token = await response.Content.ReadAsStringAsync();
+
+            Debug.WriteLine(token);
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -50,6 +53,7 @@ namespace Szakdoga.Services
 
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
 
+            response.Content.Dispose();
             return response;
         }
 
@@ -66,7 +70,7 @@ namespace Szakdoga.Services
                 };
 
                 var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("http://localhost:5223/authapi/register", content);
+                var response = await _httpClient.PostAsync("http://localhost:5223/api/register", content);
                 return response;
             }
             catch (Exception ex)
@@ -87,30 +91,5 @@ namespace Szakdoga.Services
             SecureStorage.Default.Remove("somfy_url");
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
-
-        /*
-        public async Task SetTokens()
-        {
-            var tuyaAccesToken = await SecureStorage.GetAsync("tuya_token");
-            var somfyAccesToken = await SecureStorage.GetAsync("somfy_token");
-            var tuyaRefreshToken = await SecureStorage.GetAsync("tuya_refresh_token");
-
-            var authToken = await SecureStorage.GetAsync(JWT_AUTH_TOKEN);
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
-
-
-            if (tuyaAccesToken != null)
-            {
-                var content = new StringContent(JsonSerializer.Serialize(new { AccessToken = tuyaAccesToken, RefreshToken = tuyaRefreshToken }), Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("http://localhost:5223/authapi/tokens/tuya", content);
-            }
-            else if (somfyAccesToken != null)
-            {
-                var content = new StringContent(JsonSerializer.Serialize(new { AccessToken = somfyAccesToken, RefreshToken = "" }), Encoding.UTF8, "application/json");
-                await _httpClient.PostAsync("http://localhost:5223/authapi/tokens/somfy", content);
-            }
-        }
-        */
     }
 }

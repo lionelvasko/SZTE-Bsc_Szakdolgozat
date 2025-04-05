@@ -59,22 +59,15 @@
 
     public async Task Submit()
     {
-        try
+        var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe);
+        if (!response.IsSuccessStatusCode)
         {
-            var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe);
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                var jwtResponse = JsonSerializer.Deserialize<LoginResponse>(jsonResponse);
-                string token = jwtResponse.Token;
-            }
-            ModalMessage = response.Content.ReadAsStringAsync().Result;
+            ModalMessage = await response.Content.ReadAsStringAsync();
             ShowModal = true;
         }
-        catch (Exception ex)
+        else
         {
-            ModalMessage = $"Error: {ex.Message}";
-            ShowModal = true;
+            NavigationManager.NavigateTo("/");
         }
     }
 
