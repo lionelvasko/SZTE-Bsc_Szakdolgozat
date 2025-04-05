@@ -32,18 +32,47 @@ namespace AuthAPI.Controllers
         [SwaggerResponse(404, "No devices found")]
         [SwaggerResponse(500, "Internal server error")]
         [ProducesResponseType(typeof(IEnumerable<Device>), 200)]
-        public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
+        public async Task<ActionResult<IEnumerable<DeviceDTO>>> GetDevices()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return await _context.Devices
+            var devices = await _context.Devices
                 .Include(d => d.TuyaEntities)
                 .Include(d => d.SomfyEntities)
                 .Where(d => d.UserId == userId)
                 .ToListAsync();
+            if (devices == null || !devices.Any()) return NotFound();
+            var deviceDTOs = devices.Select(d => new DeviceDTO
+            {
+                Name = d.Name,
+                CreationTime = d.CreationTime,
+                Platform = d.Platform,
+                TuyaEntities = [.. d.TuyaEntities.Select(te => new TuyaEntityDTO
+                {
+                    Name = te.Name,
+                    URL = te.URL,
+                    Platform = te.Platform,
+                    Icon = te.Icon,
+                    AccessToken = te.AccessToken,
+                    RefreshToken = te.RefreshToken,
+                    Region = te.Region
+                })],
+                SomfyEntities = [.. d.SomfyEntities.Select(se => new SomfyEntityDTO
+                {
+                    Name = se.Name,
+                    URL = se.URL,
+                    Platform = se.Platform,
+                    Icon = se.Icon,
+                    BaseUrl = se.BaseUrl,
+                    GatewayPin = se.GatewayPin,
+                    SessionId = se.SessionId,
+                    Token = se.Token
+                })]
+            }).ToList();
+            return Ok(deviceDTOs);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Device>> AddDevice(AddDevice model)
+        public async Task<ActionResult<DeviceDTO>> AddDevice(AddDevice model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
@@ -64,7 +93,16 @@ namespace AuthAPI.Controllers
             _context.Devices.Add(device);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetDevices), new { id = device.Id }, device);
+            var deviceDTO = new DeviceDTO
+            {
+                Name = model.Name,
+                Platform = model.Platform,
+                CreationTime = DateTime.UtcNow.ToString(),
+                SomfyEntities = [],
+                TuyaEntities = []
+            };
+
+            return CreatedAtAction(nameof(GetDevices), new { id = device.Id }, deviceDTO);
         }
 
         [HttpDelete("{id}")]

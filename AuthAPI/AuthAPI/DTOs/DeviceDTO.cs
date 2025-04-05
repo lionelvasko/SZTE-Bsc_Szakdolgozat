@@ -5,6 +5,7 @@
         public string Name { get; set; } = string.Empty;
         public string CreationTime { get; set; } = string.Empty;
         public string Platform { get; set; } = string.Empty;
-        public ICollection<EntityDTO> Entities { get; set; } = new List<EntityDTO>();
+        public ICollection<SomfyEntityDTO> SomfyEntities { get; set; } = new List<SomfyEntityDTO>();
+        public ICollection<TuyaEntityDTO> TuyaEntities { get; set; } = new List<TuyaEntityDTO>();
     }
 }
