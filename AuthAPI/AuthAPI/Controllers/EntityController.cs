@@ -1,6 +1,7 @@
 ﻿using AuthAPI.Data;
 using AuthAPI.DTOs;
 using AuthAPI.Models;
+using AuthAPI.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -119,12 +120,14 @@ namespace AuthAPI.Controllers
                 };
                 teDTOs.Add(entity);
             }
+            entities.AddRange(teDTOs);
+            entities.AddRange(seDTOs);
             return Ok(entities);
         }
 
         // Új entitás hozzáadása a device-hoz
         [HttpPost]
-        public async Task<ActionResult<EntityDTO>> AddEntity(int deviceId, AddEntity model)
+        public async Task<ActionResult<EntityDTO>> AddEntity(int deviceId, AddEntityRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userManager.FindByIdAsync(userId);

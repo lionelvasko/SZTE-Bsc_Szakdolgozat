@@ -1,9 +1,9 @@
 ﻿using AuthAPI.Data;
 using AuthAPI.Models;
-using AuthAPI.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using AuthAPI.Requests;
 
 namespace AuthAPI.Controllers
 {
@@ -38,7 +38,7 @@ namespace AuthAPI.Controllers
         }
 
         [HttpPut("user/password")]
-        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordModel model)
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
@@ -53,7 +53,7 @@ namespace AuthAPI.Controllers
         }
 
         [HttpPut("user/name")]
-        public async Task<IActionResult> UpdateName([FromBody] UpdateNameModel model)
+        public async Task<IActionResult> UpdateName([FromBody] UpdateNameRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();

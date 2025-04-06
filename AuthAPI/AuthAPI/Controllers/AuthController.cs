@@ -1,5 +1,5 @@
-﻿using AuthAPI.DTOs;
-using AuthAPI.Models;
+﻿using AuthAPI.Models;
+using AuthAPI.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +29,7 @@ namespace AuthAPI.Controllers
 
         // Register User
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
         {
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null)
@@ -57,7 +57,7 @@ namespace AuthAPI.Controllers
 
         // Login User
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginModel model)
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
@@ -91,8 +91,6 @@ namespace AuthAPI.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Name, $"{user.LastName} {user.FirstName}".Trim()),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

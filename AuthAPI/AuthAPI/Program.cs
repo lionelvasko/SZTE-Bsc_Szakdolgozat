@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System.Text;
 
 namespace AuthAPI
@@ -15,15 +16,15 @@ namespace AuthAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Get secret key from config
+            // Secret Key
             var secretKey = builder.Configuration["Jwt:Key"];
             var key = Encoding.ASCII.GetBytes(secretKey ?? throw new InvalidOperationException("JWT key not found in configuration"));
 
-            // Add DbContext
+            // DbContext
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configure Identity
+            // Identity
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -32,7 +33,7 @@ namespace AuthAPI
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Configure JWT Auth
+            // JWT Auth
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -91,7 +92,13 @@ namespace AuthAPI
             });
 
             // Controllers
-            builder.Services.AddControllers();
+            builder.Services
+                .AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+                });
+
 
             // CORS
             builder.Services.AddCors(options =>

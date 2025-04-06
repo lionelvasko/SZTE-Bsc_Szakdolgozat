@@ -11,6 +11,5 @@
 /AuthAPI/AuthAPI/obj
 *.db-shm
 *.db-wal
-
 /TuyaAPI/TuyaAPI/obj/Debug/net9.0/TuyaAPI.sourcelink.json
 /TuyaAPI/TuyaAPI/obj

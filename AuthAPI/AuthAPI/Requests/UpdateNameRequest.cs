@@ -1,6 +1,6 @@
-﻿namespace AuthAPI.DTOs
+﻿namespace AuthAPI.Requests
 {
-    public class UpdateNameModel
+    public class UpdateNameRequest
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,14 +1,14 @@
 ﻿using AuthAPI.Models;
 using Microsoft.Build.Framework;
 
-namespace AuthAPI.DTOs
+namespace AuthAPI.Requests
 {
-    public class AddDevice
+    public class AddDeviceRequest
     {
         [Required]
         public string Name { get; set; } = string.Empty;
         [Required]
         public string Platform { get; set; } = string.Empty;
-        public List<AddEntity> Entities { get; set; } = new List<AddEntity>();
+        public List<AddEntityRequest> Entities { get; set; } = new List<AddEntityRequest>();
     }
 }

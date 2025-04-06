@@ -7,6 +7,7 @@ using System.Security.Claims;
 using Swashbuckle.AspNetCore.Annotations;
 using AuthAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
+using AuthAPI.Requests;
 
 namespace AuthAPI.Controllers
 {
@@ -72,7 +73,7 @@ namespace AuthAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DeviceDTO>> AddDevice(AddDevice model)
+        public async Task<ActionResult<DeviceDTO>> AddDevice(AddDeviceRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
