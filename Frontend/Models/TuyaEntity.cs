@@ -8,10 +8,8 @@ namespace Szakdoga.Models
 {
     internal class TuyaEntity : Entity
     {
-        internal string Brightness { get; set; }
-        internal string ColorMode { get; set; }
-        internal bool Online { get; set; }
-        internal string State { get; set; }
-        internal int ColorTemp { get; set; }
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
+        public string Region { get; set; }
     }
 }

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Szakdoga", "Frontend\Szakdoga.csproj", "{6C9A5D15-CE2D-4949-8629-0C5BF2EEFBC7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1EA2EC63-3227-47E1-91EF-7DD6DC235A62} = {1EA2EC63-3227-47E1-91EF-7DD6DC235A62}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomfyAPI", "SomfyAPI\SomfyAPI.csproj", "{E6C20271-755E-41D9-847D-B4BE0C273FBB}"
 EndProject

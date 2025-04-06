@@ -76,8 +76,8 @@
                         <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;" @onclick="() => ShowDeviceDetails(device)">
                             <div class="card-body">
                                 <h5 class="card-title">@device.Platform</h5>
-                                <h5 class="card-title">@device.Creation_Time</h5>
-                                <h5 class="card-title">@device.Email</h5>
+                                <h5 class="card-title">@device.CreationTime</h5>
+                                <h5 class="card-title">@device.Name</h5>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,9 @@
                             </select>
                             @if (selectedApiType == "online")
                             {
-                                        <label for="homeURL" class="mt-2">@Localizer["Region"]:</label>
+                                <label for="somfyDeviceName">@Localizer["Device name"]:</label>
+                                <input type="text" class="form-control" id="somfyDeviceName" @bind="somfyDeviceName" placeholder="@Localizer["Enter device name"]" />
+                                <label for="homeURL" class="mt-2">@Localizer["Region"]:</label>
                                 <select class="form-control" id="homeURL" @bind="homeURL">
                                     <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
@@ -136,16 +138,18 @@
                         <div class="tab-content" id="apiTabContent">
                             <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
                                 <h5>Tuya @Localizer["Device form"]</h5>
-                                    <label for="region" class="mt-2">@Localizer["Region"]:</label>
+                                <label for="tuyaDeviceName">@Localizer["Device name"]:</label>
+                                <input type="text" class="form-control" id="tuyaDeviceName" @bind="tuyaDeviceName" placeholder="@Localizer["Enter device name"]" />
+                                <label for="region" class="mt-2">@Localizer["Region"]:</label>
                                 <select class="form-control" id=" " @bind="region">
-                                        <option value="" disabled selected>@Localizer["Select a region"]</option>
+                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="44">EU</option>
                                     <option value="1">US</option>
                                     <option value="86">CN</option>
                                 </select>
-                                        <label for="username">@Localizer["Username"]</label>
-                                    <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" />
-                                    <label for="tuyaPassword">@Localizer["Password"]:</label>
+                                <label for="username">@Localizer["Username"]</label>
+                                <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" />
+                                <label for="tuyaPassword">@Localizer["Password"]:</label>
                                 <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Enter your password"]" />
                             </div>
                         </div>
@@ -190,15 +194,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">@selectedDevice.Platform</h5>
-                    <h5 class="modal-title">@selectedDevice.Email</h5>
+                    <h5 class="modal-title">@selectedDevice.CreationTime</h5>
+                    <h5 class="modal-title">@selectedDevice.Name</h5>
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
                     @if(selectedDevice.Platform == "Somfy")
                     {
-                        var somfyDevice = selectedDevice as SomfyDevice;
-                        <p><strong>Device Id:</strong> @somfyDevice.Id</p>
-                        <p><strong>Device Gateway Id:</strong> @somfyDevice.GatewayId</p>
+                        var somfyDevice = selectedDevice as Models.Device;
+                        <p><strong>Device Name:</strong> @somfyDevice.Name</p>
+                        <p><strong>Device Paltform:</strong> @somfyDevice.Platform</p>
+                        <p><strong>Device Entity Count:</strong> @somfyDevice.SomfyEntities.Count()</p>
                     }
                 </div>
                 <div class="modal-footer">
@@ -214,9 +220,6 @@
     private int activeTab = 1;  
     private int modalActiveTab = 1;
 
-    private string tahomaDeviceName;
-    private string tuyaDeviceName;
-
     private bool showEntityDetailsModal = false;
     private bool showDeviceDetailsModal = false;
     private bool showAddDeviceModal = false;
@@ -226,11 +229,13 @@
     private Models.Entity selectedEntity;
     private Models.Device selectedDevice;
 
-    private string tuyaName;
     private string tuyaStatus = "Active";
 
     private List<Models.Entity> entities = new();
     private List<Models.Device> devices = new();
+
+    private string somfyDeviceName;
+    private string tuyaDeviceName;
 
     private string homeURL;
     private string gatewayPin;
@@ -312,9 +317,9 @@
             try
             {
                 await AddDeviceService.GenerateSomfyTokens(email, password, homeURL);
-                var device = await AddDeviceService.AddSomfyDeviceAsync();
+                var device = await AddDeviceService.AddSomfyDeviceAsync(somfyDeviceName);
                 devices.Add(device);
-                foreach (var entity in device.Entities)
+                foreach (var entity in device.SomfyEntities)
                 {
                     entities.Add(entity);
                 }
@@ -329,9 +334,9 @@
             try
             {
                 await AddDeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
-                var device = await AddDeviceService.AddTuyaDeviceAsync();
+                var device = await AddDeviceService.AddTuyaDeviceAsync(tuyaDeviceName);
                 devices.Add(device);
-                foreach (var entity in device.Entities)
+                foreach (var entity in device.TuyaEntities)
                 {
                     entities.Add(entity);
                 }

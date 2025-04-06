@@ -18,7 +18,7 @@
                 <ValidationMessage For="@(() => loginModel.Password)" />    
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" id="rememberMe" @bind="loginModel.RememberMe" class="form-check-input" />
+                <input type="checkbox" id="rememberMe" @bind="rememberMe" class="form-check-input" />
                 <label for="rememberMe" class="form-check-label">@Localizer["Remember me"]</label>
             </div>
 
@@ -52,14 +52,16 @@
 }
 
 @code {
-    private LoginModel loginModel = new LoginModel();
+    private LoginRequest loginModel = new LoginRequest();
     private bool ShowModal { get; set; }
     private string ModalMessage { get; set; }
+
+    private bool rememberMe = false;
 
 
     public async Task Submit()
     {
-        var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, loginModel.RememberMe);
+        var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, rememberMe);
         if (!response.IsSuccessStatusCode)
         {
             ModalMessage = await response.Content.ReadAsStringAsync();

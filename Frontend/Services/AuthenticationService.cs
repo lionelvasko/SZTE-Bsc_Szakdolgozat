@@ -1,18 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Szakdoga.Models;
+using Szakdoga.Requests;
+
 
 namespace Szakdoga.Services
 {
@@ -57,7 +49,7 @@ namespace Szakdoga.Services
             return response;
         }
 
-        public async Task<HttpResponseMessage> RegisterAsync(RegisterModel registerModel)
+        public async Task<HttpResponseMessage> RegisterAsync(RegisterRequest registerModel)
         {
             try
             {

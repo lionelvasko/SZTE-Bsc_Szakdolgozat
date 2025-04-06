@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using AuthAPI.Requests;
+using AuthAPI.DTOs;
 
 namespace AuthAPI.Controllers
 {
@@ -21,19 +22,17 @@ namespace AuthAPI.Controllers
         }
 
         [HttpGet("user")]
-        public async Task<IActionResult> GetUser()
+        public async Task<ActionResult<UserDTO>> GetUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return NotFound();
-            return Ok(new
+            return Ok(new UserDTO
             {
-                user.Id,
-                user.UserName,
-                user.Email,
-                user.FirstName,
-                user.LastName
+                email = user.Email,
+                firstName = user.FirstName,
+                lastName = user.LastName
             });
         }
 

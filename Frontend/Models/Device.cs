@@ -8,10 +8,10 @@ namespace Szakdoga.Models
 {
     internal class Device
     {
-        internal int Id { get; set; }
-        internal string Creation_Time { get; set; }
-        internal string Platform { get; set; }
-        internal string Email { get; set; }
-        internal List<Entity> Entities { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string CreationTime { get; set; } = string.Empty;
+        public string Platform { get; set; } = string.Empty;
+        public ICollection<SomfyEntity> SomfyEntities { get; set; } = new List<SomfyEntity>();
+        public ICollection<TuyaEntity> TuyaEntities { get; set; } = new List<TuyaEntity>();
     }
 }

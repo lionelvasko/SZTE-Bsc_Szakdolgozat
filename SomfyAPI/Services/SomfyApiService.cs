@@ -35,6 +35,20 @@ namespace SomfyAPI.Services
             return _token;
         }
 
+        public string GetSessionId()
+        {
+            return _sessionId;
+        }
+
+        public string GetGatewayPin()
+        {
+            return _gatewayPin;
+        }
+        public string GetToken()
+        {
+            return _token;
+        }
+
         public string GetRegisteredUsername()
         {
             return regiesteredUsername;

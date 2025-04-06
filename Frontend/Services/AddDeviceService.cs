@@ -1,13 +1,14 @@
 ﻿using SomfyAPI.Services;
 using System.Diagnostics;
 using System.Net;
+using Szakdoga.Models;
 using TuyaAPI.Services;
 
 namespace Szakdoga.Services
 {
     internal static class AddDeviceService
     {
-        internal static async Task<Models.Device> AddSomfyDeviceAsync()
+        internal static async Task<Models.Device> AddSomfyDeviceAsync(string addedName)
         {
             try
             {
@@ -17,19 +18,21 @@ namespace Szakdoga.Services
                 Debug.WriteLine(generatedJson);
                 var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
                 var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
-                var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice);
-                convertedDevice.Email = SingletonSomfyApiService.GetRegisteredUsername();
+                var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName, SingletonSomfyApiService);
 
                 foreach (var entity in newEntities)
                 {
-                    var convertedEntity = (Szakdoga.Models.Entity)EntityDeviceConverter.ConvertToEntity(entity);
-                    convertedDevice.Entities.Add(convertedEntity);
+                    var convertedEntity = EntityDeviceConverter.ConvertToEntity(entity, SingletonSomfyApiService);
+                    Debug.WriteLine(entity.ToString());
+                    convertedDevice.SomfyEntities.Add(convertedEntity as SomfyEntity);
                 }
+                Debug.WriteLine(convertedDevice);
                 return convertedDevice;
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine($"Error in AddSomfyDeviceAsync: {ex.Message}");
+                Debug.WriteLine($"Error in AddSomfyDeviceAsync: {ex.Message}");
                 throw;
             }
         }
@@ -45,7 +48,7 @@ namespace Szakdoga.Services
             return new HttpResponseMessage { StatusCode = HttpStatusCode.OK, Content = new StringContent("Login successful") };
         }
 
-        internal static async Task<Models.Device> AddTuyaDeviceAsync()
+        internal static async Task<Models.Device> AddTuyaDeviceAsync(string addedName)
         {
             try
             {
@@ -55,23 +58,25 @@ namespace Szakdoga.Services
                 if (resultDevices == null || !resultDevices.Any())
                 {
                     throw new Exception("No devices found");
+                    Debug.WriteLine("No devices found");
                 }
 
                 var toAddEntites = TuyaAPI.Services.JsonHelper.GetEntitiesFromJson(resultDevices);
 
-                var convertedDevice = EntityDeviceConverter.ConvertToDevice(toAddEntites.First());
-                convertedDevice.Email = SingletonTuyaApiService.GetRegisteredUsername();
+                var convertedDevice = EntityDeviceConverter.ConvertToDevice(toAddEntites.First(), addedName, SingletonTuyaApiService);
 
                 foreach (var entity in toAddEntites)
                 {
-                    var convertedEntity = (Szakdoga.Models.Entity)EntityDeviceConverter.ConvertToEntity(entity);
-                    convertedDevice.Entities.Add(convertedEntity);
+                    var convertedEntity = (Szakdoga.Models.Entity)EntityDeviceConverter.ConvertToEntity(entity, SingletonTuyaApiService);
+                    convertedDevice.TuyaEntities.Add(convertedEntity as TuyaEntity);
                 }
+                Debug.WriteLine(convertedDevice);
                 return convertedDevice;
             }
             catch (Exception ex)
             {
                 Console.Error.WriteLine($"Error in AddTuyaDeviceAsync: {ex.Message}");
+                Debug.WriteLine($"Error in AddTuyaDeviceAsync: {ex.Message}");
                 throw;
             }
         }

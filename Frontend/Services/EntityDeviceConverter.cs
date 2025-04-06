@@ -5,65 +5,62 @@ namespace Szakdoga.Services
 {
     internal static class EntityDeviceConverter
     {
-        internal static Entity ConvertToEntity(object obj)
+        internal static Entity ConvertToEntity(object obj, object ApiCaller)
         {
             var frontendEntities = new List<Entity>();
             if (obj.GetType() == typeof(SomfyAPI.Models.Entity))
             {
+                var service = ApiCaller as SomfyAPI.Services.SomfyApiService;
+
                 var returnEntity = new SomfyEntity();
                 var ent = obj as SomfyAPI.Models.Entity;
                 returnEntity.Id = ent.DeviceURL;
                 returnEntity.Name = ent.Label;
+                returnEntity.Icon = "Resources/Images/somfy_logo.svg";
                 returnEntity.Platform = "Somfy";
+                returnEntity.BaseUrl = service.GetURL();
+                returnEntity.GatewayPin = service.GetURL();
+                returnEntity.SessionId = service.GetSessionId();
+                returnEntity.Token = service.GetToken();
                 return returnEntity;
             }
             else if (obj.GetType() == typeof(TuyaAPI.Models.Device))
             {
+                var service = ApiCaller as TuyaAPI.Services.TuyaApiService;
+
                 var returnEntity = new TuyaEntity();
                 var ent = obj as TuyaAPI.Models.Device;
                 returnEntity.Id = ent.Id;
                 returnEntity.Name = ent.Name;
                 returnEntity.Icon = ent.Icon;
                 returnEntity.Platform = "Tuya";
-                returnEntity.State = ent.Data.State;
-                returnEntity.Brightness = ent.Data.Brightness;
-                returnEntity.ColorMode = ent.Data.ColorMode;
-                returnEntity.ColorTemp = ent.Data.ColorTemp;
-                returnEntity.Online = ent.Data.Online;
+                returnEntity.AccessToken = service.GetAccessToken();
+                returnEntity.RefreshToken = service.GetRefreshToken();
+                returnEntity.Region = service.GetRegion();
 
                 return returnEntity;
             }
             else
             {
-                throw new ArgumentException("Invalid type");
+                throw new ArgumentException("Invalid type in entity convert: wrong type");
             }
         }
 
-        internal static Device ConvertToDevice(object obj)
+        internal static Device ConvertToDevice(object obj, string Name, object ApiCaller)
         {
-            if (obj.GetType() == typeof(SomfyAPI.Models.Device))
+            if (obj.GetType() == typeof(SomfyAPI.Models.Device) || obj.GetType() == typeof(TuyaAPI.Models.Device))
             {
-                var returnDevice = new Models.SomfyDevice();
+                var returnDevice = new Models.Device();
                 var ent = obj as SomfyAPI.Models.Device;
-                returnDevice.Id = ent.Id.ToString();
-                returnDevice.GatewayId = ent.GatewayId;
-                returnDevice.Platform = "Somfy";
-                returnDevice.Entities = new List<Models.Entity>();
-                returnDevice.Creation_Time = CreateTime();
-                return returnDevice;
-            }
-            else if (obj.GetType() == typeof(TuyaAPI.Models.Device))
-            {
-                var returnDevice = new Models.TuyaDevice();
-                var ent = obj as TuyaAPI.Models.Device;
-                returnDevice.Platform = "Tuya";
-                returnDevice.Entities = new List<Models.Entity>();
-                returnDevice.Creation_Time = CreateTime();
+                
+                returnDevice.Name = Name;
+                returnDevice.CreationTime = CreateTime();
+                returnDevice.Platform = obj is SomfyAPI.Models.Device ? "Somfy" : "Tuya";
                 return returnDevice;
             }
             else
             {
-                throw new ArgumentException("Invalid type");
+                throw new ArgumentException("Invalid type in device convert: wrong type");
             }
         }
 
