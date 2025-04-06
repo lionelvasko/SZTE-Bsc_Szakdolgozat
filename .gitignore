@@ -7,5 +7,10 @@
 /SomfyAPI/bin/Debug
 /SomfyAPI/obj
 /AuthAPI/AuthAPI/bin/Debug/net9.0
+/TuyaAPI/TuyaAPI/bin/Debug/net9.0
 /AuthAPI/AuthAPI/obj
-*.json
+*.db-shm
+*.db-wal
+
+/TuyaAPI/TuyaAPI/obj/Debug/net9.0/TuyaAPI.sourcelink.json
+/TuyaAPI/TuyaAPI/obj
