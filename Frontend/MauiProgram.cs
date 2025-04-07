@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using SomfyAPI.Services;
-using TuyaAPI.Services;
-using Szakdoga.Services;
 using System.Globalization;
+using Szakdoga.Services;
+using TuyaAPI.Services;
 namespace Szakdoga
 {
     public static class MauiProgram
@@ -22,6 +22,8 @@ namespace Szakdoga
             builder.Services.AddSingleton<SomfyApiService>();
             builder.Services.AddSingleton<TuyaApiService>();
             builder.Services.AddSingleton<HttpClient>();
+
+            builder.Services.AddScoped<DbService>();
             builder.Services.AddScoped<AuthenticationService>();
 
             builder.Services.AddLocalization();
@@ -38,7 +40,7 @@ namespace Szakdoga
 #endif
 
             var app = builder.Build();
-
+            ServiceHelper.Services = app.Services;
             return app;
         }
 

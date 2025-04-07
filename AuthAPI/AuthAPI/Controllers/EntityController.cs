@@ -22,7 +22,7 @@ namespace AuthAPI.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId && d.UserId == userId);
-            if(device == null) return NotFound();
+            if (device == null) return NotFound();
             if (device.Platform == "Tuya")
             {
                 var tuyaEntities = await context.TuyaEntities
@@ -34,7 +34,7 @@ namespace AuthAPI.Controllers
                 }
 
                 var DTOs = new List<TuyaEntityDTO>();
-                foreach(var tuyaEntity in tuyaEntities)
+                foreach (var tuyaEntity in tuyaEntities)
                 {
                     var entityDTO = new TuyaEntityDTO()
                     {
@@ -53,7 +53,7 @@ namespace AuthAPI.Controllers
             else if (device.Platform == "Somfy")
             {
                 var somfyEntities = await context.SomfyEntities
-                    .Where(e => e.DeviceId == deviceId && e.UserId ==  userId)
+                    .Where(e => e.DeviceId == deviceId && e.UserId == userId)
                     .ToListAsync();
                 var DTOs = new List<SomfyEntityDTO>();
                 foreach (var somfyEntity in somfyEntities)
@@ -69,7 +69,7 @@ namespace AuthAPI.Controllers
                         GatewayPin = somfyEntity.GatewayPin,
                         SessionId = somfyEntity.SessionId
                     };
-                    DTOs .Add(entityDTO);
+                    DTOs.Add(entityDTO);
                 }
                 return Ok(DTOs);
             }
@@ -163,7 +163,7 @@ namespace AuthAPI.Controllers
                 await context.SaveChangesAsync();
                 return CreatedAtAction(nameof(GetDeviceEntities), new { deviceId = device.Id }, DTO);
             }
-            else if (model.Platform == "Somfy") 
+            else if (model.Platform == "Somfy")
             {
                 var entity = new SomfyEntity
                 {
@@ -211,7 +211,7 @@ namespace AuthAPI.Controllers
                 else
                 {
                     context.SomfyEntities.Remove(somfyEntity);
-                }  
+                }
             }
             else
             {

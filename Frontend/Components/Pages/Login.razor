@@ -61,7 +61,7 @@
 
     public async Task Submit()
     {
-        var response = await AuthenticationService.LoginAsync(loginModel.Email, loginModel.Password, rememberMe);
+        var response = await AuthenticationService.LoginAsync(loginModel, rememberMe);
         if (!response.IsSuccessStatusCode)
         {
             ModalMessage = await response.Content.ReadAsStringAsync();

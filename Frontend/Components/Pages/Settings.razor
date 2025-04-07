@@ -41,8 +41,12 @@
                             <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
                         </div>
                         <div class="mb-4">
-                            <label for="name" class="form-label fw-bold">@Localizer["Name"]</label>
-                            <input type="text" class="form-control shadow-sm border-secondary" id="name" @bind="userModel.Name" />
+                            <label for="FirstName" class="form-label fw-bold">@Localizer["Fisrtname"]</label>
+                            <input type="text" class="form-control shadow-sm border-secondary" id="FirstName" @bind="userModel.FirstName" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="LastName" class="form-label fw-bold">@Localizer["lLastname"]</label>
+                            <input type="text" class="form-control shadow-sm border-secondary" id="LastName" @bind="userModel.LastName" />
                         </div>
                         <div class="mb-4">
                             <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
@@ -93,7 +97,7 @@
 
     private string password = null;
 
-    private Szakdoga.Models.UserModel userModel = new Szakdoga.Models.UserModel();
+    private UserModel userModel;
 
     protected override async Task OnInitializedAsync()
     {
@@ -101,6 +105,7 @@
 
         theme = await SecureStorage.GetAsync("selectedTheme") ?? "light";
         ChangeTheme(new ChangeEventArgs { Value = theme });
+        userModel = await DbService.GetUserInfos();
     }
 
     private void SetActiveTab(int tabNumber)
@@ -140,9 +145,11 @@
         }
     }
 
+
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private LocalizationService LocalizationService { get; set; }
     [Inject] private ThemeChangingService ThemeChangingService { get; set; }
+    [Inject] private DbService DbService { get; set; }
 }

@@ -62,11 +62,11 @@ namespace TuyaAPI.Services
         public void SetUrl(string countryCode)
         {
             region = countryCode;
-            if(countryCode == "1")
+            if (countryCode == "1")
             {
                 _baseUrl.Replace("eu", "us");
             }
-            else if(countryCode == "44")
+            else if (countryCode == "44")
             {
                 _baseUrl.Replace("eu", "eu");
             }

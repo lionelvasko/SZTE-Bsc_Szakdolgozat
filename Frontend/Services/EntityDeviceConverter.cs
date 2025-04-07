@@ -52,7 +52,7 @@ namespace Szakdoga.Services
             {
                 var returnDevice = new Models.Device();
                 var ent = obj as SomfyAPI.Models.Device;
-                
+
                 returnDevice.Name = Name;
                 returnDevice.CreationTime = CreateTime();
                 returnDevice.Platform = obj is SomfyAPI.Models.Device ? "Somfy" : "Tuya";

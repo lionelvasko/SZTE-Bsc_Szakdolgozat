@@ -75,7 +75,7 @@
             return;
         }
 
-        var response = await AuthenticationService.RegisterAsync(registerModel);
+        var response = await DbService.Register(registerModel);
         ModalMessage = await response.Content.ReadAsStringAsync();
         ShowModal = true;
     }
@@ -92,6 +92,6 @@
     [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
-    [Inject] private AuthenticationService AuthenticationService { get; set; }
+    [Inject] private DbService DbService { get; set; }
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
 }

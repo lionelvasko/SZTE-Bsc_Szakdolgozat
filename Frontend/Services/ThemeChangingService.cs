@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Szakdoga.Services
+﻿namespace Szakdoga.Services
 {
-    using Microsoft.JSInterop;
-
     public class ThemeChangingService
     {
         private const string ThemeKey = "AppTheme";

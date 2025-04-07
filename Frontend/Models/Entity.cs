@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Szakdoga.Models
+﻿namespace Szakdoga.Models
 {
-    internal class Entity
+    public class Entity
     {
-        internal string Id { get; set; }
-        internal string Name { get; set; }
-        internal string Platform { get; set; }
-        internal string Icon { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Platform { get; set; }
+        public string Icon { get; set; }
     }
 }

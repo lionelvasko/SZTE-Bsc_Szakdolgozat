@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using System.Diagnostics;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
+using System.Security.Claims;
 using Szakdoga.Requests;
 
 
@@ -12,30 +11,24 @@ namespace Szakdoga.Services
     {
         private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly DbService _dbService;
         public readonly static string JWT_AUTH_TOKEN = "jwt_auth_token";
         public readonly static string REMEMBER_ME_KEY = "remember_me";
+        private ClaimsPrincipal _user = new ClaimsPrincipal(new ClaimsIdentity());
 
-        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider)
+        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, DbService dbServcice)
         {
             _httpClient = httpClient;
             _authenticationStateProvider = authenticationStateProvider;
+            _dbService = dbServcice;
         }
 
-        public async Task<HttpResponseMessage> LoginAsync(string email, string password, bool rememberMe)
+        public async Task<HttpResponseMessage> LoginAsync(LoginRequest request, bool rememberMe)
         {
-            var loginData = new
-            {
-                Email = email,
-                Password = password
-            };
-
-            var content = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/login", content);
+            var response = await _dbService.Login(request);
             if (!response.IsSuccessStatusCode)
                 return response;
-
             string token = await response.Content.ReadAsStringAsync();
-
             Debug.WriteLine(token);
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -47,28 +40,6 @@ namespace Szakdoga.Services
 
             response.Content.Dispose();
             return response;
-        }
-
-        public async Task<HttpResponseMessage> RegisterAsync(RegisterRequest registerModel)
-        {
-            try
-            {
-                var registerData = new
-                {
-                    Email = registerModel.Email,
-                    Password = registerModel.Password,
-                    FirstName = registerModel.FirstName,
-                    LastName = registerModel.LastName
-                };
-
-                var content = new StringContent(JsonSerializer.Serialize(registerData), Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("http://localhost:5223/api/register", content);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                return new HttpResponseMessage { StatusCode = System.Net.HttpStatusCode.Unauthorized, Content = new StringContent(ex.Message) };
-            }
         }
 
         public void Logout()
@@ -83,5 +54,6 @@ namespace Szakdoga.Services
             SecureStorage.Default.Remove("somfy_url");
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
+
     }
 }

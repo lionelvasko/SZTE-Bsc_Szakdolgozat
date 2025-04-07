@@ -1,11 +1,9 @@
 ﻿using AuthAPI.Models;
 using AuthAPI.Requests;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text;
 
@@ -81,7 +79,7 @@ namespace AuthAPI.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(SECRET_KEY);
 
-            if(user.Email is null || user.FirstName is null || user.LastName is null)
+            if (user.Email is null || user.FirstName is null || user.LastName is null)
             {
                 return null;
             }

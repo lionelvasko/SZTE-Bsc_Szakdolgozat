@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Localization;
-using Microsoft.JSInterop;
+﻿using System.Globalization;
+using System.Net.Http.Headers;
 using Szakdoga.Resources.Localization;
 using Szakdoga.Services;
 
@@ -35,6 +35,23 @@ namespace Szakdoga
                     SecureStorage.Default.Remove("somfy_token");
                     SecureStorage.Default.Remove("somfy_url");
                     SecureStorage.Default.Remove("selectedCulture");
+                }
+            };
+
+            window.Created += async (s, e) =>
+            {
+                string? selectedCulture = await SecureStorage.GetAsync("selectedCulture");
+                if (string.IsNullOrEmpty(selectedCulture))
+                {
+                    selectedCulture = "en-US";
+                }
+                CultureInfo cultureInfo = new CultureInfo(selectedCulture);
+                AppResources.Culture = cultureInfo;
+                string? jwt = await SecureStorage.GetAsync(AuthenticationService.JWT_AUTH_TOKEN);
+                if (!string.IsNullOrEmpty(jwt))
+                {
+                    var client = ServiceHelper.GetService<HttpClient>();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwt);
                 }
             };
 

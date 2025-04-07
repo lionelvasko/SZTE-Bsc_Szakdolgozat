@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Szakdoga.Requests
+﻿namespace Szakdoga.Requests
 {
     public class AddEntityRequest
     {

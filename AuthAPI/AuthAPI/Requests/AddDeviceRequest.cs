@@ -1,5 +1,4 @@
-﻿using AuthAPI.Models;
-using Microsoft.Build.Framework;
+﻿using Microsoft.Build.Framework;
 
 namespace AuthAPI.Requests
 {

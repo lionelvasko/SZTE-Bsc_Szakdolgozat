@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using AuthAPI.Models;
+﻿using AuthAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthAPI.Data
 {

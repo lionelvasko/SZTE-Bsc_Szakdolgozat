@@ -1,14 +1,14 @@
 ﻿using AuthAPI.Data;
+using AuthAPI.DTOs;
 using AuthAPI.Models;
+using AuthAPI.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using AuthAPI.Requests;
-using AuthAPI.DTOs;
 
 namespace AuthAPI.Controllers
 {
-    [Route("api/")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -21,7 +21,7 @@ namespace AuthAPI.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("user")]
+        [HttpGet]
         public async Task<ActionResult<UserDTO>> GetUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -36,7 +36,7 @@ namespace AuthAPI.Controllers
             });
         }
 
-        [HttpPut("user/password")]
+        [HttpPut("Password")]
         public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -51,7 +51,7 @@ namespace AuthAPI.Controllers
             return Ok("Password updated successfully.");
         }
 
-        [HttpPut("user/name")]
+        [HttpPut("Name")]
         public async Task<IActionResult> UpdateName([FromBody] UpdateNameRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -68,7 +68,7 @@ namespace AuthAPI.Controllers
             return Ok("User name updated successfully.");
         }
 
-        [HttpDelete("user")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteUser()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -82,7 +82,5 @@ namespace AuthAPI.Controllers
             }
             return Ok("User deleted successfully.");
         }
-
-
     }
 }

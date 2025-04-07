@@ -23,47 +23,51 @@
         <div class="tab-pane fade @GetTabClass(1)" id="entities" role="tabpanel" aria-labelledby="entitiesTab">
             <h4 class="mt-4">@Localizer["Entities"]</h4>
             <div class="row g-3">
-                @foreach (var entity in entities)
+                @if(entities != null)
                 {
-                    if(entity.Platform == "Somfy")
+                    foreach (var entity in entities)
                     {
-                        <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
-                                <div class="card-body">
-                                    <div @onclick="() => ShowEntityDetails(entity)">
-                                        <h5 class="card-title">@entity.Name</h5>
-                                    </div>
-                                    <div class="d-flex flex-column gap-2 mt-3">
+                        if (((Models.Entity)entity).Platform == "Somfy")
+                        {
+                            var somfyenetity = entity as Models.SomfyEntity;
+                            <div class="col-12 col-md-4 col-lg-3">
+                                <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
+                                    <div class="card-body">
+                                        <div @onclick="() => ShowEntityDetails(somfyenetity)">
+                                            <h5 class="card-title">@somfyenetity.Name</h5>
+                                        </div>
                                         <div class="d-flex flex-column gap-2 mt-3">
-                                                    <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(entity.Id)">@Localizer["Open"]</button>
-                                                    <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(entity.Id)">@Localizer["Stop"]</button>
-                                                    <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(entity.Id)">@Localizer["Close"]</button>
-                                                    <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(entity.Id)">@Localizer["My position"]</button>
+                                            <div class="d-flex flex-column gap-2 mt-3">
+                                                <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(somfyenetity.Id)">@Localizer["Open"]</button>
+                                                <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(somfyenetity.Id)">@Localizer["Stop"]</button>
+                                                <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(somfyenetity.Id)">@Localizer["Close"]</button>
+                                                <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(somfyenetity.Id)">@Localizer["My position"]</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="col-12 col-md-4 col-lg-3">
-                            <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
-                                <div class="card-body">
-                                    <div @onclick="() => ShowEntityDetails(entity)">
-                                        <h5 class="card-title">@entity.Name</h5>
-                                        <img src="@entity.Icon" alt="@entity.Name" style="width: 100px; height: 100px;" />
-                                    </div>
-                                    <div class="d-flex flex-column gap-2 mt-3">
+                        }
+                        else
+                        {
+                            var tuyaEntity = entity as Models.TuyaEntity;
+                            <div class="col-12 col-md-4 col-lg-3">
+                                <div class="card border-primary shadow-lg rounded bg-transparent" style="cursor: pointer;">
+                                    <div class="card-body">
+                                        <div @onclick="() => ShowEntityDetails(tuyaEntity)">
+                                            <h5 class="card-title">@tuyaEntity.Name</h5>
+                                            <img src="@tuyaEntity.Icon" alt="@tuyaEntity.Name" style="width: 100px; height: 100px;" />
+                                        </div>
                                         <div class="d-flex flex-column gap-2 mt-3">
-                                                    <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(entity.Id, true)">@Localizer["On/Off"]</button>
+                                            <div class="d-flex flex-column gap-2 mt-3">
+                                                <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(tuyaEntity.Id, true)">@Localizer["On/Off"]</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     }
-
                 }
             </div>
         </div>
@@ -246,6 +250,11 @@
     private string region;
     private string tuyaPassword;
 
+    protected override async Task OnInitializedAsync()
+    {
+        entities = await DbService.GetAllEntitesForUser();
+    }
+
     private void ShowEntityDetailsModal(Models.Entity entity)
     {
         selectedEntity = entity;
@@ -350,4 +359,5 @@
 
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
+    [Inject] private DbService DbService { get; set; }
 }

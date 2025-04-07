@@ -1,13 +1,13 @@
-﻿  using AuthAPI.Data;
+﻿using AuthAPI.Data;
+using AuthAPI.DTOs;
 using AuthAPI.Models;
+using AuthAPI.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Swashbuckle.AspNetCore.Annotations;
-using AuthAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
-using AuthAPI.Requests;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Security.Claims;
 
 namespace AuthAPI.Controllers
 {

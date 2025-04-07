@@ -36,7 +36,7 @@ namespace SomfyAPI.Services
                             OID = listEntity.OID,
                             Attributes = listEntity.Attributes
 
-    });
+                        });
                     }
 
                 }
