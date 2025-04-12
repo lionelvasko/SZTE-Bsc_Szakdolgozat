@@ -282,4 +282,16 @@
   <data name="Select language" xml:space="preserve">
     <value>Válasszon nyelvet</value>
   </data>
+  <data name="Region" xml:space="preserve">
+    <value>Régió</value>
+  </data>
+  <data name="Device name" xml:space="preserve">
+    <value>Eszköz neve</value>
+  </data>
+  <data name="API type" xml:space="preserve">
+    <value>API típusa</value>
+  </data>
+  <data name="Enter device name" xml:space="preserve">
+    <value>Adja meg az eszköz nevét</value>
+  </data>
 </root>

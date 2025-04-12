@@ -34,18 +34,18 @@
             @if (activeTab == 1)
             {
                 <div>
-                    <h3 class="text-center text-info mb-4">User Settings</h3>
+                    <h3 class="text-center text-info mb-4">@Localizer["User settings"]</h3>
                     <form>
                         <div class="mb-4">
                             <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
                             <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
                         </div>
                         <div class="mb-4">
-                            <label for="FirstName" class="form-label fw-bold">@Localizer["Fisrtname"]</label>
+                            <label for="FirstName" class="form-label fw-bold">@Localizer["First name"]</label>
                             <input type="text" class="form-control shadow-sm border-secondary" id="FirstName" @bind="userModel.FirstName" />
                         </div>
                         <div class="mb-4">
-                            <label for="LastName" class="form-label fw-bold">@Localizer["lLastname"]</label>
+                            <label for="LastName" class="form-label fw-bold">@Localizer["Last name"]</label>
                             <input type="text" class="form-control shadow-sm border-secondary" id="LastName" @bind="userModel.LastName" />
                         </div>
                         <div class="mb-4">
@@ -59,7 +59,7 @@
             else if (activeTab == 2)
             {
                 <div>
-                    <h3 class="text-center text-info mb-4">@Localizer["Application Settings"]</h3>
+                    <h3 class="text-center text-info mb-4">@Localizer["Settings"]</h3>
                     <form>
                         <div class="mb-4">
                             <label for="theme" class="form-label fw-bold">@Localizer["Theme"]</label>

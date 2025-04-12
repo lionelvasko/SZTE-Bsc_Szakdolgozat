@@ -282,4 +282,16 @@
   <data name="Select language" xml:space="preserve">
     <value>Select language</value>
   </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Device name" xml:space="preserve">
+    <value>Device name</value>
+  </data>
+  <data name="API type" xml:space="preserve">
+    <value>API type</value>
+  </data>
+  <data name="Enter device name" xml:space="preserve">
+    <value>Enter device name</value>
+  </data>
 </root>

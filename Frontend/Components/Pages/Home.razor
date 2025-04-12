@@ -115,7 +115,7 @@
                     <div class="tab-content" id="apiTabContent">
                         <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
                             <h5>Tahoma @Localizer["Device form"]</h5>
-                            <label for="apiType">API Type:</label>
+                            <label for="apiType">@Localizer["API type"]:</label>
                             <select class="form-control" id="apiType" @bind="selectedApiType">
                                 <option value="online">@Localizer["Online"]</option>
                                 <option value="local">@Localizer["Local"]</option>
@@ -162,9 +162,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
+                    @if(selectedApiType == "online"){
+                        <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
+                    }
                     <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>
-                    <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
                 </div>
             </div>
         </div>
