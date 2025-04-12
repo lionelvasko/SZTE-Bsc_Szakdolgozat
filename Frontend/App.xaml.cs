@@ -47,6 +47,8 @@ namespace Szakdoga
                 }
                 CultureInfo cultureInfo = new CultureInfo(selectedCulture);
                 AppResources.Culture = cultureInfo;
+
+
                 string? jwt = await SecureStorage.GetAsync(AuthenticationService.JWT_AUTH_TOKEN);
                 if (!string.IsNullOrEmpty(jwt))
                 {

@@ -1,6 +1,11 @@
-﻿namespace AuthAPI.DTOs
+﻿using System.Text.Json.Serialization;
+
+namespace AuthAPI.DTOs
 {
-    public class EntityDTO
+    [JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+    [JsonDerivedType(typeof(TuyaEntityDTO), "tuya")]
+    [JsonDerivedType(typeof(SomfyEntityDTO), "somfy")]
+    public abstract class EntityDTO
     {
         public string URL { get; set; }
         public string Name { get; set; }

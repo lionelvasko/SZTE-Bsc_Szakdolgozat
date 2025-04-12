@@ -1,4 +1,4 @@
-﻿using AuthAPI.Models;
+﻿  using AuthAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,24 +16,23 @@ namespace AuthAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // User → Device kapcsolat
+            // User → Device 
             modelBuilder.Entity<Device>()
                 .HasOne<User>()
                 .WithMany(u => u.Devices)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Device → TuyaEntity kapcsolat
+            // Device → TuyaEntity
             modelBuilder.Entity<TuyaEntity>()
                 .HasOne<Device>()
-                .WithMany(d => d.TuyaEntities) // Külön TuyaEntities kollekció
+                .WithMany()  
                 .HasForeignKey(e => e.DeviceId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Device → SomfyEntity kapcsolat
             modelBuilder.Entity<SomfyEntity>()
-                .HasOne<Device>()
-                .WithMany(d => d.SomfyEntities) // Külön SomfyEntities kollekció
+                 .HasOne<Device>()
+                .WithMany()
                 .HasForeignKey(e => e.DeviceId)
                 .OnDelete(DeleteBehavior.Cascade);
         }

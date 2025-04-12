@@ -19,11 +19,12 @@ namespace Szakdoga
                 });
             builder.Services.AddMauiBlazorWebView();
 
-            builder.Services.AddSingleton<SomfyApiService>();
-            builder.Services.AddSingleton<TuyaApiService>();
+            builder.Services.AddScoped<SomfyApiService>();
+            builder.Services.AddScoped<TuyaApiService>();
             builder.Services.AddSingleton<HttpClient>();
 
             builder.Services.AddScoped<DbService>();
+            builder.Services.AddScoped<StartupService>();
             builder.Services.AddScoped<AuthenticationService>();
 
             builder.Services.AddLocalization();

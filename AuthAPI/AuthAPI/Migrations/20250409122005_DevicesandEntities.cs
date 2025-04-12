@@ -1,31 +1,49 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace AuthAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FixedEntities : Migration
+    public partial class DevicesandEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Entities");
+            migrationBuilder.CreateTable(
+                name: "Devices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    CreationTime = table.Column<string>(type: "TEXT", nullable: false),
+                    Platform = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Devices_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "SomfyEntities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     BaseUrl = table.Column<string>(type: "TEXT", nullable: false),
                     GatewayPin = table.Column<string>(type: "TEXT", nullable: false),
                     SessionId = table.Column<string>(type: "TEXT", nullable: false),
                     Token = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    URL = table.Column<string>(type: "TEXT", nullable: false),
+                    DeviceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Platform = table.Column<string>(type: "TEXT", nullable: false),
                     Icon = table.Column<string>(type: "TEXT", nullable: false)
@@ -45,14 +63,13 @@ namespace AuthAPI.Migrations
                 name: "TuyaEntities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     AccessToken = table.Column<string>(type: "TEXT", nullable: false),
                     RefreshToken = table.Column<string>(type: "TEXT", nullable: false),
                     Region = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    URL = table.Column<string>(type: "TEXT", nullable: false),
+                    DeviceId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Url = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Platform = table.Column<string>(type: "TEXT", nullable: false),
                     Icon = table.Column<string>(type: "TEXT", nullable: false)
@@ -67,6 +84,11 @@ namespace AuthAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_UserId",
+                table: "Devices",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SomfyEntities_DeviceId",
@@ -88,34 +110,8 @@ namespace AuthAPI.Migrations
             migrationBuilder.DropTable(
                 name: "TuyaEntities");
 
-            migrationBuilder.CreateTable(
-                name: "Entities",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    DeviceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Icon = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Platform = table.Column<string>(type: "TEXT", nullable: false),
-                    URL = table.Column<string>(type: "TEXT", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Entities", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Entities_Devices_DeviceId",
-                        column: x => x.DeviceId,
-                        principalTable: "Devices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Entities_DeviceId",
-                table: "Entities",
-                column: "DeviceId");
+            migrationBuilder.DropTable(
+                name: "Devices");
         }
     }
 }

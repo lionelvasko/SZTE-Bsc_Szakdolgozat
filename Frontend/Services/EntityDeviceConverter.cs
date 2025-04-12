@@ -14,14 +14,14 @@ namespace Szakdoga.Services
 
                 var returnEntity = new SomfyEntity();
                 var ent = obj as SomfyAPI.Models.Entity;
-                returnEntity.Id = ent.DeviceURL;
+                returnEntity.Url = ent.DeviceURL;
                 returnEntity.Name = ent.Label;
                 returnEntity.Icon = "Resources/Images/somfy_logo.svg";
                 returnEntity.Platform = "Somfy";
                 returnEntity.BaseUrl = service.GetURL();
-                returnEntity.GatewayPin = service.GetURL();
+                returnEntity.GatewayPin = service.GetGatewayPin();
                 returnEntity.SessionId = service.GetSessionId();
-                returnEntity.Token = service.GetToken();
+                returnEntity.Token = "OnlyLocal";
                 return returnEntity;
             }
             else if (obj.GetType() == typeof(TuyaAPI.Models.Device))
@@ -30,7 +30,7 @@ namespace Szakdoga.Services
 
                 var returnEntity = new TuyaEntity();
                 var ent = obj as TuyaAPI.Models.Device;
-                returnEntity.Id = ent.Id;
+                returnEntity.Url = ent.Id;
                 returnEntity.Name = ent.Name;
                 returnEntity.Icon = ent.Icon;
                 returnEntity.Platform = "Tuya";

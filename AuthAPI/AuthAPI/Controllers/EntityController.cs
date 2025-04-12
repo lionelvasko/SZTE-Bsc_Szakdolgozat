@@ -18,15 +18,15 @@ namespace AuthAPI.Controllers
 
         // A device-hoz tartozó entitások lekérésére
         [HttpGet("Device/{deviceId}")]
-        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceEntities(int deviceId)
+        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceEntities(string deviceId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId && d.UserId == userId);
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(deviceId) && d.UserId == userId);
             if (device == null) return NotFound();
             if (device.Platform == "Tuya")
             {
                 var tuyaEntities = await context.TuyaEntities
-                    .Where(e => e.DeviceId == deviceId && e.UserId == userId)
+                    .Where(e => e.DeviceId == Guid.Parse(deviceId) && e.UserId == userId)
                     .ToListAsync();
                 if (tuyaEntities.Count == 0)
                 {
@@ -39,7 +39,7 @@ namespace AuthAPI.Controllers
                     var entityDTO = new TuyaEntityDTO()
                     {
                         Name = tuyaEntity.Name,
-                        URL = tuyaEntity.URL,
+                        URL = tuyaEntity.Url,
                         Platform = tuyaEntity.Platform,
                         Icon = tuyaEntity.Icon,
                         AccessToken = tuyaEntity.AccessToken,
@@ -53,7 +53,7 @@ namespace AuthAPI.Controllers
             else if (device.Platform == "Somfy")
             {
                 var somfyEntities = await context.SomfyEntities
-                    .Where(e => e.DeviceId == deviceId && e.UserId == userId)
+                    .Where(e => e.DeviceId == Guid.Parse(deviceId) && e.UserId == userId)
                     .ToListAsync();
                 var DTOs = new List<SomfyEntityDTO>();
                 foreach (var somfyEntity in somfyEntities)
@@ -61,7 +61,7 @@ namespace AuthAPI.Controllers
                     var entityDTO = new SomfyEntityDTO()
                     {
                         Name = somfyEntity.Name,
-                        URL = somfyEntity.URL,
+                        URL = somfyEntity.Url,
                         Platform = somfyEntity.Platform,
                         Icon = somfyEntity.Icon,
                         BaseUrl = somfyEntity.BaseUrl,
@@ -78,7 +78,7 @@ namespace AuthAPI.Controllers
 
         // A userhez tartozó entitások lekérésére
         [HttpGet("UserEntities")]
-        public async Task<ActionResult<IEnumerable<Entity>>> GetUsersEntities()
+        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetUsersEntities()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var entities = new List<EntityDTO>();
@@ -93,7 +93,7 @@ namespace AuthAPI.Controllers
                 var entityDTO = new SomfyEntityDTO()
                 {
                     Name = somfyEntity.Name,
-                    URL = somfyEntity.URL,
+                    URL = somfyEntity.Url,
                     Platform = somfyEntity.Platform,
                     Icon = somfyEntity.Icon,
                     BaseUrl = somfyEntity.BaseUrl,
@@ -111,7 +111,7 @@ namespace AuthAPI.Controllers
                 var entity = new TuyaEntityDTO()
                 {
                     Name = tuyaEntity.Name,
-                    URL = tuyaEntity.URL,
+                    URL = tuyaEntity.Url,
                     Platform = tuyaEntity.Platform,
                     Icon = tuyaEntity.Icon,
                     AccessToken = tuyaEntity.AccessToken,
@@ -126,12 +126,12 @@ namespace AuthAPI.Controllers
         }
 
         // Új entitás hozzáadása a device-hoz
-        [HttpPost]
-        public async Task<ActionResult<EntityDTO>> AddEntity(int deviceId, AddEntityRequest model)
+        [HttpPost("{deviceId}")]
+        public async Task<ActionResult<EntityDTO>> AddEntity(string deviceId, AddEntityRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userManager.FindByIdAsync(userId);
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId && d.UserId == userId && d.Platform == model.Platform);
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(deviceId.ToString()) && d.UserId == userId && d.Platform == model.Platform);
 
             if (device == null) return NotFound();
 
@@ -139,7 +139,7 @@ namespace AuthAPI.Controllers
             {
                 var entity = new TuyaEntity
                 {
-                    URL = model.URL,
+                    Url = model.URL,
                     Name = model.Name,
                     Platform = model.Platform,
                     Icon = model.Icon,
@@ -153,7 +153,7 @@ namespace AuthAPI.Controllers
                 var DTO = new TuyaEntityDTO()
                 {
                     Name = entity.Name,
-                    URL = entity.URL,
+                    URL = entity.Url,
                     Platform = entity.Platform,
                     Icon = entity.Icon,
                     AccessToken = entity.AccessToken,
@@ -167,7 +167,7 @@ namespace AuthAPI.Controllers
             {
                 var entity = new SomfyEntity
                 {
-                    URL = model.URL,
+                    Url = model.URL,
                     Name = model.Name,
                     Platform = model.Platform,
                     Icon = model.Icon,
@@ -182,7 +182,7 @@ namespace AuthAPI.Controllers
                 var DTO = new SomfyEntityDTO()
                 {
                     Name = entity.Name,
-                    URL = entity.URL,
+                    URL = entity.Url,
                     Platform = entity.Platform,
                     Icon = entity.Icon,
                     BaseUrl = entity.BaseUrl,
@@ -197,13 +197,13 @@ namespace AuthAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEntity(int id)
+        public async Task<IActionResult> DeleteEntity(string id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var tuyaEntity = await context.TuyaEntities.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+            var tuyaEntity = await context.TuyaEntities.FirstOrDefaultAsync(e => e.Id == Guid.Parse(id) && e.UserId == userId);
             if (tuyaEntity == null)
             {
-                var somfyEntity = await context.SomfyEntities.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+                var somfyEntity = await context.SomfyEntities.FirstOrDefaultAsync(e => e.Id == Guid.Parse(id) && e.UserId == userId);
                 if (somfyEntity == null)
                 {
                     return NotFound();

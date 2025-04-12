@@ -96,6 +96,11 @@ namespace SomfyAPI.Services
             _baseUrl = $"{url}/enduser-mobile-web/enduserAPI";
         }
 
+        public void SetBaseUrl(string url)
+        {
+            _baseUrl = url;
+        }
+
         public string GetURL()
         {
             return _baseUrl;
@@ -109,6 +114,11 @@ namespace SomfyAPI.Services
         public void SetToken(string token)
         {
             _token = token;
+        }
+
+        public void SetSessionId(string sessionId)
+        {
+            _sessionId = sessionId;
         }
 
         public async Task<bool> LoginAsync(string email, string password, string baseUrl)

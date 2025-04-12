@@ -6,9 +6,8 @@ namespace Szakdoga.Requests
     public class AddDeviceRequest
     {
         [Required]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
         [Required]
-        public string Platform { get; set; } = string.Empty;
-        public List<AddEntityRequest> Entities { get; set; } = new List<AddEntityRequest>();
+        public string Platform { get; set; }
     }
 }

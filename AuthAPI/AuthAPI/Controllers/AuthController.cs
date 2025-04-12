@@ -16,13 +16,14 @@ namespace AuthAPI.Controllers
 
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IConfiguration _config;
 
-        private static readonly string SECRET_KEY = "yourSuperSecretKeyThatIsLongEnoughToBe256Bits";
 
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, TokenValidationParameters tokenValidationParameters, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _config = configuration;
         }
 
         // Register User
@@ -53,6 +54,29 @@ namespace AuthAPI.Controllers
             return Ok("User registered successfully.");
         }
 
+        [HttpPost("check-jwt")]
+        public IActionResult CheckJwt([FromBody] string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value);
+            try
+            {
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+            }
+            catch (Exception)
+            {
+                return Unauthorized("Invalid token.");
+            }
+            return Ok("Token is valid.");
+        }
+
         // Login User
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
@@ -74,10 +98,12 @@ namespace AuthAPI.Controllers
         }
 
 
+        
+
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(SECRET_KEY);
+            var key = Encoding.ASCII.GetBytes(_config.GetSection("Jwt:Key").Value);
 
             if (user.Email is null || user.FirstName is null || user.LastName is null)
             {

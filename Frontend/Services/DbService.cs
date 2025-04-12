@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using System.Text.Json;
 using System.Text;
 using Szakdoga.Models;
 using Szakdoga.Requests;
+using System.Diagnostics;
 
 namespace Szakdoga.Services
 {
@@ -15,79 +15,79 @@ namespace Szakdoga.Services
         }
         public async Task<HttpResponseMessage> Register(RegisterRequest request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/register", content);
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("http://localhost:5223/api/register", json);
             return response;
         }
         public async Task<HttpResponseMessage> Login(LoginRequest request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/login", content);
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("http://localhost:5223/api/login", json);
             return response;
         }
-        public async Task<HttpResponseMessage> GetAllDevicesForUSer()
+        public async Task<List<Models.Device>> GetAllDeviceForUSer()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/Devices");
-            return response;
+            if(response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var devices = JsonSerializer.Deserialize<List<Models.Device>>(json);
+                return devices;
+            }
+            return new List<Models.Device>();
         }
         public async Task<List<Models.Entity>> GetAllEntitesForUser()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/Entity/UserEntities");
-            var content = await response.Content.ReadAsStringAsync();
-
-            var entities = JsonConvert.DeserializeObject<List<Szakdoga.Models.Entity>>(content,
-                    new JsonSerializerSettings
-                    {
-                        TypeNameHandling = TypeNameHandling.Auto,
-                        SerializationBinder = new CustomSerializationBinder()
-                    });
+            var json = await response.Content.ReadAsStringAsync();
+            var entities = JsonSerializer.Deserialize(
+                json,
+                PolymorphicEntityJsonContext.Default.ListEntity
+            );
             return entities;
         }
 
-        public class CustomSerializationBinder : ISerializationBinder
-        {
-            public Type BindToType(string assemblyName, string typeName)
-            {
-                if (typeName.Contains("SomfyEntity"))
-                {
-                    return typeof(SomfyEntity);
-                }
-                else if (typeName.Contains("TuyaEntity"))
-                {
-                    return typeof(TuyaEntity);
-                }
-                throw new ArgumentException("Unknown type");
-            }
-
-            public void BindToName(Type serializedType, out string assemblyName, out string typeName)
-            {
-                assemblyName = null;
-                typeName = serializedType.Name;
-            }
-        }
-
-        public async Task<HttpResponseMessage> GetAllEntitiesForDevice(string deviceId)
+        public async Task<List<Entity>> GetAllEntitiesForDevice(string deviceId)
         {
             var response = await _httpClient.GetAsync($"http://localhost:5223/api/Entities/DeviceEntities/{deviceId}");
-            return response;
+            var json = await response.Content.ReadAsStringAsync();
+            var entities = JsonSerializer.Deserialize(
+                json,
+                PolymorphicEntityJsonContext.Default.ListEntity
+            );
+            return entities;
         }
         public async Task<UserModel> GetUserInfos()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/User");
-            var content = await response.Content.ReadAsStringAsync();
-            var user = System.Text.Json.JsonSerializer.Deserialize<UserModel>(content);
+            var json = await response.Content.ReadAsStringAsync();
+            var user = JsonSerializer.Deserialize<UserModel>(json);
             return user;
         }
-        public async Task<HttpResponseMessage> AddDevice(AddDeviceRequest request)
+        public async Task<Guid> AddDevice(AddDeviceRequest request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/Device", content);
-            return response;
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync("http://localhost:5223/api/Devices", json);
+            response.EnsureSuccessStatusCode();
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var result = JsonSerializer.Deserialize<Dictionary<string, Guid>>(jsonResponse);
+            var id = result["id"];
+            return id;
         }
-        public async Task<HttpResponseMessage> AddEntity(AddEntityRequest request)
+
+        public async Task<HttpResponseMessage> AddEntity(Guid deviceId, Entity request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/Entity", content);
+            var options = new JsonSerializerOptions
+            {
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = false
+            };
+
+            var requestData = JsonSerializer.Serialize(request, options);
+            var json = new StringContent(requestData, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PostAsync($"http://localhost:5223/api/Entity/{deviceId}", json);
             return response;
         }
         public async Task<HttpResponseMessage> DeleteDevice(string deviceId)
@@ -102,14 +102,14 @@ namespace Szakdoga.Services
         }
         public async Task<HttpResponseMessage> UpdateUserPassword(UpdatePasswordRequest request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdatePassword", content);
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdatePassword", json);
             return response;
         }
         public async Task<HttpResponseMessage> UpdateUserName(UpdateNameRequest request)
         {
-            var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdateName", content);
+            var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdateName", json);
             return response;
         }
     }

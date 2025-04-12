@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System.Text;
+using System.Text.Json.Serialization.Metadata;
 
 namespace AuthAPI
 {
@@ -62,7 +63,7 @@ namespace AuthAPI
                 {
                     Title = "AuthAPI",
                     Version = "v1",
-                    Description = "API for authentication and device management",
+                    Description = "API for authentication and device/entity management",
                 });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -94,13 +95,15 @@ namespace AuthAPI
             // Controllers
             builder.Services
                 .AddControllers()
-                .AddNewtonsoftJson(options =>
+                .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+                    options.JsonSerializerOptions.TypeInfoResolver = JsonTypeInfoResolver.Combine(
+                        new DefaultJsonTypeInfoResolver()
+                    );
                 });
 
 
-            // CORS
+            // Cors
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -111,10 +114,19 @@ namespace AuthAPI
                 });
             });
 
+            builder.Services.AddSingleton(new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            });
+
 
             var app = builder.Build();
 
-            // Middleware pipeline
+            // Swagger UI
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

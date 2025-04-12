@@ -38,10 +38,10 @@
                                         </div>
                                         <div class="d-flex flex-column gap-2 mt-3">
                                             <div class="d-flex flex-column gap-2 mt-3">
-                                                <button class="btn btn-success" @onclick="async () => await SomfyAPI.Services.ShutterControl.OpenShutter(somfyenetity.Id)">@Localizer["Open"]</button>
-                                                <button class="btn btn-warning" @onclick="async () => await SomfyAPI.Services.ShutterControl.StopShutter(somfyenetity.Id)">@Localizer["Stop"]</button>
-                                                <button class="btn btn-danger" @onclick="async () => await SomfyAPI.Services.ShutterControl.CloseShutter(somfyenetity.Id)">@Localizer["Close"]</button>
-                                                <button class="btn btn-info" @onclick="async () => await SomfyAPI.Services.ShutterControl.MyPositionShutter(somfyenetity.Id)">@Localizer["My position"]</button>
+                                                <button class="btn btn-success" @onclick="async () => { StartupService.SetupSomfy(somfyenetity.BaseUrl, somfyenetity.Token, somfyenetity.SessionId); await SomfyAPI.Services.ShutterControl.OpenShutter(somfyenetity.Url);}">@Localizer["Open"]</button>
+                                                <button class="btn btn-warning" @onclick="async () => { StartupService.SetupSomfy(somfyenetity.BaseUrl, somfyenetity.Token, somfyenetity.SessionId); await SomfyAPI.Services.ShutterControl.StopShutter(somfyenetity.Url);}">@Localizer["Stop"]</button>
+                                                <button class="btn btn-danger" @onclick="async () => { StartupService.SetupSomfy(somfyenetity.BaseUrl, somfyenetity.Token, somfyenetity.SessionId); await SomfyAPI.Services.ShutterControl.CloseShutter(somfyenetity.Url);}">@Localizer["Close"]</button>
+                                                <button class="btn btn-info" @onclick="async () => { StartupService.SetupSomfy(somfyenetity.BaseUrl, somfyenetity.Token, somfyenetity.SessionId); await SomfyAPI.Services.ShutterControl.MyPositionShutter(somfyenetity.Url);}">@Localizer["My position"]</button>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +60,9 @@
                                         </div>
                                         <div class="d-flex flex-column gap-2 mt-3">
                                             <div class="d-flex flex-column gap-2 mt-3">
-                                                <button class="btn btn-success" @onclick="async () => await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(tuyaEntity.Id, true)">@Localizer["On/Off"]</button>
+                                                <button class="btn btn-success" @onclick="async () =>{
+                                                    StartupService.SetupTuya(tuyaEntity.Region, tuyaEntity.AccessToken, tuyaEntity.RefreshToken);
+                                                    await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(tuyaEntity.Url, true);}">@Localizer["On/Off"]</button>
                                             </div>
                                         </div>
                                     </div>
@@ -99,7 +101,7 @@
             <div class="modal-content">
 
                 <div class="modal-header">
-                        <h5 class="modal-title">@Localizer["Add device"]</h5>
+                    <h5 class="modal-title">@Localizer["Add device"]</h5>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">
@@ -112,18 +114,18 @@
                     </ul>
                     <div class="tab-content" id="apiTabContent">
                         <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
-                                    <h5>Tahoma @Localizer["Device form"]</h5>
+                            <h5>Tahoma @Localizer["Device form"]</h5>
                             <label for="apiType">API Type:</label>
                             <select class="form-control" id="apiType" @bind="selectedApiType">
-                                    <option value="online">@Localizer["Online"]</option>
-                                    <option value="local">@Localizer["Local"]</option>
+                                <option value="online">@Localizer["Online"]</option>
+                                <option value="local">@Localizer["Local"]</option>
                             </select>
                             @if (selectedApiType == "online")
                             {
                                 <label for="somfyDeviceName">@Localizer["Device name"]:</label>
                                 <input type="text" class="form-control" id="somfyDeviceName" @bind="somfyDeviceName" placeholder="@Localizer["Enter device name"]" />
-                                <label for="homeURL" class="mt-2">@Localizer["Region"]:</label>
-                                <select class="form-control" id="homeURL" @bind="homeURL">
+                                <label for="homeUrl" class="mt-2">@Localizer["Region"]:</label>
+                                <select class="form-control" id="homeUrl" @bind="homeUrl">
                                     <option value="" disabled selected>@Localizer["Select a region"]</option>
                                     <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
                                     <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
@@ -160,9 +162,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
-                        <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>
-                            <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
+                    <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
+                    <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>
+                    <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
                 </div>
             </div>
         </div>
@@ -176,15 +178,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">@selectedEntity.Id</h5>
+                    <h5 class="modal-title">@selectedEntity.Url</h5>
                     <button type="button" class="btn-close" @onclick="CloseEntityDetailsModal"></button>
                 </div>
                 <div class="modal-body">
                     <p><strong>Entity Name:</strong> @selectedEntity.Name</p>
-                    <p><strong>ID:</strong> @selectedEntity.Id</p>
+                    <p><strong>ID:</strong> @selectedEntity.Url</p>
                 </div>
                 <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">@Localizer["Close"]</button>
+                    <button type="button" class="btn btn-secondary" @onclick="CloseEntityDetailsModal">@Localizer["Close"]</button>
                 </div>
             </div>
         </div>
@@ -203,15 +205,13 @@
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    @if(selectedDevice.Platform == "Somfy")
-                    {
-                        var somfyDevice = selectedDevice as Models.Device;
-                        <p><strong>Device Name:</strong> @somfyDevice.Name</p>
-                        <p><strong>Device Paltform:</strong> @somfyDevice.Platform</p>
-                        <p><strong>Device Entity Count:</strong> @somfyDevice.SomfyEntities.Count()</p>
-                    }
+                    <p><strong>Device Name:</strong> @selectedDevice.Name</p>
+                    <p><strong>Device Paltform:</strong> @selectedDevice.Platform</p>
+                    <p><strong>Device Entity Count:</strong> @selectedDevice.CreationTime</p>
                 </div>
                 <div class="modal-footer">
+                    
+                    <button type="button" class="btn btn-danger" @onclick="() => DbService.DeleteDevice(selectedDevice.Id.ToString())">Delete</button>
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
                 </div>
             </div>
@@ -241,7 +241,7 @@
     private string somfyDeviceName;
     private string tuyaDeviceName;
 
-    private string homeURL;
+    private string homeUrl;
     private string gatewayPin;
     private string email;
     private string password;
@@ -253,6 +253,7 @@
     protected override async Task OnInitializedAsync()
     {
         entities = await DbService.GetAllEntitesForUser();
+        devices = await DbService.GetAllDeviceForUSer();
     }
 
     private void ShowEntityDetailsModal(Models.Entity entity)
@@ -325,17 +326,23 @@
         {
             try
             {
-                await AddDeviceService.GenerateSomfyTokens(email, password, homeURL);
+                await AddDeviceService.GenerateSomfyTokens(email, password, homeUrl);
                 var device = await AddDeviceService.AddSomfyDeviceAsync(somfyDeviceName);
-                devices.Add(device);
+                var request = new AddDeviceRequest
+                    {
+                        Name = device.Name,
+                        Platform = "Somfy",
+                    };
+                Guid deviceID = await DbService.AddDevice(request);
                 foreach (var entity in device.SomfyEntities)
                 {
-                    entities.Add(entity);
+                    var responseE = await DbService.AddEntity(deviceID, entity);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                throw;
             }
         }
         else if (modalActiveTab == 2)
@@ -344,10 +351,15 @@
             {
                 await AddDeviceService.GenerateTuyaTokens(username, tuyaPassword, region);
                 var device = await AddDeviceService.AddTuyaDeviceAsync(tuyaDeviceName);
-                devices.Add(device);
+                var request = new AddDeviceRequest
+                    {
+                        Name = device.Name,
+                        Platform = "Tuya",
+                    };
+                Guid deviceID = await DbService.AddDevice(request);
                 foreach (var entity in device.TuyaEntities)
                 {
-                    entities.Add(entity);
+                    var responseE = await DbService.AddEntity(deviceID, entity);
                 }
             }
             catch (Exception ex)
@@ -360,4 +372,5 @@
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private HttpClient HttpClient { get; set; }
     [Inject] private DbService DbService { get; set; }
+    [Inject] private StartupService StartupService { get; set; }
 }

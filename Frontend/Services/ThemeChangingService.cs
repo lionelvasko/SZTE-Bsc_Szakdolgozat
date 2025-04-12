@@ -10,7 +10,7 @@
         public ThemeChangingService()
         {
             string savedTheme = Preferences.Get(ThemeKey, AppTheme.Light.ToString());
-            CurrentTheme = Enum.TryParse(savedTheme, out AppTheme theme) ? theme : AppTheme.Light;
+            CurrentTheme = Enum.TryParse(savedTheme, out AppTheme theme) ? theme : AppTheme.Dark;
             ApplyTheme(CurrentTheme);
         }
 

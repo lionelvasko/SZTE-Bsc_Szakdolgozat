@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Net;
 using Szakdoga.Models;
+using Szakdoga.Requests;
 using TuyaAPI.Services;
 
 namespace Szakdoga.Services
@@ -19,11 +20,9 @@ namespace Szakdoga.Services
                 var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
                 var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
                 var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName, SingletonSomfyApiService);
-
                 foreach (var entity in newEntities)
                 {
                     var convertedEntity = EntityDeviceConverter.ConvertToEntity(entity, SingletonSomfyApiService);
-                    Debug.WriteLine(entity.ToString());
                     convertedDevice.SomfyEntities.Add(convertedEntity as SomfyEntity);
                 }
                 Debug.WriteLine(convertedDevice);
