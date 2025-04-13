@@ -212,7 +212,7 @@
                 </div>
                 <div class="modal-footer">
                     
-                    <button type="button" class="btn btn-danger" @onclick="() => DbService.DeleteDevice(selectedDevice.Id.ToString())">Delete</button>
+                    <button type="button" class="btn btn-danger" @onclick="async () => await DbService.DeleteDevice(selectedDevice.Id.ToString())">Delete</button>
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
                 </div>
             </div>

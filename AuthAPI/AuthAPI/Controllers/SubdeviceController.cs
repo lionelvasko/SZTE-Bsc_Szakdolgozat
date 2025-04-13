@@ -13,12 +13,12 @@ namespace AuthAPI.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class EntityController(AppDbContext context, UserManager<User> userManager) : ControllerBase
+    public class SubDeviceController(AppDbContext context, UserManager<User> userManager) : ControllerBase
     {
 
         // A device-hoz tartozó entitások lekérésére
-        [HttpGet("Device/{deviceId}")]
-        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceEntities(string deviceId)
+        [HttpGet("{maindeviceId}")]
+        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceSubdevices(string deviceId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(deviceId) && d.UserId == userId);
@@ -76,8 +76,8 @@ namespace AuthAPI.Controllers
         }
 
         // A userhez tartozó entitások lekérésére
-        [HttpGet("UserEntities")]
-        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetUsersEntities()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetUsersSubdevices()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var entities = new List<EntityDTO>();
@@ -124,8 +124,8 @@ namespace AuthAPI.Controllers
         }
 
         // Új entitás hozzáadása a device-hoz
-        [HttpPost("{deviceId}")]
-        public async Task<ActionResult<EntityDTO>> AddEntity(string deviceId, AddEntityRequest model)
+        [HttpPost("{maindeviceId}")]
+        public async Task<ActionResult<EntityDTO>> AddSubdevice(string deviceId, AddEntityRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userManager.FindByIdAsync(userId);
@@ -159,7 +159,7 @@ namespace AuthAPI.Controllers
                     Region = entity.Region
                 };
                 await context.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetDeviceEntities), new { deviceId = device.Id }, DTO);
+                return CreatedAtAction(nameof(AddSubdevice), new { deviceId = device.Id }, DTO);
             }
             else if (model.Platform == "Somfy")
             {
@@ -187,7 +187,7 @@ namespace AuthAPI.Controllers
                     CloudPasswordHashed = entity.CloudPasswordHashed
                 };
                 await context.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetDeviceEntities), new { deviceId = device.Id }, DTO);
+                return CreatedAtAction(nameof(AddSubdevice), new { deviceId = device.Id }, DTO);
             }
             return BadRequest("Unsupported platform");
         }

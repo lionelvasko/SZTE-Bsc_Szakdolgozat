@@ -15,28 +15,14 @@ namespace AuthAPI.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Authorize]
-    public class DevicesController : ControllerBase
+    public class MainDeviceController(AppDbContext context, UserManager<User> userManager) : ControllerBase
     {
-        private readonly AppDbContext _context;
-        private readonly UserManager<User> _userManager;
-
-        public DevicesController(AppDbContext context, UserManager<User> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-        }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Get all devices for the authenticated user.")]
-        [SwaggerResponse(200, "List of devices", typeof(IEnumerable<Device>))]
-        [SwaggerResponse(401, "Unauthorized")]
-        [SwaggerResponse(404, "No devices found")]
-        [SwaggerResponse(500, "Internal server error")]
-        [ProducesResponseType(typeof(IEnumerable<Device>), 200)]
-        public async Task<ActionResult<IEnumerable<DeviceDTO>>> GetDevices()
+        public async Task<ActionResult<IEnumerable<DeviceDTO>>> GetDevice()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var devices = await _context.Devices
+            var devices = await context.Devices
                 .Where(d => d.UserId == userId)
                 .ToListAsync();
             if (devices == null || !devices.Any()) return NotFound();
@@ -46,7 +32,7 @@ namespace AuthAPI.Controllers
                 Name = d.Name,
                 CreationTime = d.CreationTime,
                 Platform = d.Platform,
-                TuyaEntities = [.. _context.TuyaEntities.Where(e => e.DeviceId == d.Id).Select(te => new TuyaEntityDTO
+                TuyaEntities = [.. context.TuyaEntities.Where(e => e.DeviceId == d.Id).Select(te => new TuyaEntityDTO
                 {
                     Name = te.Name,
                     URL = te.Url,
@@ -56,7 +42,7 @@ namespace AuthAPI.Controllers
                     RefreshToken = te.RefreshToken,
                     Region = te.Region
                 })],
-                SomfyEntities = [.. _context.SomfyEntities.Where(e => e.DeviceId == d.Id).Select(se => new SomfyEntityDTO
+                SomfyEntities = [.. context.SomfyEntities.Where(e => e.DeviceId == d.Id).Select(se => new SomfyEntityDTO
                 {
                     Name = se.Name,
                     URL = se.Url,
@@ -76,7 +62,7 @@ namespace AuthAPI.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await userManager.FindByIdAsync(userId);
             if (user == null) return Unauthorized();
 
             var device = new Device
@@ -87,10 +73,10 @@ namespace AuthAPI.Controllers
                 UserId = user.Id,
             };
 
-            _context.Devices.Add(device);
-            await _context.SaveChangesAsync();
+            context.Devices.Add(device);
+            await context.SaveChangesAsync();
             Guid id = device.Id;
-            return CreatedAtAction(nameof(GetDevices), new { id = id }, new { id = id });
+            return CreatedAtAction(nameof(AddDevice), new { id = id }, new { id = id });
 
         }
 
@@ -98,11 +84,11 @@ namespace AuthAPI.Controllers
         public async Task<IActionResult> DeleteDevice(string id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var device = await _context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(id) && d.UserId == userId);
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(id) && d.UserId == userId);
             if (device == null) return NotFound();
 
-            _context.Devices.Remove(device);
-            await _context.SaveChangesAsync();
+            context.Devices.Remove(device);
+            await context.SaveChangesAsync();
             return NoContent();
         }
     }

@@ -54,29 +54,6 @@ namespace AuthAPI.Controllers
             return Ok("User registered successfully.");
         }
 
-        [HttpPost("check-jwt")]
-        public IActionResult CheckJwt([FromBody] string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_config.GetSection("Jwt:Key").Value);
-            try
-            {
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-            }
-            catch (Exception)
-            {
-                return Unauthorized("Invalid token.");
-            }
-            return Ok("Token is valid.");
-        }
-
         // Login User
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
