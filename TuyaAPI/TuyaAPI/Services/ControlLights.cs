@@ -39,7 +39,12 @@ namespace TuyaAPI.Services
 
         public async Task ToggleDeviceAsync(string deviceId, bool currentState)
         {
-            var response = await ControlDevice(deviceId, "turnOnOff", "value", "0");
+            string lightState = "1";
+            if (currentState)
+            {
+                lightState = "0";
+            }
+            var response = await ControlDevice(deviceId, "turnOnOff", "value", lightState);
         }
 
         public async Task ChangeBrightnessAsync(string deviceId, int newBrightness)
