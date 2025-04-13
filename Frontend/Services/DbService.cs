@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
 using System.Text;
+using System.Text.Json;
 using Szakdoga.Models;
 using Szakdoga.Requests;
-using System.Diagnostics;
 
 namespace Szakdoga.Services
 {
@@ -28,7 +28,7 @@ namespace Szakdoga.Services
         public async Task<List<Models.Device>> GetAllDeviceForUSer()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/MainDevice");
-            if(response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
                 var devices = JsonSerializer.Deserialize<List<Models.Device>>(json);

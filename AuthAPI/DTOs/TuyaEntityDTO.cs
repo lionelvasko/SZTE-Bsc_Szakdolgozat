@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace AuthAPI.DTOs
+﻿namespace AuthAPI.DTOs
 {
     public class TuyaEntityDTO : EntityDTO
     {

@@ -75,7 +75,7 @@ namespace AuthAPI.Controllers
         }
 
 
-        
+
 
         private string GenerateJwtToken(User user)
         {

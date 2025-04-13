@@ -80,7 +80,7 @@ namespace Szakdoga.Services
 
         internal static AddEntityRequest ConvertToAddEntityRequest(Entity entity)
         {
-            if(entity.Platform == "Somfy")
+            if (entity.Platform == "Somfy")
             {
                 return new AddEntityRequest
                 {
@@ -96,7 +96,7 @@ namespace Szakdoga.Services
                     Region = (entity as TuyaEntity)?.Region
                 };
             }
-            else if(entity.Platform == "Tuya")
+            else if (entity.Platform == "Tuya")
             {
                 return new AddEntityRequest
                 {
