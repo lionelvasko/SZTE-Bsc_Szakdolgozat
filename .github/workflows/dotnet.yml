@@ -19,18 +19,18 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
-    - name: Restore NuGet packages
-      run: dotnet restore Szakdolgozat.sln
+    - name: Restore NuGet packages (Windows runtime)
+      run: dotnet restore Szakdolgozat.sln -r win-x64
 
-    - name: Build all projects
-      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release
+    - name: Build all projects (Windows runtime)
+      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release -r win-x64
 
     - name: Run AuthAPI to verify it starts
-      run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release
+      run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release -r win-x64
       timeout-minutes: 1
       continue-on-error: true
 
     - name: Run Szakdoga (frontend) to verify it starts
-      run: dotnet run --project ./Szakdoga/Szakdoga.csproj --no-build --configuration Release
+      run: dotnet run --project ./Szakdoga/Szakdoga.csproj --no-build --configuration Release -r win-x64
       timeout-minutes: 1
       continue-on-error: true
