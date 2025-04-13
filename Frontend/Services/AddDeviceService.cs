@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Net;
 using Szakdoga.Models;
-using Szakdoga.Requests;
 using TuyaAPI.Services;
 
 namespace Szakdoga.Services

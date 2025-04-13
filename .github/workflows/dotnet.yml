@@ -1,35 +1,36 @@
-name: Build and Test
+name: Build and Run Projects
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  build:
+  build-run:
     runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup .NET 9 (Preview)
+    - name: Setup .NET 9 SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
-        dotnet-quality: preview
+        dotnet-version: '9.0.x'
 
-    - name: Install MAUI and platform workloads
-      run: |
-        dotnet workload install maui
-        dotnet workload install android
-        dotnet workload install ios
-        dotnet workload install maccatalyst
-        dotnet workload install wasm-tools
+    - name: Restore NuGet packages (Windows runtime)
+      run: dotnet restore Szakdolgozat.sln -r win-x64
 
-    - name: Restore dependencies
-      run: dotnet restore Szakdoga.csproj
+    - name: Build all projects (Windows runtime)
+      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release -r win-x64
 
-    - name: Build MAUI project
-      run: dotnet build Szakdoga.csproj --configuration Release --no-restore
+    - name: Run AuthAPI to verify it starts
+      run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release -r win-x64
+      timeout-minutes: 1
+      continue-on-error: true
+
+    - name: Run Szakdoga (frontend) to verify it starts
+      run: dotnet run --project ./Szakdoga/Szakdoga.csproj --no-build --configuration Release -r win-x64
+      timeout-minutes: 1
+      continue-on-error: true

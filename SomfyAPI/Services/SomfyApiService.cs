@@ -1,10 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Net.Security;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 
 namespace SomfyAPI.Services
 {
@@ -12,9 +9,9 @@ namespace SomfyAPI.Services
     {
         private static SomfyApiService? _instance;
         private HttpClient _httpClient;
-        public string BaseUrl { get; set;}
-        public string Username { get; set;}
-        public string Password { get; set;}
+        public string BaseUrl { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
 
 
         public SomfyApiService()
@@ -106,7 +103,7 @@ namespace SomfyAPI.Services
                     var sessionCookie = cookies.FirstOrDefault(c => c.StartsWith("JSESSIONID"));
                     if (!string.IsNullOrEmpty(sessionCookie))
                     {
-                         var sessionId = sessionCookie.Split(';')[0].Split('=')[1];
+                        var sessionId = sessionCookie.Split(';')[0].Split('=')[1];
                         _httpClient.DefaultRequestHeaders.Remove("Cookie");
                         _httpClient.DefaultRequestHeaders.Add("Cookie", $"JSESSIONID={sessionId}");
                     }
