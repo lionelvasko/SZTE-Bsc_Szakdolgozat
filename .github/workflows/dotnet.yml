@@ -20,10 +20,10 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Restore NuGet packages
-      run: dotnet restore SZTE-Bsc_Szakdolgozat.sln
+      run: dotnet restore Szakdolgozat.sln
 
     - name: Build all projects
-      run: dotnet build SZTE-Bsc_Szakdolgozat.sln --no-restore --configuration Release
+      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release
 
     - name: Run AuthAPI to verify it starts
       run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release
