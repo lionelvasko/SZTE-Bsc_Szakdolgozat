@@ -1,10 +1,16 @@
-﻿namespace AuthAPI.Requests
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Szakdoga.Requests
 {
     public class AddEntityRequest
     {
+        [Required]
         public string URL { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Platform { get; set; }
+        [Required]
         public string Icon { get; set; }
 
         // Tuya-specific

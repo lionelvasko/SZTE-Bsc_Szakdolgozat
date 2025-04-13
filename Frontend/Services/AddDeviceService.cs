@@ -39,7 +39,8 @@ namespace Szakdoga.Services
         internal static async Task<HttpResponseMessage> GenerateSomfyTokens(string email, string password, string homeUrl)
         {
             var SingletonSomfyApiService = SomfyApiService.GetInstance();
-            bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password, homeUrl);
+            SingletonSomfyApiService.SetOnlineUrl(homeUrl);
+            bool validLogin = await SingletonSomfyApiService.LoginAsync(email, password);
             if (!validLogin)
             {
                 return new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, Content = new StringContent("Login failed") };
@@ -57,7 +58,6 @@ namespace Szakdoga.Services
                 if (resultDevices == null || !resultDevices.Any())
                 {
                     throw new Exception("No devices found");
-                    Debug.WriteLine("No devices found");
                 }
 
                 var toAddEntites = TuyaAPI.Services.JsonHelper.GetEntitiesFromJson(resultDevices);

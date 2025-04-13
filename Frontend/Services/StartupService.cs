@@ -20,11 +20,11 @@ namespace Szakdoga.Services
             _tuyaApiService.SetTokens(at, rt);
         }
 
-        public void SetupSomfy(string baseUrl, string token, string sessionId)
+        public void SetupSomfy(string baseUrl, string username, string password)
         {
-            _somfyApiService.SetBaseUrl(baseUrl);
-            _somfyApiService.SetToken(token);
-            _somfyApiService.SetSessionId(sessionId);
+            _somfyApiService.Username = username;
+            _somfyApiService.Password = password;
+
         }
     }
 }

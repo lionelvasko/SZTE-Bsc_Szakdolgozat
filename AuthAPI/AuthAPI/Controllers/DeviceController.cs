@@ -63,9 +63,8 @@ namespace AuthAPI.Controllers
                     Platform = se.Platform,
                     Icon = se.Icon,
                     BaseUrl = se.BaseUrl,
-                    GatewayPin = se.GatewayPin,
-                    SessionId = se.SessionId,
-                    Token = se.Token
+                    CloudUsername = se.CloudUsername,
+                    CloudPasswordHashed = se.CloudPasswordHashed
                 })]
             }).ToList();
             return Ok(deviceDTOs);

@@ -12,14 +12,12 @@ namespace SomfyAPI.Services
     {
         private static SomfyApiService? _instance;
         private HttpClient _httpClient;
-        private string _baseUrl;
-        private string _gatewayPin;
-        private string _sessionId;
-        private string _token;
+        public string BaseUrl { get; set;}
+        public string Username { get; set;}
+        public string Password { get; set;}
 
-        private string regiesteredUsername;
 
-        private SomfyApiService()
+        public SomfyApiService()
         {
             if (_httpClient == null)
             {
@@ -30,29 +28,6 @@ namespace SomfyAPI.Services
             }
         }
 
-        public string GetAccessToken()
-        {
-            return _token;
-        }
-
-        public string GetSessionId()
-        {
-            return _sessionId;
-        }
-
-        public string GetGatewayPin()
-        {
-            return _gatewayPin;
-        }
-        public string GetToken()
-        {
-            return _token;
-        }
-
-        public string GetRegisteredUsername()
-        {
-            return regiesteredUsername;
-        }
 
         public static SomfyApiService GetInstance()
         {
@@ -91,19 +66,15 @@ namespace SomfyAPI.Services
             return new HttpClient(handler);
         }
 
-        public void SetUrl(string url)
+        public void SetOnlineUrl(string url)
         {
-            _baseUrl = $"{url}/enduser-mobile-web/enduserAPI";
+            BaseUrl = $"{url}/enduser-mobile-web/enduserAPI";
         }
 
-        public void SetBaseUrl(string url)
-        {
-            _baseUrl = url;
-        }
 
         public string GetURL()
         {
-            return _baseUrl;
+            return BaseUrl;
         }
 
         public HttpClient GetHttpClient()
@@ -111,24 +82,14 @@ namespace SomfyAPI.Services
             return _httpClient;
         }
 
-        public void SetToken(string token)
+        public async Task<bool> LoginAsync(string email, string password)
         {
-            _token = token;
-        }
-
-        public void SetSessionId(string sessionId)
-        {
-            _sessionId = sessionId;
-        }
-
-        public async Task<bool> LoginAsync(string email, string password, string baseUrl)
-        {
-            if (string.IsNullOrEmpty(baseUrl))
+            CreateHttpClientWithCertificate();
+            if (string.IsNullOrEmpty(BaseUrl))
             {
                 throw new InvalidOperationException("Base URL is not set.");
             }
-            SetUrl(baseUrl);
-            var loginUrl = $"{_baseUrl}/login";
+            var loginUrl = $"{BaseUrl}/login";
             var loginBody = new Dictionary<string, string>
             {
                 { "userId", email },
@@ -145,17 +106,20 @@ namespace SomfyAPI.Services
                     var sessionCookie = cookies.FirstOrDefault(c => c.StartsWith("JSESSIONID"));
                     if (!string.IsNullOrEmpty(sessionCookie))
                     {
-                        _sessionId = sessionCookie.Split(';')[0].Split('=')[1];
+                         var sessionId = sessionCookie.Split(';')[0].Split('=')[1];
                         _httpClient.DefaultRequestHeaders.Remove("Cookie");
-                        _httpClient.DefaultRequestHeaders.Add("Cookie", $"JSESSIONID={_sessionId}");
+                        _httpClient.DefaultRequestHeaders.Add("Cookie", $"JSESSIONID={sessionId}");
                     }
                 }
-                regiesteredUsername = email;
+                Username = email;
+                Password = password;
                 return true;
             }
 
             return false;
         }
+
+        /* LOCAL API USE (currently not available)
 
 
         public async Task<string> GenerateTokenAsync(string _gatewayPin)
@@ -183,7 +147,7 @@ namespace SomfyAPI.Services
 
         public async Task<bool> ActivateTokenAsync(string token)
         {
-            var activateTokenUrl = $"{_baseUrl}/config/{_gatewayPin}/local/tokens";
+            var activateTokenUrl = $"{BaseUrl}/config/{GatewayPin}/local/tokens";
             var activateBody = new
             {
                 label = "My MAUI Blazor Token",
@@ -210,6 +174,7 @@ namespace SomfyAPI.Services
             }
             return response;
         }
+        */
 
 
         public async Task<string> GetSetupJsonAsync()
@@ -222,6 +187,23 @@ namespace SomfyAPI.Services
             }
             Debug.WriteLine("Setup response: " + response);
             return await response.Content.ReadAsStringAsync();
+        }
+
+        public async Task<HttpResponseMessage> SendRequest(string type, string url, StringContent content)
+        {
+            var request = new HttpRequestMessage(new HttpMethod(type), url)
+            {
+                Content = content
+            };
+            var response = await _httpClient.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                return response;
+            }
+            else
+            {
+                throw new HttpRequestException($"Request failed: {response.StatusCode}");
+            }
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Szakdoga.Models
         public string BaseUrl { get; set; }
         [JsonPropertyName("gatewayPin")]
         public string GatewayPin { get; set; }
-        [JsonPropertyName("sessionId")]
-        public string SessionId { get; set; }
-        [JsonPropertyName("token")]
-        public string Token { get; set; }
+        [JsonPropertyName("cloudUsername")]
+        public string CloudUsername { get; set; }
+        [JsonPropertyName("cloudPasswordHashed")]
+        public string CloudPasswordHashed { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace TuyaAPI.Services
 
         private string registeredUsername;
 
-        private TuyaApiService()
+        public TuyaApiService()
         {
             if (_httpClient is null)
             {

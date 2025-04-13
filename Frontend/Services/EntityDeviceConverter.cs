@@ -1,4 +1,5 @@
 ﻿using Szakdoga.Models;
+using Szakdoga.Requests;
 using Device = Szakdoga.Models.Device;
 
 namespace Szakdoga.Services
@@ -19,9 +20,8 @@ namespace Szakdoga.Services
                 returnEntity.Icon = "Resources/Images/somfy_logo.svg";
                 returnEntity.Platform = "Somfy";
                 returnEntity.BaseUrl = service.GetURL();
-                returnEntity.GatewayPin = service.GetGatewayPin();
-                returnEntity.SessionId = service.GetSessionId();
-                returnEntity.Token = "OnlyLocal";
+                returnEntity.CloudUsername = service.Username;
+                returnEntity.CloudPasswordHashed = service.Password;
                 return returnEntity;
             }
             else if (obj.GetType() == typeof(TuyaAPI.Models.Device))
@@ -67,6 +67,52 @@ namespace Szakdoga.Services
         private static string CreateTime()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        internal static AddDeviceRequest ConvertToAddDeviceRequest(Device device)
+        {
+            return new AddDeviceRequest
+            {
+                Name = device.Name,
+                Platform = device.Platform,
+            };
+        }
+
+        internal static AddEntityRequest ConvertToAddEntityRequest(Entity entity)
+        {
+            if(entity.Platform == "Somfy")
+            {
+                return new AddEntityRequest
+                {
+                    Name = entity.Name,
+                    Platform = entity.Platform,
+                    Icon = entity.Icon,
+                    URL = entity.Url,
+                    BaseUrl = (entity as SomfyEntity)?.BaseUrl,
+                    CloudUsername = (entity as SomfyEntity)?.CloudUsername,
+                    CloudPasswordHashed = (entity as SomfyEntity)?.CloudPasswordHashed,
+                    AccessToken = (entity as TuyaEntity)?.AccessToken,
+                    RefreshToken = (entity as TuyaEntity)?.RefreshToken,
+                    Region = (entity as TuyaEntity)?.Region
+                };
+            }
+            else if(entity.Platform == "Tuya")
+            {
+                return new AddEntityRequest
+                {
+                    Name = entity.Name,
+                    Platform = entity.Platform,
+                    Icon = entity.Icon,
+                    URL = entity.Url,
+                    AccessToken = (entity as TuyaEntity)?.AccessToken,
+                    RefreshToken = (entity as TuyaEntity)?.RefreshToken,
+                    Region = (entity as TuyaEntity)?.Region
+                };
+            }
+            else
+            {
+                throw new ArgumentException("Invalid type in entity convert: wrong type");
+            }
         }
 
     }

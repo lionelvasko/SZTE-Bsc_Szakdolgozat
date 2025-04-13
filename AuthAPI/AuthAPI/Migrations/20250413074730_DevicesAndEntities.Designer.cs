@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250409122005_DevicesandEntities")]
-    partial class DevicesandEntities
+    [Migration("20250413074730_DevicesAndEntities")]
+    partial class DevicesAndEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,11 +59,15 @@ namespace AuthAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("DeviceId")
+                    b.Property<string>("CloudPasswordHashed")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("GatewayPin")
+                    b.Property<string>("CloudUsername")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Icon")
@@ -75,14 +79,6 @@ namespace AuthAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Token")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

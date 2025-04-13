@@ -56,11 +56,15 @@ namespace AuthAPI.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("DeviceId")
+                    b.Property<string>("CloudPasswordHashed")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("GatewayPin")
+                    b.Property<string>("CloudUsername")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("DeviceId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Icon")
@@ -72,14 +76,6 @@ namespace AuthAPI.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SessionId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Token")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

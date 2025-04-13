@@ -75,7 +75,7 @@ namespace Szakdoga.Services
             return id;
         }
 
-        public async Task<HttpResponseMessage> AddEntity(Guid deviceId, Entity request)
+        public async Task<HttpResponseMessage> AddEntity(Guid deviceId, AddEntityRequest request)
         {
             var options = new JsonSerializerOptions
             {

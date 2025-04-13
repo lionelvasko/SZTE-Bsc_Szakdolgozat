@@ -20,6 +20,7 @@ namespace Szakdoga
             builder.Services.AddMauiBlazorWebView();
 
             builder.Services.AddScoped<SomfyApiService>();
+            builder.Services.AddScoped<ShutterControl>();
             builder.Services.AddScoped<TuyaApiService>();
             builder.Services.AddSingleton<HttpClient>();
 

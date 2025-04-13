@@ -65,9 +65,8 @@ namespace AuthAPI.Controllers
                         Platform = somfyEntity.Platform,
                         Icon = somfyEntity.Icon,
                         BaseUrl = somfyEntity.BaseUrl,
-                        Token = somfyEntity.Token,
-                        GatewayPin = somfyEntity.GatewayPin,
-                        SessionId = somfyEntity.SessionId
+                        CloudPasswordHashed = somfyEntity.CloudPasswordHashed,
+                        CloudUsername = somfyEntity.CloudUsername
                     };
                     DTOs.Add(entityDTO);
                 }
@@ -97,9 +96,8 @@ namespace AuthAPI.Controllers
                     Platform = somfyEntity.Platform,
                     Icon = somfyEntity.Icon,
                     BaseUrl = somfyEntity.BaseUrl,
-                    Token = somfyEntity.Token,
-                    GatewayPin = somfyEntity.GatewayPin,
-                    SessionId = somfyEntity.SessionId
+                    CloudPasswordHashed = somfyEntity.CloudPasswordHashed,
+                    CloudUsername = somfyEntity.CloudUsername
                 };
                 seDTOs.Add(entityDTO);
             }
@@ -174,9 +172,8 @@ namespace AuthAPI.Controllers
                     DeviceId = device.Id,
                     UserId = user.Id,
                     BaseUrl = model.BaseUrl,
-                    GatewayPin = model.GatewayPin,
-                    SessionId = model.SessionId,
-                    Token = model.Token
+                    CloudUsername = model.CloudUsername,
+                    CloudPasswordHashed = model.CloudPasswordHashed
                 };
                 context.SomfyEntities.Add(entity);
                 var DTO = new SomfyEntityDTO()
@@ -186,9 +183,8 @@ namespace AuthAPI.Controllers
                     Platform = entity.Platform,
                     Icon = entity.Icon,
                     BaseUrl = entity.BaseUrl,
-                    GatewayPin = entity.GatewayPin,
-                    SessionId = entity.SessionId,
-                    Token = entity.Token
+                    CloudUsername = entity.CloudUsername,
+                    CloudPasswordHashed = entity.CloudPasswordHashed
                 };
                 await context.SaveChangesAsync();
                 return CreatedAtAction(nameof(GetDeviceEntities), new { deviceId = device.Id }, DTO);

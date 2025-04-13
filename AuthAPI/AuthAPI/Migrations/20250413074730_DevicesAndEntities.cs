@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class DevicesandEntities : Migration
+    public partial class DevicesAndEntities : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,9 +38,8 @@ namespace AuthAPI.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     BaseUrl = table.Column<string>(type: "TEXT", nullable: false),
-                    GatewayPin = table.Column<string>(type: "TEXT", nullable: false),
-                    SessionId = table.Column<string>(type: "TEXT", nullable: false),
-                    Token = table.Column<string>(type: "TEXT", nullable: false),
+                    CloudUsername = table.Column<string>(type: "TEXT", nullable: false),
+                    CloudPasswordHashed = table.Column<string>(type: "TEXT", nullable: false),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
                     DeviceId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Url = table.Column<string>(type: "TEXT", nullable: false),
