@@ -23,14 +23,14 @@ jobs:
       run: dotnet restore Szakdolgozat.sln -r win-x64
 
     - name: Build all projects (Windows runtime)
-      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release -r win-x64
+      run: dotnet build Szakdolgozat.sln --no-restore --configuration Release
 
     - name: Run AuthAPI to verify it starts
-      run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release -r win-x64
+      run: dotnet run --project ./AuthAPI/AuthAPI.csproj --no-build --configuration Release
       timeout-minutes: 1
       continue-on-error: true
 
     - name: Run Szakdoga (frontend) to verify it starts
-      run: dotnet run --project ./Szakdoga/Szakdoga.csproj --no-build --configuration Release -r win-x64
+      run: dotnet run --project ./Szakdoga/Szakdoga.csproj --no-build --configuration Release
       timeout-minutes: 1
       continue-on-error: true
