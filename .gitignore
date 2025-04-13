@@ -21,3 +21,8 @@
 /TuyaAPI/TuyaAPI/obj/Debug/net9.0/ref/TuyaAPI.dll
 /TuyaAPI/TuyaAPI/bin/Debug/net9.0/TuyaAPI.pdb
 /TuyaAPI/TuyaAPI/bin/Debug/net9.0/TuyaAPI.dll
+/AuthAPI/bin/Debug/net9.0
+/AuthAPI/obj
+/TuyaAPI/bin/Debug/net9.0
+/TuyaAPI/obj
+/.gitignore
