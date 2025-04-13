@@ -24,21 +24,15 @@ namespace Szakdoga
             builder.Services.AddScoped<TuyaApiService>();
             builder.Services.AddScoped<ControlLights>();
             builder.Services.AddSingleton<HttpClient>();
-
             builder.Services.AddScoped<DbService>();
             builder.Services.AddScoped<AuthenticationService>();
-
             builder.Services.AddLocalization();
             builder.Services.AddSingleton<LocalizationService>();
-
             builder.Services.AddSingleton<ThemeChangingService>();
-
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             builder.Services.AddAuthorizationCore();
-
-#if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
-#endif
+            builder.Logging.AddDebug();
 
             var app = builder.Build();
             ServiceHelper.Services = app.Services;
