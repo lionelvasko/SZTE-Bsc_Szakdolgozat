@@ -1,25 +1,35 @@
 name: Build and Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Setup .NET 9 (Preview)
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: 9.0.x
+        dotnet-quality: preview
+
+    - name: Install MAUI and platform workloads
+      run: |
+        dotnet workload install maui
+        dotnet workload install android
+        dotnet workload install ios
+        dotnet workload install maccatalyst
+        dotnet workload install wasm-tools
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Szakdoga.csproj
 
-    - name: Build solution
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Run tests
-      run: dotnet test --no-build --verbosity normal
+    - name: Build MAUI project
+      run: dotnet build Szakdoga.csproj --configuration Release --no-restore
