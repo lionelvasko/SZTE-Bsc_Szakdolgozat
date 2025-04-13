@@ -222,9 +222,6 @@
   <data name="My position" xml:space="preserve">
     <value>My position</value>
   </data>
-  <data name="On/Off" xml:space="preserve">
-    <value>On/Off</value>
-  </data>
   <data name="Device form" xml:space="preserve">
     <value>Device form</value>
   </data>
@@ -293,5 +290,23 @@
   </data>
   <data name="Enter device name" xml:space="preserve">
     <value>Enter device name</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>On</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="Current Password" xml:space="preserve">
+    <value>Current Password</value>
+  </data>
+  <data name="Confirm your password" xml:space="preserve">
+    <value>Confirm your password</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Update User" xml:space="preserve">
+    <value>Update User</value>
   </data>
 </root>

@@ -60,7 +60,7 @@
                             @if (!string.IsNullOrEmpty(passwordChangeRequest.NewPassword))
                             {
                                 <div class="mb-4">
-                                    <label for="passwordConfirm" class="form-label fw-bold">@Localizer["Confirm Password"]</label>
+                                    <label for="passwordConfirm" class="form-label fw-bold">@Localizer["Confirm password"]</label>
                                     <input type="password" class="form-control shadow-sm border-secondary" id="passwordConfirm" @bind="passwordChangeRequest.ConfirmPassword" placeholder="@Localizer["Confirm your password"]" />
                                     <ValidationMessage For="@(() => passwordChangeRequest.ConfirmPassword)" />
                                 </div>
@@ -228,7 +228,7 @@
 
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
-    [Inject] private LocalizationService LocalizationService { get; set; }
+    [Inject] private GlobalizationService LocalizationService { get; set; }
     [Inject] private ThemeChangingService ThemeChangingService { get; set; }
     [Inject] private DbService DbService { get; set; }
 }

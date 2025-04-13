@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Szakdoga.Resources.Localization {
+namespace Szakdoga.Resources.Globalization {
     using System;
     
     

@@ -1,14 +1,14 @@
 ﻿using System.Globalization;
 using System.Resources;
-using Szakdoga.Resources.Localization;
+using Szakdoga.Resources.Globalization;
 
 namespace Szakdoga.Services
 {
-    public class LocalizationService
+    public class GlobalizationService
     {
         private readonly ResourceManager _resourceManager;
 
-        public LocalizationService()
+        public GlobalizationService()
         {
             _resourceManager = new ResourceManager(typeof(AppResources));
         }

@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 using System.Net.Http.Headers;
-using Szakdoga.Resources.Localization;
+using Szakdoga.Resources.Globalization;
 using Szakdoga.Services;
 
 namespace Szakdoga

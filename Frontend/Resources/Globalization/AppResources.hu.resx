@@ -118,180 +118,195 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add device" xml:space="preserve">
-    <value>Gerät hinzufügen</value>
+    <value>Eszköz hozzáadása</value>
   </data>
   <data name="Add device form" xml:space="preserve">
-    <value>Geräteformular hinzufügen</value>
+    <value>Eszközűrlap hozzáadása</value>
   </data>
   <data name="Already have an account?" xml:space="preserve">
-    <value>Hast du schon ein Konto?</value>
+    <value>Már van fiókja?</value>
   </data>
   <data name="Application settings" xml:space="preserve">
-    <value>Anwendungseinstellungen</value>
+    <value>Alkalmazásbeállítások</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Schließen</value>
+    <value>Bezárás</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
-    <value>Armaturenbrett</value>
+    <value>Eszközök</value>
   </data>
   <data name="Devices" xml:space="preserve">
-    <value>Geräte</value>
+    <value>Eszközök</value>
   </data>
   <data name="Don't have an account?" xml:space="preserve">
-    <value>Sie haben noch kein Konto?</value>
+    <value>Nincs fiókja?</value>
   </data>
   <data name="Email address" xml:space="preserve">
-    <value>E-Mail-Adresse</value>
+    <value>E-mail cím</value>
   </data>
   <data name="Entities" xml:space="preserve">
-    <value>Entitäten</value>
+    <value>Entitások</value>
   </data>
   <data name="First name" xml:space="preserve">
-    <value>Vorname</value>
+    <value>Keresztnév</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Sprache</value>
+    <value>Nyelv</value>
   </data>
   <data name="Last name" xml:space="preserve">
-    <value>Nachname</value>
+    <value>Vezetéknév</value>
   </data>
   <data name="Location" xml:space="preserve">
-    <value>Standort</value>
+    <value>Régió</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Bejelentkezés</value>
   </data>
   <data name="Login here" xml:space="preserve">
-    <value>Melden Sie sich hier an</value>
+    <value>Bejelentkezés itt</value>
   </data>
   <data name="Login Info" xml:space="preserve">
-    <value>Anmeldeinformationen</value>
+    <value>Bejelentkezési adatok</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Abmelden</value>
+    <value>Kijelentkezés</value>
   </data>
   <data name="Only the online API is available." xml:space="preserve">
-    <value>Es ist nur die Online-API verfügbar.</value>
+    <value>Csak az online API érhető el.</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Jelszó</value>
   </data>
   <data name="Password again" xml:space="preserve">
-    <value>Nochmals Passwort</value>
+    <value>Ismét jelszó</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Registrieren</value>
+    <value>Regisztráció</value>
   </data>
   <data name="Register here" xml:space="preserve">
-    <value>Registrieren Sie sich hier</value>
+    <value>Regisztráljon itt</value>
   </data>
   <data name="Register info" xml:space="preserve">
-    <value>Informationen registrieren</value>
+    <value>Regisztrációs információ</value>
   </data>
   <data name="Remember me" xml:space="preserve">
-    <value>Erinnere dich an mich</value>
+    <value>Emlékezz rám</value>
   </data>
   <data name="Save changes" xml:space="preserve">
-    <value>Änderungen speichern</value>
+    <value>Módosítások mentése</value>
   </data>
   <data name="Save device" xml:space="preserve">
-    <value>Gerät speichern</value>
+    <value>Eszköz mentése</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Einstellungen</value>
+    <value>Beállítások</value>
   </data>
   <data name="Thesis" xml:space="preserve">
-    <value>These</value>
+    <value>Szakdolgozat</value>
   </data>
   <data name="Theme" xml:space="preserve">
-    <value>Thema</value>
+    <value>Téma</value>
   </data>
   <data name="User settings" xml:space="preserve">
-    <value>Benutzereinstellungen</value>
+    <value>Felhasználói beállítások</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Benutzername</value>
+    <value>Felhasználónév</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Offen</value>
+    <value>Nyitás</value>
   </data>
   <data name="Stop" xml:space="preserve">
-    <value>Stoppen</value>
+    <value>Megállítás</value>
   </data>
   <data name="My position" xml:space="preserve">
-    <value>Meine Position</value>
-  </data>
-  <data name="On/Off" xml:space="preserve">
-    <value>Ein/Aus</value>
+    <value>Saját pozíció</value>
   </data>
   <data name="Device form" xml:space="preserve">
-    <value>Geräteform</value>
+    <value>Készülék űrlap</value>
   </data>
   <data name="Local" xml:space="preserve">
-    <value>Lokal</value>
+    <value>Helyi</value>
   </data>
   <data name="Online" xml:space="preserve">
     <value>Online</value>
   </data>
   <data name="Select a region" xml:space="preserve">
-    <value>Wählen Sie eine Region aus</value>
+    <value>Válasszon ki egy régiót</value>
   </data>
   <data name="Enter your email" xml:space="preserve">
-    <value>Geben Sie Ihre E-Mail-Adresse ein</value>
+    <value>Adja meg e-mail címét</value>
   </data>
   <data name="Enter your first name" xml:space="preserve">
-    <value>Geben Sie Ihren Vornamen ein</value>
+    <value>Írja be a keresztnevét</value>
   </data>
   <data name="Confirm password" xml:space="preserve">
-    <value>Passwort bestätigen</value>
+    <value>Jelszó újra</value>
   </data>
   <data name="Enter your last name" xml:space="preserve">
-    <value>Geben Sie Ihren Nachnamen ein</value>
+    <value>Írja be a vezetéknevét</value>
   </data>
   <data name="Enter your email address" xml:space="preserve">
-    <value>Geben Sie Ihre E-Mail-Adresse ein</value>
+    <value>Adja meg e-mail címét</value>
   </data>
   <data name="Enter your password" xml:space="preserve">
-    <value>Geben Sie Ihr Passwort ein</value>
+    <value>Adja meg jelszavát</value>
   </data>
   <data name="Enter your password again" xml:space="preserve">
-    <value>Geben Sie Ihr Passwort erneut ein</value>
+    <value>Írja be újra a jelszavát</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Név</value>
   </data>
   <data name="Light" xml:space="preserve">
-    <value>Licht</value>
+    <value>Világos</value>
   </data>
   <data name="Dark" xml:space="preserve">
-    <value>Dunkel</value>
+    <value>Sötét</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>Englisch</value>
+    <value>Angol</value>
   </data>
   <data name="German" xml:space="preserve">
-    <value>Deutsch</value>
+    <value>Német</value>
   </data>
   <data name="Hungarian" xml:space="preserve">
-    <value>Ungarisch</value>
+    <value>Magyar</value>
   </data>
   <data name="Enable notifications" xml:space="preserve">
-    <value>Benachrichtigungen aktivieren</value>
+    <value>Értesítések engedélyezése</value>
   </data>
   <data name="Select language" xml:space="preserve">
-    <value>Sprache auswählen</value>
+    <value>Válasszon nyelvet</value>
   </data>
   <data name="Region" xml:space="preserve">
-    <value>Region</value>
+    <value>Régió</value>
   </data>
   <data name="Device name" xml:space="preserve">
-    <value>Gerätename</value>
+    <value>Eszköz neve</value>
   </data>
   <data name="API type" xml:space="preserve">
-    <value>API-Typ</value>
+    <value>API típusa</value>
   </data>
   <data name="Enter device name" xml:space="preserve">
-    <value>Geben Sie den Gerätenamen ein</value>
+    <value>Adja meg az eszköz nevét</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>Bekapcsol</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Kikapcsol</value>
+  </data>
+  <data name="Current Password" xml:space="preserve">
+    <value>Jelenlegi jelszó</value>
+  </data>
+  <data name="Confirm your password" xml:space="preserve">
+    <value>Erőstse meg az új jelszavát</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>Jelszócsere</value>
+  </data>
+  <data name="Update User" xml:space="preserve">
+    <value>Adatok frissítése</value>
   </data>
 </root>
