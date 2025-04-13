@@ -9,12 +9,14 @@
         <EditForm Model="registerModel" OnValidSubmit="Submit">
             <DataAnnotationsValidator />
             <div class="mb-3">
-                <label for="firstname" class="form-label">@Localizer["First name"]</label>
-                <input type="text" id="firstname" @bind="registerModel.FirstName" placeholder="@Localizer["Enter your first name"]" class="form-control bg-transparent text-info" />
+                <label for="firstName" class="form-label">@Localizer["First name"]</label>
+                <input type="text" id="firstName" @bind="registerModel.FirstName" placeholder="@Localizer["Enter your first name"]" class="form-control bg-transparent text-info" />
+                <ValidationMessage For="@(() => registerModel.FirstName)" />
             </div>
             <div class="mb-3">
-                <label for="lastname" class="form-label">@Localizer["First name"]</label>
-                <input type="text" id="lastname" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-info" />
+                <label for="lastName" class="form-label">@Localizer["First name"]</label>
+                <input type="text" id="lastName" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-info" />
+                <ValidationMessage For="@(() => registerModel.LastName)" />
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">@Localizer["Email address"]</label>
@@ -28,7 +30,8 @@
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">@Localizer["Confirm password"]</label>
-                <input type="password" id="confirmPassword" @bind="ConfirmPassword" placeholder="@Localizer["Enter your password again"]" class="form-control bg-transparent text-info" />
+                <input type="password" id="confirmPassword" @bind="registerModel.ConfirmPassword" placeholder="@Localizer["Enter your password again"]" class="form-control bg-transparent text-info" />
+                <ValidationMessage For="@(() => registerModel.ConfirmPassword)" />
             </div>
             <button type="submit" class="btn btn-primary w-100 shadow-sm">@Localizer["Register"]</button>
         </EditForm>

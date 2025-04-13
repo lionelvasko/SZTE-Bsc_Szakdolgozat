@@ -33,28 +33,48 @@
         <div class="container shadow-lg p-5 rounded">
             @if (activeTab == 1)
             {
-                <div>
-                    <h3 class="text-center text-info mb-4">@Localizer["User settings"]</h3>
-                    <form>
-                        <div class="mb-4">
-                            <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
-                            <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="FirstName" class="form-label fw-bold">@Localizer["First name"]</label>
-                            <input type="text" class="form-control shadow-sm border-secondary" id="FirstName" @bind="userModel.FirstName" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="LastName" class="form-label fw-bold">@Localizer["Last name"]</label>
-                            <input type="text" class="form-control shadow-sm border-secondary" id="LastName" @bind="userModel.LastName" />
-                        </div>
-                        <div class="mb-4">
-                            <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
-                            <input type="password" class="form-control shadow-sm border-secondary" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
-                        </div>
-                        <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Save changes"]</button>
-                    </form>
-                </div>
+                <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
+                    <Authorized Context="authContext">
+                        <h3 class="text-center text-info mb-4">@Localizer["User settings"]</h3>
+                        <EditForm Model="@userModel" OnValidSubmit="HandleProfileChange" Context="editContext">
+                            <div class="mb-4">
+                                <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
+                                <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
+                            </div>
+                            <div class="mb-4">
+                                <label for="FirstName" class="form-label fw-bold">@Localizer["First name"]</label>
+                                <input type="text" class="form-control shadow-sm border-secondary" id="FirstName" @bind="userModel.FirstName" />
+                            </div>
+                            <div class="mb-4">
+                                <label for="LastName" class="form-label fw-bold">@Localizer["Last name"]</label>
+                                <input type="text" class="form-control shadow-sm border-secondary" id="LastName" @bind="userModel.LastName" />
+                            </div>
+
+                            <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Update User"]</button>
+                        </EditForm>
+                        <EditForm Model="@passwordChangeRequest" OnValidSubmit="HandlePasswordChange" Context="editContext">
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-bold">@Localizer["Password"]</label>
+                                <input type="password" class="form-control shadow-sm border-secondary" id="password" @bind="passwordChangeRequest.NewPassword" placeholder="@Localizer["Enter your password"]" />
+                                <ValidationMessage For="@(() => passwordChangeRequest.NewPassword)" />
+                            </div>
+                            @if (!string.IsNullOrEmpty(passwordChangeRequest.NewPassword))
+                            {
+                                <div class="mb-4">
+                                    <label for="passwordConfirm" class="form-label fw-bold">@Localizer["Confirm Password"]</label>
+                                    <input type="password" class="form-control shadow-sm border-secondary" id="passwordConfirm" @bind="passwordChangeRequest.ConfirmPassword" placeholder="@Localizer["Confirm your password"]" />
+                                    <ValidationMessage For="@(() => passwordChangeRequest.ConfirmPassword)" />
+                                </div>
+                                <div class="mb-4">
+                                    <label for="currentPassword" class="form-label fw-bold">@Localizer["Current Password"]</label>
+                                    <input type="password" class="form-control shadow-sm border-secondary" id="currentPassword" @bind="passwordChangeRequest.CurrentPassword" placeholder="@Localizer["Current Password"]" />
+                                    <ValidationMessage For="@(() => passwordChangeRequest.CurrentPassword)" />
+                                </div>
+                            }
+                            <button type="submit" class="btn btn-info btn-lg shadow w-100" style="border-radius: 2rem;">@Localizer["Change Password"]</button>
+                        </EditForm>
+                    </Authorized>
+                </Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
             }
             else if (activeTab == 2)
             {
@@ -90,14 +110,34 @@
     </div>
 </div>
 
+@if (ShowModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Register Info</h5>
+                    <button type="button" class="btn-close" @onclick="OkModal" aria-label="@Localizer["Close"]"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@ModalMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="OkModal">@Localizer["Ok"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 @code {
     private int activeTab = 2;
     private string theme = "light";
     private string language;
-
-    private string password = null;
-
     private UserModel userModel;
+    private PasswordChangeRequest passwordChangeRequest = new PasswordChangeRequest();
+    private bool ShowModal = false;
+    private string ModalMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -145,9 +185,49 @@
         }
     }
 
+    private async Task HandleProfileChange()
+    {
+        var updateNameRequest = new UpdateNameRequest
+            {
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
+            };
+        var result = await DbService.UpdateUserName(updateNameRequest);
+        if (result.IsSuccessStatusCode)
+        {
+            ModalMessage = Localizer["User settings updated successfully"];
+            ShowModal = true;
+        }
+        else
+        {
+            ModalMessage = Localizer["Failed to update user settings"];
+            ShowModal = true;
+        }
+    }
+
+    private async Task HandlePasswordChange()
+    {
+        var result = await DbService.UpdateUserPassword(passwordChangeRequest);
+        if (result.IsSuccessStatusCode)
+        {
+            ModalMessage = Localizer["Password changed successfully"];
+            ShowModal = true;
+        }
+        else
+        {
+            ModalMessage = Localizer["Failed to change password"];
+            ShowModal = true;
+        }
+    }
+
+    private void OkModal()
+    {
+        ShowModal = false;
+        ModalMessage = "";
+    }
+
 
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
-    [Inject] private IJSRuntime JSRuntime { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     [Inject] private LocalizationService LocalizationService { get; set; }
     [Inject] private ThemeChangingService ThemeChangingService { get; set; }

@@ -28,12 +28,13 @@ namespace AuthAPI.Controllers
             if (userId == null) return Unauthorized();
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) return NotFound();
-            return Ok(new UserDTO
+            var userDto = new UserDTO
             {
-                email = user.Email,
-                firstName = user.FirstName,
-                lastName = user.LastName
-            });
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            };
+            return Ok(userDto);
         }
 
         [HttpPut("Password")]

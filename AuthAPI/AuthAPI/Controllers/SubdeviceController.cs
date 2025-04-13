@@ -18,15 +18,15 @@ namespace AuthAPI.Controllers
 
         // A device-hoz tartozó entitások lekérésére
         [HttpGet("{maindeviceId}")]
-        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceSubdevices(string deviceId)
+        public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceSubdevices(string maindeviceId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(deviceId) && d.UserId == userId);
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(maindeviceId) && d.UserId == userId);
             if (device == null) return NotFound();
             if (device.Platform == "Tuya")
             {
                 var tuyaEntities = await context.TuyaEntities
-                    .Where(e => e.DeviceId == Guid.Parse(deviceId) && e.UserId == userId)
+                    .Where(e => e.DeviceId == Guid.Parse(maindeviceId) && e.UserId == userId)
                     .ToListAsync();
                 if (tuyaEntities.Count == 0)
                 {
@@ -53,7 +53,7 @@ namespace AuthAPI.Controllers
             else if (device.Platform == "Somfy")
             {
                 var somfyEntities = await context.SomfyEntities
-                    .Where(e => e.DeviceId == Guid.Parse(deviceId) && e.UserId == userId)
+                    .Where(e => e.DeviceId == Guid.Parse(maindeviceId) && e.UserId == userId)
                     .ToListAsync();
                 var DTOs = new List<SomfyEntityDTO>();
                 foreach (var somfyEntity in somfyEntities)
@@ -125,11 +125,11 @@ namespace AuthAPI.Controllers
 
         // Új entitás hozzáadása a device-hoz
         [HttpPost("{maindeviceId}")]
-        public async Task<ActionResult<EntityDTO>> AddSubdevice(string deviceId, AddEntityRequest model)
+        public async Task<ActionResult<EntityDTO>> AddSubdevice(string maindeviceId, AddEntityRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await userManager.FindByIdAsync(userId);
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(deviceId.ToString()) && d.UserId == userId && d.Platform == model.Platform);
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(maindeviceId.ToString()) && d.UserId == userId && d.Platform == model.Platform);
 
             if (device == null) return NotFound();
 

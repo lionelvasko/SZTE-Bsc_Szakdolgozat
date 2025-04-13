@@ -27,7 +27,7 @@ namespace Szakdoga.Services
         }
         public async Task<List<Models.Device>> GetAllDeviceForUSer()
         {
-            var response = await _httpClient.GetAsync("http://localhost:5223/api/Devices");
+            var response = await _httpClient.GetAsync("http://localhost:5223/api/MainDevice");
             if(response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
@@ -38,7 +38,7 @@ namespace Szakdoga.Services
         }
         public async Task<List<Models.Entity>> GetAllEntitesForUser()
         {
-            var response = await _httpClient.GetAsync("http://localhost:5223/api/Entity/UserEntities");
+            var response = await _httpClient.GetAsync("http://localhost:5223/api/SubDevice");
             var json = await response.Content.ReadAsStringAsync();
             var entities = JsonSerializer.Deserialize(
                 json,
@@ -49,7 +49,7 @@ namespace Szakdoga.Services
 
         public async Task<List<Entity>> GetAllEntitiesForDevice(string deviceId)
         {
-            var response = await _httpClient.GetAsync($"http://localhost:5223/api/Entities/DeviceEntities/{deviceId}");
+            var response = await _httpClient.GetAsync($"http://localhost:5223/api/SubDevice/{deviceId}");
             var json = await response.Content.ReadAsStringAsync();
             var entities = JsonSerializer.Deserialize(
                 json,
@@ -60,6 +60,7 @@ namespace Szakdoga.Services
         public async Task<UserModel> GetUserInfos()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/User");
+            Debug.WriteLine(await response.Content.ReadAsStringAsync());
             var json = await response.Content.ReadAsStringAsync();
             var user = JsonSerializer.Deserialize<UserModel>(json);
             return user;
@@ -67,7 +68,7 @@ namespace Szakdoga.Services
         public async Task<Guid> AddDevice(AddDeviceRequest request)
         {
             var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("http://localhost:5223/api/Devices", json);
+            var response = await _httpClient.PostAsync("http://localhost:5223/api/MainDevice", json);
             response.EnsureSuccessStatusCode();
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<Dictionary<string, Guid>>(jsonResponse);
@@ -87,29 +88,29 @@ namespace Szakdoga.Services
             var requestData = JsonSerializer.Serialize(request, options);
             var json = new StringContent(requestData, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync($"http://localhost:5223/api/Entity/{deviceId}", json);
+            var response = await _httpClient.PostAsync($"http://localhost:5223/api/SubDevice/{deviceId}", json);
             return response;
         }
         public async Task<HttpResponseMessage> DeleteDevice(string deviceId)
         {
-            var response = await _httpClient.DeleteAsync($"http://localhost:5223/api/Device/{deviceId}");
+            var response = await _httpClient.DeleteAsync($"http://localhost:5223/api/MainDevice/{deviceId}");
             return response;
         }
         public async Task<HttpResponseMessage> DeleteEntity(string entityId)
         {
-            var response = await _httpClient.DeleteAsync($"http://localhost:5223/api/Entity/{entityId}");
+            var response = await _httpClient.DeleteAsync($"http://localhost:5223/api/SubDevice/{entityId}");
             return response;
         }
-        public async Task<HttpResponseMessage> UpdateUserPassword(UpdatePasswordRequest request)
+        public async Task<HttpResponseMessage> UpdateUserPassword(PasswordChangeRequest request)
         {
             var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdatePassword", json);
+            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/Password", json);
             return response;
         }
         public async Task<HttpResponseMessage> UpdateUserName(UpdateNameRequest request)
         {
             var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/UpdateName", json);
+            var response = await _httpClient.PutAsync("http://localhost:5223/api/User/Name", json);
             return response;
         }
     }

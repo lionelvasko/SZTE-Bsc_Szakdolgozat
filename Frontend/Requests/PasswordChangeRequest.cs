@@ -1,27 +1,22 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Szakdoga.Requests
 {
-    public class RegisterRequest
+    public class PasswordChangeRequest
     {
         [Required]
-        [EmailAddress(ErrorMessage = "Invalid email address format.")]
-        public string Email { get; set; }
-
-        [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
+        public string CurrentPassword { get; set; }
         [Required]
         [StringLength(100, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
-
+        public string NewPassword { get; set; }
         [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        internal string ConfirmPassword { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }

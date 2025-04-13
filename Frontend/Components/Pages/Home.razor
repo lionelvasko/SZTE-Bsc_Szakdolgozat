@@ -211,14 +211,14 @@
                     <p><strong>Device Entity Count:</strong> @selectedDevice.CreationTime</p>
                 </div>
                 <div class="modal-footer">
-                    
-                    <button type="button" class="btn btn-danger" @onclick="async () => await DbService.DeleteDevice(selectedDevice.Id.ToString())">Delete</button>
+
+                    <button type="button" class="btn btn-danger" @onclick="async () => { await DbService.DeleteDevice(selectedDevice.Id.ToString()); NavigationManager.Refresh(); }">@Localizer["Delete"]</button>
                     <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-}
+                                                                   }
 
 @code {
 
@@ -340,6 +340,7 @@
                     var entityRequest = EntityDeviceConverter.ConvertToAddEntityRequest(entity);
                     var responseE = await DbService.AddEntity(deviceID, entityRequest);
                 }
+                NavigationManager.NavigateTo("/");
             }
             catch (Exception ex)
             {
@@ -365,6 +366,7 @@
 
                     var responseE = await DbService.AddEntity(deviceID, entityRequest);
                 }
+                NavigationManager.NavigateTo("/");
             }
             catch (Exception ex)
             {
@@ -373,11 +375,12 @@
         }
     }
 
-    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
-    [Inject] private HttpClient HttpClient { get; set; }
-    [Inject] private DbService DbService { get; set; }
-    [Inject] private StartupService StartupService { get; set; }
-    [Inject] private SomfyApiService SomfyApiService { get; set; }
-    [Inject] private TuyaApiService TuyaApiService { get; set; }
-    [Inject] private ShutterControl ShutterControl { get; set; }
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set;}
+    [Inject] private HttpClient HttpClient { get; set;}
+    [Inject] private DbService DbService { get; set;}
+    [Inject] private StartupService StartupService { get; set;}
+    [Inject] private SomfyApiService SomfyApiService { get; set;}
+    [Inject] private TuyaApiService TuyaApiService { get; set;}
+    [Inject] private ShutterControl ShutterControl { get; set;}
+    [Inject] private NavigationManager NavigationManager { get; set;}
 }
