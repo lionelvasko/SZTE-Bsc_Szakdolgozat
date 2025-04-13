@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/" # A gyökérkönyvtárban található a Szakdoga.csproj
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "Microsoft.NETCore.App"
+        versions: ["9.0.0-preview.*"]
