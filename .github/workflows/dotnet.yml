@@ -11,26 +11,25 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Setup .NET 9 Preview
+    - name: Setup .NET 9 (Preview)
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
         dotnet-quality: preview
 
-    - name: Install required .NET workloads (MAUI + ASP.NET Core)
+    - name: Install MAUI and platform workloads
       run: |
         dotnet workload install maui
         dotnet workload install android
+        dotnet workload install ios
         dotnet workload install maccatalyst
         dotnet workload install wasm-tools
 
-    - name: Display installed workloads (debug)
-      run: dotnet workload list
+    - name: Restore dependencies
+      run: dotnet restore Szakdoga.csproj
 
-    - name: Restore dependencies for all projects
-      run: dotnet restore
-
-    - name: Build the solution (Release)
-      run: dotnet build --configuration Release --no-restore
+    - name: Build MAUI project
+      run: dotnet build Szakdoga.csproj --configuration Release --no-restore
