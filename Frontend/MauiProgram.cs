@@ -38,7 +38,6 @@ namespace Szakdoga
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
-            builder.Logging.AddDebug();
 #endif
 
             var app = builder.Build();
