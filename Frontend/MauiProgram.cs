@@ -22,10 +22,10 @@ namespace Szakdoga
             builder.Services.AddScoped<SomfyApiService>();
             builder.Services.AddScoped<ShutterControl>();
             builder.Services.AddScoped<TuyaApiService>();
+            builder.Services.AddScoped<ControlLights>();
             builder.Services.AddSingleton<HttpClient>();
 
             builder.Services.AddScoped<DbService>();
-            builder.Services.AddScoped<StartupService>();
             builder.Services.AddScoped<AuthenticationService>();
 
             builder.Services.AddLocalization();

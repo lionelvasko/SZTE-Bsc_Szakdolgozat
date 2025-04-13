@@ -1,20 +1,18 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
 namespace TuyaAPI.Services
 {
-    public static class ControlLights
+    public class ControlLights
     {
 
-        private static readonly TuyaApiService _tuyaApiService = TuyaApiService.GetInstance();
-        private static readonly HttpClient _httpClient = _tuyaApiService.GetHttpClient();
-        private static readonly string _baseUrl = _tuyaApiService.GetUrl();
-        private static readonly string _accessToken = _tuyaApiService.GetAccessToken();
+        private readonly TuyaApiService _tuyaApiService = TuyaApiService.GetInstance();
 
-        public static async Task<HttpStatusCode> ControlDevice(string deviceId, string action, string value_name, string new_state)
+        public async Task<HttpStatusCode> ControlDevice(string deviceId, string action, string value_name, string new_state)
         {
-            var url = $"{_baseUrl}skill";
+            var url = $"{_tuyaApiService.GetUrl()}skill";
             var requestBody = new
             {
                 header = new
@@ -25,13 +23,13 @@ namespace TuyaAPI.Services
                 },
                 payload = new
                 {
-                    accessToken = _accessToken,
+                    accessToken = _tuyaApiService.AccesToken,
                     devId = deviceId,
                     value_name = new_state,
                 }
             };
             using var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
+            var response = await _tuyaApiService.GetHttpClient().PostAsync(url, content);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Failed to control device: {response.StatusCode}");
@@ -39,43 +37,22 @@ namespace TuyaAPI.Services
             return response.StatusCode;
         }
 
-        public static async Task ToggleDeviceAsync(string deviceId, bool currentState)
+        public async Task ToggleDeviceAsync(string deviceId, bool currentState)
         {
-            string newState = (!currentState) ? "1" : "0";
-            var response = await ControlDevice(deviceId, "turnOnOff", "value", newState);
-
-            if (response == HttpStatusCode.OK)
-            {
-                // Frissítési logika a memóriában vagy UI-ban
-                Console.WriteLine($"Device {deviceId} state changed to {newState}");
-            }
+            var response = await ControlDevice(deviceId, "turnOnOff", "value", "0");
         }
 
-        public static async Task ChangeBrightnessAsync(string deviceId, int newBrightness)
+        public async Task ChangeBrightnessAsync(string deviceId, int newBrightness)
         {
             string brightnessValue = (newBrightness * 10).ToString();
             var response = await ControlDevice(deviceId, "brightnessSet", "value", brightnessValue);
-
-            if (response == HttpStatusCode.OK)
-            {
-                // Frissítési logika a memóriában vagy UI-ban
-                Console.WriteLine($"Device {deviceId} brightness set to {newBrightness}");
-            }
         }
 
-        public static async Task ChangeColorTemperatureAsync(string deviceId, int newTemperature)
+        public async Task ChangeColorTemperatureAsync(string deviceId, int newTemperature)
         {
-            // min temp = 1000, reports as 1000
-            // max temp = 10000, reports as 36294
             int mappedTemperature = (int)((newTemperature - 1000) * 4.033) + 1000;
             string tempValue = mappedTemperature.ToString();
             var response = await ControlDevice(deviceId, "colorTemperatureSet", "value", tempValue);
-
-            if (response == HttpStatusCode.OK)
-            {
-                // Frissítési logika a memóriában vagy UI-ban
-                Console.WriteLine($"Device {deviceId} color temperature set to {mappedTemperature}");
-            }
         }
     }
 }

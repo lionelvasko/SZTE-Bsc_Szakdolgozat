@@ -10,14 +10,13 @@ namespace TuyaAPI.Services
     {
         private static TuyaApiService? _instance;
         private HttpClient _httpClient;
+
         private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
         private readonly string PLATFORM = "tuya";
 
-        private string region;
-        private string _accessToken;
-        private string _refreshToken;
-
-        private string registeredUsername;
+        public string Region { get; set; }
+        public string AccesToken { get; set; }
+        public string RefreshToken { get; set; }
 
         public TuyaApiService()
         {
@@ -39,29 +38,13 @@ namespace TuyaAPI.Services
             return _instance;
         }
 
-        public string GetAccessToken()
-        {
-            return _accessToken;
-        }
-
-        public string GetRefreshToken()
-        {
-            return _refreshToken;
-        }
-
         public HttpClient GetHttpClient()
         {
             return _httpClient;
         }
-
-        public string GetRegion()
-        {
-            return region;
-        }
-
         public void SetUrl(string countryCode)
         {
-            region = countryCode;
+            Region = countryCode;
             if (countryCode == "1")
             {
                 _baseUrl.Replace("eu", "us");
@@ -81,17 +64,6 @@ namespace TuyaAPI.Services
             return _baseUrl;
         }
 
-        public string GetRegisteredUsername()
-        {
-            return registeredUsername;
-        }
-
-        public void SetTokens(string accessToken, string refreshToken)
-        {
-            _accessToken = accessToken;
-            _refreshToken = refreshToken;
-        }
-
         public async Task<HttpStatusCode> Login(string username, string password, string countryCode)
         {
             var loginBody = new Dictionary<string, string>
@@ -104,31 +76,23 @@ namespace TuyaAPI.Services
             };
 
             using var content = new FormUrlEncodedContent(loginBody);
-            Debug.WriteLine("Login URL: " + $"{_baseUrl}/homeassistant/auth.do");
             var response = await _httpClient.PostAsync($"{_baseUrl}auth.do", content);
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                Debug.WriteLine("Login response: " + responseContent);
                 var loginResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-                _accessToken = loginResponse.GetProperty("access_token").GetString();
-                _refreshToken = loginResponse.GetProperty("refresh_token").GetString();
-
-                registeredUsername = username;
-            }
-            else
-            {
-                Debug.WriteLine("Login failed: " + response.StatusCode);
+                AccesToken = loginResponse.GetProperty("access_token").GetString();
+                RefreshToken = loginResponse.GetProperty("refresh_token").GetString();
             }
             return response.StatusCode;
         }
 
-        public async Task<HttpStatusCode> RefreshToken()
+        public async Task<HttpStatusCode> DoRefreshToken()
         {
             var refreshBody = new Dictionary<string, string>
             {
                 { "grant_type", "refresh_token" },
-                { "refresh_token", _refreshToken },
+                { "refresh_token", RefreshToken },
                 { "rand", RandomNumberGenerator.GetInt32(0, 2).ToString() }
             };
             using var content = new FormUrlEncodedContent(refreshBody);
@@ -137,8 +101,8 @@ namespace TuyaAPI.Services
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var refreshResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-                _accessToken = refreshResponse.GetProperty("access_token").GetString();
-                _refreshToken = refreshResponse.GetProperty("refresh_token").GetString();
+                AccesToken = refreshResponse.GetProperty("access_token").GetString();
+                RefreshToken = refreshResponse.GetProperty("refresh_token").GetString();
             }
             return response.StatusCode;
         }
@@ -147,7 +111,7 @@ namespace TuyaAPI.Services
         {
             if (refreshAccessToken)
             {
-                await RefreshToken();
+                await DoRefreshToken();
             }
 
             var url = $"{_baseUrl}skill";
@@ -161,7 +125,7 @@ namespace TuyaAPI.Services
                 },
                 payload = new
                 {
-                    accessToken = _accessToken
+                    accessToken = AccesToken,
                 }
             };
 

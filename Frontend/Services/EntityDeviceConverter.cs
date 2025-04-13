@@ -34,9 +34,9 @@ namespace Szakdoga.Services
                 returnEntity.Name = ent.Name;
                 returnEntity.Icon = ent.Icon;
                 returnEntity.Platform = "Tuya";
-                returnEntity.AccessToken = service.GetAccessToken();
-                returnEntity.RefreshToken = service.GetRefreshToken();
-                returnEntity.Region = service.GetRegion();
+                returnEntity.AccessToken = service.AccesToken;
+                returnEntity.RefreshToken = service.RefreshToken;
+                returnEntity.Region = service.Region;
 
                 return returnEntity;
             }

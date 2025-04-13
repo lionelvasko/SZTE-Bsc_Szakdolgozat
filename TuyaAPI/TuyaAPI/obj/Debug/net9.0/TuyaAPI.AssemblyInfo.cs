@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TuyaAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aefd8ae7bab007363ae70ec4000522aa5214c345")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c62de6296bb8eb26fce9c13e4f2fc6510897940")]
 [assembly: System.Reflection.AssemblyProductAttribute("TuyaAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TuyaAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

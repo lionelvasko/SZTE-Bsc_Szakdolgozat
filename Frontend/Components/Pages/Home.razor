@@ -57,12 +57,22 @@
                                         <div @onclick="() => ShowEntityDetails(tuyaEntity)">
                                             <h5 class="card-title">@tuyaEntity.Name</h5>
                                             <img src="@tuyaEntity.Icon" alt="@tuyaEntity.Name" style="width: 100px; height: 100px;" />
-                                        </div>
-                                        <div class="d-flex flex-column gap-2 mt-3">
                                             <div class="d-flex flex-column gap-2 mt-3">
+                                                <button class="btn btn-success" @onclick="async () => {
+                                                    TuyaApiService.SetUrl(tuyaEntity.Region);
+                                                    TuyaApiService.AccesToken = tuyaEntity.AccessToken;
+                                                    TuyaApiService.RefreshToken = tuyaEntity.RefreshToken;
+                                                    await ControlLights.ToggleDeviceAsync(tuyaEntity.Url, true);}">
+                                                    @Localizer["On"]
+                                                </button>
+
                                                 <button class="btn btn-success" @onclick="async () =>{
-                                                    StartupService.SetupTuya(tuyaEntity.Region, tuyaEntity.AccessToken, tuyaEntity.RefreshToken);
-                                                    await TuyaAPI.Services.ControlLights.ToggleDeviceAsync(tuyaEntity.Url, true);}">@Localizer["On/Off"]</button>
+                                                    TuyaApiService.SetUrl(tuyaEntity.Region);
+                                                    TuyaApiService.AccesToken = tuyaEntity.AccessToken;
+                                                    TuyaApiService.RefreshToken = tuyaEntity.RefreshToken;
+                                                    await ControlLights.ToggleDeviceAsync(tuyaEntity.Url, false);}">
+                                                    @Localizer["Off"]
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -201,7 +211,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">@selectedDevice.Platform</h5>
-                    <h5 class="modal-title">@selectedDevice.CreationTime</h5>
                     <h5 class="modal-title">@selectedDevice.Name</h5>
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
@@ -218,7 +227,7 @@
             </div>
         </div>
     </div>
-                                                                   }
+}
 
 @code {
 
@@ -234,7 +243,6 @@
     private Models.Entity selectedEntity;
     private Models.Device selectedDevice;
 
-    private string tuyaStatus = "Active";
 
     private List<Models.Entity> entities = new();
     private List<Models.Device> devices = new();
@@ -375,12 +383,12 @@
         }
     }
 
-    [Inject] private IStringLocalizer<AppResources> Localizer { get; set;}
-    [Inject] private HttpClient HttpClient { get; set;}
-    [Inject] private DbService DbService { get; set;}
-    [Inject] private StartupService StartupService { get; set;}
-    [Inject] private SomfyApiService SomfyApiService { get; set;}
-    [Inject] private TuyaApiService TuyaApiService { get; set;}
-    [Inject] private ShutterControl ShutterControl { get; set;}
-    [Inject] private NavigationManager NavigationManager { get; set;}
+    [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }
+    [Inject] private HttpClient HttpClient { get; set; }
+    [Inject] private DbService DbService { get; set; }
+    [Inject] private SomfyApiService SomfyApiService { get; set; }
+    [Inject] private TuyaApiService TuyaApiService { get; set; }
+    [Inject] private ShutterControl ShutterControl { get; set; }
+    [Inject] private ControlLights ControlLights { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
 }
