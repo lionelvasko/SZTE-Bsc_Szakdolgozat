@@ -1,9 +1,23 @@
 ﻿namespace AuthAPI.Models
 {
+    /// <summary>  
+    /// Represents a Somfy entity with specific properties for integration.  
+    /// </summary>  
     public class SomfyEntity : Entity
     {
-        public string BaseUrl { get; set; }
-        public string CloudUsername { get; set; }
-        public string CloudPasswordHashed { get; set; }
+        /// <summary>  
+        /// Gets or sets the base URL for the Somfy entity.  
+        /// </summary>  
+        public required string BaseUrl { get; set; }
+
+        /// <summary>  
+        /// Gets or sets the cloud username for the Somfy entity.  
+        /// </summary>  
+        public required string CloudUsername { get; set; }
+
+        /// <summary>  
+        /// Gets or sets the hashed cloud password for the Somfy entity.  
+        /// </summary>  
+        public required string CloudPasswordHashed { get; set; }
     }
 }

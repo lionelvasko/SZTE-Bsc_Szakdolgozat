@@ -52,7 +52,11 @@
 }
 
 @code {
-    private LoginRequest loginModel = new LoginRequest();
+    private LoginRequest loginModel = new LoginRequest
+        {
+            Email = string.Empty,
+            Password = string.Empty
+        };
     private bool ShowModal { get; set; }
     private string ModalMessage { get; set; }
 

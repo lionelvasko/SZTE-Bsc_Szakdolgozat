@@ -3,7 +3,7 @@
     public class ThemeChangingService
     {
         private const string ThemeKey = "AppTheme";
-        public event Action? OnThemeChanged;
+        public event Action OnThemeChanged;
 
         public AppTheme CurrentTheme { get; private set; }
 

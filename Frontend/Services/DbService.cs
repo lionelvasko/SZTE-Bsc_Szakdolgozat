@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 using Szakdoga.Models;
-using Szakdoga.Requests;
+using Contracts;
 
 namespace Szakdoga.Services
 {
@@ -101,7 +101,7 @@ namespace Szakdoga.Services
             var response = await _httpClient.DeleteAsync($"http://localhost:5223/api/SubDevice/{entityId}");
             return response;
         }
-        public async Task<HttpResponseMessage> UpdateUserPassword(PasswordChangeRequest request)
+        public async Task<HttpResponseMessage> UpdateUserPassword(UpdatePasswordRequest request)
         {
             var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
             var response = await _httpClient.PutAsync("http://localhost:5223/api/User/Password", json);

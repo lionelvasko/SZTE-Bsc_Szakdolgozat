@@ -8,7 +8,7 @@ namespace SomfyAPI.Services
     public class ShutterControl
     {
         private readonly SomfyApiService _somfyApiService;
-        private static readonly Dictionary<string, TahomaExecutionId> _tahomaExecutionIds = new();
+        private static readonly Dictionary<string, TahomaExecutionId> _tahomaExecutionIds = [];
 
         public ShutterControl(SomfyApiService somfyApiService)
         {
@@ -67,7 +67,8 @@ namespace SomfyAPI.Services
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
                 throw new Exception($"Error sending {command} command: {response.StatusCode} Given payload: {jsonContent}");
             }
-            _tahomaExecutionIds[deviceUrl] = JsonSerializer.Deserialize<TahomaExecutionId>(await response.Content.ReadAsStringAsync());
+            _tahomaExecutionIds[deviceUrl] = JsonSerializer.Deserialize<TahomaExecutionId>(await response.Content.ReadAsStringAsync())
+                ?? throw new InvalidOperationException("Deserialization of TahomaExecutionId returned null.");
         }
 
         private static string[] GetParameters(string command)

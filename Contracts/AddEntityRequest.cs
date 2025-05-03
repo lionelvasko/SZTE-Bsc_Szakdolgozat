@@ -1,17 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Szakdoga.Requests
+﻿namespace Contracts
 {
     public class AddEntityRequest
     {
-        [Required]
-        public string URL { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Platform { get; set; }
-        [Required]
-        public string Icon { get; set; }
+        public string URL { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Platform { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
 
         // Tuya-specific
         public string AccessToken { get; set; } = string.Empty;

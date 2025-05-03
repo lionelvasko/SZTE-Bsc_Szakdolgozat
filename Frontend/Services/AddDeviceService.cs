@@ -16,8 +16,8 @@ namespace Szakdoga.Services
 
                 var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
                 Debug.WriteLine(generatedJson);
-                var mainDevice = SomfyAPI.Services.JsonHelper.GetDeviceFromJson(generatedJson);
-                var newEntities = SomfyAPI.Services.JsonHelper.GetEntitiesFromJson(generatedJson);
+                var mainDevice = generatedJson.ToSomfyDevice();
+                var newEntities = generatedJson.ToSomfyEntities();
                 var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName, SingletonSomfyApiService);
                 foreach (var entity in newEntities)
                 {
@@ -59,7 +59,7 @@ namespace Szakdoga.Services
                     throw new Exception("No devices found");
                 }
 
-                var toAddEntites = TuyaAPI.Services.JsonHelper.GetEntitiesFromJson(resultDevices);
+                var toAddEntites = resultDevices.ToTuyaEntities();
 
                 var convertedDevice = EntityDeviceConverter.ConvertToDevice(toAddEntites.First(), addedName, SingletonTuyaApiService);
 
@@ -85,7 +85,7 @@ namespace Szakdoga.Services
             SingletonTuyaApiService.SetUrl(region);
 
             var response = await SingletonTuyaApiService.Login(username, password, region);
-            if (response == null)
+            if (response == HttpStatusCode.Unauthorized)
             {
                 return new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, Content = new StringContent("Login failed") };
             }

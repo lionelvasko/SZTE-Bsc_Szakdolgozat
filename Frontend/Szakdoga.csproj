@@ -48,6 +48,7 @@
        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />  
    </ItemGroup>  
    <ItemGroup>  
+       <ProjectReference Include="..\Contracts\Contracts.csproj" />  
        <ProjectReference Include="..\SomfyAPI\SomfyAPI.csproj" />  
        <ProjectReference Include="..\TuyaAPI\TuyaAPI.csproj" />  
    </ItemGroup>  

@@ -1,6 +1,6 @@
-﻿using Microsoft.Build.Framework;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace AuthAPI.Requests
+namespace Contracts
 {
     public class AddDeviceRequest
     {

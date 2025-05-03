@@ -8,11 +8,10 @@ namespace SomfyAPI.Services
     public class SomfyApiService
     {
         private static SomfyApiService? _instance;
-        private HttpClient _httpClient;
-        public string BaseUrl { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-
+        private readonly HttpClient _httpClient;
+        public string BaseUrl { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         public SomfyApiService()
         {
@@ -24,7 +23,6 @@ namespace SomfyAPI.Services
                 _httpClient.Timeout = TimeSpan.FromSeconds(5);
             }
         }
-
 
         public static SomfyApiService GetInstance()
         {
@@ -51,7 +49,6 @@ namespace SomfyAPI.Services
                     var certificate = X509CertificateLoader.LoadCertificate(memoryStream.ToArray());
                     handler.ClientCertificates.Add(certificate);
                 }
-
             }
             handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) =>
             {
@@ -67,7 +64,6 @@ namespace SomfyAPI.Services
         {
             BaseUrl = $"{url}/enduser-mobile-web/enduserAPI";
         }
-
 
         public string GetURL()
         {
@@ -88,10 +84,10 @@ namespace SomfyAPI.Services
             }
             var loginUrl = $"{BaseUrl}/login";
             var loginBody = new Dictionary<string, string>
-            {
-                { "userId", email },
-                { "userPassword", password }
-            };
+                {
+                    { "userId", email },
+                    { "userPassword", password }
+                };
 
             using var content = new FormUrlEncodedContent(loginBody);
             using var response = await _httpClient.PostAsync(loginUrl, content);
@@ -115,64 +111,6 @@ namespace SomfyAPI.Services
 
             return false;
         }
-
-        /* LOCAL API USE (currently not available)
-
-
-        public async Task<string> GenerateTokenAsync(string _gatewayPin)
-        {
-            if (string.IsNullOrEmpty(_gatewayPin))
-            {
-                throw new InvalidOperationException("Gateway Pin is not set.");
-            }
-            this._gatewayPin = _gatewayPin;
-            var tokenUrl = $"{_baseUrl}/config/{_gatewayPin}/local/tokens/generate";
-
-
-            var response = await _httpClient.GetAsync(tokenUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                var responseBody = await response.Content.ReadAsStringAsync();
-                var tokenData = JsonSerializer.Deserialize<JsonElement>(responseBody);
-                _token = tokenData.GetProperty("token").GetString();
-                Debug.WriteLine(responseBody.ToString());
-                Debug.WriteLine(tokenData);
-                return _token;
-            }
-            return null;
-        }
-
-        public async Task<bool> ActivateTokenAsync(string token)
-        {
-            var activateTokenUrl = $"{BaseUrl}/config/{GatewayPin}/local/tokens";
-            var activateBody = new
-            {
-                label = "My MAUI Blazor Token",
-                token,
-                scope = "devmode"
-            };
-
-            _httpClient.DefaultRequestHeaders.Remove("Authorization");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            using var response = await _httpClient.PostAsJsonAsync(activateTokenUrl, activateBody);
-            return response.IsSuccessStatusCode;
-        }
-
-        public async Task<HttpResponseMessage> SendAuthenticatedRequest(Func<Task<HttpResponseMessage>> apiCall)
-        {
-            var response = await apiCall();
-            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                Console.WriteLine("🔄 Session expired, re-authenticating...");
-                await ActivateTokenAsync(_token);
-                response.Dispose();
-                response = await apiCall();
-            }
-            return response;
-        }
-        */
-
 
         public async Task<string> GetSetupJsonAsync()
         {

@@ -1,25 +1,29 @@
-﻿using System.Text.Json;
+﻿using SomfyAPI.Models;
+using System.Text.Json;
 
 namespace SomfyAPI.Services
 {
-    public static class JsonHelper
+    public static class JsonExtensions
     {
-        public static List<Models.Entity> GetEntitiesFromJson(string json)
+        // Cache the JsonSerializerOptions instance to avoid creating a new one for every operation
+        private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new()
         {
-            var setupData = JsonSerializer.Deserialize<Models.SetupResponse>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            PropertyNameCaseInsensitive = true
+        };
 
-            var entities = new List<Models.Entity>();
+        public static List<Entity> ToSomfyEntities(this string json)
+        {
+            var setupData = JsonSerializer.Deserialize<SetupResponse>(json, CachedJsonSerializerOptions);
+
+            var entities = new List<Entity>();
 
             if (setupData?.Entities != null)
             {
                 foreach (var listEntity in setupData.Entities)
                 {
-                    if (Enum.TryParse<Resources.TahomaEntityList>(listEntity.Label, true, out _))
+                    if (Enum.TryParse<Resources.TahomaEntityEnum>(listEntity.Label, true, out _))
                     {
-                        entities.Add(new Models.Entity
+                        entities.Add(new Entity
                         {
                             DeviceURL = listEntity.DeviceURL,
                             Available = listEntity.Available,
@@ -35,22 +39,16 @@ namespace SomfyAPI.Services
                             PlaceOID = listEntity.PlaceOID,
                             OID = listEntity.OID,
                             Attributes = listEntity.Attributes
-
                         });
                     }
-
                 }
             }
-
             return entities;
         }
-        public static Models.Device? GetDeviceFromJson(string json)
-        {
-            var setupData = JsonSerializer.Deserialize<Models.SetupResponse>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
 
+        public static Device? ToSomfyDevice(this string json)
+        {
+            var setupData = JsonSerializer.Deserialize<SetupResponse>(json, CachedJsonSerializerOptions);
             return setupData?.Devices?.FirstOrDefault();
         }
     }

@@ -134,7 +134,12 @@
     private string theme = "light";
     private string language;
     private UserModel userModel;
-    private PasswordChangeRequest passwordChangeRequest = new PasswordChangeRequest();
+    private UpdatePasswordRequest passwordChangeRequest = new UpdatePasswordRequest()
+    {
+        ConfirmPassword = string.Empty,
+        CurrentPassword = string.Empty,
+        NewPassword = string.Empty
+    };
     private bool ShowModal = false;
     private string ModalMessage;
 

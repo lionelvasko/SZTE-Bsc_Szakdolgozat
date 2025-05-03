@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Szakdoga.Requests
+namespace Szakdoga.Models
 {
-    public class RegisterRequest
+    public class RegisterModel
     {
         [Required]
         [EmailAddress(ErrorMessage = "Invalid email address format.")]

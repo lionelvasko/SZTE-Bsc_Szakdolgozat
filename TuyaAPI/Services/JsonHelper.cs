@@ -3,9 +3,9 @@ using TuyaAPI.Models;
 
 namespace TuyaAPI.Services
 {
-    public static class JsonHelper
+    public static class JsonHelperExtensions
     {
-        public static List<Device> GetEntitiesFromJson(string json)
+        public static List<Device> ToTuyaEntities(this string json)
         {
             var setupData = JsonSerializer.Deserialize<TuyaResponse>(json, new JsonSerializerOptions
             {
@@ -14,7 +14,7 @@ namespace TuyaAPI.Services
 
             var entities = new List<Device>();
 
-            if (setupData?.Payload != null)
+            if (setupData?.Payload?.Devices != null)
             {
                 foreach (var listEntity in setupData.Payload.Devices)
                 {
@@ -26,7 +26,6 @@ namespace TuyaAPI.Services
                         Icon = listEntity.Icon,
                         Id = listEntity.Id,
                         HaType = listEntity.HaType
-
                     });
                 }
             }

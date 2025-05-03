@@ -1,7 +1,7 @@
 ﻿using AuthAPI.Data;
 using AuthAPI.DTOs;
 using AuthAPI.Models;
-using AuthAPI.Requests;
+using Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +10,33 @@ using System.Security.Claims;
 
 namespace AuthAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing subdevices associated with a main device or user.
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class SubDeviceController(AppDbContext context, UserManager<User> userManager) : ControllerBase
+    public class SubDeviceController : ControllerBase
     {
+        private readonly AppDbContext context;
+        private readonly UserManager<User> userManager;
 
-        // A device-hoz tartozó entitások lekérésére
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubDeviceController"/> class.
+        /// </summary>
+        /// <param name="context">The database context.</param>
+        /// <param name="userManager">The user manager for handling user-related operations.</param>
+        public SubDeviceController(AppDbContext context, UserManager<User> userManager)
+        {
+            this.context = context;
+            this.userManager = userManager;
+        }
+
+        /// <summary>
+        /// Retrieves the subdevices associated with a specific main device.
+        /// </summary>
+        /// <param name="maindeviceId">The ID of the main device.</param>
+        /// <returns>A list of subdevice DTOs associated with the specified main device.</returns>
         [HttpGet("{maindeviceId}")]
         public async Task<ActionResult<IEnumerable<EntityDTO>>> GetDeviceSubdevices(string maindeviceId)
         {
@@ -75,7 +95,10 @@ namespace AuthAPI.Controllers
             return NotFound();
         }
 
-        // A userhez tartozó entitások lekérésére
+        /// <summary>
+        /// Retrieves all subdevices associated with the authenticated user.
+        /// </summary>
+        /// <returns>A list of subdevice DTOs associated with the authenticated user.</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EntityDTO>>> GetUsersSubdevices()
         {
@@ -123,12 +146,27 @@ namespace AuthAPI.Controllers
             return Ok(entities);
         }
 
-        // Új entitás hozzáadása a device-hoz
+        /// <summary>
+        /// Adds a new subdevice to the specified main device.
+        /// </summary>
+        /// <param name="maindeviceId">The ID of the main device to which the subdevice will be added.</param>
+        /// <param name="model">The details of the subdevice to be added.</param>
+        /// <returns>The added subdevice as a DTO.</returns>
         [HttpPost("{maindeviceId}")]
         public async Task<ActionResult<EntityDTO>> AddSubdevice(string maindeviceId, AddEntityRequest model)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return BadRequest("User ID is null or empty.");
+            }
+
             var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
             var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == Guid.Parse(maindeviceId.ToString()) && d.UserId == userId && d.Platform == model.Platform);
 
             if (device == null) return NotFound();
@@ -192,6 +230,11 @@ namespace AuthAPI.Controllers
             return BadRequest("Unsupported platform");
         }
 
+        /// <summary>
+        /// Deletes a subdevice entity by its ID.
+        /// </summary>
+        /// <param name="id">The ID of the subdevice entity to delete.</param>
+        /// <returns>An IActionResult indicating the result of the operation.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntity(string id)
         {

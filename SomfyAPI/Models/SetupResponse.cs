@@ -5,8 +5,8 @@ namespace SomfyAPI.Models
     public class SetupResponse
     {
         [JsonPropertyName("gateways")]
-        public List<Device> Devices { get; set; }
+        public List<Device>? Devices { get; set; }
         [JsonPropertyName("devices")]
-        public List<Entity> Entities { get; set; }
+        public List<Entity>? Entities { get; set; }
     }
 }

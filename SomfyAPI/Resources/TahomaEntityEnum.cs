@@ -1,6 +1,6 @@
 ﻿namespace SomfyAPI.Resources
 {
-    public enum TahomaEntityList
+    public enum TahomaEntityEnum
     {
         ADJUSTABLE_SLATS_ROLLER_SHUTTER,
         AWNING,

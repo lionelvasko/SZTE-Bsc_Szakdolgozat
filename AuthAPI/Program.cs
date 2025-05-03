@@ -10,21 +10,28 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace AuthAPI
 {
+    /// <summary>  
+    /// The entry point of the AuthAPI application.  
+    /// </summary>  
     public class Program
     {
+        /// <summary>  
+        /// The main method that starts the application.  
+        /// </summary>  
+        /// <param name="args">Command-line arguments.</param>  
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Secret Key
+            // Secret Key  
             var secretKey = builder.Configuration["Jwt:Key"];
             var key = Encoding.ASCII.GetBytes(secretKey ?? throw new InvalidOperationException("JWT key not found in configuration"));
 
-            // DbContext
+            // DbContext  
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Identity
+            // Identity  
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -33,7 +40,7 @@ namespace AuthAPI
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            // JWT Auth
+            // JWT Auth  
             builder.Services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -54,7 +61,7 @@ namespace AuthAPI
 
             builder.Services.AddAuthorization();
 
-            // Add Swagger
+            // Add Swagger  
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {
@@ -77,21 +84,21 @@ namespace AuthAPI
 
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
+                       {
+                           new OpenApiSecurityScheme
+                           {
+                               Reference = new OpenApiReference
+                               {
+                                   Type = ReferenceType.SecurityScheme,
+                                   Id = "Bearer"
+                               }
+                           },
+                           Array.Empty<string>()
+                       }
                 });
             });
 
-            // Controllers
+            // Controllers  
             builder.Services
                 .AddControllers()
                 .AddJsonOptions(options =>
@@ -101,8 +108,7 @@ namespace AuthAPI
                     );
                 });
 
-
-            // Cors
+            // Cors  
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", policy =>
@@ -122,10 +128,9 @@ namespace AuthAPI
                 ClockSkew = TimeSpan.Zero
             });
 
-
             var app = builder.Build();
 
-            // Swagger UI
+            // Swagger UI  
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -135,7 +140,6 @@ namespace AuthAPI
                     c.RoutePrefix = "swagger";
                 });
             }
-
 
             app.UseRouting();
 

@@ -13,9 +13,9 @@ namespace TuyaAPI.Services
         private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
         private readonly string PLATFORM = "tuya";
 
-        public string Region { get; set; }
-        public string AccesToken { get; set; }
-        public string RefreshToken { get; set; }
+        public string Region { get; set; } = string.Empty;
+        public string AccesToken { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
 
         public TuyaApiService()
         {
@@ -66,13 +66,13 @@ namespace TuyaAPI.Services
         public async Task<HttpStatusCode> Login(string username, string password, string countryCode)
         {
             var loginBody = new Dictionary<string, string>
-            {
-                { "userName", username },
-                { "password", password },
-                { "countryCode", countryCode},
-                {"bizType", PLATFORM },
-                {"from", PLATFORM }
-            };
+                {
+                    { "userName", username },
+                    { "password", password },
+                    { "countryCode", countryCode},
+                    {"bizType", PLATFORM },
+                    {"from", PLATFORM }
+                };
 
             using var content = new FormUrlEncodedContent(loginBody);
             var response = await _httpClient.PostAsync($"{_baseUrl}auth.do", content);
@@ -80,8 +80,15 @@ namespace TuyaAPI.Services
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var loginResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-                AccesToken = loginResponse.GetProperty("access_token").GetString();
-                RefreshToken = loginResponse.GetProperty("refresh_token").GetString();
+                if (loginResponse.TryGetProperty("access_token", out JsonElement accessTokenElement))
+                {
+                    AccesToken = accessTokenElement.GetString() ?? string.Empty;
+                }
+
+                if (loginResponse.TryGetProperty("refresh_token", out JsonElement refreshTokenElement))
+                {
+                    RefreshToken = refreshTokenElement.GetString() ?? string.Empty;
+                }
             }
             return response.StatusCode;
         }
@@ -89,19 +96,27 @@ namespace TuyaAPI.Services
         public async Task<HttpStatusCode> DoRefreshToken()
         {
             var refreshBody = new Dictionary<string, string>
-            {
-                { "grant_type", "refresh_token" },
-                { "refresh_token", RefreshToken },
-                { "rand", RandomNumberGenerator.GetInt32(0, 2).ToString() }
-            };
+                {
+                    { "grant_type", "refresh_token" },
+                    { "refresh_token", RefreshToken },
+                    { "rand", RandomNumberGenerator.GetInt32(0, 2).ToString() }
+                };
             using var content = new FormUrlEncodedContent(refreshBody);
             var response = await _httpClient.PostAsync($"{_baseUrl}access.do", content);
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var refreshResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
-                AccesToken = refreshResponse.GetProperty("access_token").GetString();
-                RefreshToken = refreshResponse.GetProperty("refresh_token").GetString();
+
+                if (refreshResponse.TryGetProperty("access_token", out JsonElement accessTokenElement))
+                {
+                    AccesToken = accessTokenElement.GetString() ?? string.Empty;
+                }
+
+                if (refreshResponse.TryGetProperty("refresh_token", out JsonElement refreshTokenElement))
+                {
+                    RefreshToken = refreshTokenElement.GetString() ?? string.Empty;
+                }
             }
             return response.StatusCode;
         }

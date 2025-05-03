@@ -5,16 +5,16 @@ namespace TuyaAPI.Models
     public class DeviceData
     {
         [JsonPropertyName("brightness")]
-        public string Brightness { get; set; }
+        public string? Brightness { get; set; }
 
         [JsonPropertyName("color_mode")]
-        public string ColorMode { get; set; }
+        public string? ColorMode { get; set; }
 
         [JsonPropertyName("online")]
         public bool Online { get; set; }
 
         [JsonPropertyName("state")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         [JsonPropertyName("color_temp")]
         public int ColorTemp { get; set; }

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using Szakdoga.Requests;
+using Contracts;
 
 
 namespace Szakdoga.Services

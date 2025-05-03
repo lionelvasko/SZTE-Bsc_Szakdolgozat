@@ -5,9 +5,9 @@ namespace TuyaAPI.Models
     public class TuyaResponse
     {
         [JsonPropertyName("payload")]
-        public Payload Payload { get; set; }
+        public Payload? Payload { get; set; }
 
         [JsonPropertyName("header")]
-        public Header Header { get; set; }
+        public Header? Header { get; set; }
     }
 }

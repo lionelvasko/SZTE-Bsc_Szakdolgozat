@@ -1,5 +1,5 @@
 ﻿using Szakdoga.Models;
-using Szakdoga.Requests;
+using Contracts;
 using Device = Szakdoga.Models.Device;
 
 namespace Szakdoga.Services

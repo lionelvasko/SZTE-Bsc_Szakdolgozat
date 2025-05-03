@@ -1,13 +1,16 @@
 ﻿using AuthAPI.Data;
 using AuthAPI.DTOs;
 using AuthAPI.Models;
-using AuthAPI.Requests;
+using Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace AuthAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing user-related operations such as retrieving user details, updating user information, and deleting users.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
@@ -15,12 +18,21 @@ namespace AuthAPI.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// </summary>
+        /// <param name="context">The application database context.</param>
+        /// <param name="userManager">The user manager for handling user-related operations.</param>
         public UserController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Retrieves the details of the currently authenticated user.
+        /// </summary>
+        /// <returns>A <see cref="UserDTO"/> containing user details.</returns>
         [HttpGet]
         public async Task<ActionResult<UserDTO>> GetUser()
         {
@@ -30,13 +42,18 @@ namespace AuthAPI.Controllers
             if (user == null) return NotFound();
             var userDto = new UserDTO
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName
+                Email = user.Email ?? string.Empty,
+                FirstName = user.FirstName ?? string.Empty,
+                LastName = user.LastName ?? string.Empty
             };
             return Ok(userDto);
         }
 
+        /// <summary>
+        /// Updates the password of the currently authenticated user.
+        /// </summary>
+        /// <param name="model">The request model containing the current and new passwords.</param>
+        /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpPut("Password")]
         public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest model)
         {
@@ -52,6 +69,11 @@ namespace AuthAPI.Controllers
             return Ok("Password updated successfully.");
         }
 
+        /// <summary>
+        /// Updates the name of the currently authenticated user.
+        /// </summary>
+        /// <param name="model">The request model containing the new first and last names.</param>
+        /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpPut("Name")]
         public async Task<IActionResult> UpdateName([FromBody] UpdateNameRequest model)
         {
@@ -69,6 +91,10 @@ namespace AuthAPI.Controllers
             return Ok("User name updated successfully.");
         }
 
+        /// <summary>
+        /// Deletes the currently authenticated user.
+        /// </summary>
+        /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpDelete]
         public async Task<IActionResult> DeleteUser()
         {

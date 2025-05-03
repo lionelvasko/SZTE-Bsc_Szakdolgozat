@@ -3,11 +3,18 @@ using System.Text;
 
 namespace AuthAPI.Services
 {
+    /// <summary>  
+    /// Provides encryption and decryption services for string values.  
+    /// </summary>  
     public class EncryptService
     {
         private readonly byte[] _key;
         private readonly byte[] _iv;
 
+        /// <summary>  
+        /// Initializes a new instance of the <see cref="EncryptService"/> class with the specified secret.  
+        /// </summary>  
+        /// <param name="secret">The secret key used for encryption and decryption.</param>  
         public EncryptService(string secret)
         {
             using var sha256 = SHA256.Create();
@@ -15,6 +22,11 @@ namespace AuthAPI.Services
             _iv = _key.Take(16).ToArray();
         }
 
+        /// <summary>  
+        /// Encrypts the specified plain text string.  
+        /// </summary>  
+        /// <param name="plainText">The plain text to encrypt.</param>  
+        /// <returns>The encrypted string in Base64 format.</returns>  
         public string Encrypt(string plainText)
         {
             using var aes = Aes.Create();
@@ -27,6 +39,11 @@ namespace AuthAPI.Services
             return Convert.ToBase64String(cipherBytes);
         }
 
+        /// <summary>  
+        /// Decrypts the specified encrypted string.  
+        /// </summary>  
+        /// <param name="cipherText">The encrypted string in Base64 format to decrypt.</param>  
+        /// <returns>The decrypted plain text string.</returns>  
         public string Decrypt(string cipherText)
         {
             using var aes = Aes.Create();

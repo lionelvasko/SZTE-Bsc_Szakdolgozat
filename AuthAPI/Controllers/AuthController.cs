@@ -1,5 +1,5 @@
 ﻿using AuthAPI.Models;
-using AuthAPI.Requests;
+using Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -9,24 +9,22 @@ using System.Text;
 
 namespace AuthAPI.Controllers
 {
+    /// <summary>
+    /// Controller for handling authentication-related operations such as user registration and login.
+    /// </summary>
     [Route("api/")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration) : ControllerBase
     {
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly SignInManager<User> _signInManager = signInManager;
+        private readonly IConfiguration _config = configuration;
 
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _config;
-
-
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager, TokenValidationParameters tokenValidationParameters, IConfiguration configuration)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _config = configuration;
-        }
-
-        // Register User
+        /// <summary>
+        /// Registers a new user.
+        /// </summary>
+        /// <param name="model">The registration request containing user details.</param>
+        /// <returns>An <see cref="IActionResult"/> indicating the result of the operation.</returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest model)
         {
@@ -54,7 +52,11 @@ namespace AuthAPI.Controllers
             return Ok("User registered successfully.");
         }
 
-        // Login User
+        /// <summary>
+        /// Logs in a user.
+        /// </summary>
+        /// <param name="model">The login request containing user credentials.</param>
+        /// <returns>An <see cref="IActionResult"/> containing the JWT token if login is successful.</returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
@@ -74,13 +76,23 @@ namespace AuthAPI.Controllers
             return Ok(token);
         }
 
-
-
-
-        private string GenerateJwtToken(User user)
+        /// <summary>
+        /// Generates a JWT token for the specified user.
+        /// </summary>
+        /// <param name="user">The user for whom the token is generated.</param>
+        /// <returns>A JWT token as a string.</returns>
+        private string? GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config.GetSection("Jwt:Key").Value);
+            var keySection = _config.GetSection("Jwt:Key");
+            var keyValue = keySection?.Value;
+
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                throw new InvalidOperationException("JWT key is not configured properly.");
+            }
+
+            var key = Encoding.ASCII.GetBytes(keyValue);
 
             if (user.Email is null || user.FirstName is null || user.LastName is null)
             {
@@ -91,8 +103,8 @@ namespace AuthAPI.Controllers
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                }),
+                        new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

@@ -14,7 +14,7 @@
                 <ValidationMessage For="@(() => registerModel.FirstName)" />
             </div>
             <div class="mb-3">
-                <label for="lastName" class="form-label">@Localizer["First name"]</label>
+                <label for="lastName" class="form-label">@Localizer["Last name"]</label>
                 <input type="text" id="lastName" @bind="registerModel.LastName" placeholder="@Localizer["Enter your last name"]" class="form-control bg-transparent text-info" />
                 <ValidationMessage For="@(() => registerModel.LastName)" />
             </div>
@@ -65,7 +65,7 @@
 }
 
 @code {
-    private RegisterRequest registerModel = new RegisterRequest();
+    private RegisterModel registerModel = new RegisterModel();
     private bool ShowModal { get; set; }
     private string ModalMessage { get; set; }
     private string ConfirmPassword { get; set; }
@@ -77,8 +77,14 @@
             ShowModal = true;
             return;
         }
-
-        var response = await DbService.Register(registerModel);
+        var registerRequest = new RegisterRequest
+            {
+                FirstName = registerModel.FirstName,
+                LastName = registerModel.LastName,
+                Email = registerModel.Email,
+                Password = registerModel.Password
+            };
+        var response = await DbService.Register(registerRequest);
         ModalMessage = await response.Content.ReadAsStringAsync();
         ShowModal = true;
     }
