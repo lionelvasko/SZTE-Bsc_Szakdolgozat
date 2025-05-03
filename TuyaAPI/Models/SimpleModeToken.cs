@@ -14,7 +14,7 @@ namespace TuyaAPI.Models
         internal long T { get; set; }
 
         [JsonPropertyName("tid")]
-        internal string Tid { get; set; }
+        internal string Tid { get; set; } = string.Empty;
 
         public override string ToString()
         {

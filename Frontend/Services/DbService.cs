@@ -1,18 +1,15 @@
-﻿using System.Diagnostics;
+﻿using Contracts;
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using Szakdoga.Models;
-using Contracts;
 
 namespace Szakdoga.Services
 {
-    public class DbService
+    public class DbService(HttpClient httpClient)
     {
-        private readonly HttpClient _httpClient;
-        public DbService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
+        private readonly HttpClient _httpClient = httpClient;
+
         public async Task<HttpResponseMessage> Register(RegisterRequest request)
         {
             var json = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
@@ -34,7 +31,7 @@ namespace Szakdoga.Services
                 var devices = JsonSerializer.Deserialize<List<Models.Device>>(json);
                 return devices;
             }
-            return new List<Models.Device>();
+            return [];
         }
         public async Task<List<Models.Entity>> GetAllEntitesForUser()
         {
@@ -76,16 +73,16 @@ namespace Szakdoga.Services
             return id;
         }
 
+        private static readonly JsonSerializerOptions _cachedJsonSerializerOptions = new()
+        {
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            WriteIndented = false
+        };
+
         public async Task<HttpResponseMessage> AddEntity(Guid deviceId, AddEntityRequest request)
         {
-            var options = new JsonSerializerOptions
-            {
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = false
-            };
-
-            var requestData = JsonSerializer.Serialize(request, options);
+            var requestData = JsonSerializer.Serialize(request, _cachedJsonSerializerOptions);
             var json = new StringContent(requestData, Encoding.UTF8, "application/json");
 
             var response = await _httpClient.PostAsync($"http://localhost:5223/api/SubDevice/{deviceId}", json);

@@ -1,5 +1,5 @@
-﻿using Szakdoga.Models;
-using Contracts;
+﻿using Contracts;
+using Szakdoga.Models;
 using Device = Szakdoga.Models.Device;
 
 namespace Szakdoga.Services
@@ -8,7 +8,6 @@ namespace Szakdoga.Services
     {
         internal static Entity ConvertToEntity(object obj, object ApiCaller)
         {
-            var frontendEntities = new List<Entity>();
             if (obj.GetType() == typeof(SomfyAPI.Models.Entity))
             {
                 var service = ApiCaller as SomfyAPI.Services.SomfyApiService;
@@ -46,16 +45,16 @@ namespace Szakdoga.Services
             }
         }
 
-        internal static Device ConvertToDevice(object obj, string Name, object ApiCaller)
+        internal static Device ConvertToDevice(object obj, string Name)
         {
             if (obj.GetType() == typeof(SomfyAPI.Models.Device) || obj.GetType() == typeof(TuyaAPI.Models.Device))
             {
-                var returnDevice = new Models.Device();
-                var ent = obj as SomfyAPI.Models.Device;
-
-                returnDevice.Name = Name;
-                returnDevice.CreationTime = CreateTime();
-                returnDevice.Platform = obj is SomfyAPI.Models.Device ? "Somfy" : "Tuya";
+                var returnDevice = new Device
+                {
+                    Name = Name,
+                    CreationTime = CreateTime(),
+                    Platform = obj is SomfyAPI.Models.Device ? "Somfy" : "Tuya"
+                };
                 return returnDevice;
             }
             else

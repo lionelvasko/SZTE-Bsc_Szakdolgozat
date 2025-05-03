@@ -99,12 +99,14 @@ namespace AuthAPI.Controllers
                 return null;
             }
 
+            var claims = new List<Claim>
+            {
+                new(ClaimTypes.NameIdentifier, user.Id)
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                        new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

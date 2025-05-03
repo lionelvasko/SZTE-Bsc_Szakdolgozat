@@ -13,24 +13,18 @@ namespace AuthAPI.Controllers
     /// <summary>
     /// Controller for managing subdevices associated with a main device or user.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="SubDeviceController"/> class.
+    /// </remarks>
+    /// <param name="context">The database context.</param>
+    /// <param name="userManager">The user manager for handling user-related operations.</param>
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class SubDeviceController : ControllerBase
+    public class SubDeviceController(AppDbContext context, UserManager<User> userManager) : ControllerBase
     {
-        private readonly AppDbContext context;
-        private readonly UserManager<User> userManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SubDeviceController"/> class.
-        /// </summary>
-        /// <param name="context">The database context.</param>
-        /// <param name="userManager">The user manager for handling user-related operations.</param>
-        public SubDeviceController(AppDbContext context, UserManager<User> userManager)
-        {
-            this.context = context;
-            this.userManager = userManager;
-        }
+        private readonly AppDbContext context = context;
+        private readonly UserManager<User> userManager = userManager;
 
         /// <summary>
         /// Retrieves the subdevices associated with a specific main device.

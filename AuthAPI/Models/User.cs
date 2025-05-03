@@ -21,6 +21,6 @@ namespace AuthAPI.Models
         /// <summary>
         /// Gets or sets the collection of devices associated with the user.
         /// </summary>
-        public ICollection<Device> Devices { get; set; } = new List<Device>();
+        public ICollection<Device> Devices { get; set; } = [];
     }
 }

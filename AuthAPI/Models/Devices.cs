@@ -16,22 +16,22 @@ namespace AuthAPI.Models
         /// <summary>  
         /// Gets or sets the name of the device.  
         /// </summary>  
-        public string Name { get; set; } = string.Empty;
+        public required string Name { get; set; } = string.Empty;
 
         /// <summary>  
         /// Gets or sets the creation time of the device.  
         /// </summary>  
-        public string CreationTime { get; set; } = string.Empty;
+        public required string CreationTime { get; set; } = string.Empty;
 
         /// <summary>  
         /// Gets or sets the platform of the device (e.g., iOS, Android).  
         /// </summary>  
-        public string Platform { get; set; } = string.Empty;
+        public required string Platform { get; set; } = string.Empty;
 
         /// <summary>  
         /// Gets or sets the user ID associated with the device.  
         /// </summary>  
-        public string UserId { get; set; }
+        public required string UserId { get; set; }
     }
 
 }

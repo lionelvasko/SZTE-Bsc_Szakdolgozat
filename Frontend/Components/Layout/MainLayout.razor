@@ -17,7 +17,7 @@
 
         if (!string.IsNullOrEmpty(language))
         {
-            LocalizationService.SetCulture(language);
+                GlobalizationService.SetCulture(language);
             await Task.Delay(100);
         }
         if (ThemeChangingService != null)

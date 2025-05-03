@@ -1,33 +1,27 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Contracts;
+using Microsoft.AspNetCore.Components.Authorization;
 using System.Diagnostics;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
-using Contracts;
 
 
 namespace Szakdoga.Services
 {
-    public class AuthenticationService
+    public class AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, DbService dbServcice)
     {
-        private readonly HttpClient _httpClient;
-        private readonly AuthenticationStateProvider _authenticationStateProvider;
-        private readonly DbService _dbService;
+        private readonly HttpClient _httpClient = httpClient;
+        private readonly AuthenticationStateProvider _authenticationStateProvider = authenticationStateProvider;
+        private readonly DbService _dbService = dbServcice;
         public readonly static string JWT_AUTH_TOKEN = "jwt_auth_token";
         public readonly static string REMEMBER_ME_KEY = "remember_me";
-        private ClaimsPrincipal _user = new ClaimsPrincipal(new ClaimsIdentity());
-
-        public AuthenticationService(HttpClient httpClient, AuthenticationStateProvider authenticationStateProvider, DbService dbServcice)
-        {
-            _httpClient = httpClient;
-            _authenticationStateProvider = authenticationStateProvider;
-            _dbService = dbServcice;
-        }
 
         public async Task<HttpResponseMessage> LoginAsync(LoginRequest request, bool rememberMe)
         {
             var response = await _dbService.Login(request);
             if (!response.IsSuccessStatusCode)
                 return response;
+
             string token = await response.Content.ReadAsStringAsync();
             Debug.WriteLine(token);
 
@@ -38,7 +32,12 @@ namespace Szakdoga.Services
 
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
 
-            response.Content.Dispose();
+            // Explicitly dispose of the response content to avoid issues with trimming and AOT compatibility
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                response.Content.Dispose();
+            }
+
             return response;
         }
 
@@ -54,6 +53,5 @@ namespace Szakdoga.Services
             SecureStorage.Default.Remove("somfy_url");
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).NotifyAuthenticationStateChanged();
         }
-
     }
 }

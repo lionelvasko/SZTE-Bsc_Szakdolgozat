@@ -5,15 +5,10 @@ using System.Text.Json;
 
 namespace SomfyAPI.Services
 {
-    public class ShutterControl
+    public class ShutterControl(SomfyApiService somfyApiService)
     {
-        private readonly SomfyApiService _somfyApiService;
+        private readonly SomfyApiService _somfyApiService = somfyApiService;
         private static readonly Dictionary<string, TahomaExecutionId> _tahomaExecutionIds = [];
-
-        public ShutterControl(SomfyApiService somfyApiService)
-        {
-            _somfyApiService = somfyApiService;
-        }
 
         public async Task OpenShutter(string deviceUrl)
         {
@@ -37,9 +32,9 @@ namespace SomfyAPI.Services
 
         public async Task SendCommand(string command, string deviceUrl)
         {
-            if (_tahomaExecutionIds.ContainsKey(deviceUrl))
+            if (_tahomaExecutionIds.TryGetValue(deviceUrl, out TahomaExecutionId? value))
             {
-                await CancelSpecificExecution(_tahomaExecutionIds[deviceUrl]);
+                await CancelSpecificExecution(value);
             }
             var payload = new
             {
@@ -73,19 +68,19 @@ namespace SomfyAPI.Services
 
         private static string[] GetParameters(string command)
         {
-            var CommandConsts = new List<Models.Command>
-                {
-                    new Models.Command { CommandName = "close", Nparams = 1 },
-                    new Models.Command { CommandName = "down", Nparams = 1 },
-                    new Models.Command { CommandName = "identify", Nparams = 0 },
-                    new Models.Command { CommandName = "my", Nparams = 1 },
-                    new Models.Command { CommandName = "open", Nparams = 1 },
-                    new Models.Command { CommandName = "rest", Nparams = 1 },
-                    new Models.Command { CommandName = "stop", Nparams = 1 },
-                    new Models.Command { CommandName = "test", Nparams = 0 },
-                    new Models.Command { CommandName = "up", Nparams = 1 },
-                    new Models.Command { CommandName = "openConfiguration", Nparams = 1 }
-                };
+            var CommandConsts = new List<Command>
+            {
+                new() { CommandName = "close", Nparams = 1 },
+                new() { CommandName = "down", Nparams = 1 },
+                new() { CommandName = "identify", Nparams = 0 },
+                new() { CommandName = "my", Nparams = 1 },
+                new() { CommandName = "open", Nparams = 1 },
+                new() { CommandName = "rest", Nparams = 1 },
+                new() { CommandName = "stop", Nparams = 1 },
+                new() { CommandName = "test", Nparams = 0 },
+                new() { CommandName = "up", Nparams = 1 },
+                new() { CommandName = "openConfiguration", Nparams = 1 }
+            };
 
             return new string[CommandConsts.First(c => c.CommandName == command).Nparams];
         }

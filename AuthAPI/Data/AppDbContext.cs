@@ -20,6 +20,7 @@ namespace AuthAPI.Data
         /// </summary>
         /// <param name="options">The options to configure the database context.</param>
         /// <param name="configuration">The application configuration.</param>
+        /// </summary>
         public AppDbContext(DbContextOptions<AppDbContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));

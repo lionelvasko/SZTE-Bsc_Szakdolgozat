@@ -1,4 +1,6 @@
-﻿namespace Szakdoga.Services
+﻿using System.Runtime.Versioning;
+
+namespace Szakdoga.Services
 {
     public class ThemeChangingService
     {
@@ -10,7 +12,7 @@
         public ThemeChangingService()
         {
             string savedTheme = Preferences.Get(ThemeKey, AppTheme.Light.ToString());
-            CurrentTheme = Enum.TryParse(savedTheme, out AppTheme theme) ? theme : AppTheme.Dark;
+            CurrentTheme = TryParseAppTheme(savedTheme, out AppTheme theme) ? theme : AppTheme.Dark;
             ApplyTheme(CurrentTheme);
         }
 
@@ -25,9 +27,15 @@
             OnThemeChanged?.Invoke();
         }
 
-        private void ApplyTheme(AppTheme theme)
+        private static void ApplyTheme(AppTheme theme)
         {
             Application.Current!.UserAppTheme = theme;
+        }
+
+        [SupportedOSPlatform("windows10.0.17763.0")]
+        private static bool TryParseAppTheme(string value, out AppTheme theme)
+        {
+            return Enum.TryParse(value, out theme);
         }
     }
 

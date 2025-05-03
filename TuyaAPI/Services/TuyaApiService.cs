@@ -8,7 +8,7 @@ namespace TuyaAPI.Services
     public class TuyaApiService
     {
         private static TuyaApiService? _instance;
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         private string _baseUrl = "https://px1.tuyaeu.com/homeassistant/";
         private readonly string PLATFORM = "tuya";
@@ -30,10 +30,7 @@ namespace TuyaAPI.Services
 
         public static TuyaApiService GetInstance()
         {
-            if (_instance is null)
-            {
-                _instance = new TuyaApiService();
-            }
+            _instance ??= new TuyaApiService();
             return _instance;
         }
 
@@ -46,15 +43,15 @@ namespace TuyaAPI.Services
             Region = countryCode;
             if (countryCode == "1")
             {
-                _baseUrl.Replace("eu", "us");
+                _baseUrl = _baseUrl.Replace("eu", "us");
             }
             else if (countryCode == "44")
             {
-                _baseUrl.Replace("eu", "eu");
+                _baseUrl = _baseUrl.Replace("eu", "eu");
             }
             else
             {
-                _baseUrl.Replace("eu", "cn");
+                _baseUrl = _baseUrl.Replace("eu", "cn");
             }
         }
 

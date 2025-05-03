@@ -13,25 +13,19 @@ namespace AuthAPI.Controllers
     /// <summary>
     /// Controller for managing main devices.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="MainDeviceController"/> class.
+    /// </remarks>
+    /// <param name="context">The application database context.</param>
+    /// <param name="userManager">The user manager for managing user-related operations.</param>
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]
     [Authorize]
-    public class MainDeviceController : ControllerBase
+    public class MainDeviceController(AppDbContext context, UserManager<User> userManager) : ControllerBase
     {
-        private readonly AppDbContext context;
-        private readonly UserManager<User> userManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MainDeviceController"/> class.
-        /// </summary>
-        /// <param name="context">The application database context.</param>
-        /// <param name="userManager">The user manager for managing user-related operations.</param>
-        public MainDeviceController(AppDbContext context, UserManager<User> userManager)
-        {
-            this.context = context;
-            this.userManager = userManager;
-        }
+        private readonly AppDbContext context = context;
+        private readonly UserManager<User> userManager = userManager;
 
         /// <summary>
         /// Retrieves the list of devices associated with the current user.
@@ -44,7 +38,7 @@ namespace AuthAPI.Controllers
             var devices = await context.Devices
                 .Where(d => d.UserId == userId)
                 .ToListAsync();
-            if (devices == null || !devices.Any()) return NotFound();
+            if (devices == null || devices.Count == 0) return NotFound();
             var deviceDTOs = devices.Select(d => new DeviceDTO
             {
                 Id = d.Id,
@@ -97,8 +91,9 @@ namespace AuthAPI.Controllers
             context.Devices.Add(device);
             await context.SaveChangesAsync();
             Guid id = device.Id;
-            return CreatedAtAction(nameof(AddDevice), new { id = id }, new { id = id });
-        }
+            return CreatedAtAction(nameof(AddDevice), new { id }, new { id });
+        }
+
 
         /// <summary>
         /// Deletes a device associated with the current user.

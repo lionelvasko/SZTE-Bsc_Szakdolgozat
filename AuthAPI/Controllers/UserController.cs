@@ -11,23 +11,17 @@ namespace AuthAPI.Controllers
     /// <summary>
     /// Controller for managing user-related operations such as retrieving user details, updating user information, and deleting users.
     /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="UserController"/> class.
+    /// </remarks>
+    /// <param name="context">The application database context.</param>
+    /// <param name="userManager">The user manager for handling user-related operations.</param>
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController(AppDbContext context, UserManager<User> userManager) : Controller
     {
-        private readonly AppDbContext _context;
-        private readonly UserManager<User> _userManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserController"/> class.
-        /// </summary>
-        /// <param name="context">The application database context.</param>
-        /// <param name="userManager">The user manager for handling user-related operations.</param>
-        public UserController(AppDbContext context, UserManager<User> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-        }
+        private readonly AppDbContext _context = context;
+        private readonly UserManager<User> _userManager = userManager;
 
         /// <summary>
         /// Retrieves the details of the currently authenticated user.

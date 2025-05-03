@@ -6,7 +6,7 @@ namespace Szakdoga.Services
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private readonly ClaimsPrincipal _anonymous = new ClaimsPrincipal(new ClaimsIdentity());
+        private readonly ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {

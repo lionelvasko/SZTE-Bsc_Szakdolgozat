@@ -17,9 +17,8 @@ namespace AuthAPI.Services
         /// <param name="secret">The secret key used for encryption and decryption.</param>  
         public EncryptService(string secret)
         {
-            using var sha256 = SHA256.Create();
-            _key = sha256.ComputeHash(Encoding.UTF8.GetBytes(secret));
-            _iv = _key.Take(16).ToArray();
+            _key = SHA256.HashData(Encoding.UTF8.GetBytes(secret));
+            _iv = [.. _key.Take(16)];
         }
 
         /// <summary>  

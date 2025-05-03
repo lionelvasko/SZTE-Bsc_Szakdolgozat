@@ -5,12 +5,15 @@ namespace TuyaAPI.Services
 {
     public static class JsonHelperExtensions
     {
+        // Cache the JsonSerializerOptions instance to avoid creating a new one for every operation
+        private static readonly JsonSerializerOptions CachedJsonSerializerOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
         public static List<Device> ToTuyaEntities(this string json)
         {
-            var setupData = JsonSerializer.Deserialize<TuyaResponse>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
+            var setupData = JsonSerializer.Deserialize<TuyaResponse>(json, CachedJsonSerializerOptions);
 
             var entities = new List<Device>();
 

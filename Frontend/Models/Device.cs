@@ -12,7 +12,7 @@ namespace Szakdoga.Models
         public string CreationTime { get; set; } = string.Empty;
         [JsonPropertyName("platform")]
         public string Platform { get; set; } = string.Empty;
-        public ICollection<SomfyEntity> SomfyEntities { get; set; } = new List<SomfyEntity>();
-        public ICollection<TuyaEntity> TuyaEntities { get; set; } = new List<TuyaEntity>();
+        public ICollection<SomfyEntity> SomfyEntities { get; set; } = [];
+        public ICollection<TuyaEntity> TuyaEntities { get; set; } = [];
     }
 }

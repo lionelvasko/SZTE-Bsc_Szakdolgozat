@@ -16,6 +16,6 @@
         public string? UiClass { get; set; }
         public string? PlaceOID { get; set; }
         public string? OID { get; set; }
-        public List<Attribute> Attributes { get; set; } = new();
+        public List<Attribute> Attributes { get; set; } = [];
     }
 }

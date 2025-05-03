@@ -9,7 +9,7 @@ namespace TuyaAPI.Services
 
         private readonly TuyaApiService _tuyaApiService = TuyaApiService.GetInstance();
 
-        public async Task<HttpStatusCode> ControlDevice(string deviceId, string action, string value_name, string new_state)
+        public async Task<HttpStatusCode> ControlDevice(string deviceId, string action, string new_state)
         {
             var url = $"{_tuyaApiService.GetUrl()}skill";
             var requestBody = new
@@ -35,7 +35,6 @@ namespace TuyaAPI.Services
             }
             return response.StatusCode;
         }
-
         public async Task ToggleDeviceAsync(string deviceId, bool currentState)
         {
             string lightState = "1";
@@ -43,20 +42,9 @@ namespace TuyaAPI.Services
             {
                 lightState = "0";
             }
-            var response = await ControlDevice(deviceId, "turnOnOff", "value", lightState);
-        }
-
-        public async Task ChangeBrightnessAsync(string deviceId, int newBrightness)
-        {
-            string brightnessValue = (newBrightness * 10).ToString();
-            var response = await ControlDevice(deviceId, "brightnessSet", "value", brightnessValue);
-        }
-
-        public async Task ChangeColorTemperatureAsync(string deviceId, int newTemperature)
-        {
-            int mappedTemperature = (int)((newTemperature - 1000) * 4.033) + 1000;
-            string tempValue = mappedTemperature.ToString();
-            var response = await ControlDevice(deviceId, "colorTemperatureSet", "value", tempValue);
+            {
+            }
+            await ControlDevice(deviceId, "turnOnOff", lightState);
         }
     }
 }

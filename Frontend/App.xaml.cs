@@ -12,9 +12,9 @@ namespace Szakdoga
             InitializeComponent();
         }
 
-        protected override Window CreateWindow(IActivationState? activationState)
+        protected override Window CreateWindow(IActivationState activationState)
         {
-            Window window = new Window(new MainPage())
+            Window window = new(new MainPage())
             {
                 MinimumWidth = 500,
                 MinimumHeight = 400,
@@ -23,7 +23,7 @@ namespace Szakdoga
 
             window.Destroying += async (s, e) =>
             {
-                string? shouldRememberString = await SecureStorage.GetAsync(AuthenticationService.REMEMBER_ME_KEY);
+                string shouldRememberString = await SecureStorage.GetAsync(AuthenticationService.REMEMBER_ME_KEY);
                 bool shouldRemember = bool.TryParse(shouldRememberString, out bool result) && result;
                 if (!shouldRemember)
                 {
@@ -40,15 +40,15 @@ namespace Szakdoga
 
             window.Created += async (s, e) =>
             {
-                string? selectedCulture = await SecureStorage.GetAsync("selectedCulture");
+                string selectedCulture = await SecureStorage.GetAsync("selectedCulture");
                 if (string.IsNullOrEmpty(selectedCulture))
                 {
                     selectedCulture = "en-US";
                 }
-                CultureInfo cultureInfo = new CultureInfo(selectedCulture);
+                CultureInfo cultureInfo = new(selectedCulture);
                 AppResources.Culture = cultureInfo;
 
-                string? jwt = await SecureStorage.GetAsync(AuthenticationService.JWT_AUTH_TOKEN);
+                string jwt = await SecureStorage.GetAsync(AuthenticationService.JWT_AUTH_TOKEN);
                 if (!string.IsNullOrEmpty(jwt))
                 {
                     var client = ServiceHelper.GetService<HttpClient>();

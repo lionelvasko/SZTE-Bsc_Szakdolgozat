@@ -18,7 +18,7 @@ namespace Szakdoga.Services
                 Debug.WriteLine(generatedJson);
                 var mainDevice = generatedJson.ToSomfyDevice();
                 var newEntities = generatedJson.ToSomfyEntities();
-                var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName, SingletonSomfyApiService);
+                var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName);
                 foreach (var entity in newEntities)
                 {
                     var convertedEntity = EntityDeviceConverter.ConvertToEntity(entity, SingletonSomfyApiService);
@@ -54,14 +54,14 @@ namespace Szakdoga.Services
                 var SingletonTuyaApiService = TuyaApiService.GetInstance();
                 var resultDevices = await SingletonTuyaApiService.GetEntities();
                 Debug.WriteLine(resultDevices);
-                if (resultDevices == null || !resultDevices.Any())
+                if (resultDevices == null || resultDevices.Length == 0)
                 {
                     throw new Exception("No devices found");
                 }
 
                 var toAddEntites = resultDevices.ToTuyaEntities();
 
-                var convertedDevice = EntityDeviceConverter.ConvertToDevice(toAddEntites.First(), addedName, SingletonTuyaApiService);
+                var convertedDevice = EntityDeviceConverter.ConvertToDevice(toAddEntites.First(), addedName);
 
                 foreach (var entity in toAddEntites)
                 {
