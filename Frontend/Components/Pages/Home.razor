@@ -60,16 +60,18 @@
                                         </div>
                                         <div class="d-flex flex-column gap-2 mt-3">
                                             <button class="btn btn-success" @onclick="async () => {
-                                                TuyaApiService.SetUrl(tuyaEntity.Region);
-                                                TuyaApiService.AccesToken = tuyaEntity.AccessToken;
-                                                TuyaApiService.RefreshToken = tuyaEntity.RefreshToken;
+                                                var tuyaApiInstance = TuyaApiService.GetInstance();
+                                                tuyaApiInstance.SetUrl(tuyaEntity.Region);
+                                                tuyaApiInstance.AccesToken = tuyaEntity.AccessToken;
+                                                tuyaApiInstance.RefreshToken = tuyaEntity.RefreshToken;
                                                 await ControlLights.ToggleDeviceAsync(tuyaEntity.Url, true);}">
                                                 @Localizer["On"]
                                             </button>
                                             <button class="btn btn-success" @onclick="async () =>{
-                                                TuyaApiService.SetUrl(tuyaEntity.Region);
-                                                TuyaApiService.AccesToken = tuyaEntity.AccessToken;
-                                                TuyaApiService.RefreshToken = tuyaEntity.RefreshToken;
+                                                var tuyaApiInstance = TuyaApiService.GetInstance();
+                                                tuyaApiInstance.SetUrl(tuyaEntity.Region);
+                                                tuyaApiInstance.AccesToken = tuyaEntity.AccessToken;
+                                                tuyaApiInstance.RefreshToken = tuyaEntity.RefreshToken;
                                                 await ControlLights.ToggleDeviceAsync(tuyaEntity.Url, false);}">
                                                 @Localizer["Off"]
                                             </button>

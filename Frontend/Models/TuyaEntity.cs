@@ -4,7 +4,7 @@ namespace Szakdoga.Models
 {
     public class TuyaEntity : Entity
     {
-        [JsonPropertyName("accesToken")]
+        [JsonPropertyName("accessToken")]
         public string AccessToken { get; set; }
         [JsonPropertyName("refreshToken")]
         public string RefreshToken { get; set; }

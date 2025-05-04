@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -24,7 +25,7 @@ namespace TuyaAPI.Services
                 {
                     accessToken = _tuyaApiService.AccesToken,
                     devId = deviceId,
-                    value_name = new_state,
+                    value = new_state,
                 }
             };
             using var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
@@ -33,16 +34,15 @@ namespace TuyaAPI.Services
             {
                 throw new HttpRequestException($"Failed to control device: {response.StatusCode}");
             }
+            Debug.WriteLine(response.Content.ReadAsStringAsync().Result);
             return response.StatusCode;
         }
         public async Task ToggleDeviceAsync(string deviceId, bool currentState)
         {
-            string lightState = "1";
+            string lightState = "0";
             if (currentState)
             {
-                lightState = "0";
-            }
-            {
+                lightState = "1";
             }
             await ControlDevice(deviceId, "turnOnOff", lightState);
         }

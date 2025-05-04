@@ -118,7 +118,7 @@ namespace TuyaAPI.Services
             return response.StatusCode;
         }
 
-        public async Task<string> GetEntities(bool refreshAccessToken = false)
+        public async Task<string> GetEntities(bool refreshAccessToken = true)
         {
             if (refreshAccessToken)
             {
