@@ -15,7 +15,6 @@ namespace Szakdoga.Services
                 var SingletonSomfyApiService = SomfyApiService.GetInstance();
 
                 var generatedJson = await SingletonSomfyApiService.GetSetupJsonAsync();
-                Debug.WriteLine(generatedJson);
                 var mainDevice = generatedJson.ToSomfyDevice();
                 var newEntities = generatedJson.ToSomfyEntities();
                 var convertedDevice = EntityDeviceConverter.ConvertToDevice(mainDevice, addedName);
@@ -24,13 +23,10 @@ namespace Szakdoga.Services
                     var convertedEntity = EntityDeviceConverter.ConvertToEntity(entity, SingletonSomfyApiService);
                     convertedDevice.SomfyEntities.Add(convertedEntity as SomfyEntity);
                 }
-                Debug.WriteLine(convertedDevice);
                 return convertedDevice;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.Error.WriteLine($"Error in AddSomfyDeviceAsync: {ex.Message}");
-                Debug.WriteLine($"Error in AddSomfyDeviceAsync: {ex.Message}");
                 throw;
             }
         }
@@ -53,7 +49,6 @@ namespace Szakdoga.Services
             {
                 var SingletonTuyaApiService = TuyaApiService.GetInstance();
                 var resultDevices = await SingletonTuyaApiService.GetEntities();
-                Debug.WriteLine(resultDevices);
                 if (resultDevices == null || resultDevices.Length == 0)
                 {
                     throw new Exception("No devices found");
@@ -65,16 +60,13 @@ namespace Szakdoga.Services
 
                 foreach (var entity in toAddEntites)
                 {
-                    var convertedEntity = (Szakdoga.Models.Entity)EntityDeviceConverter.ConvertToEntity(entity, SingletonTuyaApiService);
+                    var convertedEntity = EntityDeviceConverter.ConvertToEntity(entity, SingletonTuyaApiService);
                     convertedDevice.TuyaEntities.Add(convertedEntity as TuyaEntity);
                 }
-                Debug.WriteLine(convertedDevice);
                 return convertedDevice;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.Error.WriteLine($"Error in AddTuyaDeviceAsync: {ex.Message}");
-                Debug.WriteLine($"Error in AddTuyaDeviceAsync: {ex.Message}");
                 throw;
             }
         }
