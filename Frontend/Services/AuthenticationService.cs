@@ -23,7 +23,6 @@ namespace Szakdoga.Services
                 return response;
 
             string token = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine(token);
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
