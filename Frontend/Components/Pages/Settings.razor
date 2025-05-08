@@ -38,7 +38,7 @@
                         <EditForm Model="@userModel" OnValidSubmit="HandleProfileChange" Context="editContext">
                             <div class="mb-4">
                                 <label for="email" class="form-label fw-bold">@Localizer["Email address"]</label>
-                                <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" />
+                                <input type="email" class="form-control shadow-sm border-secondary" id="email" @bind="userModel.Email" readonly/>
                             </div>
                             <div class="mb-4">
                                 <label for="FirstName" class="form-label fw-bold">@Localizer["First name"]</label>
