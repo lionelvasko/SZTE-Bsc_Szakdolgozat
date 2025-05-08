@@ -34,7 +34,6 @@ namespace TuyaAPI.Services
             {
                 throw new HttpRequestException($"Failed to control device: {response.StatusCode}");
             }
-            Debug.WriteLine(response.Content.ReadAsStringAsync().Result);
             return response.StatusCode;
         }
         public async Task ToggleDeviceAsync(string deviceId, bool currentState)

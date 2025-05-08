@@ -86,7 +86,6 @@ namespace SomfyAPI.Services
             {
                 throw new HttpRequestException($"Failed to fetch setup data: {response.StatusCode}");
             }
-            Debug.WriteLine("Setup response: " + response);
             return await response.Content.ReadAsStringAsync();
         }
 

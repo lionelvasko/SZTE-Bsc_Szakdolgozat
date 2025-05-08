@@ -229,6 +229,25 @@
         </div>
     </div>
 }
+@if (ShowModal)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"> Error Info</h5>
+                    <button type="button" class="btn-close" @onclick="CloseModal" aria-label="@Localizer["Close"]"></button>
+                </div>
+                <div class="modal-body">
+                    <p>@ModalMessage</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="CloseModal">@Localizer["Close"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 @code {
 
@@ -238,6 +257,9 @@
     private bool showEntityDetailsModal = false;
     private bool showDeviceDetailsModal = false;
     private bool showAddDeviceModal = false;
+
+    private bool ShowModal = false;
+    private string ModalMessage { get; set; }
 
     private string selectedApiType = "online";
 
@@ -352,8 +374,8 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                ModalMessage = ex.Message;
+                ShowModal = true;
             }
         }
         else if (modalActiveTab == 2)
@@ -378,9 +400,14 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ModalMessage = ex.Message;
+                ShowModal = true;
             }
         }
+    }
+    private void CloseModal()
+    {
+        ShowModal = false;
     }
 
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }

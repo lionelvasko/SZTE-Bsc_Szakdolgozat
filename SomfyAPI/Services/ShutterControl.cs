@@ -58,8 +58,6 @@ namespace SomfyAPI.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                Debug.WriteLine(response.StatusCode);
-                Debug.WriteLine(await response.Content.ReadAsStringAsync());
                 throw new Exception($"Error sending {command} command: {response.StatusCode} Given payload: {jsonContent}");
             }
             _tahomaExecutionIds[deviceUrl] = JsonSerializer.Deserialize<TahomaExecutionId>(await response.Content.ReadAsStringAsync())

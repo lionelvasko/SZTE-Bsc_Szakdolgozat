@@ -57,7 +57,6 @@ namespace Szakdoga.Services
         public async Task<UserModel> GetUserInfos()
         {
             var response = await _httpClient.GetAsync("http://localhost:5223/api/User");
-            Debug.WriteLine(await response.Content.ReadAsStringAsync());
             var json = await response.Content.ReadAsStringAsync();
             var user = JsonSerializer.Deserialize<UserModel>(json);
             return user;
