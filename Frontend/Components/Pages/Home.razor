@@ -219,11 +219,31 @@
                     <p><strong>Device Paltform:</strong> @selectedDevice.Platform</p>
                     <p><strong>Device Entity Count:</strong> @selectedDevice.CreationTime</p>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer">  
+                    <button type="button" class="btn btn-danger" @onclick="ConfirmDeleteDevice">@Localizer["Delete"]</button>  
+                    <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">@Localizer["Close"]</button>  
+                </div>  
 
-                    <button type="button" class="btn btn-danger" @onclick="async () => { await DbService.DeleteDevice(selectedDevice.Id.ToString()); NavigationManager.Refresh(); }">@Localizer["Delete"]</button>
-                    <button type="button" class="btn btn-secondary" @onclick="CloseDeviceDetailsModal">Close</button>
-                </div>
+                @if (showDeleteConfirmation)  
+                {  
+                    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">  
+                        <div class="modal-dialog modal-dialog-centered" role="document">  
+                            <div class="modal-content">  
+                                <div class="modal-header">  
+                                    <h5 class="modal-title">@Localizer["Confirm Deletion"]</h5>  
+                                    <button type="button" class="btn-close" @onclick="CloseDeleteConfirmation" aria-label="@Localizer["Close"]"></button>  
+                                </div>  
+                                <div class="modal-body">  
+                                    <p>@Localizer["Are you sure you want to delete this device?"]</p>  
+                                </div>  
+                                <div class="modal-footer">  
+                                    <button type="button" class="btn btn-danger" @onclick="async () => { await DeleteDevice(); }">@Localizer["Yes, Delete"]</button>  
+                                    <button type="button" class="btn btn-secondary" @onclick="CloseDeleteConfirmation">@Localizer["Cancel"]</button>  
+                                </div>  
+                            </div>  
+                        </div>  
+                    </div>  
+                }
             </div>
         </div>
     </div>
@@ -386,7 +406,8 @@
                     var entityRequest = EntityDeviceConverter.ConvertToAddEntityRequest(entity);
                     var responseE = await DbService.AddEntity(deviceID, entityRequest);
                 }
-                NavigationManager.NavigateTo("/");
+                showAddDeviceModal = false;
+                NavigationManager.NavigateTo("/", true);
             }
             catch (Exception ex)
             {
@@ -412,7 +433,8 @@
 
                     var responseE = await DbService.AddEntity(deviceID, entityRequest);
                 }
-                NavigationManager.NavigateTo("/");
+                showAddDeviceModal=false;
+                NavigationManager.NavigateTo("/", true);
             }
             catch (Exception ex)
             {
@@ -424,6 +446,29 @@
     private void CloseModal()
     {
         ShowModal = false;
+    }
+
+    private bool showDeleteConfirmation = false;
+
+    private void ConfirmDeleteDevice()
+    {
+        showDeleteConfirmation = true;
+    }
+
+    private void CloseDeleteConfirmation()
+    {
+        showDeleteConfirmation = false;
+    }
+
+    private async Task DeleteDevice()
+    {
+        if (selectedDevice != null)
+        {
+            await DbService.DeleteDevice(selectedDevice.Id.ToString());
+            NavigationManager.Refresh();
+        }
+        showDeleteConfirmation = false;
+        CloseDeviceDetailsModal();
     }
 
     [Inject] private IStringLocalizer<AppResources> Localizer { get; set; }

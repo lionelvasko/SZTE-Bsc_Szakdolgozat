@@ -77,14 +77,15 @@ namespace TuyaAPI.Services
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var loginResponse = JsonSerializer.Deserialize<JsonElement>(responseContent);
+                var tuyaInstance = GetInstance();
                 if (loginResponse.TryGetProperty("access_token", out JsonElement accessTokenElement))
                 {
-                    AccesToken = accessTokenElement.GetString() ?? string.Empty;
+                    tuyaInstance.AccesToken = accessTokenElement.GetString() ?? string.Empty;
                 }
 
                 if (loginResponse.TryGetProperty("refresh_token", out JsonElement refreshTokenElement))
                 {
-                    RefreshToken = refreshTokenElement.GetString() ?? string.Empty;
+                    tuyaInstance.RefreshToken = refreshTokenElement.GetString() ?? string.Empty;
                 }
             }
             return response.StatusCode;
