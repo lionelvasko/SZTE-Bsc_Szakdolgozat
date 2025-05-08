@@ -309,4 +309,10 @@
   <data name="Update User" xml:space="preserve">
     <value>Adatok frissítése</value>
   </data>
+  <data name="Error Info" xml:space="preserve">
+    <value>Hiba információ</value>
+  </data>
+  <data name="Settings Info" xml:space="preserve">
+    <value>Információ</value>
+  </data>
 </root>

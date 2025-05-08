@@ -105,84 +105,83 @@
     </div>
 </div>
 
-@if (showAddDeviceModal)
-{
-    <div class="modal fade show bg-transparent" tabindex="-1" style="display: block;" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+@if (showAddDeviceModal)  
+{  
+    <div class="modal fade show bg-transparent" tabindex="-1" style="display: block;" aria-labelledby="addDeviceModalLabel" aria-hidden="true">  
+        <div class="modal-dialog">  
+            <div class="modal-content">  
 
-                <div class="modal-header">
-                    <h5 class="modal-title">@Localizer["Add device"]</h5>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link " @onclick="() => SetModalActiveTab(1)" id="tahomaTab" data-bs-toggle="tab" href="#tahoma" role="tab" aria-controls="tahoma" aria-selected="true">Tahoma API</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link " @onclick="() => SetModalActiveTab(2)" id="tuyaTab" data-bs-toggle="tab" href="#tuya" role="tab" aria-controls="tuya" aria-selected="false">Tuya API</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="apiTabContent">
-                        <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">
-                            <h5>Tahoma @Localizer["Device form"]</h5>
-                            <label for="apiType">@Localizer["API type"]:</label>
-                            <select class="form-control" id="apiType" @bind="selectedApiType">
-                                <option value="online">@Localizer["Online"]</option>
-                                <option value="local">@Localizer["Local"]</option>
-                            </select>
-                            @if (selectedApiType == "online")
-                            {
-                                <label for="somfyDeviceName">@Localizer["Device name"]:</label>
-                                <input type="text" class="form-control" id="somfyDeviceName" @bind="somfyDeviceName" placeholder="@Localizer["Enter device name"]" />
-                                <label for="homeUrl" class="mt-2">@Localizer["Region"]:</label>
-                                <select class="form-control" id="homeUrl" @bind="homeUrl">
-                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
-                                    <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>
-                                    <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>
-                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (America)</option>
-                                </select>
-                                <label for="email">@Localizer["Email address"]:</label>
-                                <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" />
-                                <label for="password">@Localizer["Password"]:</label>
-                                <input type="password" class="form-control" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" />
-                            }
-                            else if (selectedApiType == "local")
-                            {
-                                <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>
-                            }
-                        </div>
-                        <div class="tab-content" id="apiTabContent">
-                            <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">
-                                <h5>Tuya @Localizer["Device form"]</h5>
-                                <label for="tuyaDeviceName">@Localizer["Device name"]:</label>
-                                <input type="text" class="form-control" id="tuyaDeviceName" @bind="tuyaDeviceName" placeholder="@Localizer["Enter device name"]" />
-                                <label for="region" class="mt-2">@Localizer["Region"]:</label>
-                                <select class="form-control" id=" " @bind="region">
-                                    <option value="" disabled selected>@Localizer["Select a region"]</option>
-                                    <option value="44">EU</option>
-                                    <option value="1">US</option>
-                                    <option value="86">CN</option>
-                                </select>
-                                <label for="username">@Localizer["Username"]</label>
-                                <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" />
-                                <label for="tuyaPassword">@Localizer["Password"]:</label>
-                                <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Enter your password"]" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    @if(selectedApiType == "online"){
-                        <button type="button" class="btn btn-primary" @onclick="LoadEntities">@Localizer["Save device"]</button>
-                    }
-                    <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
+                <div class="modal-header">  
+                    <h5 class="modal-title">@Localizer["Add device"]</h5>  
+                </div>  
+                <div class="modal-body">  
+                    <ul class="nav nav-tabs w-100" id="apiTab" role="tablist">  
+                        <li class="nav-item" role="presentation">  
+                            <a class="nav-link " @onclick="() => SetModalActiveTab(1)" id="tahomaTab" data-bs-toggle="tab" href="#tahoma" role="tab" aria-controls="tahoma" aria-selected="true">Tahoma API</a>  
+                        </li>  
+                        <li class="nav-item" role="presentation">  
+                            <a class="nav-link " @onclick="() => SetModalActiveTab(2)" id="tuyaTab" data-bs-toggle="tab" href="#tuya" role="tab" aria-controls="tuya" aria-selected="false">Tuya API</a>  
+                        </li>  
+                    </ul>  
+                    <div class="tab-content" id="apiTabContent">  
+                        <div class="tab-pane fade @GetModalTabClass(1)" id="tahoma" role="tabpanel" aria-labelledby="tahomaTab">  
+                            <h5>Tahoma @Localizer["Device form"]</h5>  
+                            <label for="apiType">@Localizer["API type"]:</label>  
+                            <select class="form-control" id="apiType" @bind="selectedApiType" required>  
+                                <option value="online">@Localizer["Online"]</option>  
+                                <option value="local">@Localizer["Local"]</option>  
+                            </select>  
+                            @if (selectedApiType == "online")  
+                            {  
+                                <label for="somfyDeviceName">@Localizer["Device name"]:</label>  
+                                <input type="text" class="form-control" id="somfyDeviceName" @bind="somfyDeviceName" placeholder="@Localizer["Enter device name"]" required />  
+                                <label for="homeUrl" class="mt-2">@Localizer["Region"]:</label>  
+                                <select class="form-control" id="homeUrl" @bind="homeUrl" required>  
+                                    <option value="" disabled selected>@Localizer["Select a region"]</option>  
+                                    <option value="https://ha101-1.overkiz.com">ha101-1.overkiz.com (Europe, Middle East and Africa)</option>  
+                                    <option value="https://ha201-1.overkiz.com">ha201-1.overkiz.com (Asia and Pacific)</option>  
+                                    <option value="https://ha401-1.overkiz.com">ha401-1.overkiz.com (America)</option>  
+                                </select>  
+                                <label for="email">@Localizer["Email address"]:</label>  
+                                <input type="email" class="form-control" id="email" @bind="email" placeholder="example@sth.com" required />  
+                                <label for="password">@Localizer["Password"]:</label>  
+                                <input type="password" class="form-control" id="password" @bind="password" placeholder="@Localizer["Enter your password"]" required />  
+                            }  
+                            else if (selectedApiType == "local")  
+                            {  
+                                <div class="alert alert-warning mt-3">@Localizer["Only the online API is available."]</div>  
+                            }  
+                        </div>  
+                        <div class="tab-content" id="apiTabContent">  
+                            <div class="tab-pane fade @GetModalTabClass(2)" id="tuya" role="tabpanel" aria-labelledby="tuyaTab">  
+                                <h5>Tuya @Localizer["Device form"]</h5>  
+                                <label for="tuyaDeviceName">@Localizer["Device name"]:</label>  
+                                <input type="text" class="form-control" id="tuyaDeviceName" @bind="tuyaDeviceName" placeholder="@Localizer["Enter device name"]" required />  
+                                <label for="region" class="mt-2">@Localizer["Region"]:</label>  
+                                <select class="form-control" id=" " @bind="region" required>  
+                                    <option value="" disabled selected>@Localizer["Select a region"]</option>  
+                                    <option value="44">EU</option>  
+                                    <option value="1">US</option>  
+                                    <option value="86">CN</option>  
+                                </select>  
+                                <label for="username">@Localizer["Username"]</label>  
+                                <input type="text" class="form-control" id="username" @bind="username" placeholder="@Localizer["Username"]" required />  
+                                <label for="tuyaPassword">@Localizer["Password"]:</label>  
+                                <input type="password" class="form-control" id="tuyaPassword" @bind="tuyaPassword" placeholder="@Localizer["Enter your password"]" required />  
+                            </div>  
+                        </div>  
+                    </div>  
+                </div>  
+                <div class="modal-footer">  
+                    @if(selectedApiType == "online"){  
+                        <button type="button" class="btn btn-primary" @onclick=" async()=>{ await ValidateAndLoadEntities();}">@Localizer["Save device"]</button>  
+                    }  
+                    <button type="button" class="btn btn-secondary" @onclick="CloseAddDeviceModal">@Localizer["Close"]</button>  
+                </div>  
+            </div>  
+        </div>  
+    </div>  
+}  
 
 @if (showEntityDetailsModal && selectedEntity != null)
 {
@@ -235,7 +234,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"> Error Info</h5>
+                    <h5 class="modal-title">@Localizer["Error Info"]</h5>
                     <button type="button" class="btn-close" @onclick="CloseModal" aria-label="@Localizer["Close"]"></button>
                 </div>
                 <div class="modal-body">
@@ -349,6 +348,23 @@
     private void ShowAddDeviceModal()
     {
         showAddDeviceModal = true;
+    }
+
+    private async Task ValidateAndLoadEntities()
+    {
+        if (modalActiveTab == 1 && (string.IsNullOrWhiteSpace(somfyDeviceName) || string.IsNullOrWhiteSpace(homeUrl) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password)))
+        {
+            ModalMessage = "Missing data";
+            ShowModal = true;
+            return;
+        }
+        if (modalActiveTab == 2 && (string.IsNullOrWhiteSpace(tuyaDeviceName) || string.IsNullOrWhiteSpace(region) || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(tuyaPassword)))
+        {
+            ModalMessage = "Missing data";
+            ShowModal = true;
+            return;
+        }
+        await LoadEntities();
     }
 
     private async Task LoadEntities()
