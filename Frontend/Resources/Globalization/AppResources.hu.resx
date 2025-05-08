@@ -282,7 +282,7 @@
   <data name="Region" xml:space="preserve">
     <value>Régió</value>
   </data>
-  <data name="Device name" xml:space="preserve">
+  <data name="Device Name" xml:space="preserve">
     <value>Eszköz neve</value>
   </data>
   <data name="API type" xml:space="preserve">
@@ -314,5 +314,26 @@
   </data>
   <data name="Settings Info" xml:space="preserve">
     <value>Információ</value>
+  </data>
+  <data name="Device Platform" xml:space="preserve">
+    <value>Eszköz gyártója</value>
+  </data>
+  <data name="Device Creation Time" xml:space="preserve">
+    <value>Eszköz létrehozva ekkora</value>
+  </data>
+  <data name="Entity Name" xml:space="preserve">
+    <value>Entitás neve</value>
+  </data>
+  <data name="Confirm Deletion" xml:space="preserve">
+    <value>Törlés megerősítése</value>
+  </data>
+  <data name="Are you sure you want to delete this device?" xml:space="preserve">
+    <value>Biztosan törli az eszközt?</value>
+  </data>
+  <data name="Yes, Delete" xml:space="preserve">
+    <value>Megerősít</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Törlés</value>
   </data>
 </root>

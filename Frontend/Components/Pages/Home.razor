@@ -193,7 +193,7 @@
                     <button type="button" class="btn-close" @onclick="CloseEntityDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Entity Name:</strong> @selectedEntity.Name</p>
+                    <p><strong>@Localizer["Entity Name"]:</strong> @selectedEntity.Name</p>
                     <p><strong>ID:</strong> @selectedEntity.Url</p>
                 </div>
                 <div class="modal-footer">
@@ -215,9 +215,9 @@
                     <button type="button" class="btn-close" @onclick="CloseDeviceDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Device Name:</strong> @selectedDevice.Name</p>
-                    <p><strong>Device Paltform:</strong> @selectedDevice.Platform</p>
-                    <p><strong>Device Entity Count:</strong> @selectedDevice.CreationTime</p>
+                    <p><strong>@Localizer["Device Name"]:</strong> @selectedDevice.Name</p>
+                    <p><strong>@Localizer["Device Platform"]:</strong> @selectedDevice.Platform</p>
+                    <p><strong>@Localizer["Device Creation Time"]:</strong> @selectedDevice.CreationTime</p>
                 </div>
                 <div class="modal-footer">  
                     <button type="button" class="btn btn-danger" @onclick="ConfirmDeleteDevice">@Localizer["Delete"]</button>  

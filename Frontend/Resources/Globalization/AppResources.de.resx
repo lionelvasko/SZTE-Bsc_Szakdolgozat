@@ -282,7 +282,7 @@
   <data name="Region" xml:space="preserve">
     <value>Region</value>
   </data>
-  <data name="Device name" xml:space="preserve">
+  <data name="Device Name" xml:space="preserve">
     <value>Gerätename</value>
   </data>
   <data name="API type" xml:space="preserve">
@@ -314,5 +314,26 @@
   </data>
   <data name="Settings Info" xml:space="preserve">
     <value>Information</value>
+  </data>
+  <data name="Device Platform" xml:space="preserve">
+    <value>Gerätehersteller</value>
+  </data>
+  <data name="Device Creation Time" xml:space="preserve">
+    <value>Geräteerstellungszeit</value>
+  </data>
+  <data name="Entity Name" xml:space="preserve">
+    <value>Entitätsname</value>
+  </data>
+  <data name="Confirm Deletion" xml:space="preserve">
+    <value>Bestätigen Sie den Löschvorgang</value>
+  </data>
+  <data name="Are you sure you want to delete this device?" xml:space="preserve">
+    <value>Möchten Sie dieses Gerät wirklich löschen?</value>
+  </data>
+  <data name="Yes, Delete" xml:space="preserve">
+    <value>Ja, löschen</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
   </data>
 </root>
