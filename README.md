@@ -1,6 +1,6 @@
 # SZTE TTIK Programtervező informatikus szak - Bsc Szakdolgozat
 
-## Szakdolgozat Sollution
+## Szakdolgozat Solution
 
 ### Leírás
 A Szakdolgozat egy .NET 9 alapú megoldás, amely egy .NET MAUI frontend alkalmazást és több backend API-t tartalmaz. 
@@ -15,7 +15,7 @@ A projekt célja egy modern, platformfüggetlen alkalmazás létrehozása, amely
   -   Felhasználói felület a Somfy és Tuya eszközök vezérléséhez.
   -	  Integráció a backend API-kkal.
   -	  Reszponzív dizájn több platformon (Windows, Android, iOS).
-  -	  Sötét és világs téma alkalmazása
+  -	  Sötét és világos téma támogatása
   -	  Globalizáció
   -	  Authentikáció és authorizáció
 
@@ -25,9 +25,9 @@ A projekt célja egy modern, platformfüggetlen alkalmazás létrehozása, amely
   -	Felhasználói hitelesítés
   -	REST API végpontok a frontend számára + Swagger felület
     -	Főeszközök CRUD műveletei
-    -	Mellékeszközök Crud műveletei
+    -	Mellékeszközök CRUD műveletei
     -	Felhasználói adatok CRUD műveletei
-    -	Authentikáció
+    -	Hitelesítés
    
 #### 3. SomfyAPI:
 - Technológia: ASP.NET Core Class Library
@@ -35,7 +35,7 @@ A projekt célja egy modern, platformfüggetlen alkalmazás létrehozása, amely
   - Authentikáció a Somfy felhős környezetével
   - Eszközök lekérése
   - Eszközök vezérlése (pl. redőnyök nyitása, zárása, megállítása).
-  -	JSON alapú kommunikáció.
+  -	JSON-alapú kommunikáció.
  
 #### 4. TuyaAPI
 - Technológia: ASP.NET Core Class Library
